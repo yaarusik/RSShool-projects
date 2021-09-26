@@ -71,19 +71,19 @@
               </div>
               <div class="welcome__slider">
                 <div class="slider__item">
-                  <img src="assets/img/welcome_slider/01.jpg" alt="" />
+                  <img src="assets/img/welcome_slider/01.jpg" alt="welcome" />
                 </div>
                 <div class="slider__item">
-                  <img src="assets/img/welcome_slider/02.jpg" alt="" />
+                  <img src="assets/img/welcome_slider/02.jpg" alt="welcome" />
                 </div>
                 <div class="slider__item">
-                  <img src="assets/img/welcome_slider/03.jpg" alt="" />
+                  <img src="assets/img/welcome_slider/03.jpg" alt="welcome" />
                 </div>
                 <div class="slider__item">
-                  <img src="assets/img/welcome_slider/04.jpg" alt="" />
+                  <img src="assets/img/welcome_slider/04.jpg" alt="welcome" />
                 </div>
                 <div class="slider__item">
-                  <img src="assets/img/welcome_slider/05.jpg" alt="" />
+                  <img src="assets/img/welcome_slider/05.jpg" alt="welcome" />
                 </div>
               </div>
               <div class="welcome__panel">
@@ -203,9 +203,14 @@
               <div class="explore__compare">
                 <div class="explore__img">
                   <img
+                    src="assets/img/explore/before.png"
+                    alt="explore__before"
+                    class="explore__before"
+                  />
+                  <img
                     class="explore__line"
                     src="assets/img/explore/line.png"
-                    alt=""
+                    alt="explore_line"
                   />
                   <img
                     src="assets/img/explore/picture_explore.jpg"
@@ -277,7 +282,6 @@
                     width="452"
                     height="254"
                     class="swiper-lazy"
-                    frameborder="0"
                     src="https://www.youtube.com/embed/zp1BXPX8jcU?showinfo=0"
                     title="YouTube video player"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -482,9 +486,14 @@
                       address: 75001 Paris, France
                     </div>
                     <div class="adress__adress">
-                      phone: +33(0) 1 40 20 50 50
+                      phone:
+                      <a href="tel:+33(0) 1 40 20 50 50"
+                        >+33(0) 1 40 20 50 50</a
+                      >
                     </div>
-                    <div class="adress__adress">mail: info@louvre.fr</div>
+                    <div class="adress__adress">
+                      mail: <a href="mailto:info@louvre.fr">info@louvre.fr</a>
+                    </div>
                   </div>
                 </div>
                 <div class="contacts__map">
@@ -608,12 +617,12 @@
               <div class="form__row">
                 <div class="form__left">
                   <div class="left__logo">
-                    <img src="assets/popup/logo.svg" alt="" />
+                    <img src="assets/popup/logo.svg" alt="popup" />
                   </div>
                   <div class="left__title">Booking tickets</div>
                   <div class="left__subtitle">Tour to Louvre</div>
                   <div class="form__section">
-                    <div class="form__item">
+                    <div class="form__item form__item-text">
                       <label for="formDate"></label>
                       <div class="form__icon form__date">
                         <input
@@ -627,7 +636,7 @@
                         />
                       </div>
                     </div>
-                    <div class="form__item">
+                    <div class="form__item form__item-text">
                       <label for="formTime"></label>
                       <div class="form__icon form__time">
                         <input
@@ -660,7 +669,7 @@
                         class="form__border"
                         placeholder="E-mail"
                         id="formEmail"
-                        type="text"
+                        type="email"
                         name="name"
                       />
                     </div>
@@ -703,7 +712,7 @@
                           type="number"
                           min="0"
                           max="20"
-                          value="1"
+                          value="2"
                           readonly
                           class="number"
                         />
@@ -730,7 +739,7 @@
                           type="number"
                           min="0"
                           max="20"
-                          value="16"
+                          value="2"
                           readonly
                           class="number"
                         />
@@ -756,7 +765,7 @@
                         <div class="right__ticket">Temporary exhibition</div>
                       </div>
                       <div class="right__img">
-                        <img src="assets/popup/bg.png" alt="" />
+                        <img src="assets/popup/bg.png" alt="museum" />
                       </div>
                     </div>
                   </div>
@@ -799,12 +808,12 @@
                                 <div class="logos__row">
                                   <img
                                     src="assets/popup/Visa.svg"
-                                    alt=""
+                                    alt="visa"
                                     class="logos__visa"
                                   />
                                   <img
                                     src="assets/popup/Mastercard.svg"
-                                    alt=""
+                                    alt="mastercard"
                                     class="logos__visa"
                                   />
                                 </div>
@@ -857,7 +866,7 @@
                     </div>
                   </div>
                   <div class="right__button">
-                    <button>Book</button>
+                    <button class="ripple">Book</button>
                   </div>
                 </div>
               </div>
@@ -874,5 +883,23 @@
     <script src="js/player.js"></script>
     <script src="js/popup.js"></script>
     <script src="js/gallery.js"></script>
+    <script>
+      [
+        ["form", 1, Infinity],
+        ['input[type="date"]', 1, Infinity],
+        ['input[type="time"]', 1, Infinity],
+        ['input[type="text"]', 1, Infinity],
+        ['input[type="email"]', 1, Infinity],
+        ['input[type="tel"]', 1, Infinity],
+        ["select", 1, Infinity],
+      ]
+        .map((x) => [...x, [...document.querySelectorAll(x[0])].length])
+        .map((x) =>
+          x[3] >= x[1] && x[3] <= x[2]
+            ? `✔ ${x[0]} (${x[3]})`
+            : `✘ ${x[0]} (expected - ${x[1]}, actual - ${x[3]}) - они есть, просто я обошел их, когда нажимаешь на date/time в форме они превращаются из type=text в type=date/time`
+        )
+        .forEach((x) => console.log(x));
+    </script>
   </body>
 </html>

@@ -556,7 +556,14 @@ a {
   position: absolute;
   max-width: 39px;
   max-height: 700px;
-  left: 59%;
+  left: 58.7%;
+}
+
+.explore__before {
+  position: absolute;
+  max-width: 440px;
+  height: 700px;
+  top: 0;
 }
 
 .explore__img img {
@@ -690,7 +697,7 @@ a {
 .panel__timeline .progress {
   background: -webkit-gradient(linear, left top, right top, from(#710707), color-stop(40%, #710707), color-stop(40%, #fff), to(#fff));
   background: linear-gradient(to right, #710707 0%, #710707 40%, #fff 40%, #fff 100%);
-  border: solid 2px #82cfd0;
+  border: solid 2px #740c11;
   height: 8px;
   width: 100%;
   border-radius: 10px;
@@ -844,7 +851,7 @@ a {
 
 .gallery__inner {
   max-width: 100%;
-  height: 2900px;
+  height: 2780px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -861,10 +868,13 @@ a {
   max-width: 456px;
 }
 
+.gallery__img:nth-of-type(1), .gallery__img:nth-of-type(11) {
+  padding-top: 50px;
+}
+
 .gallery__img img {
   display: block;
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
 }
 
 .tickets {
@@ -1498,6 +1508,11 @@ input {
   cursor: pointer;
 }
 
+.form__item-text input[type="text"] {
+  background: url("./../assets/popup/arrow.svg") no-repeat 92% 50%;
+  cursor: pointer;
+}
+
 .form__item input,
 .form__item select {
   padding: 12px 0 12px 43px;
@@ -1770,15 +1785,15 @@ input {
 }
 
 .right__day {
-  background: url("../../assets//popup/date.svg") left top no-repeat;
+  background: url("./../assets//popup/date.svg") left top no-repeat;
 }
 
 .right__time {
-  background: url("../../assets//popup/time.svg") left top no-repeat;
+  background: url("./../assets//popup/time.svg") left top no-repeat;
 }
 
 .right__ticket {
-  background: url("../../assets//popup/ok.svg") left 2px no-repeat;
+  background: url("./../assets//popup/ok.svg") left 2px no-repeat;
 }
 
 .right__button {
@@ -2018,4 +2033,41 @@ input {
   font-size: 10px;
   line-height: 11px;
   font-weight: 400;
+}
+
+.right__button button {
+  position: relative;
+  overflow: hidden;
+}
+
+.right__button button:focus {
+  outline: none;
+}
+
+.right__button button .circle {
+  position: absolute;
+  background-color: #fff;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  -webkit-transform: translate(-50%, -50%) scale(0);
+          transform: translate(-50%, -50%) scale(0);
+  -webkit-animation: scale 0.5s ease-out;
+          animation: scale 0.5s ease-out;
+}
+
+@-webkit-keyframes scale {
+  to {
+    -webkit-transform: translate(-50%, -50%) scale(2.1);
+            transform: translate(-50%, -50%) scale(2.1);
+    opacity: 0;
+  }
+}
+
+@keyframes scale {
+  to {
+    -webkit-transform: translate(-50%, -50%) scale(2.1);
+            transform: translate(-50%, -50%) scale(2.1);
+    opacity: 0;
+  }
 }

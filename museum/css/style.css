@@ -861,10 +861,6 @@ a {
   max-width: 456px;
 }
 
-.gallery__img:first-child, .gallery__img:nth-child(11) {
-  padding-top: 50px;
-}
-
 .gallery__img img {
   display: block;
   max-width: 100%;
@@ -1215,7 +1211,6 @@ a {
 }
 
 .footer__up {
-  position: relative;
   padding: 75px 0 40px 0;
 }
 
@@ -1223,7 +1218,11 @@ a {
   padding: 40px 0 75px;
 }
 
-.footer__up::after {
+.footer__line {
+  position: relative;
+}
+
+.footer__line::after {
   content: "";
   position: absolute;
   background: #666666;

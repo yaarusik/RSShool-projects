@@ -711,7 +711,7 @@ a {
 
    &__inner {
       max-width: 100%;
-      height: 2900px;
+      height: 2800px;
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
@@ -724,7 +724,7 @@ a {
 
    &__img:first-child,
    &__img:nth-child(11) {
-      padding-top: 50px;
+      // padding-top: 50px;
    }
 
    &__img img {
@@ -1030,13 +1030,17 @@ a {
       flex-direction: column;
    }
    &__up {
-      position: relative;
       padding: 75px 0 40px 0;
    }
    &__down {
       padding: 40px 0 75px;
    }
-   &__up::after {
+
+   &__line {
+      position: relative;
+   }
+
+   &__line::after {
       content: "";
       position: absolute;
       background: #666666;

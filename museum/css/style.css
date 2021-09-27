@@ -862,6 +862,8 @@ a {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   gap: 24px 36px;
+  -webkit-column-count: 4;
+          column-count: 4;
 }
 
 .gallery__img {
@@ -1411,19 +1413,32 @@ input {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
   z-index: 100;
-  -webkit-transition: 1s;
-  transition: 1s;
+  -webkit-transition: 0.7s;
+  transition: 0.7s;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .popup__wrapper {
   position: relative;
 }
 
+.popup__overlay {
+  position: fixed;
+  content: "";
+  height: 200vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.6);
+  left: -120%;
+  bottom: 0;
+  -webkit-transition: 0.7s;
+  transition: 0.7s;
+}
+
 .popup__close {
   cursor: pointer;
   position: absolute;
+  z-index: 100;
   left: 96.25%;
   top: 3.42%;
   width: 25px;
@@ -1441,6 +1456,8 @@ input {
 }
 
 .form__body {
+  position: relative;
+  z-index: 10;
   padding-top: 90px;
   margin-bottom: 90px;
   min-height: 100%;

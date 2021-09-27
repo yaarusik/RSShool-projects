@@ -1,0 +1,86 @@
+//SLIDER-WELCOME ========================================
+.slider__item {
+   position: relative;
+}
+
+.slides__count {
+   display: flex;
+   font-size: 22px;
+   line-height: 40px;
+   font-weight: 400;
+   color: #fff;
+   mix-blend-mode: difference;
+   pointer-events: none;
+}
+
+.slides__arrows {
+   display: flex;
+   column-gap: 20px;
+}
+
+.slick-arrow.slick-prev:hover,
+.slick-arrow.slick-next:hover {
+   filter: invert(55%) sepia(5%) saturate(2034%) hue-rotate(356deg) brightness(96%) contrast(90%);
+}
+
+.slides__count span:nth-child(2) {
+   padding: 0 10px;
+}
+
+// обертка слайдера
+.slick-list {
+   overflow: hidden;
+}
+
+// общий класс для всех встрелок
+.slick-arrow {
+   width: 30px;
+   height: 8px;
+   font-size: 0;
+}
+// стрелка влево
+.slick-arrow.slick-prev {
+   background: url("./../assets/img/welcome_slider/prev.svg") 0 0 / 100% no-repeat;
+}
+// стрелка вправо
+.slick-arrow.slick-next {
+   background: url("./../assets/img/welcome_slider/next.svg") 0 0 / 100% no-repeat;
+}
+// лента слайдов
+.slick-track {
+   @include flexbox();
+}
+
+// точки
+.slick-dots {
+   @include flexbox();
+   justify-content: center;
+   column-gap: 25px;
+}
+
+.slick-dots li {
+   // list-style: none;
+}
+
+.slick-dots li.slick-active button {
+   background-color: #d2b183;
+}
+
+.slick-dots button {
+   font-size: 0;
+   width: 16px;
+   height: 16px;
+   background-color: #ffffff;
+}
+// адаптировать картинку и тень поменять на другой блок
+.slider__item::before {
+   content: "";
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background: rgb(0, 0, 0);
+   background: linear-gradient(90deg, rgba(0, 0, 0, 1) 1%, rgba(0, 0, 0, 0.6477941518404237) 8%, rgba(0, 0, 0, 0) 21%);
+}
+// =====================================================================

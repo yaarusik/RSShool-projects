@@ -32,7 +32,7 @@ for (let i = 0; i < a.length; i++) {
   const img = document.createElement("img");
   img.classList.add("gallery__img");
   if (i == 9) {
-    img.style.paddingBottom = "20px";
+    // img.style.paddingBottom = "20px";
   }
   img.src = imgAdress[i];
   img.alt = `galery ${i}`;

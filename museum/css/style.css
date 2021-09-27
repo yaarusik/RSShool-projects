@@ -845,8 +845,8 @@ a {
   left: 0;
   right: 0;
   bottom: 0;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(1%, black), color-stop(6%, rgba(0, 0, 0, 0.6)), color-stop(16%, rgba(0, 0, 0, 0)), color-stop(26%, rgba(0, 0, 0, 0)));
-  background: linear-gradient(0deg, black 1%, rgba(0, 0, 0, 0.6) 6%, rgba(0, 0, 0, 0) 16%, rgba(0, 0, 0, 0) 26%);
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(1%, black), color-stop(6%, rgba(0, 0, 0, 0.61)), color-stop(16%, rgba(0, 0, 0, 0)), color-stop(26%, rgba(0, 0, 0, 0)));
+  background: linear-gradient(0deg, black 1%, rgba(0, 0, 0, 0.61) 6%, rgba(0, 0, 0, 0) 16%, rgba(0, 0, 0, 0) 26%);
 }
 
 .gallery__inner {

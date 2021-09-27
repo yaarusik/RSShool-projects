@@ -31,8 +31,8 @@ let a = shuffle(imgAdress).map((item) => {});
 for (let i = 0; i < a.length; i++) {
   const img = document.createElement("img");
   img.classList.add("gallery__img");
-  if (i == 9) {
-    // img.style.paddingBottom = "20px";
+  if (i == 0 || i == 2) {
+    img.style.paddingTop = 50 + "px";
   }
   img.src = imgAdress[i];
   img.alt = `galery ${i}`;

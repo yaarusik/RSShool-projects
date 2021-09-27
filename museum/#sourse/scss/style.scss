@@ -63,7 +63,7 @@ a {
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      margin: 50px 0;
+      padding: 51px 0 49px;
    }
 }
 
@@ -78,10 +78,10 @@ a {
       font-size: 28px;
       line-height: 50px;
       letter-spacing: 5px;
-      padding-left: 70px;
+      padding-left: 73px;
       font-weight: 400;
       background: url("./../assets/svg/louvre.svg") left no-repeat;
-      background-size: 50px 34px;
+      background-size: 49px 26px;
       opacity: 0.8;
    }
 
@@ -146,7 +146,7 @@ a {
       @include flexbox();
       justify-content: center;
       align-items: center;
-      column-gap: 49px;
+      column-gap: 59px;
       bottom: 0;
       right: 0;
       max-width: 600px;
@@ -248,7 +248,7 @@ a {
 .slick-dots {
    @include flexbox();
    justify-content: center;
-   column-gap: 28px;
+   column-gap: 25px;
 }
 
 .slick-dots li {
@@ -261,8 +261,8 @@ a {
 
 .slick-dots button {
    font-size: 0;
-   width: 17px;
-   height: 17px;
+   width: 16px;
+   height: 16px;
    background-color: #ffffff;
 }
 // адаптировать картинку и тень поменять на другой блок
@@ -762,7 +762,7 @@ a {
    }
 
    &__main {
-      padding: 75px 0 60px;
+      padding: 75px 0;
    }
 
    &__row {
@@ -791,7 +791,7 @@ a {
    }
 
    &__amount {
-      padding: 0 0 50px 0;
+      padding: 0 0 52px 0;
    }
    &__total {
    }
@@ -809,10 +809,10 @@ a {
       @include flexbox();
       flex-direction: column;
       white-space: nowrap;
+      row-gap: 25px;
    }
 
    &__radio {
-      margin-bottom: 50px;
       padding-left: 39px;
       display: block;
       position: relative;
@@ -874,14 +874,14 @@ a {
       line-height: 33px;
       font-weight: 700;
       text-align: right;
-      padding-bottom: 12px;
+      padding-bottom: 25px;
    }
 
    &__row {
       @include flexbox();
       flex-direction: column;
       padding: 0 0 0 24px;
-      row-gap: 36px;
+      row-gap: 12px;
    }
 
    &__position {
@@ -935,7 +935,7 @@ a {
 
 .total {
    &__title {
-      padding: 0 0 50px 25px;
+      padding: 0 0 60px 25px;
       font-weight: 700;
       font-size: 28px;
       line-height: 33px;
@@ -974,7 +974,7 @@ a {
    &__title {
       position: relative;
       color: #9d8665;
-      padding: 90px 0 28px 0;
+      padding: 75px 0 28px 0;
    }
    &__title:after {
       content: "";
@@ -1014,14 +1014,14 @@ a {
    }
 
    &__titles {
-      padding-bottom: 35px;
+      padding-bottom: 50px;
    }
 
    &__adress {
       font-weight: 300;
       font-size: 22px;
       line-height: 26px;
-      padding: 0 0 20px 0;
+      padding: 0 0 25px 0;
    }
 }
 
@@ -1041,7 +1041,7 @@ a {
       padding: 75px 0 40px 0;
    }
    &__down {
-      padding: 40px 0 75px;
+      padding: 51px 0 75px;
    }
 
    &__line {
@@ -1084,10 +1084,10 @@ a {
       font-size: 28px;
       line-height: 50px;
       letter-spacing: 5px;
-      padding-left: 70px;
+      padding-left: 73px;
       font-weight: 400;
       background: url("./../assets/svg/louvre.svg") left no-repeat;
-      background-size: 50px 34px;
+      background-size: 49px 26px;
       opacity: 0.8;
    }
 
@@ -1137,10 +1137,10 @@ a {
 
    &__list {
       @include flexbox();
+      column-gap: 25px;
    }
 
    &__link {
-      margin: 0 12px;
    }
 
    &__item {
@@ -1166,11 +1166,11 @@ a {
    }
 
    &__youtube {
-      background: url("./../assets/svg/social/youtube.svg") 47% 50% no-repeat;
+      background: url("./../assets/svg/social/youtube.svg") 48% 50% no-repeat;
    }
 
    &__instagram {
-      background: url("./../assets/svg/social/instagram.svg") 48% 49.5% no-repeat;
+      background: url("./../assets/svg/social/instagram.svg") 46% 50% no-repeat;
    }
 
    &__facebook {
@@ -1289,9 +1289,14 @@ input {
       cursor: pointer;
    }
 
-   &__item input,
-   &__item select {
+   &__item input {
       padding: 12px 0 12px 43px;
+      margin-right: 20px;
+      margin-bottom: 20px;
+   }
+
+   &__item select {
+      padding: 12px 0 11px 43px;
       margin-right: 20px;
       margin-bottom: 20px;
    }
@@ -1327,12 +1332,10 @@ input {
    &__name input:focus,
    &__email input:focus,
    &__tel input:focus,
-   &__ticket select:focus {
-      color: #212529;
-      background-color: #fff;
-      border-color: #bdbdbd;
-      outline: 0;
-      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.25);
+   &__ticket select:focus,
+   &__date input:focus,
+   &__time input:focus {
+      box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.25);
    }
 
    &__item input::placeholder {
@@ -1371,7 +1374,7 @@ input {
    }
 
    select.ticket option:hover {
-      box-shadow: 0 0 10px 100px #1882a8 inset;
+      box-shadow: 0 0 10px 100px #740c11 inset;
    }
 
    &__ticket::before {
@@ -1698,6 +1701,7 @@ input {
    }
 
    &__inputs input {
+      position: relative;
       width: 100px;
       height: 35px;
       padding: 10px 8px;
@@ -1709,6 +1713,32 @@ input {
       width: 320px;
       padding: 10px;
    }
+}
+
+.inputs__number {
+   position: relative;
+}
+
+.inputs__number input[type="number"]::-webkit-inner-spin-button,
+.inputs__number input[type="number"]::-webkit-outer-spin-button {
+   -webkit-appearance: none;
+   // display: block;
+   width: 10px;
+   opacity: 1;
+}
+
+.inputs__number::before {
+   content: "";
+   position: absolute;
+   right: 15px;
+   opacity: 0.8;
+   width: 28px;
+   height: 35px;
+   pointer-events: none;
+   z-index: 1;
+   border-left: 0.5px solid #a4a4a3;
+   background: url("../../assets/popup/up-arrow.svg") 11px 12px no-repeat,
+      url("../../assets/popup/down-arrow.svg") 11px 19px no-repeat;
 }
 
 .logos {
@@ -1785,7 +1815,7 @@ input {
 
 @keyframes scale {
    to {
-      transform: translate(-50%, -50%) scale(2.1);
+      transform: translate(-50%, -50%) scale(3);
       opacity: 0;
    }
 }

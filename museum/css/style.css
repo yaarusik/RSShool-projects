@@ -1072,6 +1072,7 @@ a {
           appearance: none;
   all: unset;
   width: 3em;
+  text-align: center;
   font-weight: 300;
   font-size: 22px;
   line-height: 26px;
@@ -1103,6 +1104,8 @@ a {
 
 .total__buy {
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
   font-weight: 300;
   font-size: 22px;
   line-height: 26px;
@@ -1116,6 +1119,8 @@ a {
 
 .total__buy:hover {
   background-color: #9d8665;
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
   -webkit-transition: linear 0.1s;
   transition: linear 0.1s;
 }
@@ -1807,17 +1812,6 @@ input {
   padding-top: 26px;
 }
 
-.right__button button {
-  display: block;
-  width: 220px;
-  height: 45px;
-  background: #710707;
-  color: #ffffff;
-  font-size: 22px;
-  line-height: 24px;
-  font-weight: 400;
-}
-
 .total__basic {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1996,7 +1990,7 @@ input {
   pointer-events: none;
   z-index: 1;
   border-left: 0.5px solid #a4a4a3;
-  background: url("../../assets/popup/up-arrow.svg") 11px 12px no-repeat, url("../../assets/popup/down-arrow.svg") 11px 19px no-repeat;
+  background: url("./../assets/popup/up-arrow.svg") 11px 12px no-repeat, url("./../assets/popup/down-arrow.svg") 11px 19px no-repeat;
 }
 
 .logos__row {
@@ -2062,38 +2056,49 @@ input {
 }
 
 .right__button button {
+  display: block;
   position: relative;
   overflow: hidden;
+  width: 220px;
+  height: 45px;
+  background: #710707;
+  color: #ffffff;
+  font-size: 22px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.right__button button:hover {
+  -webkit-transform: scale(0.97);
+          transform: scale(0.97);
 }
 
 .right__button button:focus {
   outline: none;
 }
 
-.right__button button .circle {
+.circle {
   position: absolute;
   background-color: #fff;
-  width: 100px;
-  height: 100px;
   border-radius: 50%;
-  -webkit-transform: translate(-50%, -50%) scale(0);
-          transform: translate(-50%, -50%) scale(0);
-  -webkit-animation: scale 0.5s ease-out;
-          animation: scale 0.5s ease-out;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-animation: pulse 0.7s ease-out;
+          animation: pulse 0.7s ease-out;
 }
 
-@-webkit-keyframes scale {
+@-webkit-keyframes pulse {
   to {
-    -webkit-transform: translate(-50%, -50%) scale(3);
-            transform: translate(-50%, -50%) scale(3);
+    -webkit-transform: scale(2.2);
+            transform: scale(2.2);
     opacity: 0;
   }
 }
 
-@keyframes scale {
+@keyframes pulse {
   to {
-    -webkit-transform: translate(-50%, -50%) scale(3);
-            transform: translate(-50%, -50%) scale(3);
+    -webkit-transform: scale(2.2);
+            transform: scale(2.2);
     opacity: 0;
   }
 }

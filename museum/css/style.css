@@ -128,7 +128,7 @@ a {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  margin: 50px 0;
+  padding: 51px 0 49px;
 }
 
 .logo {
@@ -148,10 +148,10 @@ a {
   font-size: 28px;
   line-height: 50px;
   letter-spacing: 5px;
-  padding-left: 70px;
+  padding-left: 73px;
   font-weight: 400;
   background: url("./../assets/svg/louvre.svg") left no-repeat;
-  background-size: 50px 34px;
+  background-size: 49px 26px;
   opacity: 0.8;
 }
 
@@ -232,8 +232,8 @@ a {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-column-gap: 49px;
-          column-gap: 49px;
+  -webkit-column-gap: 59px;
+          column-gap: 59px;
   bottom: 0;
   right: 0;
   max-width: 600px;
@@ -346,8 +346,8 @@ a {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-column-gap: 28px;
-          column-gap: 28px;
+  -webkit-column-gap: 25px;
+          column-gap: 25px;
 }
 
 .slick-dots li.slick-active button {
@@ -356,8 +356,8 @@ a {
 
 .slick-dots button {
   font-size: 0;
-  width: 17px;
-  height: 17px;
+  width: 16px;
+  height: 16px;
   background-color: #ffffff;
 }
 
@@ -899,7 +899,7 @@ a {
 }
 
 .tickets__main {
-  padding: 75px 0 60px;
+  padding: 75px 0;
 }
 
 .tickets__row {
@@ -939,7 +939,7 @@ a {
 }
 
 .tickets__amount {
-  padding: 0 0 50px 0;
+  padding: 0 0 52px 0;
 }
 
 .type__title {
@@ -959,10 +959,10 @@ a {
       -ms-flex-direction: column;
           flex-direction: column;
   white-space: nowrap;
+  row-gap: 25px;
 }
 
 .type__radio {
-  margin-bottom: 50px;
   padding-left: 39px;
   display: block;
   position: relative;
@@ -1025,7 +1025,7 @@ a {
   line-height: 33px;
   font-weight: 700;
   text-align: right;
-  padding-bottom: 12px;
+  padding-bottom: 25px;
 }
 
 .amount__row {
@@ -1038,7 +1038,7 @@ a {
       -ms-flex-direction: column;
           flex-direction: column;
   padding: 0 0 0 24px;
-  row-gap: 36px;
+  row-gap: 12px;
 }
 
 .amount__position {
@@ -1093,7 +1093,7 @@ a {
 }
 
 .total__title {
-  padding: 0 0 50px 25px;
+  padding: 0 0 60px 25px;
   font-weight: 700;
   font-size: 28px;
   line-height: 33px;
@@ -1131,7 +1131,7 @@ a {
 .contacts__title {
   position: relative;
   color: #9d8665;
-  padding: 90px 0 28px 0;
+  padding: 75px 0 28px 0;
 }
 
 .contacts__title:after {
@@ -1184,14 +1184,14 @@ a {
 }
 
 .adress__titles {
-  padding-bottom: 35px;
+  padding-bottom: 50px;
 }
 
 .adress__adress {
   font-weight: 300;
   font-size: 22px;
   line-height: 26px;
-  padding: 0 0 20px 0;
+  padding: 0 0 25px 0;
 }
 
 .footer {
@@ -1225,7 +1225,7 @@ a {
 }
 
 .footer__down {
-  padding: 40px 0 75px;
+  padding: 51px 0 75px;
 }
 
 .footer__line {
@@ -1272,10 +1272,10 @@ a {
   font-size: 28px;
   line-height: 50px;
   letter-spacing: 5px;
-  padding-left: 70px;
+  padding-left: 73px;
   font-weight: 400;
   background: url("./../assets/svg/louvre.svg") left no-repeat;
-  background-size: 50px 34px;
+  background-size: 49px 26px;
   opacity: 0.8;
 }
 
@@ -1335,10 +1335,8 @@ a {
   display: -ms-flexbox;
   display: flex;
   font-size: 0;
-}
-
-.social__link {
-  margin: 0 12px;
+  -webkit-column-gap: 25px;
+          column-gap: 25px;
 }
 
 .social__item {
@@ -1371,11 +1369,11 @@ a {
 }
 
 .social__youtube {
-  background: url("./../assets/svg/social/youtube.svg") 47% 50% no-repeat;
+  background: url("./../assets/svg/social/youtube.svg") 48% 50% no-repeat;
 }
 
 .social__instagram {
-  background: url("./../assets/svg/social/instagram.svg") 48% 49.5% no-repeat;
+  background: url("./../assets/svg/social/instagram.svg") 46% 50% no-repeat;
 }
 
 .social__facebook {
@@ -1513,9 +1511,14 @@ input {
   cursor: pointer;
 }
 
-.form__item input,
-.form__item select {
+.form__item input {
   padding: 12px 0 12px 43px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.form__item select {
+  padding: 12px 0 11px 43px;
   margin-right: 20px;
   margin-bottom: 20px;
 }
@@ -1551,13 +1554,11 @@ input {
 .form__name input:focus,
 .form__email input:focus,
 .form__tel input:focus,
-.form__ticket select:focus {
-  color: #212529;
-  background-color: #fff;
-  border-color: #bdbdbd;
-  outline: 0;
-  -webkit-box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.25);
-          box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.25);
+.form__ticket select:focus,
+.form__date input:focus,
+.form__time input:focus {
+  -webkit-box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.25);
+          box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.25);
 }
 
 .form__item input::-webkit-input-placeholder {
@@ -1609,8 +1610,8 @@ input {
 }
 
 .form select.ticket option:hover {
-  -webkit-box-shadow: 0 0 10px 100px #1882a8 inset;
-          box-shadow: 0 0 10px 100px #1882a8 inset;
+  -webkit-box-shadow: 0 0 10px 100px #740c11 inset;
+          box-shadow: 0 0 10px 100px #740c11 inset;
 }
 
 .form__ticket::before {
@@ -1961,6 +1962,7 @@ input {
 }
 
 .data__inputs input {
+  position: relative;
   width: 100px;
   height: 35px;
   padding: 10px 8px;
@@ -1971,6 +1973,30 @@ input {
   height: 35px;
   width: 320px;
   padding: 10px;
+}
+
+.inputs__number {
+  position: relative;
+}
+
+.inputs__number input[type="number"]::-webkit-inner-spin-button,
+.inputs__number input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  width: 10px;
+  opacity: 1;
+}
+
+.inputs__number::before {
+  content: "";
+  position: absolute;
+  right: 15px;
+  opacity: 0.8;
+  width: 28px;
+  height: 35px;
+  pointer-events: none;
+  z-index: 1;
+  border-left: 0.5px solid #a4a4a3;
+  background: url("../../assets/popup/up-arrow.svg") 11px 12px no-repeat, url("../../assets/popup/down-arrow.svg") 11px 19px no-repeat;
 }
 
 .logos__row {
@@ -2058,16 +2084,16 @@ input {
 
 @-webkit-keyframes scale {
   to {
-    -webkit-transform: translate(-50%, -50%) scale(2.1);
-            transform: translate(-50%, -50%) scale(2.1);
+    -webkit-transform: translate(-50%, -50%) scale(3);
+            transform: translate(-50%, -50%) scale(3);
     opacity: 0;
   }
 }
 
 @keyframes scale {
   to {
-    -webkit-transform: translate(-50%, -50%) scale(2.1);
-            transform: translate(-50%, -50%) scale(2.1);
+    -webkit-transform: translate(-50%, -50%) scale(3);
+            transform: translate(-50%, -50%) scale(3);
     opacity: 0;
   }
 }

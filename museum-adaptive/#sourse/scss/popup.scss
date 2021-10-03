@@ -19,6 +19,7 @@ input {
    z-index: 100;
    transition: 0.7s;
    background-color: rgba(0, 0, 0, 0.6);
+   overflow-y: scroll;
 
    &__wrapper {
       position: relative;
@@ -256,8 +257,7 @@ input {
       height: 2px;
    }
 }
-.formTiket {
-}
+
 .entry {
    &__title {
       position: relative;
@@ -328,10 +328,6 @@ input {
    }
 }
 
-.form {
-   &__right {
-   }
-}
 .right {
    &__overview {
       max-width: 530px;
@@ -582,7 +578,7 @@ input {
    &__line {
       margin: 25px 0 15px 0;
       background-color: #161615;
-      width: 360px;
+      width: 100%;
       height: 45px;
    }
 
@@ -630,6 +626,9 @@ input {
 .right__button button:focus {
    outline: none;
 }
+.cvc__row {
+   min-width: 360px;
+}
 
 .circle {
    position: absolute;
@@ -643,5 +642,224 @@ input {
    to {
       transform: scale(2.2);
       opacity: 0;
+   }
+}
+
+@media (max-width: 1024px) {
+   .popup {
+      width: 100%;
+      max-height: 768px;
+   }
+   .entry__number {
+      width: 105px;
+   }
+   .popup__close {
+      top: 9.9%;
+      left: 96.7%;
+   }
+   .form__body {
+      padding: 75px 0 30px;
+   }
+}
+
+@media (max-width: 1023px) {
+   .form {
+      &__row {
+         flex-direction: column;
+
+         row-gap: 51px;
+         min-width: 530px;
+      }
+      &__body {
+         padding: 40px 0;
+      }
+      &__left {
+         padding-right: 0;
+      }
+      &__right {
+         max-width: 530px;
+         padding: 25px 15px 23px;
+      }
+
+      &__section {
+         padding-top: 40px;
+      }
+      &__entry {
+         width: 530px;
+         max-width: inherit;
+      }
+
+      &__item input {
+         width: 251px;
+         height: 44.88px;
+      }
+
+      &__item input[placeholder="Date"] {
+         margin-right: 28px;
+      }
+
+      &__name input,
+      &__email input,
+      &__tel input,
+      &__ticket select {
+         width: 530px;
+      }
+   }
+   .left__subtitle:after {
+      width: 530px;
+   }
+   .right__row {
+      column-gap: 154px;
+   }
+   .total__total {
+      padding: 10px 0 14px;
+   }
+   .right__ticket {
+      white-space: nowrap;
+   }
+   .form__item-text input[type="text"] {
+      background-position: 94% 50%;
+   }
+   .popup__close {
+      top: 1.7%;
+      left: 74.6%;
+   }
+   .entry__title:before {
+      width: 500px;
+   }
+}
+
+@media (max-width: 768px) {
+   .left__subtitle:after {
+      width: calc(360px + (530 - 360) * ((100vw - 420px) / (768 - 420)));
+   }
+   .popup__close {
+      top: 1.7%;
+      left: 81.6%;
+   }
+   .left__title {
+      font-size: calc(32px + (50 - 32) * ((100vw - 420px) / (768 - 420)));
+      line-height: calc(35.3px + (55 - 35.3) * ((100vw - 420px) / (768 - 420)));
+   }
+   .form {
+      &__item input {
+         width: calc(360px + (251 - 360) * ((100vw - 420px) / (768 - 420)));
+         height: 45px;
+      }
+
+      &__right {
+         max-width: calc(360px + (530 - 360) * ((100vw - 420px) / (768 - 420)));
+      }
+
+      &__name input,
+      &__email input,
+      &__tel input,
+      &__ticket select {
+         width: calc(360px + (530 - 360) * ((100vw - 420px) / (768 - 420)));
+      }
+
+      &__item input[placeholder="Date"] {
+         margin-right: 28px;
+      }
+      &__entry {
+         width: calc(360px + (530 - 360) * ((100vw - 420px) / (768 - 420)));
+      }
+      .entry__title:before {
+         width: calc(330px + (500 - 330) * ((100vw - 420px) / (768 - 420)));
+      }
+   }
+   .right__row {
+      column-gap: calc(14px + (154 - 14) * ((100vw - 420px) / (768 - 420)));
+   }
+   .right__button {
+      padding-top: calc(40px + (26 - 40) * ((100vw - 420px) / (768 - 420)));
+   }
+   .right__img img {
+      display: block;
+      width: 100%;
+      max-width: 150px;
+   }
+   .cvc__row {
+      min-width: 360px;
+   }
+   .form__left {
+      padding-left: 0px;
+   }
+   .data__cardholder input {
+      width: calc(290px + (320 - 290) * ((100vw - 420px) / (768 - 420)));
+   }
+}
+
+@media (max-width: 760px) {
+   .form__section {
+      display: block;
+   }
+   .form__row {
+      align-items: center;
+   }
+   .form__left {
+      padding-left: 22px;
+   }
+
+   .card__cvc {
+      position: static;
+   }
+   .form__right {
+      height: auto;
+   }
+   .right__card {
+      height: auto;
+   }
+   .card__row {
+      flex-direction: column;
+      row-gap: calc(21px + (40 - 21) * ((100vw - 420px) / (760 - 420)));
+   }
+   .cvc__row {
+      min-width: 200px;
+   }
+   .form__item-text input[type="text"] {
+      background-position: 97% 50%;
+   }
+   .form__item input[placeholder="Date"] {
+      margin-right: 28px;
+   }
+   .right__img img {
+      max-width: 120px;
+   }
+}
+@media (max-width: 420px) {
+   .popup__close {
+      top: 1.5%;
+      left: 90.6%;
+   }
+   .form__item input {
+      width: calc(251px + (360 - 251) * ((100vw - 320px) / (420 - 320)));
+      height: 45px;
+   }
+   .form__ticket select {
+      width: calc(251px + (360 - 251) * ((100vw - 320px) / (420 - 320)));
+   }
+   .left__subtitle:after {
+      width: calc(251px + (360 - 251) * ((100vw - 320px) / (420 - 320)));
+   }
+
+   .form__entry {
+      width: calc(251px + (360 - 251) * ((100vw - 320px) / (420 - 320)));
+   }
+
+   .data__cardholder input {
+      width: calc(251px + (290 - 251) * ((100vw - 320px) / (420 - 320)));
+   }
+   .cvc__line {
+      // width: 330px;
+   }
+}
+
+@media (max-width: 410px) {
+   .logos__row {
+      display: none;
+   }
+   .entry__title:before {
+      width: 251px !important;
    }
 }

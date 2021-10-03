@@ -149,7 +149,7 @@
       z-index: 10;
       top: 130px;
       width: 29.005%;
-      height: 70.997%;
+      max-height: 585px;
       left: -100%;
       background-color: #030303;
       padding: 0;
@@ -180,7 +180,7 @@
    .menu__item::after {
       content: "";
       position: absolute;
-      background: url("../../assets/svg/arrow-burger.svg") center no-repeat;
+      background: url("./../assets/svg/arrow-burger.svg") center no-repeat;
       width: 12px;
       height: 12px;
       left: 110px;
@@ -195,8 +195,8 @@
    }
 
    .menu {
-      height: calc(544px + (861 - 544) * ((100vw - 420px) / (768 - 420)));
-
+      height: calc(502px + (861 - 502) * ((100vw - 420px) / (768 - 420)));
+      max-height: 841px;
       width: 100%;
       &__list {
          padding-top: 14px;
@@ -209,7 +209,7 @@
          bottom: 4px;
       }
       &__icon span {
-         top: 33%;
+         top: 27%;
       }
       &__icon._active {
          top: -4px;
@@ -222,10 +222,19 @@
       &__images {
          padding: 35px 55px;
       }
-      &__images .img-two {
-         padding-top: 20px;
+      &__images .img {
          display: flex;
+         flex-wrap: wrap;
+         row-gap: 20px;
          column-gap: 20px;
+      }
+      &__images .img img {
+         object-fit: cover;
+         width: calc(95px + (319 - 95) * ((100vw - 420px) / (768 - 420)));
+      }
+      &__images .img img:first-of-type {
+         width: calc(210px + (658 - 210) * ((100vw - 420px) / (768 - 420)));
+         height: calc(95px + (194 - 95) * ((100vw - 420px) / (768 - 420)));
       }
       &__images::after {
          content: "";
@@ -237,9 +246,6 @@
          height: 1px;
       }
 
-      // &__images img:hover {
-      //    opacity: 0.7;
-      // }
       &__social .social__body {
          padding: 35px 0;
       }
@@ -251,15 +257,7 @@
 }
 
 @media (max-width: 420px) {
-   .logo__title {
-      font-size: calc(16px + (28 - 16) * ((100vw - 420px) / (768 - 420)));
-      line-height: 26px;
-      background-size: 30px 19px;
-      padding-left: 54px;
-   }
-
    .menu {
-      // height: 141.15%;
       width: 100%;
       &__list {
          padding-top: 0px;
@@ -268,21 +266,6 @@
       }
       &__item {
          line-height: 15px;
-      }
-      &__images {
-         display: flex;
-         column-gap: 15px;
-         padding-bottom: 20px;
-         padding-top: 38px;
-      }
-      &__images .img-two {
-         column-gap: 11px;
-         padding-top: 0;
-      }
-      &__images img {
-         max-width: 95px;
-         height: 95px;
-         object-fit: cover;
       }
 
       &__icon::before {
@@ -300,5 +283,44 @@
       &__icon._active {
          top: -4px;
       }
+      &__images .img img {
+         width: 95px;
+         height: 95px;
+      }
+      &__images .img img {
+         width: calc(30px + (95 - 30) * ((100vw - 310px) / (420 - 310)));
+         height: calc(30px + (95 - 30) * ((100vw - 310px) / (420 - 310)));
+      }
+      &__images .img img:first-of-type {
+         width: calc(30px + (95 - 30) * ((100vw - 310px) / (420 - 310)));
+         height: calc(30px + (95 - 30) * ((100vw - 310px) / (420 - 310)));
+         order: -1;
+      }
+      &__images .img img:nth-of-type(2) {
+         order: -2;
+      }
+      &__images .img {
+         column-gap: 12px;
+      }
+      &__images {
+         padding: 35px 55px 23px;
+      }
+   }
+}
+
+@media (max-width: 420px) {
+   .logo__title {
+      font-size: calc(16px + (28 - 16) * ((100vw - 420px) / (768 - 420)));
+      line-height: 26px;
+      background-size: 30px 19px;
+      padding-left: 54px;
+   }
+   .menu__images::after {
+      width: 76.68%;
+   }
+}
+@media (max-width: 410px) {
+   .menu__social .social__body {
+      display: none;
    }
 }

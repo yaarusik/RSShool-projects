@@ -37,7 +37,7 @@
   letter-spacing: 5px;
   padding-left: 73px;
   font-weight: 400;
-  background: url("../../assets/svg/louvre.svg") left no-repeat;
+  background: url("./../assets/svg/louvre.svg") left no-repeat;
   background-size: 49px 36px;
   opacity: 0.8;
 }
@@ -50,10 +50,6 @@
 }
 
 .menu__icon {
-  display: none;
-}
-
-.menu__social, .menu__images {
   display: none;
 }
 
@@ -156,7 +152,7 @@
     z-index: 10;
     top: 130px;
     width: 29.005%;
-    height: 70.997%;
+    height: 95.902%;
     left: -100%;
     background-color: #030303;
     padding: 0;
@@ -200,121 +196,5 @@
     height: 12px;
     left: 110px;
     top: 20%;
-  }
-}
-
-@media (max-width: 768px) {
-  .header__row {
-    padding-top: calc(44px + (51 - 44) * ((100vw - 768px) / (1024 - 768)));
-    padding-bottom: calc(34px + (48 - 34) * ((100vw - 768px) / (1024 - 768)));
-  }
-  .menu {
-    height: calc(544px + (861 - 544) * ((100vw - 420px) / (768 - 420)));
-    width: 100%;
-  }
-  .menu__list {
-    padding-top: 14px;
-    padding-bottom: 0;
-  }
-  .menu__icon::before {
-    top: -5px;
-  }
-  .menu__icon::after {
-    bottom: 4px;
-  }
-  .menu__icon span {
-    top: 33%;
-  }
-  .menu__icon._active {
-    top: -4px;
-  }
-  .menu__social, .menu__images {
-    display: block;
-    position: relative;
-  }
-  .menu__images {
-    padding: 35px 55px;
-  }
-  .menu__images .img-two {
-    padding-top: 20px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-column-gap: 20px;
-            column-gap: 20px;
-  }
-  .menu__images::after {
-    content: "";
-    position: absolute;
-    background: #666666;
-    bottom: 0;
-    left: 55px;
-    width: 85.68%;
-    height: 1px;
-  }
-  .menu__social .social__body {
-    padding: 35px 0;
-  }
-  .menu__social {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-  }
-}
-
-@media (max-width: 420px) {
-  .logo__title {
-    font-size: calc(16px + (28 - 16) * ((100vw - 420px) / (768 - 420)));
-    line-height: 26px;
-    background-size: 30px 19px;
-    padding-left: 54px;
-  }
-  .menu {
-    width: 100%;
-  }
-  .menu__list {
-    padding-top: 0px;
-    padding-bottom: 0;
-    row-gap: 33px;
-  }
-  .menu__item {
-    line-height: 15px;
-  }
-  .menu__images {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-column-gap: 15px;
-            column-gap: 15px;
-    padding-bottom: 20px;
-  }
-  .menu__images .img-two {
-    -webkit-column-gap: 13px;
-            column-gap: 13px;
-    padding-top: 0;
-  }
-  .menu__images img {
-    max-width: 95px;
-    height: 95px;
-    -o-object-fit: cover;
-       object-fit: cover;
-  }
-  .menu__icon::before {
-    top: -2px;
-  }
-  .menu__icon::after {
-    bottom: 2px;
-  }
-  .menu__social .social__body {
-    padding: 24px 0;
-  }
-  .menu__icon span {
-    top: 34%;
-  }
-  .menu__icon._active {
-    top: -4px;
   }
 }

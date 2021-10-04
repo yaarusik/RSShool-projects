@@ -16,14 +16,6 @@ $(document).ready(function () {
     slidesToShow: 1,
     variableWidth: true,
     adaptiveHeight: true,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {},
-      },
-    ],
-
-    // autoplay: true,
   });
 });
 

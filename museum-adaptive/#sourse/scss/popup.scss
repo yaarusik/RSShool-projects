@@ -40,8 +40,8 @@ input {
       cursor: pointer;
       position: absolute;
       z-index: 100;
-      left: 96.25%;
-      top: 3.42%;
+      left: 84.6%;
+      top: 12.8%;
       width: 25px;
       height: 25px;
       background: url("./../assets/popup/Close.svg") no-repeat;
@@ -654,8 +654,8 @@ input {
       width: 105px;
    }
    .popup__close {
-      top: 9.9%;
-      left: 96.7%;
+      top: 10.9%;
+      left: 94.7%;
    }
    .form__body {
       padding: 75px 0 30px;
@@ -735,7 +735,7 @@ input {
    }
    .popup__close {
       top: 1.7%;
-      left: 81.6%;
+      left: 79.6%;
    }
    .left__title {
       font-size: calc(32px + (50 - 32) * ((100vw - 420px) / (768 - 420)));
@@ -830,7 +830,7 @@ input {
 @media (max-width: 420px) {
    .popup__close {
       top: 1.5%;
-      left: 90.6%;
+      left: 86.6%;
    }
    .form__item input {
       width: calc(251px + (360 - 251) * ((100vw - 320px) / (420 - 320)));

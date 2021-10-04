@@ -99,7 +99,7 @@
     font-size: 0;
   }
   .slick-dots button {
-    width: calc(7px + (12 - 7) * ((100vw - 420px) / (768 - 420)));
+    width: calc(8px + (12 - 8) * ((100vw - 420px) / (768 - 420)));
     height: calc(8px + (12 - 8) * ((100vw - 420px) / (768 - 420)));
   }
   .slides__count {

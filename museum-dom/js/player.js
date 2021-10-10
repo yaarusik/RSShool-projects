@@ -5,6 +5,7 @@ document.querySelector("#window").onclick = fullscreen;
 
 let bcgPlay = document.querySelector(".panel__play");
 let bcgSound = document.querySelector(".panel__sound");
+let windowBtn = document.querySelector(".panel__window");
 
 //запуск видео по кнопкам
 let bigPlay = document.querySelector(".video__play");
@@ -27,6 +28,7 @@ videoSection = document.querySelector(".video__full");
 progress = document.querySelector("#progress");
 progressVolume = document.querySelector("#volume-range");
 panelOpacity = document.querySelector(".video__panel");
+
 //кнопка громкости
 volumeBtn = document.querySelector("#volume");
 volumeBtn.onclick = volume;
@@ -126,23 +128,29 @@ function fullscreen() {
     videoFull.style.overflow = "hidden";
     panelOpacity.style.transform = "translateY(-47%)";
     bigPlay.style.top = "44.4%";
+    windowBtn.style.backgroundImage = "url('./../assets/video/window.svg')";
   } else if (document.webkitFullscreenElement) {
     // Need this to support Safari
     document.webkitExitFullscreen();
     videoFull.style.overflow = "hidden";
     panelOpacity.style.transform = "translateY(-47%)";
     bigPlay.style.top = "44.4%";
+    windowBtn.style.backgroundImage = "url(./../assets/video/window.svg')";
   } else if (videoSection.webkitRequestFullscreen) {
     // Need this to support Safari
     videoSection.webkitRequestFullscreen();
     videoFull.style.overflow = "visible";
     panelOpacity.style.transform = "translateY(0%)";
     bigPlay.style.top = "65%";
+    windowBtn.style.backgroundImage =
+      "url('./../assets/video/fullscreen_exit.svg')";
   } else {
     videoSection.requestFullscreen();
     videoFull.style.overflow = "visible";
     panelOpacity.style.transform = "translateY(0%)";
     bigPlay.style.top = "65%";
+    windowBtn.style.backgroundImage =
+      "url('./../assets/video/fullscreen_exit.svg')";
   }
 }
 

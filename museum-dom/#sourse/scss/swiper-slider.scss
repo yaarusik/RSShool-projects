@@ -1,0 +1,89 @@
+// SWIPER =====================================
+.swiper-wrapper {
+   // height: auto !important;
+}
+.slider__buttons {
+   padding-top: 40px;
+   padding-bottom: calc(60px + (75 - 60) * ((100vw - 1024px) / (1920 - 1024)));
+   display: flex;
+   justify-content: center;
+   column-gap: 16px;
+}
+
+.slider__buttons .swiper-button-prev {
+   position: static;
+   margin: 0;
+   width: 10px;
+   height: 12px;
+   background-image: url("../assets/video/buttons/prev.svg");
+}
+
+.slider__buttons .swiper-button-next {
+   margin: 0;
+   position: static;
+   width: 10px;
+   height: 12px;
+   background-image: url("../assets/video/buttons/next.svg");
+}
+
+.slider__buttons .swiper-button-prev:hover,
+.slider__buttons .swiper-button-next:hover,
+.slider__buttons .swiper-pagination-bullet-active:hover,
+.slider__buttons .swiper-pagination-bullet:hover {
+   filter: invert(14%) sepia(52%) saturate(3352%) hue-rotate(342deg) brightness(84%) contrast(114%);
+   opacity: 1;
+}
+
+.slider__buttons .swiper-pagination {
+   position: static;
+   width: auto !important;
+   display: flex;
+   column-gap: 12px;
+}
+
+.slider__buttons .swiper-button-prev::after,
+.slider__buttons .swiper-button-next::after {
+   font-size: 0;
+}
+
+.slider__buttons .swiper-pagination-bullet-active {
+   background: #333333;
+}
+
+.slider__buttons .swiper-pagination-bullet {
+   width: 12px;
+   height: 12px;
+}
+
+// ============================================
+@media (max-width: 768px) {
+   .slider__buttons {
+      padding-top: calc(20px + (40 - 20) * ((100vw - 768px) / (1024 - 768)));
+      padding-bottom: calc(80px + (60 - 80) * ((100vw - 768px) / (1024 - 768)));
+   }
+   .slider__buttons .swiper-pagination-bullet {
+      width: calc(10px + (12 - 10) * ((100vw - 768px) / (1024 - 768)));
+      height: calc(10px + (12 - 10) * ((100vw - 768px) / (1024 - 768)));
+   }
+   .slider__buttons .swiper-button-prev {
+      width: 10px;
+      height: 12px;
+   }
+
+   .slider__buttons .swiper-button-next,
+   .slider__buttons .swiper-button-prev {
+      width: calc(7px + (10 - 7) * ((100vw - 420px) / (768 - 420)));
+      height: calc(8px + (12 - 8) * ((100vw - 420px) / (768 - 420)));
+      background-size: calc(7px + (10 - 7) * ((100vw - 420px) / (768 - 420)))
+         calc(8px + (12 - 8) * ((100vw - 420px) / (768 - 420)));
+   }
+}
+@media (max-width: 767px) {
+   .slider__buttons {
+      padding: 40px 0;
+   }
+   .slider__buttons .swiper-pagination-bullet {
+      width: calc(8px + (10 - 8) * ((100vw - 420px) / (767 - 420)));
+      height: calc(8px + (10 - 8) * ((100vw - 420px) / (767 - 420)));
+   }
+}

@@ -64,7 +64,7 @@ a {
       z-index: 1000;
       width: 50px;
       height: 50px;
-      color: lightblue;
+      color: #710707;
       cursor: pointer;
       visibility: hidden;
       border-radius: 50%;
@@ -90,7 +90,7 @@ a {
       content: "↑";
    }
    &__up:hover {
-      color: orange;
+      color: #710707;
    }
    &__up--active {
       visibility: visible;
@@ -104,7 +104,7 @@ a {
    &__up-path {
       box-sizing: border-box;
       fill: none;
-      stroke: orange;
+      stroke: #710707;
       stroke-width: 4px;
       transition: 0.2s;
    }
@@ -1366,13 +1366,16 @@ a {
 
 .total {
    &__title {
-      padding: 0 0 60px 25px;
+      padding: 0 0px 60px 25px;
       font-weight: 700;
       font-size: 28px;
       line-height: 33px;
       letter-spacing: 1.65px;
       white-space: nowrap;
    }
+   // &__title span {
+   //    margin-right: 30px;
+   // }
 
    &__buy {
       cursor: pointer;

@@ -54,14 +54,14 @@ video.volume = +progressVolume.value / 100;
 
 function playPause() {
   if (video.paused) {
-    bcgPlay.style.background = "url('./../assets/video/pause.svg') center";
+    bcgPlay.style.background = "url('./assets/video/pause.svg') center";
     // play = true;
     video.play();
     //скрывание кнопки
     bigPlay.style.opacity = 0;
   } else {
     video.pause();
-    bcgPlay.style.background = "url('./../assets/video/play.svg') center";
+    bcgPlay.style.background = "url('./assets/video/play.svg') center";
     bigPlay.style.opacity = 1;
   }
 }
@@ -72,14 +72,14 @@ function volume() {
   if (video.muted) {
     //передаем кнопке звука значение прогрессбара
     volumeBtn.setAttribute("data-volume", progressVolume.value);
-    bcgSound.style.backgroundImage = "url('./../assets/video/mute.svg')";
+    bcgSound.style.backgroundImage = "url('./assets/video/mute.svg')";
 
     progressVolume.value = 0;
     tracking(progressVolume);
   } else {
     progressVolume.value = volumeBtn.dataset.volume;
 
-    bcgSound.style.backgroundImage = "url('./../assets/video/sound.svg')";
+    bcgSound.style.backgroundImage = "url('./assets/video/sound.svg')";
     tracking(progressVolume);
   }
 }
@@ -89,11 +89,11 @@ function volumChange(e) {
   let v = this.value;
   if (v == 0) {
     video.muted = true;
-    bcgSound.style.backgroundImage = "url('./../assets/video/mute.svg')";
+    bcgSound.style.backgroundImage = "url('./assets/video/mute.svg')";
   } else {
     //видео регулируется в процентах
     video.volume = v / 100;
-    bcgSound.style.backgroundImage = "url('./../assets/video/sound.svg')";
+    bcgSound.style.backgroundImage = "url('./assets/video/sound.svg')";
     video.muted = false;
   }
   return v;
@@ -105,8 +105,7 @@ function volumUpDown(e) {
     if (progressVolume.value < 100) {
       progressVolume.value = +progressVolume.value + 10;
       video.volume += 0.1;
-      bcgSound.style.backgroundImage = "url('./../assets/video/sound.svg')";
-
+      bcgSound.style.backgroundImage = "url('./assets/video/sound.svg')";
       tracking(progressVolume);
     }
   } else if (e.code == "ArrowDown") {
@@ -115,7 +114,7 @@ function volumUpDown(e) {
       video.volume -= 0.1;
       tracking(progressVolume);
       if (video.volume < 0.1) {
-        bcgSound.style.backgroundImage = "url('./../assets/video/mute.svg')";
+        bcgSound.style.backgroundImage = "url('./assets/video/mute.svg')";
       }
     }
   }
@@ -128,14 +127,14 @@ function fullscreen() {
     videoFull.style.overflow = "hidden";
     panelOpacity.style.transform = "translateY(-47%)";
     bigPlay.style.top = "44.4%";
-    windowBtn.style.backgroundImage = "url('./../assets/video/window.svg')";
+    windowBtn.style.backgroundImage = "url('./assets/video/window.svg')";
   } else if (document.webkitFullscreenElement) {
     // Need this to support Safari
     document.webkitExitFullscreen();
     videoFull.style.overflow = "hidden";
     panelOpacity.style.transform = "translateY(-47%)";
     bigPlay.style.top = "44.4%";
-    windowBtn.style.backgroundImage = "url(./../assets/video/window.svg')";
+    windowBtn.style.backgroundImage = "url(./assets/video/window.svg')";
   } else if (videoSection.webkitRequestFullscreen) {
     // Need this to support Safari
     videoSection.webkitRequestFullscreen();
@@ -143,14 +142,14 @@ function fullscreen() {
     panelOpacity.style.transform = "translateY(0%)";
     bigPlay.style.top = "65%";
     windowBtn.style.backgroundImage =
-      "url('./../assets/video/fullscreen_exit.svg')";
+      "url('./assets/video/fullscreen_exit.svg')";
   } else {
     videoSection.requestFullscreen();
     videoFull.style.overflow = "visible";
     panelOpacity.style.transform = "translateY(0%)";
     bigPlay.style.top = "65%";
     windowBtn.style.backgroundImage =
-      "url('./../assets/video/fullscreen_exit.svg')";
+      "url('./assets/video/fullscreen_exit.svg')";
   }
 }
 
@@ -162,7 +161,7 @@ function check() {
     video.pause();
     bigPlay.style.opacity = 1;
     bcgPlay.classList.remove("pause__btn");
-    bcgPlay.style.background = "url('./../assets/video/play.svg')";
+    bcgPlay.style.background = "url('./assets/video/play.svg')";
   }
 }
 
@@ -172,6 +171,9 @@ function progressUpdate() {
   let d = video.duration;
   //текущее время видео
   let c = video.currentTime;
+  if (isNaN(d)) {
+    d = 1;
+  }
   progress.value = (100 * c) / d;
   tracking(progress);
   // progress.style.background = `linear-gradient(to right, #82CFD0 0%, #82CFD0 ${progress.value}%, #fff ${progress.value}%, white 100%)`;
@@ -254,59 +256,4 @@ idVideo.addEventListener("keyup", function (e) {
   if (e.code == "ArrowUp" || e.code == "ArrowDown") {
     volumUpDown(e);
   }
-  // //P
-  // if (e.code == "KeyP") {
-  //   forward();
-  // }
-  // //N
-  // if (e.code == "KeyN") {
-  //   rewind();
-  // }
 });
-
-// //слайдер
-// let currentItem = 0;
-
-// let videoSrc = [
-//   "assets/video/video0.mp4",
-//   "assets/video/video1.mp4",
-//   "assets/video/video2.mp4",
-// ];
-// let posterSrc = [
-//   "assets/video/poster0.jpg",
-//   "assets/video/poster1.jpg",
-//   "assets/video/poster2.jpg",
-// ];
-
-// function changeCurrentItem(n) {
-//   //формуда для бесконечного слайдера. как только последний элемент слайдера. при делении с остатком у нас обнулит currentItem - при минусе тоже самое
-//   currentItem = (n + videoSrc.length) % videoSrc.length;
-// }
-
-// function forward() {
-//   changeCurrentItem(currentItem + 1);
-//   video.src = videoSrc[currentItem];
-//   video.poster = posterSrc[currentItem];
-//   playPause();
-//   playPause();
-// }
-// function rewind() {
-//   changeCurrentItem(currentItem - 1);
-//   video.src = videoSrc[currentItem];
-//   video.poster = posterSrc[currentItem];
-//   playPause();
-//   playPause();
-// }
-//скрывание панели
-// videoSection.addEventListener("mousemove", panelOpacityChange);
-
-// function panelOpacityChange() {
-//   if (!video.paused) {
-//     panelOpacity.style.opacity = 1;
-//     setTimeout(function () {
-//       if (!video.paused) panelOpacity.style.opacity = 0;
-//     }, 5000);
-//   } else if (video.paused) {
-//     panelOpacity.style.opacity = 1;
-//   }
-// }

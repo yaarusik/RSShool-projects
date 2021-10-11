@@ -22,6 +22,8 @@ let formMinus = document.querySelectorAll(".entry__minus");
 let formB = document.querySelector("input[name='BASIC']");
 let formS = document.querySelector("input[name='SENIOR']");
 let formTicket = document.querySelector("#formTicket");
+let entryS = document.querySelector(".entryS").children;
+let entryB = document.querySelector(".entryB").children;
 let formCollectionDate = document.querySelector(".right__day").children;
 let formOptions = document
   .querySelector("#formTicket")
@@ -164,6 +166,8 @@ totalForm[0].textContent = localStorage.getItem("resultSum");
 
 formTextS[0].textContent = +localStorage.getItem("price") / 2;
 formTextB[0].textContent = localStorage.getItem("price");
+entryS[0].textContent = +localStorage.getItem("price") / 2;
+entryB[0].textContent = localStorage.getItem("price");
 
 formSumB[0].textContent =
   +localStorage.getItem("price") * +localStorage.getItem("countB");
@@ -216,6 +220,8 @@ formTicket.addEventListener("change", function () {
   }
   formTextS[0].textContent = cost / 2;
   formTextB[0].textContent = cost;
+  entryS[0].textContent = cost / 2;
+  entryB[0].textContent = cost;
 });
 
 // кнопки плюс

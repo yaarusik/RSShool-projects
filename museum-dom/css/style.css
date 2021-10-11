@@ -119,7 +119,7 @@ a {
   z-index: 1000;
   width: 50px;
   height: 50px;
-  color: lightblue;
+  color: #710707;
   cursor: pointer;
   visibility: hidden;
   border-radius: 50%;
@@ -154,7 +154,7 @@ a {
 }
 
 .scroll__up:hover {
-  color: orange;
+  color: #710707;
 }
 
 .scroll__up--active {
@@ -168,7 +168,7 @@ a {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   fill: none;
-  stroke: orange;
+  stroke: #710707;
   stroke-width: 4px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
@@ -1150,7 +1150,7 @@ a {
   height: 700px;
   opacity: 0.7;
   border-radius: 50%;
-  background: url("./../../assets/img/explore/line.svg") no-repeat;
+  background: url("./../assets/img/explore/line.svg") no-repeat;
 }
 
 @media (max-width: 1870px) {
@@ -2092,7 +2092,7 @@ a {
 }
 
 .total__title {
-  padding: 0 0 60px 25px;
+  padding: 0 0px 60px 25px;
   font-weight: 700;
   font-size: 28px;
   line-height: 33px;
@@ -3241,7 +3241,7 @@ input {
 }
 
 .right__time {
-  background: url("./../../assets/popup/time.svg") left top no-repeat;
+  background: url("./../assets//popup/time.svg") left top no-repeat;
 }
 
 .right__ticket {

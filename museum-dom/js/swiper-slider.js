@@ -94,14 +94,15 @@ let playButtonIcon = document.querySelector(".panel__play");
 let playButtonBigIcon = document.querySelector(".video__play");
 
 function changePlayIcon() {
-  playButtonIcon.style.background = "url('./../assets/video/play.svg') center";
+  playButtonIcon.style.background = "url('./assets/video/play.svg') center";
   playButtonBigIcon.style.opacity = 1;
+  progress.value = 0;
 }
 
 function changePlayIconArrow() {
   videoLink.setAttribute("src", videoSrcSlides[swiper.realIndex]);
   videoLink.setAttribute("poster", postersSrc[swiper.realIndex]);
-  playButtonIcon.style.background = "url('./../assets/video/play.svg') center";
+  playButtonIcon.style.background = "url('./assets/video/play.svg') center";
   playButtonBigIcon.style.opacity = 1;
 }
 

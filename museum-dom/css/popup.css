@@ -328,6 +328,24 @@ input {
   background-color: red;
 }
 
+.message2 {
+  position: absolute;
+  display: none;
+  bottom: -16px;
+  left: 0;
+  width: 400px;
+  height: 14px;
+  color: #ffffff;
+  font-size: 11px;
+  padding-left: 2px;
+  padding-top: 2px;
+  background-color: red;
+}
+
+.activity {
+  border: 1px solid red;
+}
+
 .entry__title {
   position: relative;
   padding: 0px 0 5px 15px;
@@ -450,7 +468,7 @@ input {
 }
 
 .right__time {
-  background: url("./../../assets/popup/time.svg") left top no-repeat;
+  background: url("./../assets//popup/time.svg") left top no-repeat;
 }
 
 .right__ticket {

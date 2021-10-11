@@ -116,7 +116,7 @@ a {
   position: fixed;
   right: 50px;
   bottom: 50px;
-  z-index: 1000;
+  z-index: 100;
   width: 50px;
   height: 50px;
   color: #710707;
@@ -2922,11 +2922,6 @@ input {
   margin-bottom: 20px;
 }
 
-.form__item input[type="time"] {
-  background: url("./../assets/popup/arrow.svg") no-repeat 93% 50%;
-  cursor: pointer;
-}
-
 .form__time input {
   padding: 12.6px 0 12.3px 40px;
 }
@@ -3595,7 +3590,8 @@ input {
     width: 530px;
     max-width: inherit;
   }
-  .form__item input {
+  .form__item input,
+  .form__time select {
     width: 251px;
     height: 44.88px;
   }
@@ -3656,7 +3652,7 @@ input {
   .form__email input,
   .form__tel input,
   .form__ticket select,
-  .form .form__time select {
+  .form__time select {
     width: calc(360px + (530 - 360) * ((100vw - 420px) / (768 - 420)));
   }
   .form__item input[placeholder="Date"] {
@@ -3742,7 +3738,8 @@ input {
     width: calc(251px + (360 - 251) * ((100vw - 320px) / (420 - 320)));
     height: 45px;
   }
-  .form__ticket select {
+  .form__ticket select,
+  .form__time select {
     width: calc(251px + (360 - 251) * ((100vw - 320px) / (420 - 320)));
   }
   .left__subtitle:after {
@@ -3769,10 +3766,6 @@ input {
   position: relative;
 }
 
-.select__time {
-  position: absolute;
-}
-
 .form__time::before {
   position: absolute;
   content: "";
@@ -3785,7 +3778,7 @@ input {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  background: url("./../assets/popup/arrow.svg") no-repeat 96% 50%;
+  background: url("./../assets/popup/arrow.svg") no-repeat 95% 50%;
   margin-right: 0;
 }
 

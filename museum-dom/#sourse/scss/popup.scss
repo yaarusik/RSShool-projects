@@ -132,11 +132,6 @@ input {
       margin-bottom: 20px;
    }
 
-   &__item input[type="time"] {
-      background: url("./../assets/popup/arrow.svg") no-repeat 93% 50%;
-      cursor: pointer;
-   }
-
    &__time input {
       padding: 12.6px 0 12.3px 40px;
    }
@@ -736,7 +731,8 @@ input {
          max-width: inherit;
       }
 
-      &__item input {
+      &__item input,
+      &__time select {
          width: 251px;
          height: 44.88px;
       }
@@ -802,7 +798,7 @@ input {
       &__email input,
       &__tel input,
       &__ticket select,
-      .form__time select {
+      &__time select {
          width: calc(360px + (530 - 360) * ((100vw - 420px) / (768 - 420)));
       }
 
@@ -884,7 +880,8 @@ input {
       width: calc(251px + (360 - 251) * ((100vw - 320px) / (420 - 320)));
       height: 45px;
    }
-   .form__ticket select {
+   .form__ticket select,
+   .form__time select {
       width: calc(251px + (360 - 251) * ((100vw - 320px) / (420 - 320)));
    }
    .left__subtitle:after {
@@ -912,7 +909,7 @@ input {
    position: relative;
 }
 .select__time {
-   position: absolute;
+   // position: absolute;
 }
 .form__time::before {
    position: absolute;
@@ -925,6 +922,6 @@ input {
 
 .form__time select {
    appearance: none;
-   background: url("./../assets/popup/arrow.svg") no-repeat 96% 50%;
+   background: url("./../assets/popup/arrow.svg") no-repeat 95% 50%;
    margin-right: 0;
 }

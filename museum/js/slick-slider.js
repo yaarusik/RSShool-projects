@@ -14,9 +14,9 @@ $(document).ready(function () {
     infinite: true,
     speed: 300,
     slidesToShow: 1,
+    rtl: true,
+    variableWidth: true,
     adaptiveHeight: true,
-
-    // autoplay: true,
   });
 });
 

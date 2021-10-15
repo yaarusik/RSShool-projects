@@ -18,16 +18,10 @@ const imgAdress = [
   `assets/img/gallery/15.jpg`,
 ];
 
-// img.classList.add("gallery__img");
-// img.src = `assets/img/gallery/01.jpg`;
-// img.alt = `galery1`;
-
 function shuffle(array) {
   return array.sort(() => Math.random() - 0.5);
 }
-
-let a = shuffle(imgAdress).map((item) => {});
-
+let a = shuffle(imgAdress);
 for (let i = 0; i < a.length; i++) {
   const img = document.createElement("img");
   img.classList.add("gallery__img");
@@ -36,9 +30,41 @@ for (let i = 0; i < a.length; i++) {
   }
   img.src = imgAdress[i];
   img.alt = `galery ${i}`;
+  img.classList.add("slide__in");
   pictureInnerContainer.append(img);
 }
+window.onload = function () {
+  const animItems = document.querySelectorAll(".slide__in");
 
-// console.log(b);
+  window.addEventListener("scroll", animOnScroll);
+  function animOnScroll(param) {
+    for (let i = 0; i < animItems.length; i++) {
+      const animItemsHeight = animItems[i].offsetHeight;
+      const animItemOffset = offset(animItems[i]).top;
+      const animStart = 4;
 
-// pictureInnerContainer.append(img);
+      let animItemPoint = window.innerHeight - animItemsHeight / animStart;
+      if (animItemsHeight > window.innerHeight) {
+        animItemPoint = window.innerHeight - window.innerHeight / animStart;
+      }
+
+      if (
+        pageYOffset > animItemOffset - animItemPoint &&
+        pageYOffset < animItemOffset + animItemsHeight
+      ) {
+        animItems[i].classList.add("active");
+      } else {
+        animItems[i].classList.remove("active");
+      }
+    }
+  }
+  function offset(el) {
+    const rect = el.getBoundingClientRect(),
+      scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+      scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return { top: rect.top + scrollTop, left: rect.left + scrollLeft };
+  }
+  animOnScroll();
+};
+
+// AIzaSyAGgZL8EN0yHrmDrciJJMmk8tu14fz_LYc

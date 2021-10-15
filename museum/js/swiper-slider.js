@@ -1,4 +1,29 @@
-new Swiper(".video__slider", {
+let videoSrcSlides = [
+  "assets/video/videos/video0.mp4",
+  "assets/video/videos/video1.mp4",
+  "assets/video/videos/video2.mp4",
+  "assets/video/videos/video3.mp4",
+  "assets/video/videos/video4.mp4",
+];
+let postersSrc = [
+  "assets/video/posters/poster0.jpg",
+  "assets/video/posters/poster1.jpg",
+  "assets/video/posters/poster2.jpg",
+  "assets/video/posters/poster3.jpg",
+  "assets/video/posters/poster4.jpg",
+];
+
+let videoLink = document.querySelector("#video-player");
+let prevSiperBtn = document.querySelector(".swiper-button-prev");
+let nextSiperBtn = document.querySelector(".swiper-button-next");
+let videoLinkIframe = document.querySelectorAll(".video-slides");
+let iframesArr = [];
+
+// console.log(videoLinkIframe);
+
+let counter = 0;
+
+const swiper = new Swiper(".video__slider", {
   //стрелки
   navigation: {
     nextEl: ".swiper-button-next",
@@ -24,12 +49,13 @@ new Swiper(".video__slider", {
   },
   // количество слайдов для показа
   slidesPerView: 3,
+  simulateTouch: false,
   // отступ между слайдами
   spaceBetween: 42,
   // стартовый слайд
   initialSlide: 0,
   // адаптиввная высота
-  autoHeight: true,
+  autoHeight: false,
   // бесконечный слайдер
   loop: true,
   // количество дублирующихся слайдов
@@ -42,28 +68,122 @@ new Swiper(".video__slider", {
       slidesPerView: 3,
     },
     768: {
-      slidesPerView: 3,
-      spaceBetween: 41,
+      slidesPerView: 2,
+      spaceBetween: 20,
     },
     420: {
       spaceBetween: 20,
       slidesPerView: 2,
     },
+    320: {
+      spaceBetween: 15,
+      slidesPerView: 2,
+    },
   },
-  // отключить подгрузку картинок
 });
 
-// function video() {
-//   if (!clicked) {
-//     playVideo();
-//     window.clicked = true;
-//     console.log("1");
-//   } else if ((clicked = 2)) {
-//     pauseVideo();
-//     console.log("2");
-//     window.clicked = false;
-//   } else {
-//     resumeVideo();
-//     window.clicked = 2;
-//   }
-// }
+swiper.on("slideChangeTransitionEnd", function () {});
+
+nextSiperBtn.onclick = function () {
+  changePlayIconArrow();
+  // iframesArr.forEach((iframe) => {
+  //   iframe[0].contentWindow.postMessage(
+  //     '{"event":"command","func":"pauseVideo","args":""}',
+  //     "*"
+  //   );
+  // });
+};
+
+prevSiperBtn.onclick = function () {
+  changePlayIconArrow();
+  // iframesArr.forEach((iframe) => {
+  //   iframe[0].contentWindow.postMessage(
+  //     '{"event":"command","func":"pauseVideo","args":""}',
+  //     "*"
+  //   );
+  // });
+};
+
+let bullets = document.querySelectorAll(".swiper-pagination-bullet");
+let playButtonIcon = document.querySelector(".panel__play");
+let playButtonBigIcon = document.querySelector(".video__play");
+
+function changePlayIcon() {
+  playButtonIcon.style.background = "url('./assets/video/play.svg') center";
+  playButtonBigIcon.style.opacity = 1;
+}
+
+function changePlayIconArrow() {
+  videoLink.setAttribute("src", videoSrcSlides[swiper.realIndex]);
+  videoLink.setAttribute("poster", postersSrc[swiper.realIndex]);
+  playButtonIcon.style.background = "url('./assets/video/play.svg') center";
+  playButtonBigIcon.style.opacity = 1;
+}
+
+bullets[0].addEventListener("click", function () {
+  videoLink.setAttribute("src", videoSrcSlides[0]);
+  videoLink.setAttribute("poster", postersSrc[0]);
+  changePlayIcon();
+  // iframesArr.forEach((iframe) => {
+  //   iframe[0].contentWindow.postMessage(
+  //     '{"event":"command","func":"pauseVideo","args":""}',
+  //     "*"
+  //   );
+  // });
+});
+bullets[1].addEventListener("click", function () {
+  videoLink.setAttribute("src", videoSrcSlides[1]);
+  videoLink.setAttribute("poster", postersSrc[1]);
+  changePlayIcon();
+  // iframesArr.forEach((iframe) => {
+  //   iframe[0].contentWindow.postMessage(
+  //     '{"event":"command","func":"pauseVideo","args":""}',
+  //     "*"
+  //   );
+  // });
+});
+bullets[2].addEventListener("click", function () {
+  videoLink.setAttribute("src", videoSrcSlides[2]);
+  videoLink.setAttribute("poster", postersSrc[2]);
+  changePlayIcon();
+  // iframesArr.forEach((iframe) => {
+  //   iframe[0].contentWindow.postMessage(
+  //     '{"event":"command","func":"pauseVideo","args":""}',
+  //     "*"
+  //   );
+  // });
+});
+bullets[3].addEventListener("click", function () {
+  videoLink.setAttribute("src", videoSrcSlides[3]);
+  videoLink.setAttribute("poster", postersSrc[3]);
+  changePlayIcon();
+  // iframesArr.forEach((iframe) => {
+  //   iframe[0].contentWindow.postMessage(
+  //     '{"event":"command","func":"pauseVideo","args":""}',
+  //     "*"
+  //   );
+  // });
+});
+bullets[4].addEventListener("click", function () {
+  videoLink.setAttribute("src", videoSrcSlides[4]);
+  videoLink.setAttribute("poster", postersSrc[4]);
+  changePlayIcon();
+  // iframesArr.forEach((iframe) => {
+  //   iframe[0].contentWindow.postMessage(
+  //     '{"event":"command","func":"pauseVideo","args":""}',
+  //     "*"
+  //   );
+  // });
+});
+
+videoLinkIframe.forEach((item) => {
+  item.addEventListener("click", function () {
+    iframesArr.push(item.children);
+    // iframesArr.forEach((iframe) => {
+    //   iframe[0].contentWindow.postMessage(
+    //     '{"event":"command","func":"pauseVideo","args":""}',
+    //     "*"
+    //   );
+    // });
+  });
+});

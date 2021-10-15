@@ -3,7 +3,8 @@
    // height: auto !important;
 }
 .slider__buttons {
-   padding: 40px 0 75px 0;
+   padding-top: 40px;
+   padding-bottom: calc(60px + (75 - 60) * ((100vw - 1024px) / (1920 - 1024)));
    display: flex;
    justify-content: center;
    column-gap: 16px;
@@ -14,7 +15,7 @@
    margin: 0;
    width: 10px;
    height: 12px;
-   background-image: url("./../assets/video/buttons/prev.svg");
+   background-image: url("../assets/video/buttons/prev.svg");
 }
 
 .slider__buttons .swiper-button-next {
@@ -22,7 +23,7 @@
    position: static;
    width: 10px;
    height: 12px;
-   background-image: url("./../assets/video/buttons/next.svg");
+   background-image: url("../assets/video/buttons/next.svg");
 }
 
 .slider__buttons .swiper-button-prev:hover,
@@ -55,3 +56,41 @@
 }
 
 // ============================================
+@media (max-width: 768px) {
+   .slider__buttons {
+      padding-top: calc(20px + (40 - 20) * ((100vw - 768px) / (1024 - 768)));
+      padding-bottom: calc(80px + (60 - 80) * ((100vw - 768px) / (1024 - 768)));
+   }
+   .slider__buttons .swiper-pagination-bullet {
+      width: calc(10px + (12 - 10) * ((100vw - 768px) / (1024 - 768)));
+      height: calc(10px + (12 - 10) * ((100vw - 768px) / (1024 - 768)));
+   }
+   .slider__buttons .swiper-button-prev {
+      width: 10px;
+      height: 12px;
+   }
+
+   .slider__buttons .swiper-button-next,
+   .slider__buttons .swiper-button-prev {
+      width: calc(7px + (10 - 7) * ((100vw - 420px) / (768 - 420)));
+      height: calc(8px + (12 - 8) * ((100vw - 420px) / (768 - 420)));
+      background-size: calc(7px + (10 - 7) * ((100vw - 420px) / (768 - 420)))
+         calc(8px + (12 - 8) * ((100vw - 420px) / (768 - 420)));
+   }
+}
+@media (max-width: 767px) {
+   .slider__buttons {
+      padding: 40px 0;
+   }
+   .slider__buttons .swiper-pagination-bullet {
+      width: calc(8px + (10 - 8) * ((100vw - 420px) / (767 - 420)));
+      height: calc(8px + (10 - 8) * ((100vw - 420px) / (767 - 420)));
+   }
+}
+
+@media (min-width: 1920px) {
+   .slider__buttons {
+      padding-top: 40px;
+      padding-bottom: 75px;
+   }
+}

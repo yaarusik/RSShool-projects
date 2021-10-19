@@ -8,8 +8,8 @@
 //МИКСИНЫ================================
 
 //подключение шрифтов====================
-// @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
-// @import url("https://fonts.googleapis.com/css2?family=Forum&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Forum&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 //подключение шрифтов====================
 
 //шрифт по умолчанию====================
@@ -24,10 +24,10 @@ $minwidth: 320px;
 //переменные============================
 
 // Файл обнуляющих стилей===============
-@import "sourse/scss/nullstyle.scss";
+@import "./sourse/scss/nullstyle.scss";
 // Файл обнуляющих стилей===============
 
-@import "sourse/scss/owfont-regular.scss";
+@import "./sourse/scss/owfont-regular.scss";
 
 //ОБОЛОЧКА==============================
 .wrapper {
@@ -60,7 +60,7 @@ body {
    font-size: 16px;
    color: #fff;
    text-align: center;
-   // background: url("images/assets/img/bg.jpg") center/cover, rgba(0, 0, 0, 0.5);
+   background-color: rgba(0, 0, 0, 0.5);
    background-blend-mode: multiply;
    transition: background-image 1s ease-in-out;
 }
@@ -80,10 +80,10 @@ body {
    align-items: center;
    justify-content: space-between;
    width: 120px;
-   margin-bottom: 28px;
 }
 
 .play-list {
+   padding-top: 28px;
    text-align: left;
 }
 
@@ -306,6 +306,48 @@ body {
 
 .author {
    min-height: 20px;
+}
+
+.playlist-indicator {
+   color: #c5b358;
+}
+
+.player-interface {
+   display: flex;
+   align-items: flex-end;
+}
+.player-controls {
+}
+
+.player-icon {
+}
+
+.player-progress {
+}
+.progress-title {
+}
+.progress-container {
+   background: #e4e9eb;
+   border-radius: 5px;
+   width: 100%;
+   height: 10px;
+   display: flex;
+   align-items: center;
+   position: relative;
+   cursor: pointer;
+}
+
+.progress-bar {
+   background: #c5b358;
+   border-radius: 5px;
+   height: 6px;
+   width: 150px;
+}
+.player-sound {
+}
+.sound-icon {
+}
+.sound-progress {
 }
 
 @media (max-width: 768px) {

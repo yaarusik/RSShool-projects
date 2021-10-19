@@ -2,6 +2,9 @@
 import "./style.scss";
 import "./js/calendar";
 import "./js/imagesSlider";
+import "./js/weather";
+import "./js/quote";
+import "./js/audioPlayer";
 
 const createImage = (src) =>
   new Promise((res, rej) => {

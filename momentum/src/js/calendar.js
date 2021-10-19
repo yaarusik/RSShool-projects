@@ -21,7 +21,7 @@ export const getTimeOfDay = (currentTimeZone) => {
     : currentTimeZone == 1
     ? `morning`
     : currentTimeZone == 2
-    ? `day`
+    ? `afternoon`
     : `evening`;
 };
 

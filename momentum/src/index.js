@@ -5,6 +5,10 @@ import "./js/imagesSlider";
 import "./js/weather";
 import "./js/quote";
 import "./js/audioPlayer";
+import "./js/todoList";
+import "./js/popup";
+import "./js/translation";
+import "./js/hidden";
 
 const createImage = (src) =>
   new Promise((res, rej) => {

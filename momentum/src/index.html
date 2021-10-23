@@ -6,6 +6,10 @@
     <link href="assets/favicon.ico" rel="shortcut icon" />
     <link rel="stylesheet" href="css/owfont-regular.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="./images/assets/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
     <title>momentum</title>
   </head>
   <body>
@@ -18,21 +22,45 @@
             <button class="play-next player-icon"></button>
           </div>
           <div class="player-progress">
-            <div class="progress-title"></div>
-            <div class="progress-container">
-              <div class="progress-bar"></div>
+            <div class="progress-wrapper">
+              <div class="title-wrapper">
+                <div class="progress-title">Talking To The Moon</div>
+                <div class="progress-container">
+                  <div class="progress-bar"></div>
+                </div>
+              </div>
+
+              <div class="progress-duration"></div>
             </div>
           </div>
           <div class="player-sound">
-            <div class="sound-icon"></div>
-            <div class="sound-progress"></div>
+            <div class="sound-icon">
+              <div class="player-icon player-icon__volume loud"></div>
+            </div>
+            <div class="progress-sound-container">
+              <div class="sound-bar">
+                <input
+                  type="range"
+                  class="range"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="40"
+                />
+              </div>
+            </div>
           </div>
         </div>
 
         <ul class="play-list"></ul>
       </div>
       <div class="weather">
-        <input type="text" placeholder="[Enter name]" class="city" />
+        <input
+          type="text"
+          placeholder="[Enter name]"
+          value="Minsk"
+          class="city"
+        />
         <i class="weather-icon owf"></i>
         <div class="weather-error"></div>
         <div class="description-container">
@@ -56,12 +84,128 @@
       </div>
     </main>
     <footer class="footer">
-      <button class="change-quote"></button>
-      <div>
-        <div class="quote"></div>
-        <div class="author"></div>
+      <div class="footer__quotes">
+        <button class="change-quote"></button>
+        <div class="quotes">
+          <div class="quote"></div>
+          <div class="author"></div>
+        </div>
+      </div>
+      <div class="todo">
+        <div class="todo__header">Todo List</div>
+        <div class="inputField">
+          <input type="text" placeholder="Add your new todo" />
+          <button><i class="fa fa-plus"></i></button>
+        </div>
+        <ul class="todo__list"></ul>
+        <div class="todo__footer">
+          <span
+            >You have <span class="pending__numb"></span> pending tasks</span
+          >
+          <button>Clear all</button>
+        </div>
       </div>
     </footer>
+    <div class="settings player-icon"></div>
+    <div class="popup">
+      <div class="popup__body">
+        <div class="popup__content">
+          <a href="#" class="popup__close player-icon"
+            ><i class="fa fa-times player-icon"></i
+          ></a>
+          <div class="popup__title">Settings</div>
+          <div class="popup__settings">
+            <div class="popup__language">
+              <div class="language__title">
+                Select the application language:
+              </div>
+              <div class="language__choose">
+                <label for="ru">RU</label>
+                <input type="radio" name="language" id="ru" value="russia" />
+                <label for="en">EN</label>
+                <input
+                  type="radio"
+                  name="language"
+                  id="en"
+                  value="english"
+                  checked
+                />
+                <label for="be">BE</label>
+                <input type="radio" name="language" id="be" value="belarus" />
+              </div>
+            </div>
+            <div class="popup__foto popup__language">
+              <div class="foto__title">Select the photo upload source:</div>
+              <div class="foto__choose">
+                <div class="russia">
+                  <label for="git">GitHub</label>
+                  <input type="radio" name="foto" id="git" value="ru" checked />
+                </div>
+                <div class="english russia">
+                  <label for="unspl">Unsplash API</label>
+                  <input type="radio" name="foto" id="unspl" value="en" ch />
+                </div>
+                <div class="belarus russia">
+                  <label for="flick">Flickr API</label>
+                  <input type="radio" name="foto" id="flick" value="be" />
+                </div>
+              </div>
+            </div>
+            <div class="popup__blocks">
+              <div class="blocks__title">Show / Hide next blocks:</div>
+              <div class="blocks__hidden">
+                <div class="hidden__left">
+                  <div class="hidden__section">
+                    <div class="weather__title">Weather</div>
+                    <div class="hidden__weather" id="weather">
+                      <div class="indicator"></div>
+                    </div>
+                  </div>
+                  <div class="hidden__section">
+                    <div class="weather__title">Time</div>
+                    <div class="hidden__weather" id="time">
+                      <div class="indicator"></div>
+                    </div>
+                  </div>
+                  <div class="hidden__section">
+                    <div class="weather__title">Date</div>
+                    <div class="hidden__weather" id="date">
+                      <div class="indicator"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="hidden__right">
+                  <div class="hidden__section">
+                    <div class="weather__title">Audio</div>
+                    <div class="hidden__weather" id="audio">
+                      <div class="indicator"></div>
+                    </div>
+                  </div>
+                  <div class="hidden__section">
+                    <div class="weather__title">Quotes</div>
+                    <div class="hidden__weather" id="quotes">
+                      <div class="indicator"></div>
+                    </div>
+                  </div>
+                  <div class="hidden__section">
+                    <div class="weather__title">Greeting</div>
+                    <div class="hidden__weather" id="greeting">
+                      <div class="indicator"></div>
+                    </div>
+                  </div>
+                  <div class="hidden__section">
+                    <div class="weather__title">TodoList</div>
+                    <div class="hidden__weather" id="todo">
+                      <div class="indicator"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="js/script.js"></script>
   </body>
 </html>

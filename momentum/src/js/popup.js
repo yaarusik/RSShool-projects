@@ -9,3 +9,9 @@ settingsBtn.addEventListener("click", function () {
 closeBtn.addEventListener("click", function () {
   popup.classList.remove("open");
 });
+
+document.addEventListener("click", (e) => {
+  if (!popup.contains(e.target) && !settingsBtn.contains(e.target)) {
+    popup.classList.remove("open");
+  }
+});

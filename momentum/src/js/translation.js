@@ -9,6 +9,13 @@ const fotoTitle = document.querySelector(".foto__title");
 const popupTitle = document.querySelector(".popup__title");
 const blockTitle = document.querySelector(".blocks__title");
 const languageTitle = document.querySelector(".language__title");
+const tags = document.querySelector(".foto__tags p");
+const todoHeader = document.querySelector(".todo__header");
+const todoInput = document.querySelector(".inputField input");
+const todoClear = document.querySelector(".todo__footer button");
+const todoPending = document.querySelector(".todo__footer span").childNodes;
+
+console.log(todoPending);
 
 let chooseLanguage = localStorage.getItem("lang") || "en";
 
@@ -68,6 +75,12 @@ let settingTranslaition = {
     "Quotes",
     "Greeting",
     "Select the application language:",
+    "TodoList",
+    "Tags for foto:",
+    "Add your new todo",
+    "Clear all",
+    "You have ",
+    " pending tasks",
   ],
   ru: [
     "Настройки",
@@ -80,6 +93,12 @@ let settingTranslaition = {
     "Цитаты",
     "Приветствие",
     "Выберите язык приложения:",
+    "Cписок дел",
+    "Теги для фото",
+    "Добавить новое задание",
+    "Очистить",
+    "У вас ",
+    " незавершенных задач",
   ],
   be: [
     "Наладжваньне",
@@ -92,6 +111,12 @@ let settingTranslaition = {
     "Цытата",
     "Прывітанне",
     "Абярыце мову прыкладання:",
+    "Спіс спраў",
+    "Тэгі фота",
+    "Дадаць новае заданне",
+    "Ачысціць",
+    "У вас ",
+    " незавершаных задач",
   ],
 };
 
@@ -112,8 +137,16 @@ function setting(lang) {
   weatherTitles[3].textContent = settingArr[6];
   weatherTitles[4].textContent = settingArr[7];
   weatherTitles[5].textContent = settingArr[8];
+  weatherTitles[6].textContent = settingArr[10];
+
   fotoTitle.textContent = settingArr[1];
   languageTitle.textContent = settingArr[9];
   popupTitle.textContent = settingArr[0];
   blockTitle.textContent = settingArr[2];
+  tags.textContent = settingArr[11];
+  todoHeader.textContent = settingArr[10];
+  todoInput.placeholder = settingArr[12];
+  todoClear.textContent = settingArr[13];
+  todoPending[0].textContent = settingArr[14];
+  todoPending[2].textContent = settingArr[15];
 }

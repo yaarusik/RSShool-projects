@@ -111,7 +111,7 @@
       <div class="popup__body">
         <div class="popup__content">
           <a href="#" class="popup__close player-icon"
-            ><i class="fa fa-times player-icon"></i
+            ><i class="fa fa-times player-icon close-icon"></i
           ></a>
           <div class="popup__title">Settings</div>
           <div class="popup__settings">
@@ -120,35 +120,65 @@
                 Select the application language:
               </div>
               <div class="language__choose">
-                <label for="ru">RU</label>
-                <input type="radio" name="language" id="ru" value="russia" />
-                <label for="en">EN</label>
-                <input
-                  type="radio"
-                  name="language"
-                  id="en"
-                  value="english"
-                  checked
-                />
-                <label for="be">BE</label>
-                <input type="radio" name="language" id="be" value="belarus" />
+                <label for="ru" class="radio">
+                  <input type="radio" name="language" id="ru" value="russia" />
+                  <span class="ru">RU</span>
+                  <span class="fake"></span>
+                </label>
+
+                <label for="en" class="radio">
+                  <input
+                    type="radio"
+                    name="language"
+                    id="en"
+                    value="english"
+                    checked
+                  />
+                  <span class="ru">EN</span>
+                  <span class="fake"></span>
+                </label>
+
+                <label for="be" class="radio">
+                  <input type="radio" name="language" id="be" value="belarus" />
+                  <span class="ru">BE</span>
+                  <span class="fake"></span>
+                </label>
               </div>
             </div>
             <div class="popup__foto popup__language">
               <div class="foto__title">Select the photo upload source:</div>
               <div class="foto__choose">
                 <div class="russia">
-                  <label for="git">GitHub</label>
-                  <input type="radio" name="foto" id="git" value="ru" checked />
+                  <label for="git" class="radio soursing">
+                    <input
+                      type="radio"
+                      name="foto"
+                      id="git"
+                      value="ru"
+                      checked
+                    />
+                    <span>Github</span>
+                    <span class="fake"></span>
+                  </label>
                 </div>
                 <div class="english russia">
-                  <label for="unspl">Unsplash API</label>
-                  <input type="radio" name="foto" id="unspl" value="en" ch />
+                  <label for="unspl" class="radio soursing">
+                    <input type="radio" name="foto" id="unspl" value="en" ch />
+                    <span>Unsplash API</span>
+                    <span class="fake"></span>
+                  </label>
                 </div>
                 <div class="belarus russia">
-                  <label for="flick">Flickr API</label>
-                  <input type="radio" name="foto" id="flick" value="be" />
+                  <label for="flick" class="radio soursing">
+                    <input type="radio" name="foto" id="flick" value="be" />
+                    <span>Flickr API</span>
+                    <span class="fake"></span>
+                  </label>
                 </div>
+              </div>
+              <div class="foto__tags">
+                <p>Tags for foto:</p>
+                <input type="text" id="tags" />
               </div>
             </div>
             <div class="popup__blocks">

@@ -10,6 +10,8 @@
 //подключение шрифтов====================
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Forum&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Marck+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Marck+Script&display=swap");
 //подключение шрифтов====================
 
 //шрифт по умолчанию====================
@@ -56,7 +58,7 @@ a {
 body {
    min-width: 480px;
    min-height: 100vh;
-   font-family: "Arial", sans-serif;
+   font-family: "Roboto";
    font-size: 16px;
    color: #fff;
    text-align: center;
@@ -64,6 +66,7 @@ body {
    background-blend-mode: multiply;
    transition: background-image 1s ease-in-out;
    position: relative;
+   background-position: center;
    background-size: cover;
 }
 
@@ -311,6 +314,7 @@ body {
 
 .footer {
    display: flex;
+   position: relative;
    // flex-direction: column;
    // justify-content: flex-end;
    justify-content: center;
@@ -328,10 +332,13 @@ body {
 
 .quote {
    min-height: 32px;
+   font-size: 16px;
+   font-family: "Caveat", cursive;
 }
 
 .author {
    min-height: 20px;
+   font-size: "Roboto";
 }
 
 .playlist-indicator {
@@ -443,13 +450,9 @@ body {
    align-items: center;
    column-gap: 10px;
 }
-.sound-icon {
-}
-.sound-progress {
-}
 
 .settings {
-   background: #fff;
+   fill: #8eee9d;
    width: 40px;
    height: 40px;
    position: absolute;
@@ -457,7 +460,19 @@ body {
    background-image: url("./images/assets/svg/settings.svg");
    background-size: 40px 40px;
    left: 2%;
+   opacity: 1;
    bottom: 10%;
+   transform: rotate(0deg);
+   transition: all 0.4s ease;
+}
+
+.settings:hover {
+   transform: rotate(180deg) scale(1.1);
+}
+
+.close-icon {
+   position: relative;
+   z-index: 20;
 }
 
 .popup {
@@ -469,13 +484,10 @@ body {
    bottom: 0;
    left: 6%;
    border-radius: 10px;
-   opacity: 1;
-   transform: translateY(0%);
+   opacity: 0;
+   transform: translateY(100%);
    transition: all 0.6s ease-in 0s;
    overflow-y: auto;
-
-   &__body {
-   }
 
    &__content {
       position: relative;
@@ -483,6 +495,7 @@ body {
 
    &__close {
       position: absolute;
+      z-index: 10;
       top: 10px;
       right: 10px;
       font-size: 20px;
@@ -490,9 +503,9 @@ body {
    }
 
    &__title {
-      font-size: 20px;
+      font-size: 28px;
       color: #e4e9eb;
-      padding: 5px 0 10px;
+      padding: 10px 0 10px;
       position: relative;
    }
 
@@ -526,20 +539,52 @@ body {
    }
 }
 
-.popup::-webkit-scrollbar-track {
-   background-color: aqua;
-}
-
-.popup::-webkit-scrollbar {
-   width: 5px;
-}
-.popup::-webkit-scrollbar-thumb {
-   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
-
 .open {
    opacity: 1;
    transform: translateY(0%);
+}
+
+.radio input {
+   display: none;
+}
+
+.radio input:checked ~ .fake::before {
+   opacity: 1;
+}
+
+.ru {
+   display: flex;
+   margin-bottom: 5px;
+}
+
+.soursing {
+   width: 140px;
+   display: flex;
+   justify-content: space-between;
+}
+
+.fake {
+   display: block;
+   width: 20px;
+   height: 20px;
+   border-radius: 50%;
+   border: 1px solid #fff;
+   position: relative;
+}
+
+.fake::before {
+   content: "";
+   position: absolute;
+   display: block;
+   opacity: 0;
+   transition: 0.2s;
+   width: 10px;
+   height: 10px;
+   border-radius: 50%;
+   background: #c5b358;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
 }
 
 .language {
@@ -548,6 +593,10 @@ body {
    }
 
    &__choose {
+      display: flex;
+      justify-content: center;
+      column-gap: 20px;
+      align-items: center;
    }
 }
 
@@ -555,17 +604,38 @@ body {
    &__choose {
       display: flex;
       flex-direction: column;
-      row-gap: 5px;
+      row-gap: 10px;
       align-items: center;
    }
    &__title {
+      padding-bottom: 10px;
       font-size: 20px;
+   }
+
+   &__tags {
+      padding-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 10px;
+      border-radius: 5px;
+   }
+
+   &__tags input {
+      width: 40%;
+      height: 23px;
+      border-radius: 5px;
+      padding: 5px 5px 5px 10px;
+   }
+   &__tags input:focus {
+      border: #8eee9d;
    }
 }
 
 .russia {
    display: flex;
    justify-content: space-between;
+   font-size: 18px;
    width: 35%;
 }
 
@@ -658,8 +728,9 @@ body {
 .todo {
    position: absolute;
    z-index: 10;
-   right: 10px;
-   bottom: 20px;
+   font-family: "Roboto";
+   right: 4%;
+   bottom: 20%;
    max-width: 320px;
    width: 100%;
    background: rgba(255, 255, 255, 0.2);
@@ -671,11 +742,11 @@ body {
       font-size: 26px;
       font-weight: 600;
       padding-bottom: 10px;
-      color: skyblue;
+      color: #8eee9d;
    }
 
    &__list {
-      max-height: 250px;
+      max-height: 150px;
       overflow-y: auto;
    }
 
@@ -713,12 +784,13 @@ body {
       display: flex;
       width: 100%;
       align-items: center;
+      justify-content: space-between;
       margin-top: 10px;
    }
    &__footer button {
       border: none;
       outline: none;
-      background-color: #c5b358;
+      background-color: rgba(192, 111, 252, 1);
       color: #fff;
       font-size: 14px;
       cursor: pointer;
@@ -754,7 +826,7 @@ body {
    height: 100%;
    border: none;
    outline: none;
-   background-color: #c5b358;
+   background-color: rgba(192, 111, 252, 1);
    color: #fff;
    font-size: 22px;
    cursor: pointer;
@@ -768,9 +840,17 @@ body {
    opacity: 1;
    pointer-events: auto;
 }
-.fa {
+
+.popup::-webkit-scrollbar-track,
+.todo__list::-webkit-scrollbar {
+   background-color: #fff;
 }
-.fa-plus {
+
+.popup::-webkit-scrollbar,
+.todo__list::-webkit-scrollbar {
+   width: 5px;
 }
-.fa-trash {
+.popup::-webkit-scrollbar-thumb,
+.todo__list::-webkit-scrollbar {
+   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }

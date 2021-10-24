@@ -15,8 +15,6 @@ const todoInput = document.querySelector(".inputField input");
 const todoClear = document.querySelector(".todo__footer button");
 const todoPending = document.querySelector(".todo__footer span").childNodes;
 
-console.log(todoPending);
-
 let chooseLanguage = localStorage.getItem("lang") || "en";
 
 // languages.forEach((item) => {

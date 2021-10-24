@@ -54,7 +54,7 @@ function showTasks() {
       deleteTask(index);
     });
   });
-  console.log(liTags);
+
   iunputBox.value = "";
 }
 

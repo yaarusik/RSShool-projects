@@ -7,7 +7,7 @@ const changeQuote = document.querySelector(".change-quote");
 const date = document.querySelector(".date");
 const time = document.querySelector(".time");
 const todo = document.querySelector(".todo");
-console.log(hidden);
+
 let id = [];
 
 hidden.forEach((item) => {
@@ -94,7 +94,6 @@ window.addEventListener("load", getLocalStorage);
 //
 
 function setMemory() {
-  console.log(hidden.length, id.length);
   for (let i = 0; i < hidden.length; i++) {
     for (let j = 0; j < id.length; j++) {
       if (hidden[i].id == id[j]) {

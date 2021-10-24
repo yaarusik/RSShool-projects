@@ -141,7 +141,6 @@ async function getLinkToImageFlickr(id, time) {
   const data = await res.json();
   dinamicUrl = data.photos.photo[randomNum].url_h;
 
-  console.log(dinamicUrl);
   id = setBg(time, randomNum, dinamicId, dinamicUrl);
 }
 let id = localStorage.sourse;

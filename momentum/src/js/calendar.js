@@ -67,7 +67,6 @@ let weekDate = date.getDay() + 1;
 let week = daysBe[weekDate];
 
 let dateFull = `${week}, ${dateDay} ${month}`;
-// console.log(dateFull);
 
 const showDate = (lang = "en") => {
   if (lang == "en") {

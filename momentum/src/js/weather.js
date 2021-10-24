@@ -86,11 +86,5 @@ export async function getWeather(value, lang) {
       langsArr[2]
     }`;
     weatherHumidity.textContent = `${langsArr[1]}: ${data.main.humidity}%`;
-
-    // console.log(
-    //   data.weather[0].id,
-    //   data.weather[0].description,
-    //   data.main.temp
-    // );
   }
 }

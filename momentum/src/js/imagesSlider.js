@@ -119,7 +119,7 @@ async function getLinkToImageUnsplash(id, time) {
   const data = await res.json();
   try {
     dinamicUrl = data.urls.regular;
-    setBg(time, randomNum, id, dinamicUrl);
+    setBg(time, randomNum, dinamicId, dinamicUrl);
     fotoTags.placeholder = "";
   } catch {
     fotoTags.value = "";
@@ -141,7 +141,7 @@ async function getLinkToImageFlickr(id, time) {
   const data = await res.json();
   dinamicUrl = data.photos.photo[randomNum].url_h;
 
-  id = setBg(time, randomNum, dinamicId, dinamicUrl);
+  setBg(time, randomNum, dinamicId, dinamicUrl);
 }
 let id = localStorage.sourse;
 

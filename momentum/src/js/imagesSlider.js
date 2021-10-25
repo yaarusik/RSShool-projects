@@ -179,3 +179,7 @@ async function flikrTags(value) {
 
   setBg(getTimeOfDay(currentTimeZone), randomNum, dinamicId, dinamicUrl);
 }
+
+console.log(
+  "Flickr API ИНОГДА ДОЛГО ПОДГРУЖАЕТСЯ\n самооценка в pull request по ссылке по никнейму yaarusik в footer приложения(160/160)"
+);

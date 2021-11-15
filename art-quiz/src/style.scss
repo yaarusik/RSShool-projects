@@ -1,0 +1,73 @@
+//МИКСИНЫ================================
+@import "sourse/scss/mixin.scss";
+//МИКСИНЫ================================
+
+//подключение шрифтов====================
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,600;0,700;0,900;1,500&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Marck+Script&display=swap");
+
+//подключение шрифтов====================
+
+//шрифт по умолчанию====================
+$fontfamily: "Source Sans Pro", sans-serif;
+//шрифт по умолчанию====================
+
+//переменные============================
+$minwidth: 320px;
+:root {
+   --bg-green: #324047;
+   --col-white: #ffffff;
+   --bg-blue: #00cece;
+   --bg-coffee: #e7d6ac;
+   --col-text: #324047;
+   --col-grey: #efefef;
+   --col-orange: #e7d6ac;
+}
+//переменные============================
+
+// Файл обнуляющих стилей===============
+@import "./sourse/scss/nullstyle.scss";
+// Файл обнуляющих стилей===============
+
+body {
+   width: 100%;
+   height: 100%;
+   background: var(--bg-green);
+}
+
+//ОСНОВНАЯ СЕТКА========================
+.container {
+   max-width: 360px;
+   margin: 0 auto;
+   width: calc(100% - 20px);
+}
+//ОСНОВНАЯ СЕТКА========================
+
+// MAIN SECTION=============================
+@import "./sourse/scss/main.scss";
+// ===========================================
+
+//SETTING SECTION=============================
+@import "./sourse/scss/settings.scss";
+// ===========================================
+
+// Category section===========================
+@import "./sourse/scss/category.scss";
+// ===========================================
+
+// QUESTIONS SECTION===========================
+@import "./sourse/scss/questions.scss";
+// ===========================================
+
+.hide {
+   display: none;
+}
+
+.correct__answer {
+   background: rgb(10, 245, 10) !important;
+}
+
+.uncorrect__answer {
+   background: rgb(250, 46, 46) !important;
+}

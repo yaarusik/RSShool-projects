@@ -4,6 +4,7 @@ const volumeMuteBtn = document.querySelector(".sound__switch");
 const timerOnBtn = document.querySelector(".timer__switch");
 const soundIndicator = document.querySelector(".sound__indicator");
 const timerIndicator = document.querySelector(".timer__indicator");
+const settingsTimerSelect = document.querySelector(".settings__select");
 
 const audio = new Audio();
 let volumeStart = 0.5;
@@ -90,3 +91,24 @@ function audioPlay() {
   audio.currentTime = 0;
   // audio.play();
 }
+
+// // progressBar
+// const updateProgress = (e) => {
+//   const { duration, currentTime } = e.srcElement;
+//   const progressPersent = (currentTime / duration) * 100;
+//   progressBar.style.width = `${progressPersent}%`;
+
+//   progressDuration.textContent = timeFormat(currentTime);
+// };
+
+// // счетчик
+// function timeFormat(ct) {
+//   let minutes = Math.floor(ct / 60);
+//   let seconds = Math.floor(ct % 60);
+
+//   if (seconds < 10) seconds = "0" + seconds;
+
+//   return `${minutes}:${seconds} / ${playList[playNum].duration}`;
+// }
+
+// audio.addEventListener("timeupdate", updateProgress);

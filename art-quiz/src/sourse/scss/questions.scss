@@ -20,6 +20,11 @@
       width: 266px;
       height: 3px;
       background-color: var(--col-grey);
+      display: flex;
+      align-items: center;
+      align-self: flex-end;
+      position: relative;
+      cursor: pointer;
    }
 
    &__timer {
@@ -40,6 +45,13 @@
 
    &__block {
    }
+}
+
+.progress__bar {
+   height: 2px;
+   border-radius: 2px;
+   width: 30px;
+   background: var(--col-orange);
 }
 
 .block {

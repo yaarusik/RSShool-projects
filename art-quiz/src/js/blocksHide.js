@@ -1,5 +1,5 @@
 import { renderAnswers } from "./quiz";
-
+import { cleanProgress } from "./quiz";
 const mainBlock = document.querySelector(".start");
 const settingBlock = document.querySelector(".setting");
 const settingClose = document.querySelector(".settings__close");
@@ -11,6 +11,12 @@ const artistQuiz = document.querySelector(".main__author");
 const categories = document.querySelectorAll(".down__row");
 const questionsClose = document.querySelector(".questions__close");
 const menuHomeBtn = document.querySelector(".menu__home");
+
+const popupClose = document.querySelector(".popup__cancel");
+export const popupEnd = document.querySelector(".popup__end");
+const popupCancelBtn = document.querySelector(".popup__no");
+const popupHomeBtn = document.querySelectorAll(".popup__yes");
+const popupNextQuizBtn = document.querySelector(".popup__next");
 
 let eventMemory = false;
 
@@ -52,17 +58,35 @@ categories.forEach((item, index) => {
   item.addEventListener("click", function () {
     categoryBlock.classList.add("hide");
     questionsBlock.classList.remove("hide");
-    renderAnswers(index);
+    // в зависимости от категории будет приходить определенный десяток
+    console.log(index * 10);
+    renderAnswers(index * 10);
   });
 });
 
 questionsClose.addEventListener("click", function () {
-  categoryBlock.classList.remove("hide");
-  questionsBlock.classList.add("hide");
+  popupClose.classList.add("active");
+  // categoryBlock.classList.remove("hide");
+  // questionsBlock.classList.add("hide");
 });
 
 menuHomeBtn.addEventListener("click", function () {
   eventMemory = false;
   categoryBlock.classList.add("hide");
   mainBlock.classList.remove("hide");
+});
+
+popupHomeBtn.forEach((item) => {
+  item.addEventListener("click", () => {
+    popupClose.classList.remove("active");
+    questionsBlock.classList.add("hide");
+    popupEnd.classList.remove("active");
+    mainBlock.classList.remove("hide");
+    cleanProgress();
+  });
+});
+
+// закрываем popup с предупреждением
+popupCancelBtn.addEventListener("click", () => {
+  popupClose.classList.remove("active");
 });

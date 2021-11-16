@@ -60,6 +60,10 @@ body {
 @import "./sourse/scss/questions.scss";
 // ===========================================
 
+// QUESTIONS SECTION===========================
+@import "./sourse/scss/popup.scss";
+// ===========================================
+
 .hide {
    display: none;
 }
@@ -70,4 +74,8 @@ body {
 
 .uncorrect__answer {
    background: rgb(250, 46, 46) !important;
+}
+
+.active {
+   left: 0%;
 }

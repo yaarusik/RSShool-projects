@@ -4,6 +4,7 @@ import "./js/blocksHide";
 import "./js/ripple";
 import "./js/questions";
 import "./js/quiz";
+
 // import "./js/navigation";
 
 const createImage = (src) =>

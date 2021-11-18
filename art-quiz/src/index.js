@@ -2,12 +2,9 @@ import "./style.scss";
 import "./js/settings";
 import "./js/blocksHide";
 import "./js/ripple";
-import "./js/questions";
 import "./js/quiz";
 import "./js/score";
-
-// import "./js/navigation";
-
+import "./js/picturesQuiz";
 // const createImage = (src) =>
 //   new Promise((res, rej) => {
 //     const img = new Image();

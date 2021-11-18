@@ -1,11 +1,15 @@
 import { scoreBlock } from "./blocksHide";
 import { categoryBlock } from "./blocksHide";
+import { quizByAuthor } from "./quiz";
+import { quizByName } from "./quiz";
 
 const scoreBody = document.querySelector(".score__body");
 const scoreBtn = document.querySelectorAll(".button__score");
-let scorePages = [];
+let amountBtnQuiz = scoreBtn.length / 2;
+let scoreArtistsPages = [];
+let scorePicturesPages = [];
 
-export const renderScoreBlock = (index, answers) => {
+export const renderScoreBlock = (index, answers, type) => {
   let scoreBlock = ` 
    <div class="score__body">
    <div class="score__logo background__size"></div>
@@ -13,19 +17,24 @@ export const renderScoreBlock = (index, answers) => {
        <div class="score__title">Score</div>
      </div>
      <div class="score__picture">
-         ${renderPictureBlock(index * 10, answers)}
+         ${renderPictureBlock(index * 10, answers, type)}
      </div>
    </div>
 `;
   // записываем в объект страницы
-  scorePages.push({ page: scoreBlock, number: index });
-  console.log(scorePages);
-
-  scoreBtnShow(index);
+  if (type == "picture") {
+    scorePicturesPages.push({ page: scoreBlock, number: index });
+    scoreBtnShow(index + amountBtnQuiz);
+  } else {
+    scoreArtistsPages.push({ page: scoreBlock, number: index });
+    scoreBtnShow(index);
+  }
+  console.log(scorePicturesPages);
+  console.log(scoreArtistsPages);
 };
 
 // генерация картинок
-const renderPictureBlock = (currentImg, answers) => {
+const renderPictureBlock = (currentImg, answers, type) => {
   console.log("чичло" + currentImg);
   let htmlString = "";
   let classString;
@@ -36,10 +45,18 @@ const renderPictureBlock = (currentImg, answers) => {
     } else {
       classString = "";
     }
-    htmlString += `
+    if (type == "picture") {
+      htmlString += `
                      <div class="picture__one">
-                  <img ${classString} src="./images/assets/img/${currentImg}.jpg" alt="img" />
+                  <img ${classString} src="./images/assets/img/${quizByName[currentImg].imageNum}.jpg" alt="img" />
                         </div>`;
+    } else {
+      htmlString += `
+                     <div class="picture__one">
+                  <img ${classString} src="./images/assets/img/${quizByAuthor[currentImg].imageNum}.jpg" alt="img" />
+                        </div>`;
+    }
+
     currentImg++;
     count++;
   }
@@ -65,7 +82,7 @@ scoreBtn.forEach((item, index) => {
 
 // генерирует окончательный score
 const renderScorePage = (index) => {
-  let currentPage = scorePages.filter((item, i) => item.number == index);
+  let currentPage = scoreArtistsPages.filter((item, i) => item.number == index);
   console.log(currentPage);
   scoreBody.innerHTML = currentPage[currentPage.length - 1].page;
 };

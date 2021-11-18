@@ -1,27 +1,25 @@
-// import images from "./../images/images";
-
 import { popupEnd } from "./blocksHide";
 import { renderScoreBlock } from "./score";
 
-// const questions = document.querySelector(".questions");
-const questionsBlock = document.querySelector(".questions__block");
+const questionsBlock = document.querySelector(".question__pictures");
 const finishResult = document.querySelector(".finish");
 // const nextQuestionBtn = document.querySelector(".correct__button");
 const popupAnswers = document.querySelector(".popup__correct-up");
-const scoreCard = document.querySelectorAll(".down__score");
-const scoreBlock = document.querySelector(".score");
+const scoreCard = document.querySelectorAll(".down__results");
 const categoryBg = document.querySelectorAll(".down__test");
 
 let authorAnswers = new Set();
-// let uniqAuthors = new Set();
+let pictureAnswers = new Set();
+
 let roundCounter = 0;
 let counter;
 let cardNumber;
-export let quizByAuthor = [];
-export let quizByName = [];
+let quizByAuthor = [];
+let quizByName = [];
 let data;
 let buttonsChoose;
 let correctMemory = [];
+let type = "picture";
 // рандом для вариантов ответа авторов
 const getRandomInt = (num) => {
   return Math.floor(Math.random() * num);
@@ -46,10 +44,10 @@ const renderPopupAnswer = (answer) => {
               <div class="correct__body">
                 <div class="correct__img">
                   <div class="correct__logo ${answer} background__size"></div>
-                  <img src="./images/assets/img/${counter}.jpg" alt="img" />
+                  <img src="./images/assets/img/${quizByName[counter].imageNum}.jpg" alt="img" />
                 </div>
-                <div class="correct__name">${quizByAuthor[counter].name}</div>
-                <div class="correct__author"> ${quizByAuthor[counter].author}, ${quizByAuthor[counter].year}</div>
+                <div class="correct__name">${quizByName[counter].author}</div>
+                <div class="correct__author"> ${quizByName[counter].author}, ${quizByName[counter].year}</div>
                 <button class="correct__button">Next</button>
               </div>
             </div>
@@ -59,7 +57,7 @@ const renderPopupAnswer = (answer) => {
 
 // обработчик верного ответа
 const chooseHundler = (e) => {
-  if (e.target.innerHTML == quizByAuthor[counter].author) {
+  if (e.target.innerHTML == quizByName[counter].imageNum) {
     e.target.classList.add("correct__answer");
     correctMemory.push("1");
     renderIndicator(counter);
@@ -81,7 +79,7 @@ const removeEvents = () => {
 };
 
 // получение данных для quiz
-export const renderAnswers = async (index, currentBlock) => {
+export const renderPictureAnswers = async (index, currentBlock) => {
   // запоминаем номер карточки
   if (typeof currentBlock == "number") {
     cardNumber = currentBlock;
@@ -116,13 +114,13 @@ const saveResults = (result) => {
 
 // для пометки правильных  и неправильных
 const renderIndicator = () => {
-  const indicatorCircle = document.querySelectorAll(".indicators__circle");
+  const indicatorRound = document.querySelectorAll(".indicators__round");
 
   correctMemory.forEach((item, index) => {
     if (item == "1") {
-      indicatorCircle[index].classList.add("correct__answer");
+      indicatorRound[index].classList.add("correct__answer");
     } else if (item == "0") {
-      indicatorCircle[index].classList.add("uncorrect__answer");
+      indicatorRound[index].classList.add("uncorrect__answer");
     }
   });
 };
@@ -136,11 +134,11 @@ popupAnswers.addEventListener("click", (e) => {
     if (roundCounter == 3) {
       roundEnd();
       // отрисовываем score
-      renderScoreBlock(cardNumber, correctMemory);
+      renderScoreBlock(cardNumber, correctMemory, type);
       // помечаем карточки
       categoryIndicator();
     } else {
-      renderAnswers(counter);
+      renderPictureAnswers(counter);
       roundCounter++;
     }
     // убираем блок с правильным ответом
@@ -150,60 +148,57 @@ popupAnswers.addEventListener("click", (e) => {
 
 // cоздаем 4 варианта ответа
 const createAnswers = (index, data) => {
-  authorAnswers.add(quizByAuthor[index].author);
-  while (authorAnswers.size < 4) {
-    authorAnswers.add(data[getRandomInt(data.length - 1)].author);
+  pictureAnswers.add(quizByName[index].imageNum);
+  while (pictureAnswers.size < 4) {
+    pictureAnswers.add(data[getRandomInt(data.length - 1)].imageNum);
   }
-  let authorArray = [...authorAnswers];
-  authorArray = shuffle(authorArray);
 
-  return authorArray
+  let pictureArray = [...pictureAnswers];
+  pictureArray = shuffle(pictureArray);
+
+  return pictureArray
     .map((item) => {
-      return `<div class="variants__answer">${item}</div>`;
+      return `<div class="pictures__answer">
+                  <img src="./images/assets/img/${item}.jpg" alt="img" />
+               </div>`;
     })
     .join("");
 };
 
 // создание блока с вариантами ответа и фото
 const renderQuestions = (index, data) => {
-  // создание вариантов ответа для quiz авторов
+  // создание вариантов ответа для quiz картин
 
   questionsBlock.innerHTML = `
-  <div class="questions__block">
-  <div class="block__picture">
-    <img src="https://raw.githubusercontent.com/yaarusik/image-data/master/img/${index}.jpg" alt="" />
-  </div>
   <div class="block__indicators">
-    <span class="indicators__circle"></span>
-    <span class="indicators__circle"></span>
-    <span class="indicators__circle"></span>
-    <span class="indicators__circle"></span>
-    <span class="indicators__circle"></span>
-    <span class="indicators__circle"></span>
-    <span class="indicators__circle"></span>
-    <span class="indicators__circle"></span>
-    <span class="indicators__circle"></span>
-    <span class="indicators__circle"></span>
-  </div>
-  <div class="block__variants">
-    <div class="variants__body">
-      <div class="variants__row">
-       ${createAnswers(index, data)}
-      </div>
+  <span class="indicators__round"></span>
+  <span class="indicators__round"></span>
+  <span class="indicators__round"></span>
+  <span class="indicators__round"></span>
+  <span class="indicators__round"></span>
+  <span class="indicators__round"></span>
+  <span class="indicators__round"></span>
+  <span class="indicators__round"></span>
+  <span class="indicators__round"></span>
+  <span class="indicators__round"></span>
+</div>
+<div class="block__variants">
+  <div class="variants__body">
+    <div class="variants__row pictures__row">
+      ${createAnswers(index, data)} 
     </div>
   </div>
-  </div> 
+</div>
   `;
-
   // окрашивание предыдущих ответов
   if (index) {
     renderIndicator();
   }
 
   // очищение set
-  authorAnswers = new Set();
+  pictureAnswers = new Set();
 
-  buttonsChoose = document.querySelectorAll(".variants__answer");
+  buttonsChoose = document.querySelectorAll(".pictures__answer");
   // cлушатель событий для созданных кнопок
   buttonsChoose.forEach((item) =>
     item.addEventListener("click", chooseHundler)

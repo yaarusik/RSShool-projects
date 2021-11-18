@@ -1,0 +1,157 @@
+.score {
+   position: relative;
+   min-width: 100%;
+   min-height: 100vh;
+
+   .score {
+      &__back {
+         padding: 10px 0;
+      }
+
+      &__row {
+         display: flex;
+         align-items: center;
+         justify-content: left;
+         column-gap: 10px;
+      }
+
+      &__categories {
+         width: 17px;
+         height: 17px;
+         background-image: url("./images/assets/svg/left__arrow.svg");
+      }
+
+      &__artists {
+         font-size: 14px;
+         color: var(--col-grey);
+      }
+   }
+
+   &__body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+   }
+
+   &__logo {
+      width: 110px;
+      height: 132px;
+      background-image: url("./images/assets/logo/art-quiz.webp");
+   }
+
+   &__header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+   }
+
+   &__title {
+      padding-top: 10px;
+      font-size: 28px;
+      line-height: 30px;
+      font-weight: 700;
+      color: var(--col-grey);
+   }
+
+   &__picture {
+      display: flex;
+      gap: 15px 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding-top: 30px;
+   }
+}
+
+.picture {
+   &__one {
+    
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+
+     
+   }
+   &__one img {
+    filter: grayscale(100%);
+      position: relative;
+      border-radius: 50%;
+      width: 100%;
+      object-fit:cover;
+      display: block;
+   }
+   
+}
+
+.results {
+   position: relative;
+   min-width: 100%;
+   min-height: 100vh;
+   color: var(--col-grey);
+
+   &__body {
+      padding-top: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+   }
+
+   &__logo {
+      width: 110px;
+      height: 132px;
+      background-image: url("./images/assets/logo/art-quiz.webp");
+      padding-bottom: 20px;
+   }
+
+   &__artists {
+      padding-top: 10px;
+   }
+
+   &__title {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 24px;
+      padding-bottom: 10px;
+   }
+
+   &__categories {
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+   }
+
+   &__round {
+      color: var(--bg-green);
+      font-weight: 600;
+      width: 280px;
+      height: 50px;
+      display: flex;
+      padding-left: 20px;
+      justify-content: left;
+      align-items: center;
+      border-radius: 50px;
+      background-color: var(--bg-blue);
+   }
+}
+
+.category {
+   &__back {
+      display: flex;
+      justify-content: left;
+      column-gap: 10px;
+      padding-bottom: 20px;
+   }
+}
+.score {
+   &__categories {
+      width: 17px;
+      height: 17px;
+      background-image: url("./images/assets/svg/left__arrow.svg");
+   }
+
+   &__artists {
+      font-size: 16px;
+      line-height: 18px;
+      color: var(--col-grey);
+   }
+}

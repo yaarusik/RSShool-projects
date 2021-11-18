@@ -19,7 +19,7 @@ $minwidth: 320px;
    --bg-green: #324047;
    --col-white: #ffffff;
    --bg-blue: #00cece;
-   --bg-coffee: #e7d6ac;
+   --bg-coffee: #e5d099;
    --col-text: #324047;
    --col-grey: #efefef;
    --col-orange: #e7d6ac;
@@ -62,7 +62,11 @@ body {
 
 // QUESTIONS SECTION===========================
 @import "./sourse/scss/popup.scss";
-// ===========================================
+// ============================================
+
+// SCORE SECTION===========================
+@import "./sourse/scss/score.scss";
+// ============================================
 
 .hide {
    display: none;
@@ -78,4 +82,13 @@ body {
 
 .active {
    left: 0%;
+}
+
+.add__bg {
+   filter: grayscale(0%) !important;
+}
+
+.show {
+   pointer-events: visible;
+   opacity: 1;
 }

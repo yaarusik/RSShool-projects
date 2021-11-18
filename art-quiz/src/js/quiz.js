@@ -1,24 +1,27 @@
 // import images from "./../images/images";
 
 import { popupEnd } from "./blocksHide";
+import { renderScoreBlock } from "./score";
 
-const questions = document.querySelector(".questions");
+// const questions = document.querySelector(".questions");
 const questionsBlock = document.querySelector(".questions__block");
 const finishResult = document.querySelector(".finish");
-const nextQuestionBtn = document.querySelector(".correct__button");
+// const nextQuestionBtn = document.querySelector(".correct__button");
 const popupAnswers = document.querySelector(".popup__correct-up");
+const scoreCard = document.querySelectorAll(".down__score");
+const scoreBlock = document.querySelector(".score");
+const categoryBg = document.querySelectorAll('.down__test');
 
 let authorAnswers = new Set();
-let uniqAuthors = new Set();
+// let uniqAuthors = new Set();
 let roundCounter = 0;
-let counter = 0;
+let counter;
+let cardNumber;
 let quizByAuthor = [];
 let quizByName = [];
 let data;
 let buttonsChoose;
-
 let correctMemory = [];
-
 // рандом для вариантов ответа авторов
 const getRandomInt = (num) => {
   return Math.floor(Math.random() * num);
@@ -77,8 +80,13 @@ const removeEvents = () => {
 };
 
 // получение данных для quiz
-export const renderAnswers = async (index) => {
+export const renderAnswers = async (index, currentBlock) => {
+  // запоминаем номер карточки
+  if((typeof currentBlock) == 'number'){
+    cardNumber = currentBlock;
+  }
   counter = index;
+
   let response = await fetch(
     "https://raw.githubusercontent.com/yaarusik/image-data/master/images.json"
   );
@@ -93,13 +101,20 @@ export const renderAnswers = async (index) => {
 // окончание раунда
 const roundEnd = () => {
   let sumResult = correctMemory.reduce((item, current) => +item + +current, 0);
-  console.log(sumResult);
+  
   popupEnd.classList.add("active");
   finishResult.textContent = `${sumResult}`;
+  saveResults(sumResult);
+};
+
+const saveResults = (result) => {
+  scoreCard[cardNumber].innerHTML = `
+    ${result} / 10
+  `;
 };
 
 // для пометки правильных  и неправильных
-const renderIndicator = (currentAnswer) => {
+const renderIndicator = () => {
   const indicatorCircle = document.querySelectorAll(".indicators__circle");
 
   correctMemory.forEach((item, index) => {
@@ -117,8 +132,12 @@ popupAnswers.addEventListener("click", (e) => {
     counter += 1;
 
     console.log(roundCounter);
-    if (roundCounter == 5) {
+    if (roundCounter == 3) {
       roundEnd();
+      // отрисовываем score
+      renderScoreBlock(cardNumber, correctMemory);
+      // помечаем карточки
+      categoryIndicator();
     } else {
       renderAnswers(counter);
       roundCounter++;
@@ -151,7 +170,7 @@ const renderQuestions = (index, data) => {
   questionsBlock.innerHTML = `
   <div class="questions__block">
   <div class="block__picture">
-    <img src="https://raw.githubusercontent.com/Geo-nw/image-data/master/img/${index}.jpg" alt="" />
+    <img src="https://raw.githubusercontent.com/yaarusik/image-data/master/img/${index}.jpg" alt="" />
   </div>
   <div class="block__indicators">
     <span class="indicators__circle"></span>
@@ -176,8 +195,8 @@ const renderQuestions = (index, data) => {
   `;
 
   // окрашивание предыдущих ответов
-  if (counter) {
-    renderIndicator(counter);
+  if (index) {
+    renderIndicator();
   }
 
   // очищение set
@@ -195,3 +214,8 @@ export const cleanProgress = () => {
   roundCounter = 0;
   correctMemory = [];
 };
+
+
+const categoryIndicator = () => {
+  categoryBg[cardNumber].classList.add('add__bg');
+}

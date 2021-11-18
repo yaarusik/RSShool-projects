@@ -81,6 +81,8 @@
    }
 
    &__row {
+      position: relative;
+      z-index: 0;
       cursor: pointer;
       display: flex;
       flex-direction: column;
@@ -130,15 +132,28 @@
    }
 
    &__test {
+      position: relative;
       width: 155px;
       height: 164px;
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
-
-      // background-color: rgba(0, 0, 0, 0.2);
-      // background-blend-mode: multiply;
+      filter: grayscale(100%);
    }
+}
+
+.button__score {
+   pointer-events: none;
+   position: absolute;
+   display: block;
+   opacity: 0;
+   color: white;
+   font-weight: 400;
+   bottom: 0;
+   left: 0;
+   background-color: red;
+   width: 100%;
+   height: 35px;
 }
 
 .down__row:first-child .down__test {

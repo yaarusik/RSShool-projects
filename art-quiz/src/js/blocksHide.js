@@ -1,16 +1,21 @@
 import { renderAnswers } from "./quiz";
 import { cleanProgress } from "./quiz";
+import { renderScoreBlock } from "./score";
+
 const mainBlock = document.querySelector(".start");
 const settingBlock = document.querySelector(".setting");
 const settingClose = document.querySelector(".settings__close");
 const mainSettingBtn = document.querySelector(".main__settings");
 const categorySetting = document.querySelector(".category__setting");
-const categoryBlock = document.querySelector(".category");
+export const categoryBlock = document.querySelector(".category");
 const questionsBlock = document.querySelector(".questions");
 const artistQuiz = document.querySelector(".main__author");
 const categories = document.querySelectorAll(".down__row");
 const questionsClose = document.querySelector(".questions__close");
 const menuHomeBtn = document.querySelector(".menu__home");
+const menuScoreBtn = document.querySelector(".menu__score");
+export const scoreBlock = document.querySelector(".score");
+const backCategoriesBtn = document.querySelector(".score__row");
 
 const popupClose = document.querySelector(".popup__cancel");
 export const popupEnd = document.querySelector(".popup__end");
@@ -19,16 +24,6 @@ const popupHomeBtn = document.querySelectorAll(".popup__yes");
 const popupNextQuizBtn = document.querySelector(".popup__next");
 
 let eventMemory = false;
-
-// buttons.forEach((item) => {
-//   item.addEventListener("click", (e) => {
-//     hideBlocks(item);
-//   });
-// });
-
-const hideBlocks = (block) => {
-  console.log(block.classList[0]);
-};
 
 const addHide = () => {
   mainBlock.classList.add("hide");
@@ -59,15 +54,13 @@ categories.forEach((item, index) => {
     categoryBlock.classList.add("hide");
     questionsBlock.classList.remove("hide");
     // в зависимости от категории будет приходить определенный десяток
-    console.log(index * 10);
-    renderAnswers(index * 10);
+
+    renderAnswers(index * 10, index);
   });
 });
 
 questionsClose.addEventListener("click", function () {
   popupClose.classList.add("active");
-  // categoryBlock.classList.remove("hide");
-  // questionsBlock.classList.add("hide");
 });
 
 menuHomeBtn.addEventListener("click", function () {
@@ -81,7 +74,7 @@ popupHomeBtn.forEach((item) => {
     popupClose.classList.remove("active");
     questionsBlock.classList.add("hide");
     popupEnd.classList.remove("active");
-    mainBlock.classList.remove("hide");
+    categoryBlock.classList.remove("hide");
     cleanProgress();
   });
 });
@@ -89,4 +82,14 @@ popupHomeBtn.forEach((item) => {
 // закрываем popup с предупреждением
 popupCancelBtn.addEventListener("click", () => {
   popupClose.classList.remove("active");
+});
+
+menuScoreBtn.addEventListener("click", () => {
+  categoryBlock.classList.add("hide");
+  resultBlock.classList.remove("hide");
+});
+
+backCategoriesBtn.addEventListener("click", () => {
+  scoreBlock.classList.add("hide");
+  categoryBlock.classList.remove("hide");
 });

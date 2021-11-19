@@ -6,7 +6,7 @@ const finishResult = document.querySelector(".finish");
 // const nextQuestionBtn = document.querySelector(".correct__button");
 const popupAnswers = document.querySelector(".popup__correct-up");
 const scoreCard = document.querySelectorAll(".down__results");
-const categoryBg = document.querySelectorAll(".down__test");
+const categoryBg = document.querySelectorAll(".down__reaction");
 
 let authorAnswers = new Set();
 let pictureAnswers = new Set();
@@ -15,10 +15,10 @@ let roundCounter = 0;
 let counter;
 let cardNumber;
 let quizByAuthor = [];
-let quizByName = [];
+export let quizByName = [];
 let data;
 let buttonsChoose;
-let correctMemory = [];
+let correctPictureMemory = [];
 let type = "picture";
 // рандом для вариантов ответа авторов
 const getRandomInt = (num) => {
@@ -48,7 +48,7 @@ const renderPopupAnswer = (answer) => {
                 </div>
                 <div class="correct__name">${quizByName[counter].author}</div>
                 <div class="correct__author"> ${quizByName[counter].author}, ${quizByName[counter].year}</div>
-                <button class="correct__button">Next</button>
+                <button class="correct__btn">Next</button>
               </div>
             </div>
           </div>
@@ -57,13 +57,14 @@ const renderPopupAnswer = (answer) => {
 
 // обработчик верного ответа
 const chooseHundler = (e) => {
-  if (e.target.innerHTML == quizByName[counter].imageNum) {
+  console.log(e.target.alt);
+  if (e.target.alt == quizByName[counter].imageNum) {
     e.target.classList.add("correct__answer");
-    correctMemory.push("1");
+    correctPictureMemory.push("1");
     renderIndicator(counter);
     renderPopupAnswer("yes");
   } else {
-    correctMemory.push("0");
+    correctPictureMemory.push("0");
     e.target.classList.add("uncorrect__answer");
     renderIndicator(counter);
     renderPopupAnswer("no");
@@ -99,7 +100,10 @@ export const renderPictureAnswers = async (index, currentBlock) => {
 
 // окончание раунда
 const roundEnd = () => {
-  let sumResult = correctMemory.reduce((item, current) => +item + +current, 0);
+  let sumResult = correctPictureMemory.reduce(
+    (item, current) => +item + +current,
+    0
+  );
 
   popupEnd.classList.add("active");
   finishResult.textContent = `${sumResult}`;
@@ -116,7 +120,7 @@ const saveResults = (result) => {
 const renderIndicator = () => {
   const indicatorRound = document.querySelectorAll(".indicators__round");
 
-  correctMemory.forEach((item, index) => {
+  correctPictureMemory.forEach((item, index) => {
     if (item == "1") {
       indicatorRound[index].classList.add("correct__answer");
     } else if (item == "0") {
@@ -127,14 +131,14 @@ const renderIndicator = () => {
 
 // делегирование
 popupAnswers.addEventListener("click", (e) => {
-  if (e.target.classList.contains("correct__button")) {
+  if (e.target.classList.contains("correct__btn")) {
     counter += 1;
 
     console.log(roundCounter);
     if (roundCounter == 3) {
       roundEnd();
       // отрисовываем score
-      renderScoreBlock(cardNumber, correctMemory, type);
+      renderScoreBlock(cardNumber, correctPictureMemory, type);
       // помечаем карточки
       categoryIndicator();
     } else {
@@ -159,7 +163,7 @@ const createAnswers = (index, data) => {
   return pictureArray
     .map((item) => {
       return `<div class="pictures__answer">
-                  <img src="./images/assets/img/${item}.jpg" alt="img" />
+                  <img src="./images/assets/img/${item}.jpg" alt="${item}" />
                </div>`;
     })
     .join("");
@@ -206,9 +210,9 @@ const renderQuestions = (index, data) => {
 };
 
 // удаляем прогресс
-export const cleanProgress = () => {
+export const cleanPictureProgress = () => {
   roundCounter = 0;
-  correctMemory = [];
+  correctPictureMemory = [];
 };
 
 const categoryIndicator = () => {

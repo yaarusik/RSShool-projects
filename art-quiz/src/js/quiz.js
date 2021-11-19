@@ -2,7 +2,8 @@
 
 import { popupEnd } from "./blocksHide";
 import { renderScoreBlock } from "./score";
-
+import { settingsTimerSelect } from "./settings";
+import { questionsTimer } from "./settings";
 // const questions = document.querySelector(".questions");
 const questionsBlock = document.querySelector(".questions__block");
 const finishResult = document.querySelector(".finish");
@@ -18,10 +19,11 @@ let roundCounter = 0;
 let counter;
 let cardNumber;
 export let quizByAuthor = [];
-export let quizByName = [];
+let quizByName = [];
 let data;
 let buttonsChoose;
-let correctMemory = [];
+let correctArtistMemory = [];
+export let interval;
 // рандом для вариантов ответа авторов
 const getRandomInt = (num) => {
   return Math.floor(Math.random() * num);
@@ -61,15 +63,16 @@ const renderPopupAnswer = (answer) => {
 const chooseHundler = (e) => {
   if (e.target.innerHTML == quizByAuthor[counter].author) {
     e.target.classList.add("correct__answer");
-    correctMemory.push("1");
+    correctArtistMemory.push("1");
     renderIndicator(counter);
     renderPopupAnswer("yes");
   } else {
-    correctMemory.push("0");
+    correctArtistMemory.push("0");
     e.target.classList.add("uncorrect__answer");
     renderIndicator(counter);
     renderPopupAnswer("no");
   }
+  clearInterval(interval);
   removeEvents();
 };
 
@@ -101,7 +104,10 @@ export const renderAnswers = async (index, currentBlock) => {
 
 // окончание раунда
 const roundEnd = () => {
-  let sumResult = correctMemory.reduce((item, current) => +item + +current, 0);
+  let sumResult = correctArtistMemory.reduce(
+    (item, current) => +item + +current,
+    0
+  );
 
   popupEnd.classList.add("active");
   finishResult.textContent = `${sumResult}`;
@@ -118,7 +124,7 @@ const saveResults = (result) => {
 const renderIndicator = () => {
   const indicatorCircle = document.querySelectorAll(".indicators__circle");
 
-  correctMemory.forEach((item, index) => {
+  correctArtistMemory.forEach((item, index) => {
     if (item == "1") {
       indicatorCircle[index].classList.add("correct__answer");
     } else if (item == "0") {
@@ -136,11 +142,12 @@ popupAnswers.addEventListener("click", (e) => {
     if (roundCounter == 3) {
       roundEnd();
       // отрисовываем score
-      renderScoreBlock(cardNumber, correctMemory);
+      renderScoreBlock(cardNumber, correctArtistMemory);
       // помечаем карточки
       categoryIndicator();
     } else {
       renderAnswers(counter);
+      timer();
       roundCounter++;
     }
     // убираем блок с правильным ответом
@@ -213,9 +220,27 @@ const renderQuestions = (index, data) => {
 // удаляем прогресс
 export const cleanProgress = () => {
   roundCounter = 0;
-  correctMemory = [];
+  correctArtistMemory = [];
 };
 
 const categoryIndicator = () => {
   categoryBg[cardNumber].classList.add("add__bg");
+};
+
+export const timer = () => {
+  let count = settingsTimerSelect.value.split(" ")[0];
+  interval = setInterval(() => {
+    questionsTimer.innerHTML = `00 : ${count}`;
+
+    if (!count) {
+      clearInterval(interval);
+      correctArtistMemory.push("0");
+      renderIndicator(counter);
+      renderPopupAnswer("no");
+      removeEvents();
+    }
+    count--;
+    console.log(count);
+    // document.querySelector
+  }, 1000);
 };

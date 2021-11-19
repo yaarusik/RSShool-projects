@@ -1,15 +1,22 @@
 import { scoreBlock } from "./blocksHide";
 import { categoryBlock } from "./blocksHide";
+import { categoryPicturesBlock } from "./blocksHide";
 import { quizByAuthor } from "./quiz";
-import { quizByName } from "./quiz";
+import { quizByName } from "./picturesQuiz";
+import { eventMemory } from "./blocksHide";
 
 const scoreBody = document.querySelector(".score__body");
 const scoreBtn = document.querySelectorAll(".button__score");
 let amountBtnQuiz = scoreBtn.length / 2;
+console.log(amountBtnQuiz);
 let scoreArtistsPages = [];
 let scorePicturesPages = [];
-
+let quizType;
 export const renderScoreBlock = (index, answers, type) => {
+  console.log(quizByAuthor);
+  console.log(quizByName);
+  quizType = type;
+  console.log("index" + index);
   let scoreBlock = ` 
    <div class="score__body">
    <div class="score__logo background__size"></div>
@@ -35,7 +42,7 @@ export const renderScoreBlock = (index, answers, type) => {
 
 // генерация картинок
 const renderPictureBlock = (currentImg, answers, type) => {
-  console.log("чичло" + currentImg);
+  console.log("кртинка номер" + currentImg);
   let htmlString = "";
   let classString;
   let count = 0;
@@ -50,6 +57,7 @@ const renderPictureBlock = (currentImg, answers, type) => {
                      <div class="picture__one">
                   <img ${classString} src="./images/assets/img/${quizByName[currentImg].imageNum}.jpg" alt="img" />
                         </div>`;
+      console.log(htmlString);
     } else {
       htmlString += `
                      <div class="picture__one">
@@ -73,16 +81,34 @@ const scoreBtnShow = (index) => {
 scoreBtn.forEach((item, index) => {
   item.addEventListener("click", (event) => {
     event.stopPropagation();
-    categoryBlock.classList.add("hide");
-    scoreBlock.classList.remove("hide");
-    console.log("index" + index);
-    renderScorePage(index);
+    if (eventMemory == "artist") {
+      categoryBlock.classList.add("hide");
+      scoreBlock.classList.remove("hide");
+    } else if (eventMemory == "picture") {
+      categoryPicturesBlock.classList.add("hide");
+      scoreBlock.classList.remove("hide");
+    }
+
+    renderScorePage(index, quizType);
   });
 });
 
 // генерирует окончательный score
-const renderScorePage = (index) => {
-  let currentPage = scoreArtistsPages.filter((item, i) => item.number == index);
-  console.log(currentPage);
-  scoreBody.innerHTML = currentPage[currentPage.length - 1].page;
+const renderScorePage = (index, type) => {
+  if (type == "picture") {
+    // подбиваем кнопку
+    index -= amountBtnQuiz;
+    console.log("d" + index);
+    let currentPage = scorePicturesPages.filter(
+      (item, i) => item.number == index
+    );
+    console.log(currentPage);
+    scoreBody.innerHTML = currentPage[currentPage.length - 1].page;
+  } else {
+    let currentPage = scoreArtistsPages.filter(
+      (item, i) => item.number == index
+    );
+    console.log(currentPage);
+    scoreBody.innerHTML = currentPage[currentPage.length - 1].page;
+  }
 };

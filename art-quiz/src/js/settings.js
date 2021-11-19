@@ -4,8 +4,8 @@ const volumeMuteBtn = document.querySelector(".sound__switch");
 const timerOnBtn = document.querySelector(".timer__switch");
 const soundIndicator = document.querySelector(".sound__indicator");
 const timerIndicator = document.querySelector(".timer__indicator");
-const settingsTimerSelect = document.querySelector(".settings__select");
-
+export const settingsTimerSelect = document.querySelector(".settings__select");
+export const questionsTimer = document.querySelector(".questions__timer");
 const audio = new Audio();
 let volumeStart = 0.5;
 
@@ -100,15 +100,3 @@ function audioPlay() {
 
 //   progressDuration.textContent = timeFormat(currentTime);
 // };
-
-// // счетчик
-// function timeFormat(ct) {
-//   let minutes = Math.floor(ct / 60);
-//   let seconds = Math.floor(ct % 60);
-
-//   if (seconds < 10) seconds = "0" + seconds;
-
-//   return `${minutes}:${seconds} / ${playList[playNum].duration}`;
-// }
-
-// audio.addEventListener("timeupdate", updateProgress);

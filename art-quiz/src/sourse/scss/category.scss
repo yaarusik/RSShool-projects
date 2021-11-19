@@ -125,7 +125,8 @@
       font-size: 15;
    }
 
-   &__test {
+   &__test,
+   &__reaction {
       position: relative;
       width: 155px;
       height: 164px;
@@ -190,43 +191,43 @@
    background-image: url("./images/assets/img/110.jpg");
 }
 
-.category__two .down__pictures:first-child .down__test {
+.category__two .down__pictures:first-child .down__reaction {
    background-image: url("./images/assets/img/120.jpg");
 }
-.category__two .down__pictures:nth-child(2) .down__test {
+.category__two .down__pictures:nth-child(2) .down__reaction {
    background-image: url("./images/assets/img/130.jpg");
 }
 
-.category__two .down__pictures:nth-child(3) .down__test {
+.category__two .down__pictures:nth-child(3) .down__reaction {
    background-image: url("./images/assets/img/140.jpg");
 }
 
-.category__two .down__pictures:nth-child(4) .down__test {
+.category__two .down__pictures:nth-child(4) .down__reaction {
    background-image: url("./images/assets/img/150.jpg");
 }
 
-.category__two .down__pictures:nth-child(5) .down__test {
+.category__two .down__pictures:nth-child(5) .down__reaction {
    background-image: url("./images/assets/img/160.jpg");
 }
-.category__two .down__pictures:nth-child(6) .down__test {
+.category__two .down__pictures:nth-child(6) .down__reaction {
    background-image: url("./images/assets/img/170.jpg");
 }
-.category__two .down__pictures:nth-child(7) .down__test {
+.category__two .down__pictures:nth-child(7) .down__reaction {
    background-image: url("./images/assets/img/180.jpg");
 }
-.category__two .down__pictures:nth-child(8) .down__test {
+.category__two .down__pictures:nth-child(8) .down__reaction {
    background-image: url("./images/assets/img/190.jpg");
 }
-.category__two .down__pictures:nth-child(9) .down__test {
+.category__two .down__pictures:nth-child(9) .down__reaction {
    background-image: url("./images/assets/img/200.jpg");
 }
-.category__two .down__pictures:nth-child(10) .down__test {
+.category__two .down__pictures:nth-child(10) .down__reaction {
    background-image: url("./images/assets/img/210.jpg");
 }
-.category__two .down__pictures:nth-child(11) .down__test {
+.category__two .down__pictures:nth-child(11) .down__reaction {
    background-image: url("./images/assets/img/220.jpg");
 }
-.category__two .down__pictures:nth-child(12) .down__test {
+.category__two .down__pictures:nth-child(12) .down__reaction {
    background-image: url("./images/assets/img/230.jpg");
 }
 

@@ -4,6 +4,7 @@ import { renderPictureAnswers } from "./picturesQuiz";
 import { cleanPictureProgress } from "./picturesQuiz";
 import { timer } from "./quiz";
 import { interval } from "./quiz";
+import { timerOn } from "./settings";
 
 const mainBlock = document.querySelector(".start");
 const settingBlock = document.querySelector(".setting");
@@ -74,7 +75,7 @@ categories.forEach((item, index) => {
     // в зависимости от категории будет приходить определенный десяток
 
     renderAnswers(index * 10, index);
-    timer();
+    timer(timerOn);
   });
 });
 

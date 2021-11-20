@@ -3,8 +3,13 @@
 import { popupEnd } from "./blocksHide";
 import { renderScoreBlock } from "./score";
 import { settingsTimerSelect } from "./settings";
+import { timerOn } from "./settings";
 import { questionsTimer } from "./settings";
-// const questions = document.querySelector(".questions");
+import { rigthAnswer } from "./settings";
+import { wrongAnswer } from "./settings";
+import { endGame } from "./settings";
+import { playAudio } from "./settings";
+
 const questionsBlock = document.querySelector(".questions__block");
 const finishResult = document.querySelector(".finish");
 // const nextQuestionBtn = document.querySelector(".correct__button");
@@ -66,12 +71,15 @@ const chooseHundler = (e) => {
     correctArtistMemory.push("1");
     renderIndicator(counter);
     renderPopupAnswer("yes");
+    rigthAnswer();
   } else {
     correctArtistMemory.push("0");
     e.target.classList.add("uncorrect__answer");
     renderIndicator(counter);
     renderPopupAnswer("no");
+    wrongAnswer();
   }
+  playAudio();
   clearInterval(interval);
   removeEvents();
 };
@@ -145,9 +153,15 @@ popupAnswers.addEventListener("click", (e) => {
       renderScoreBlock(cardNumber, correctArtistMemory);
       // помечаем карточки
       categoryIndicator();
+      endGame();
+      playAudio();
     } else {
+      questionsTimer.innerHTML = `00 : ${settingsTimerSelect.value.padStart(
+        2,
+        "0"
+      )}`;
       renderAnswers(counter);
-      timer();
+      timer(timerOn);
       roundCounter++;
     }
     // убираем блок с правильным ответом
@@ -227,20 +241,28 @@ const categoryIndicator = () => {
   categoryBg[cardNumber].classList.add("add__bg");
 };
 
-export const timer = () => {
-  let count = settingsTimerSelect.value.split(" ")[0];
-  interval = setInterval(() => {
-    questionsTimer.innerHTML = `00 : ${count}`;
+export const timer = (timerStatus) => {
+  if (timerStatus == "on") {
+    let count = settingsTimerSelect.value.padStart(2, "0");
+    console.log(typeof count);
+    interval = setInterval(() => {
+      if (+count < 10) {
+        questionsTimer.innerHTML = `00 : 0${count - 1}`;
+      } else {
+        questionsTimer.innerHTML = `00 : ${count - 1}`;
+      }
+      count--;
+      if (!count) {
+        clearInterval(interval);
+        correctArtistMemory.push("0");
+        renderIndicator(counter);
+        renderPopupAnswer("no");
+        removeEvents();
+        wrongAnswer();
+        playAudio();
+      }
 
-    if (!count) {
-      clearInterval(interval);
-      correctArtistMemory.push("0");
-      renderIndicator(counter);
-      renderPopupAnswer("no");
-      removeEvents();
-    }
-    count--;
-    console.log(count);
-    // document.querySelector
-  }, 1000);
+      console.log(count);
+    }, 1000);
+  }
 };

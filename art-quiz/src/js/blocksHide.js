@@ -9,17 +9,17 @@ import { timerOn } from "./settings";
 const mainBlock = document.querySelector(".start");
 const settingBlock = document.querySelector(".setting");
 const settingClose = document.querySelector(".settings__close");
-const mainSettingBtn = document.querySelector(".main__settings");
+export const mainSettingBtn = document.querySelector(".main__settings");
 const categorySetting = document.querySelectorAll(".category__setting");
 export const categoryBlock = document.querySelector(".category__one");
 export const categoryPicturesBlock = document.querySelector(".category__two");
-const picturesQuiz = document.querySelector(".main__picture");
+export const picturesQuiz = document.querySelector(".main__picture");
 const questionsBlock = document.querySelector(".questions");
-const artistQuiz = document.querySelector(".main__author");
+export const artistQuiz = document.querySelector(".main__author");
 const categories = document.querySelectorAll(".down__row");
 const questionsClose = document.querySelectorAll(".questions__close");
 const menuHomeBtn = document.querySelectorAll(".menu__home");
-const menuScoreBtn = document.querySelector(".menu__score");
+
 export const scoreBlock = document.querySelector(".score");
 const backCategoriesBtn = document.querySelector(".score__row");
 const picturesCategoriesBtn = document.querySelectorAll(".down__pictures");
@@ -125,11 +125,6 @@ popupCategoryBtn.forEach((item) => {
 // закрываем popup с предупреждением
 popupCancelBtn.addEventListener("click", () => {
   popupClose.classList.remove("active");
-});
-
-menuScoreBtn.addEventListener("click", () => {
-  categoryBlock.classList.add("hide");
-  resultBlock.classList.remove("hide");
 });
 
 backCategoriesBtn.addEventListener("click", () => {

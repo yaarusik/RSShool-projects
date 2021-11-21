@@ -4,19 +4,21 @@ import { categoryPicturesBlock } from "./blocksHide";
 import { quizByAuthor } from "./quiz";
 import { quizByName } from "./picturesQuiz";
 import { eventMemory } from "./blocksHide";
+import { setLocalStorage } from "./settings";
 
 const scoreBody = document.querySelector(".score__body");
 const scoreBtn = document.querySelectorAll(".button__score");
+const resultsNumber = document.querySelectorAll(".down__common");
+const localIndicator = document.querySelectorAll(".local__indicator");
 let amountBtnQuiz = scoreBtn.length / 2;
-console.log(amountBtnQuiz);
-let scoreArtistsPages = [];
-let scorePicturesPages = [];
+// console.log(amountBtnQuiz);
+let scoreArtistsPages = JSON.parse(localStorage.getItem("artistScore")) || [];
+let scorePicturesPages = JSON.parse(localStorage.getItem("pictureScore")) || [];
+let scoreButtonIndex = JSON.parse(localStorage.getItem("scoreIndex")) || [];
 let quizType;
 export const renderScoreBlock = (index, answers, type) => {
-  console.log(quizByAuthor);
-  console.log(quizByName);
   quizType = type;
-  console.log("index" + index);
+  console.log("index " + index);
   let scoreBlock = ` 
    <div class="score__body">
    <div class="score__logo background__size"></div>
@@ -30,14 +32,20 @@ export const renderScoreBlock = (index, answers, type) => {
 `;
   // записываем в объект страницы
   if (type == "picture") {
-    scorePicturesPages.push({ page: scoreBlock, number: index });
-    scoreBtnShow(index + amountBtnQuiz);
+    scorePicturesPages.push({
+      page: scoreBlock,
+      number: index,
+    });
+    scoreBtnShow(index + amountBtnQuiz, answers);
+    setLocalStorage("pictureScore", JSON.stringify(scorePicturesPages));
   } else {
-    scoreArtistsPages.push({ page: scoreBlock, number: index });
-    scoreBtnShow(index);
+    scoreArtistsPages.push({
+      page: scoreBlock,
+      number: index,
+    });
+    scoreBtnShow(index, answers);
+    setLocalStorage("artistScore", JSON.stringify(scoreArtistsPages));
   }
-  console.log(scorePicturesPages);
-  console.log(scoreArtistsPages);
 };
 
 // генерация картинок
@@ -56,13 +64,34 @@ const renderPictureBlock = (currentImg, answers, type) => {
       htmlString += `
                      <div class="picture__one">
                   <img ${classString} src="./images/assets/img/${quizByName[currentImg].imageNum}.jpg" alt="img" />
+                 <div class="img__row">
+                 <div class="img__title">
+                 ${quizByName[currentImg].author}
+                </div>
+                <div class="img__subtitle">
+                ${quizByName[currentImg].name}
+                </div>
+                <div class="img__year">
+                 ${quizByName[currentImg].year}
+                </div>
+                </div>
                         </div>`;
-      console.log(htmlString);
     } else {
       htmlString += `
                      <div class="picture__one">
                   <img ${classString} src="./images/assets/img/${quizByAuthor[currentImg].imageNum}.jpg" alt="img" />
-                        </div>`;
+                  <div class="img__row">
+                  <div class="img__title">
+                  ${quizByAuthor[currentImg].author}
+                 </div>
+                 <div class="img__subtitle">
+                 ${quizByAuthor[currentImg].name}
+                 </div>
+                 <div class="img__year">
+                  ${quizByAuthor[currentImg].year}
+                 </div>
+                 </div>
+                  </div>`;
     }
 
     currentImg++;
@@ -73,7 +102,9 @@ const renderPictureBlock = (currentImg, answers, type) => {
 };
 
 // показывает скор у сыгранной категории
-const scoreBtnShow = (index) => {
+const scoreBtnShow = (index, answers) => {
+  scoreButtonIndex.push({ index: index, results: answers });
+  setLocalStorage("scoreIndex", JSON.stringify(scoreButtonIndex));
   scoreBtn[index].classList.add("show");
 };
 
@@ -89,7 +120,7 @@ scoreBtn.forEach((item, index) => {
       scoreBlock.classList.remove("hide");
     }
 
-    renderScorePage(index, quizType);
+    renderScorePage(index, eventMemory);
   });
 });
 
@@ -111,4 +142,29 @@ const renderScorePage = (index, type) => {
     console.log(currentPage);
     scoreBody.innerHTML = currentPage[currentPage.length - 1].page;
   }
+  let decscriptionBtn = document.querySelectorAll(".picture__one");
+
+  decscriptionBtn.forEach((item, index) => {
+    item.addEventListener("click", () => {
+      item.classList.toggle("description__visible");
+      item.children[0].classList.toggle("descriptin__img-hidden");
+      item.children[1].classList.toggle("description__title-visible");
+    });
+  });
+};
+
+window.onload = () => {
+  scoreBtn.forEach((btn, i) => {
+    scoreButtonIndex.forEach((item) => {
+      if (item.index == i) {
+        btn.classList.add("show");
+        localIndicator[i].classList.add("add__bg");
+        let sumResult = item.results.reduce(
+          (item, current) => +item + +current,
+          0
+        );
+        resultsNumber[i].innerHTML = `${sumResult} / 10`;
+      }
+    });
+  });
 };

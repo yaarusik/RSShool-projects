@@ -1,3 +1,13 @@
+import { artistQuiz } from "./blocksHide";
+import { picturesQuiz } from "./blocksHide";
+import { mainSettingBtn } from "./blocksHide";
+
+const settingsTitle = document.querySelector(".settings__title");
+const languageTitle = document.querySelector(".language__title");
+const soundTitle = document.querySelector(".sound__title");
+const timerTitle = document.querySelector(".timer__title");
+const timeTitle = document.querySelector(".time__title");
+const saveTitle = document.querySelector(".text__size");
 const progress = document.querySelector(".volume__progress");
 const muteBtn = document.querySelector(".mute");
 const buttonSave = document.querySelector(".button__save");
@@ -5,8 +15,19 @@ const volumeMuteBtn = document.querySelector(".sound__switch");
 const timerOnBtn = document.querySelector(".timer__switch");
 const soundIndicator = document.querySelector(".sound__indicator");
 const timerIndicator = document.querySelector(".timer__indicator");
+const languageIndicator = document.querySelector(".language__indicator");
+const languageBtn = document.querySelector(".language__switch");
+const categoryTitle = document.querySelectorAll(".category__title");
+const categoriesSubtitle = document.querySelectorAll(".down__title");
+const footerDeveloper = document.querySelectorAll(".footer__author");
+const menuTitle = document.querySelectorAll(".menu__text");
+const questionTitle = document.querySelectorAll(".questions__title");
+const popupTitle = document.querySelector(".popup__title");
+const popupClose = document.querySelector(".popup__close");
+const popupHome = document.querySelector(".popup__home");
 export const settingsTimerSelect = document.querySelector(".settings__select");
 export const questionsTimer = document.querySelector(".questions__timer");
+let language = "en";
 
 let musicEffects = {
   right: "./sound/correct.mp3",
@@ -31,13 +52,13 @@ export const playAudio = () => {
   audioEffects.play();
 };
 
-const setLocalStorage = (vatiable, variableValue) => {
+export const setLocalStorage = (vatiable, variableValue) => {
   localStorage.setItem(`${vatiable}`, variableValue);
 };
 
 export let timerOn = localStorage.getItem("timerStatus") || "on";
 export let volumeOn = localStorage.getItem("volumeStatus") || "on";
-console.log(volumeOn);
+// console.log(volumeOn);
 
 progress.addEventListener("input", function () {
   const value = this.value;
@@ -63,6 +84,16 @@ timerOnBtn.addEventListener("click", () => {
     settingsTimerSelect.disabled = true;
   }
   timerIndicator.classList.toggle("change__indicator");
+});
+
+languageBtn.addEventListener("click", () => {
+  if (languageIndicator.classList.contains("change__indicator")) {
+    language = "en";
+  } else {
+    language = "ru";
+  }
+  changeLanguage(language);
+  languageIndicator.classList.toggle("change__indicator");
 });
 
 function volumeMute() {
@@ -97,7 +128,7 @@ function volumeChange(e) {
   }
 
   setLocalStorage("volumeValue", audioEffects.volume);
-  console.log(audioEffects.volume);
+  // console.log(audioEffects.volume);
   return v;
 }
 
@@ -118,7 +149,7 @@ function volume() {
 }
 
 function tracking(obj) {
-  console.log(obj.value);
+  // console.log(obj.value);
   obj.style.background = `linear-gradient(to right, #00cece 0%, #00cece ${obj.value}%, #e5e5e5 ${obj.value}%, #e5e5e5 100%)`;
 }
 
@@ -160,12 +191,12 @@ const settingsSave = () => {
     timerOn = "off";
 
     questionsTimer.innerHTML = ``;
-    console.log(timerOn);
+    // console.log(timerOn);
   } else {
     timerOn = "on";
     let count = settingsTimerSelect.value;
     questionsTimer.innerHTML = `00 : ${count}`;
-    console.log(timerOn);
+    // console.log(timerOn);
   }
   if (volumeOn == "off") {
     audioEffects.volume = 0;
@@ -197,3 +228,94 @@ if (volumeOn == "off") {
   progress.value = localStorage.getItem("volumeValue") * 100 || 40;
   tracking(progress);
 }
+// language section =======================
+const changeLanguage = (lang) => {
+  if (lang == "en") {
+    artistQuiz.textContent = englishParams[0];
+    picturesQuiz.textContent = englishParams[1];
+    mainSettingBtn.textContent = englishParams[2];
+
+    settingsTitle.textContent = englishParams[2];
+    languageTitle.textContent = englishParams[3];
+    soundTitle.textContent = englishParams[4];
+    timerTitle.textContent = englishParams[5];
+    timeTitle.textContent = englishParams[6];
+    saveTitle.textContent = englishParams[8];
+    footerDeveloper.forEach((item) => (item.textContent = englishParams[9]));
+    categoryTitle.forEach((item) => (item.textContent = englishParams[10]));
+    categoriesSubtitle.forEach(
+      (item) => (item.textContent = englishParams[11] + `${index}`)
+    );
+    menuTitle.forEach((item) => (item.textContent = englishParams[12]));
+    questionTitle[0].textContent = englishParams[13];
+    questionTitle[1].textContent =
+      englishParams[14] + `<span class="change__title"></span`;
+    popupTitle.textContent = englishParams[15];
+    popupHome.textContent = englishParams[16];
+    popupClose.textContent = englishParams[17];
+  } else {
+    artistQuiz.textContent = russianParams[0];
+    picturesQuiz.textContent = russianParams[1];
+    mainSettingBtn.textContent = russianParams[2];
+    settingsTitle.textContent = russianParams[2];
+    languageTitle.textContent = russianParams[3];
+    soundTitle.textContent = russianParams[4];
+    timerTitle.textContent = russianParams[5];
+    timeTitle.textContent = russianParams[6];
+    saveTitle.textContent = russianParams[8];
+    footerDeveloper.forEach((item) => (item.textContent = russianParams[9]));
+    categoryTitle.forEach((item) => (item.textContent = russianParams[10]));
+    categoriesSubtitle.forEach(
+      (item, index) => (item.textContent = russianParams[11] + ` ${index}`)
+    );
+    menuTitle.forEach((item) => (item.textContent = russianParams[12]));
+    questionTitle[0].textContent = russianParams[13];
+    questionTitle[1].textContent =
+      russianParams[14] + `<span class="change__title"></span`;
+    popupTitle.textContent = russianParams[15];
+    popupHome.textContent = russianParams[16];
+    popupClose.textContent = russianParams[17];
+  }
+};
+
+let englishParams = [
+  "ARTIST QUIZ",
+  "PICTURES QUIZ",
+  "SETTINGS",
+  "LANGUAGE",
+  "VOLUME",
+  "TIMER GAME",
+  "TIME TO ANSWER",
+  "sec",
+  "SAVE",
+  "Developer: Ruslan Vildanov",
+  "CATEGORIES",
+  "ROUND",
+  "HOME",
+  "Who is the author of this picture?",
+  "Which of these paintings did Oliver paint",
+  "Are you sure you want to complete the test?",
+  "Yes",
+  "Cancel",
+];
+
+let russianParams = [
+  "Квиз по художникам",
+  "КВИЗ ПО КАРТИНАМ",
+  "НАСТРОЙКИ",
+  "ЯЗЫК",
+  "ГРОМКОСТЬ",
+  "ИГРА НА ВРЕМЯ",
+  "ВРЕМЯ НА ВОПРОС",
+  "сек",
+  "Сохранить",
+  "Разработчик: Руслан Вильданов",
+  "Категории",
+  "Раунд",
+  "Домой",
+  "Кто автор этой картины?",
+  "Какую из этих картин написал ",
+  "Вы уверены, что хотите завершить тест",
+  "Да",
+  "Отмена",
+];

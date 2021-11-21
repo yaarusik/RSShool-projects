@@ -1,5 +1,5 @@
 const buttons = document.querySelectorAll(".buttons");
-console.log(buttons);
+// console.log(buttons);
 buttons.forEach((item) => {
   item.addEventListener("click", function (e) {
     const circle = document.createElement("div");
@@ -13,7 +13,7 @@ buttons.forEach((item) => {
 
     styleDiv.left = e.clientX - x.left - maxValue / 2 + px;
     styleDiv.top = e.clientY - x.top - maxValue / 2 + px;
-    console.log(this);
+    // console.log(this);
     this.appendChild(circle);
     setTimeout(() => circle.remove(), 11700);
 

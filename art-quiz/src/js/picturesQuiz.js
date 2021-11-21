@@ -1,5 +1,9 @@
 import { popupEnd } from "./blocksHide";
 import { renderScoreBlock } from "./score";
+import { wrongAnswer } from "./settings";
+import { rigthAnswer } from "./settings";
+import { endGame } from "./settings";
+import { playAudio } from "./settings";
 
 const questionsBlock = document.querySelector(".question__pictures");
 const finishResult = document.querySelector(".finish");
@@ -7,6 +11,7 @@ const finishResult = document.querySelector(".finish");
 const popupAnswers = document.querySelector(".popup__correct-up");
 const scoreCard = document.querySelectorAll(".down__results");
 const categoryBg = document.querySelectorAll(".down__reaction");
+const questionTitle = document.querySelector(".change__title");
 
 let authorAnswers = new Set();
 let pictureAnswers = new Set();
@@ -46,7 +51,7 @@ const renderPopupAnswer = (answer) => {
                   <div class="correct__logo ${answer} background__size"></div>
                   <img src="./images/assets/img/${quizByName[counter].imageNum}.jpg" alt="img" />
                 </div>
-                <div class="correct__name">${quizByName[counter].author}</div>
+                <div class="correct__name">${quizByName[counter].name}</div>
                 <div class="correct__author"> ${quizByName[counter].author}, ${quizByName[counter].year}</div>
                 <button class="correct__btn">Next</button>
               </div>
@@ -57,18 +62,20 @@ const renderPopupAnswer = (answer) => {
 
 // обработчик верного ответа
 const chooseHundler = (e) => {
-  console.log(e.target.alt);
   if (e.target.alt == quizByName[counter].imageNum) {
     e.target.classList.add("correct__answer");
     correctPictureMemory.push("1");
     renderIndicator(counter);
     renderPopupAnswer("yes");
+    rigthAnswer();
   } else {
     correctPictureMemory.push("0");
     e.target.classList.add("uncorrect__answer");
     renderIndicator(counter);
     renderPopupAnswer("no");
+    wrongAnswer();
   }
+  playAudio();
   removeEvents();
 };
 
@@ -134,13 +141,15 @@ popupAnswers.addEventListener("click", (e) => {
   if (e.target.classList.contains("correct__btn")) {
     counter += 1;
 
-    console.log(roundCounter);
+    // console.log(roundCounter);
     if (roundCounter == 3) {
       roundEnd();
       // отрисовываем score
       renderScoreBlock(cardNumber, correctPictureMemory, type);
       // помечаем карточки
       categoryIndicator();
+      endGame();
+      playAudio();
     } else {
       renderPictureAnswers(counter);
       roundCounter++;
@@ -152,6 +161,7 @@ popupAnswers.addEventListener("click", (e) => {
 
 // cоздаем 4 варианта ответа
 const createAnswers = (index, data) => {
+  questionTitle.innerHTML = quizByName[index].author;
   pictureAnswers.add(quizByName[index].imageNum);
   while (pictureAnswers.size < 4) {
     pictureAnswers.add(data[getRandomInt(data.length - 1)].imageNum);
@@ -194,6 +204,7 @@ const renderQuestions = (index, data) => {
   </div>
 </div>
   `;
+
   // окрашивание предыдущих ответов
   if (index) {
     renderIndicator();

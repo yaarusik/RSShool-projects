@@ -9,6 +9,7 @@ import { rigthAnswer } from "./settings";
 import { wrongAnswer } from "./settings";
 import { endGame } from "./settings";
 import { playAudio } from "./settings";
+import { setLocalStorage } from "./settings";
 
 const questionsBlock = document.querySelector(".questions__block");
 const finishResult = document.querySelector(".finish");
@@ -28,7 +29,9 @@ let quizByName = [];
 let data;
 let buttonsChoose;
 let correctArtistMemory = [];
+
 export let interval;
+
 // рандом для вариантов ответа авторов
 const getRandomInt = (num) => {
   return Math.floor(Math.random() * num);
@@ -119,6 +122,9 @@ const roundEnd = () => {
 
   popupEnd.classList.add("active");
   finishResult.textContent = `${sumResult}`;
+  // сохраняем результаты
+
+  // ==================================
   saveResults(sumResult);
 };
 
@@ -146,7 +152,7 @@ popupAnswers.addEventListener("click", (e) => {
   if (e.target.classList.contains("correct__button")) {
     counter += 1;
 
-    console.log(roundCounter);
+    // console.log(roundCounter);
     if (roundCounter == 3) {
       roundEnd();
       // отрисовываем score
@@ -244,7 +250,7 @@ const categoryIndicator = () => {
 export const timer = (timerStatus) => {
   if (timerStatus == "on") {
     let count = settingsTimerSelect.value.padStart(2, "0");
-    console.log(typeof count);
+
     interval = setInterval(() => {
       if (+count < 10) {
         questionsTimer.innerHTML = `00 : 0${count - 1}`;
@@ -262,7 +268,7 @@ export const timer = (timerStatus) => {
         playAudio();
       }
 
-      console.log(count);
+      // console.log(count);
     }, 1000);
   }
 };

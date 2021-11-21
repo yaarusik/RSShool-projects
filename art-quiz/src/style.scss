@@ -92,3 +92,17 @@ body {
    pointer-events: visible;
    opacity: 1;
 }
+
+.description__visible {
+   border-radius: 10px;
+   background: rgba($color: #efefef, $alpha: 1);
+}
+
+.descriptin__img-hidden {
+   opacity: 0;
+   border-radius: 0;
+}
+
+.description__title-visible {
+   opacity: 1;
+}

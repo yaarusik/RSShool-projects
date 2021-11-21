@@ -1,6 +1,8 @@
 import { artistQuiz } from "./blocksHide";
 import { picturesQuiz } from "./blocksHide";
 import { mainSettingBtn } from "./blocksHide";
+import { mainBlock } from "./blocksHide";
+import { settingBlock } from "./blocksHide";
 
 const settingsTitle = document.querySelector(".settings__title");
 const languageTitle = document.querySelector(".language__title");
@@ -27,7 +29,7 @@ const popupClose = document.querySelector(".popup__close");
 const popupHome = document.querySelector(".popup__home");
 export const settingsTimerSelect = document.querySelector(".settings__select");
 export const questionsTimer = document.querySelector(".questions__timer");
-let language = "en";
+export let language = localStorage.getItem("lang") || "en";
 
 let musicEffects = {
   right: "./sound/correct.mp3",
@@ -203,9 +205,13 @@ const settingsSave = () => {
   } else {
     audioEffects.volume = localStorage.getItem("volumeValue") || 0.4;
   }
+  changeLanguage(language);
+  setLocalStorage("lang", language);
   setLocalStorage("volumeValue", audioEffects.volume);
   setLocalStorage("volumeStatus", volumeOn);
   setLocalStorage("timerStatus", timerOn);
+  mainBlock.classList.remove("hide");
+  settingBlock.classList.add("hide");
 };
 
 buttonSave.addEventListener("click", settingsSave);
@@ -244,7 +250,7 @@ const changeLanguage = (lang) => {
     footerDeveloper.forEach((item) => (item.textContent = englishParams[9]));
     categoryTitle.forEach((item) => (item.textContent = englishParams[10]));
     categoriesSubtitle.forEach(
-      (item) => (item.textContent = englishParams[11] + `${index}`)
+      (item, index) => (item.textContent = englishParams[11] + ` ${index + 1}`)
     );
     menuTitle.forEach((item) => (item.textContent = englishParams[12]));
     questionTitle[0].textContent = englishParams[13];
@@ -319,3 +325,5 @@ let russianParams = [
   "Да",
   "Отмена",
 ];
+
+changeLanguage(language);

@@ -5,9 +5,12 @@ import { cleanPictureProgress } from "./picturesQuiz";
 import { timer } from "./quiz";
 import { interval } from "./quiz";
 import { timerOn } from "./settings";
+import { language } from "./settings";
+import { questionsTimer } from "./settings";
+import { settingsTimerSelect } from "./settings";
 
-const mainBlock = document.querySelector(".start");
-const settingBlock = document.querySelector(".setting");
+export const mainBlock = document.querySelector(".start");
+export const settingBlock = document.querySelector(".setting");
 const settingClose = document.querySelector(".settings__close");
 export const mainSettingBtn = document.querySelector(".main__settings");
 const categorySetting = document.querySelectorAll(".category__setting");
@@ -74,7 +77,7 @@ categories.forEach((item, index) => {
     questionsBlock.classList.remove("hide");
     // в зависимости от категории будет приходить определенный десяток
 
-    renderAnswers(index * 10, index);
+    renderAnswers(index * 10, index, language);
     timer(timerOn);
   });
 });
@@ -86,13 +89,15 @@ picturesCategoriesBtn.forEach((item, index) => {
 
     // в зависимости от категории будет приходить определенный десяток
 
-    renderPictureAnswers(index * 10, index);
+    renderPictureAnswers(index * 10, index, language);
+    timer(timerOn);
   });
 });
 
 questionsClose.forEach((item) => {
   item.addEventListener("click", function () {
     popupClose.classList.add("active");
+    clearInterval(interval);
   });
 });
 
@@ -107,6 +112,10 @@ menuHomeBtn.forEach((item) => {
 
 popupCategoryBtn.forEach((item) => {
   item.addEventListener("click", () => {
+    questionsTimer.innerHTML = `00 : ${settingsTimerSelect.value.padStart(
+      2,
+      "0"
+    )}`;
     if (eventMemory == "artist") {
       questionsBlock.classList.add("hide");
       categoryBlock.classList.remove("hide");
@@ -125,6 +134,7 @@ popupCategoryBtn.forEach((item) => {
 // закрываем popup с предупреждением
 popupCancelBtn.addEventListener("click", () => {
   popupClose.classList.remove("active");
+  timer("continue");
 });
 
 backCategoriesBtn.addEventListener("click", () => {

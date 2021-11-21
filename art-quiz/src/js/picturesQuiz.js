@@ -4,6 +4,9 @@ import { wrongAnswer } from "./settings";
 import { rigthAnswer } from "./settings";
 import { endGame } from "./settings";
 import { playAudio } from "./settings";
+import { language } from "./settings";
+import { timer } from "./quiz";
+import { timerOn } from "./settings";
 
 const questionsBlock = document.querySelector(".question__pictures");
 const finishResult = document.querySelector(".finish");
@@ -87,16 +90,22 @@ const removeEvents = () => {
 };
 
 // получение данных для quiz
-export const renderPictureAnswers = async (index, currentBlock) => {
+export const renderPictureAnswers = async (index, currentBlock, lang) => {
   // запоминаем номер карточки
   if (typeof currentBlock == "number") {
     cardNumber = currentBlock;
   }
   counter = index;
-
-  let response = await fetch(
-    "https://raw.githubusercontent.com/yaarusik/image-data/master/images.json"
-  );
+  let response;
+  if (lang == "en") {
+    response = await fetch(
+      "https://raw.githubusercontent.com/yaarusik/image-data/master/imagesEn.json"
+    );
+  } else {
+    response = await fetch(
+      "https://raw.githubusercontent.com/yaarusik/image-data/master/images.json"
+    );
+  }
 
   data = await response.json();
 
@@ -151,7 +160,8 @@ popupAnswers.addEventListener("click", (e) => {
       endGame();
       playAudio();
     } else {
-      renderPictureAnswers(counter);
+      renderPictureAnswers(counter, undefined, language);
+      timer(timerOn);
       roundCounter++;
     }
     // убираем блок с правильным ответом

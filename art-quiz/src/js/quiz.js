@@ -10,6 +10,7 @@ import { wrongAnswer } from "./settings";
 import { endGame } from "./settings";
 import { playAudio } from "./settings";
 import { setLocalStorage } from "./settings";
+import { language } from "./settings";
 
 const questionsBlock = document.querySelector(".questions__block");
 const finishResult = document.querySelector(".finish");
@@ -95,16 +96,22 @@ const removeEvents = () => {
 };
 
 // получение данных для quiz
-export const renderAnswers = async (index, currentBlock) => {
+export const renderAnswers = async (index, currentBlock, lang) => {
   // запоминаем номер карточки
   if (typeof currentBlock == "number") {
     cardNumber = currentBlock;
   }
   counter = index;
-
-  let response = await fetch(
-    "https://raw.githubusercontent.com/yaarusik/image-data/master/images.json"
-  );
+  let response;
+  if (lang == "en") {
+    response = await fetch(
+      "https://raw.githubusercontent.com/yaarusik/image-data/master/imagesEn.json"
+    );
+  } else {
+    response = await fetch(
+      "https://raw.githubusercontent.com/yaarusik/image-data/master/images.json"
+    );
+  }
 
   data = await response.json();
 
@@ -166,7 +173,7 @@ popupAnswers.addEventListener("click", (e) => {
         2,
         "0"
       )}`;
-      renderAnswers(counter);
+      renderAnswers(counter, undefined, language);
       timer(timerOn);
       roundCounter++;
     }
@@ -247,28 +254,35 @@ const categoryIndicator = () => {
   categoryBg[cardNumber].classList.add("add__bg");
 };
 
+let timerCount;
 export const timer = (timerStatus) => {
   if (timerStatus == "on") {
-    let count = settingsTimerSelect.value.padStart(2, "0");
-
-    interval = setInterval(() => {
-      if (+count < 10) {
-        questionsTimer.innerHTML = `00 : 0${count - 1}`;
-      } else {
-        questionsTimer.innerHTML = `00 : ${count - 1}`;
-      }
-      count--;
-      if (!count) {
-        clearInterval(interval);
-        correctArtistMemory.push("0");
-        renderIndicator(counter);
-        renderPopupAnswer("no");
-        removeEvents();
-        wrongAnswer();
-        playAudio();
-      }
-
-      // console.log(count);
-    }, 1000);
+    timerCount = settingsTimerSelect.value.padStart(2, "0");
+    timerSet();
+  } else if (timerStatus == "continue") {
+    console.log(timerCount);
+    timerSet();
+  } else {
+    questionsTimer.innerHTML = "";
   }
+};
+
+const timerSet = () => {
+  interval = setInterval(() => {
+    if (+timerCount < 11) {
+      questionsTimer.innerHTML = `00 : 0${timerCount - 1}`;
+    } else {
+      questionsTimer.innerHTML = `00 : ${timerCount - 1}`;
+    }
+    timerCount--;
+    if (!timerCount) {
+      clearInterval(interval);
+      correctArtistMemory.push("0");
+      renderIndicator(counter);
+      renderPopupAnswer("no");
+      removeEvents();
+      wrongAnswer();
+      playAudio();
+    }
+  }, 1000);
 };

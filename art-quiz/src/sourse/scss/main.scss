@@ -21,7 +21,7 @@
 
    .start {
       position: relative;
-      padding-top: 20px;
+      // padding-top: 20px;
       min-width: 100%;
       min-height: 100vh;
       &__body {
@@ -36,6 +36,7 @@
       display: flex;
       justify-content: center;
       &__logo {
+         padding-top: 15px;
          width: calc(110px + (130 - 110) * ((100vw - 360px) / (768 - 360)));
          height: calc(132px + (152 - 132) * ((100vw - 360px) / (768 - 360)));
          background-image: url("./images/assets/logo/art-quiz.webp");

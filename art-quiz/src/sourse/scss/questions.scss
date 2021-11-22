@@ -34,8 +34,8 @@
    }
 
    &__timer {
-      font-size: 16px;
-      line-height: 18px;
+      font-size: calc(16px + (22 - 16) * ((100vw - 360px) / (1920 - 360)));
+      line-height: calc(18px + (24 - 18) * ((100vw - 360px) / (1920 - 360)));
       font-weight: 700;
       color: var(--col-grey);
    }

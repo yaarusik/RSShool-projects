@@ -38,7 +38,6 @@ const menuTitle = document.querySelectorAll(".menu__text");
 const questionTitlePicture =
   document.querySelector(".title__picture").childNodes;
 const questionTitleAuthor = document.querySelector(".title__author").childNodes;
-console.log(questionTitleAuthor, questionTitlePicture);
 const popupTitle = document.querySelector(".popup__title");
 const popupClose = document.querySelector(".popup__close");
 const popupHome = document.querySelector(".popup__home");
@@ -89,194 +88,65 @@ export let timerOn = localStorage.getItem("timerStatus") || "on";
 export let volumeOn = localStorage.getItem("volumeStatus") || "on";
 // console.log(volumeOn);
 
-progress.addEventListener("input", function () {
+progress.addEventListener("input", () => {
   const value = this.value;
   this.style.background = `linear-gradient(to right, #00cece 0%, #00cece ${value}%, #e5e5e5 ${value}%, #e5e5e5 100%)`;
 });
 
-const volumeSet = () => {
-  volumeMute();
-  volume();
-};
-
-muteBtn.addEventListener("click", volumeSet);
-
-// ДОБАВИТЬ ИЗМЕНЕНИЕ КНОПКИ
-volumeMuteBtn.addEventListener("click", volumeSet);
-
-settingsTimerSelect.addEventListener("change", () => {
-  saveTimerNum = settingsTimerSelect.value;
-});
-
-timerOnBtn.addEventListener("click", () => {
-  if (timerIndicator.classList.contains("change__indicator")) {
-    settingsTimerSelect.disabled = false;
-  } else {
-    settingsTimerSelect.disabled = true;
-  }
-  timerIndicator.classList.toggle("change__indicator");
-});
-
-// меняет язык
-languageBtn.addEventListener("click", () => {
-  if (languageIndicator.classList.contains("change__indicator")) {
-    language = "en";
-  } else {
-    language = "ru";
-  }
-  changeLanguage(language);
-  languageIndicator.classList.toggle("change__indicator");
-});
-
-if (language == "ru") {
-  languageIndicator.classList.add("change__indicator");
-}
-
-function volumeMute() {
-  audioEffects.muted = !audioEffects.muted;
-
-  if (audioEffects.muted) {
-    volumeOn = "off";
-    soundIndicator.classList.add("change__indicator");
-    muteBtn.classList.add("unmute");
-  } else {
-    volumeOn = "on";
-    soundIndicator.classList.remove("change__indicator");
-    muteBtn.classList.remove("unmute");
-  }
-}
-// уменьшение и увеличение громкости
-progress.oninput = volumeChange;
-
-function volumeChange(e) {
-  let v = this.value;
-  if (v == 0) {
-    volumeOn = "off";
-    audioEffects.muted = true;
-    muteBtn.classList.add("unmute");
-    soundIndicator.classList.add("change__indicator");
-  } else {
-    volumeOn = "on";
-    audioEffects.volume = v / 100;
-    soundIndicator.classList.remove("change__indicator");
-    muteBtn.classList.remove("unmute");
-    audioEffects.muted = false;
-  }
-
-  setLocalStorage("volumeValue", audioEffects.volume);
-  // console.log(audioEffects.volume);
-  return v;
-}
-
-// запоминает значение громкости
-function volume() {
-  if (audioEffects.muted) {
-    //передаем кнопке звука значение прогрессбара
-    muteBtn.setAttribute("data-volume", progress.value);
-    muteBtn.classList.add("unmute");
-    progress.value = 0;
-    tracking(progress);
-  } else {
-    progress.value = muteBtn.dataset.volume;
-    muteBtn.classList.remove("unmute");
-
-    tracking(progress);
-  }
-}
-
-function tracking(obj) {
-  // console.log(obj.value);
-  obj.style.background = `linear-gradient(to right, #00cece 0%, #00cece ${obj.value}%, #e5e5e5 ${obj.value}%, #e5e5e5 100%)`;
-}
-
-// window.onload = audioEffectsPlay;
-
-// function audioEffectsPlay() {
-//   audioEffects.src = "./sound/MellenGiRemix_In_The_End.mp3";
-//   audioEffects.currentTime = 0;
-//   // audioEffects.play();
-// }
-
-// // progressBar
-// const updateProgress = (e) => {
-//   const { duration, currentTime } = e.srcElement;
-//   const progressPersent = (currentTime / duration) * 100;
-//   progressBar.style.width = `${progressPersent}%`;
-
-//   progressDuration.textContent = timeFormat(currentTime);
-// };
-
-//TIMER SECTION================================
-// начальное положение ползунка и значение таймера
-if (timerOn == "off") {
-  timerIndicator.classList.add("change__indicator");
-  settingsTimerSelect.disabled = true;
-  questionsTimer.innerHTML = ``;
-  picturesTimer.innerHTML = ``;
-} else {
-  timerIndicator.classList.remove("change__indicator");
-  settingsTimerSelect.disabled = false;
-  questionsTimer.innerHTML = `00 : ${settingsTimerSelect.value.padStart(
-    2,
-    "0"
-  )}`;
-  picturesTimer.innerHTML = `00 : ${settingsTimerSelect.value.padStart(
-    2,
-    "0"
-  )}`;
-}
-
-// сохранение настроек таймера
-const settingsSave = () => {
-  if (settingsTimerSelect.disabled == true) {
-    timerOn = "off";
-
-    questionsTimer.innerHTML = ``;
-    picturesTimer.innerHTML = ``;
-  } else {
-    timerOn = "on";
-    let count = settingsTimerSelect.value;
-    questionsTimer.innerHTML = `00 : ${count}`;
-    picturesTimer.innerHTML = `00 : ${count}`;
-  }
-  if (volumeOn == "off") {
-    audioEffects.volume = 0;
-  } else {
-    audioEffects.volume = localStorage.getItem("volumeValue") || 0.4;
-  }
-  changeLanguage(language);
-  setLocalStorage("lang", language);
-  setLocalStorage("volumeValue", audioEffects.volume);
-  setLocalStorage("volumeStatus", volumeOn);
-  setLocalStorage("timerStatus", timerOn);
-  if (saveTimerNum) setLocalStorage("timerClock", saveTimerNum);
-  mainBlock.classList.remove("hide");
-  settingBlock.classList.add("hide");
-};
-
-buttonSave.addEventListener("click", settingsSave);
-
-// VOLUME SECTION=========================================
-
-// отслеживание значений нстроек
-if (volumeOn == "off") {
-  audioEffects.volume = 0;
-  audioEffects.muted = true;
-  muteBtn.classList.add("unmute");
-  soundIndicator.classList.add("change__indicator");
-  progress.value = 0;
-  tracking(progress);
-} else {
-  audioEffects.volume = localStorage.getItem("volumeValue") || 1;
-  audioEffects.muted = false;
-  muteBtn.classList.remove("unmute");
-  soundIndicator.classList.remove("change__indicator");
-  progress.value = localStorage.getItem("volumeValue") * 100 || 40;
-  tracking(progress);
-}
 // language section =======================
+
+let englishParams = [
+  "ARTIST QUIZ",
+  "PICTURES QUIZ",
+  "SETTINGS",
+  "LANGUAGE RU / EN",
+  "VOLUME",
+  "TIMER GAME",
+  "TIME TO ANSWER",
+  "sec",
+  "SAVE",
+  "Developer: Ruslan Vildanov",
+  "CATEGORIES",
+  "ROUND",
+  "HOME",
+  "Who is the author of this picture?",
+  "Which of these paintings did paint",
+  "Are you sure you want to complete the test?",
+  "Yes",
+  "Cancel",
+  "SCORE",
+  "Back to categories",
+  "Type of game: to guess the artist by the picture",
+  "Type of game: to guess the picture by the name of its author",
+];
+
+let russianParams = [
+  "Квиз по художникам",
+  "Квиз по картинам",
+  "НАСТРОЙКИ",
+  "ЯЗЫК РУС / АНГЛ",
+  "ГРОМКОСТЬ",
+  "ИГРА НА ВРЕМЯ",
+  "ВРЕМЯ НА ВОПРОС",
+  "сек",
+  "СОХРАНИТЬ",
+  "Разработчик: Руслан Вильданов",
+  "Категории",
+  "РАУНД",
+  "ДОМОЙ",
+  "Кто автор этой картины?",
+  "Какую из этих картин написал ",
+  "Вы уверены, что хотите завершить тест",
+  "Да",
+  "Отмена",
+  "Результаты",
+  "Назад к категориям",
+  "Тип игры: угадать художника по картине",
+  "Тип игры: угадать картину по имени её автора",
+];
+
 const changeLanguage = (lang) => {
-  if (lang == "en") {
+  if (lang === "en") {
     artistQuiz.textContent = englishParams[0];
     picturesQuiz.textContent = englishParams[1];
     mainSettingBtn.textContent = englishParams[2];
@@ -342,54 +212,186 @@ const changeLanguage = (lang) => {
   }
 };
 
-let englishParams = [
-  "ARTIST QUIZ",
-  "PICTURES QUIZ",
-  "SETTINGS",
-  "LANGUAGE RU / EN",
-  "VOLUME",
-  "TIMER GAME",
-  "TIME TO ANSWER",
-  "sec",
-  "SAVE",
-  "Developer: Ruslan Vildanov",
-  "CATEGORIES",
-  "ROUND",
-  "HOME",
-  "Who is the author of this picture?",
-  "Which of these paintings did paint",
-  "Are you sure you want to complete the test?",
-  "Yes",
-  "Cancel",
-  "SCORE",
-  "Back to categories",
-  "Type of game: to guess the artist by the picture",
-  "Type of game: to guess the picture by the name of its author",
-];
+function tracking(obj) {
+  // console.log(obj.value);
+  obj.style.background = `linear-gradient(to right, #00cece 0%, #00cece ${obj.value}%, #e5e5e5 ${obj.value}%, #e5e5e5 100%)`;
+}
 
-let russianParams = [
-  "Квиз по художникам",
-  "Квиз по картинам",
-  "НАСТРОЙКИ",
-  "ЯЗЫК РУС / АНГЛ",
-  "ГРОМКОСТЬ",
-  "ИГРА НА ВРЕМЯ",
-  "ВРЕМЯ НА ВОПРОС",
-  "сек",
-  "СОХРАНИТЬ",
-  "Разработчик: Руслан Вильданов",
-  "Категории",
-  "РАУНД",
-  "ДОМОЙ",
-  "Кто автор этой картины?",
-  "Какую из этих картин написал ",
-  "Вы уверены, что хотите завершить тест",
-  "Да",
-  "Отмена",
-  "Результаты",
-  "Назад к категориям",
-  "Тип игры: угадать художника по картине",
-  "Тип игры: угадать картину по имени её автора",
-];
+// запоминает значение громкости
+function volume() {
+  if (audioEffects.muted) {
+    // передаем кнопке звука значение прогрессбара
+    muteBtn.setAttribute("data-volume", progress.value);
+    muteBtn.classList.add("unmute");
+    progress.value = 0;
+    tracking(progress);
+  } else {
+    progress.value = muteBtn.dataset.volume;
+    muteBtn.classList.remove("unmute");
+
+    tracking(progress);
+  }
+}
+
+function volumeMute() {
+  audioEffects.muted = !audioEffects.muted;
+
+  if (audioEffects.muted) {
+    volumeOn = "off";
+    soundIndicator.classList.add("change__indicator");
+    muteBtn.classList.add("unmute");
+  } else {
+    volumeOn = "on";
+    soundIndicator.classList.remove("change__indicator");
+    muteBtn.classList.remove("unmute");
+  }
+}
+
+function volumeChange() {
+  let v = this.value;
+  if (v === 0) {
+    volumeOn = "off";
+    audioEffects.muted = true;
+    muteBtn.classList.add("unmute");
+    soundIndicator.classList.add("change__indicator");
+  } else {
+    volumeOn = "on";
+    audioEffects.volume = v / 100;
+    soundIndicator.classList.remove("change__indicator");
+    muteBtn.classList.remove("unmute");
+    audioEffects.muted = false;
+  }
+
+  setLocalStorage("volumeValue", audioEffects.volume);
+  // console.log(audioEffects.volume);
+  return v;
+}
+
+const volumeSet = () => {
+  volumeMute();
+  volume();
+};
+
+muteBtn.addEventListener("click", volumeSet);
+
+// ДОБАВИТЬ ИЗМЕНЕНИЕ КНОПКИ
+volumeMuteBtn.addEventListener("click", volumeSet);
+
+settingsTimerSelect.addEventListener("change", () => {
+  saveTimerNum = settingsTimerSelect.value;
+});
+
+timerOnBtn.addEventListener("click", () => {
+  if (timerIndicator.classList.contains("change__indicator")) {
+    settingsTimerSelect.disabled = false;
+  } else {
+    settingsTimerSelect.disabled = true;
+  }
+  timerIndicator.classList.toggle("change__indicator");
+});
+
+// меняет язык
+languageBtn.addEventListener("click", () => {
+  if (languageIndicator.classList.contains("change__indicator")) {
+    language = "en";
+  } else {
+    language = "ru";
+  }
+  changeLanguage(language);
+  languageIndicator.classList.toggle("change__indicator");
+});
+
+if (language === "ru") {
+  languageIndicator.classList.add("change__indicator");
+}
+
+// уменьшение и увеличение громкости
+progress.oninput = volumeChange;
+
+// window.onload = audioEffectsPlay;
+
+// function audioEffectsPlay() {
+//   audioEffects.src = "./sound/MellenGiRemix_In_The_End.mp3";
+//   audioEffects.currentTime = 0;
+//   // audioEffects.play();
+// }
+
+// // progressBar
+// const updateProgress = (e) => {
+//   const { duration, currentTime } = e.srcElement;
+//   const progressPersent = (currentTime / duration) * 100;
+//   progressBar.style.width = `${progressPersent}%`;
+
+//   progressDuration.textContent = timeFormat(currentTime);
+// };
+
+// TIMER SECTION================================
+// начальное положение ползунка и значение таймера
+if (timerOn === "off") {
+  timerIndicator.classList.add("change__indicator");
+  settingsTimerSelect.disabled = true;
+  questionsTimer.innerHTML = ``;
+  picturesTimer.innerHTML = ``;
+} else {
+  timerIndicator.classList.remove("change__indicator");
+  settingsTimerSelect.disabled = false;
+  questionsTimer.innerHTML = `00 : ${settingsTimerSelect.value.padStart(
+    2,
+    "0"
+  )}`;
+  picturesTimer.innerHTML = `00 : ${settingsTimerSelect.value.padStart(
+    2,
+    "0"
+  )}`;
+}
+
+// сохранение настроек таймера
+const settingsSave = () => {
+  if (settingsTimerSelect.disabled === true) {
+    timerOn = "off";
+
+    questionsTimer.innerHTML = ``;
+    picturesTimer.innerHTML = ``;
+  } else {
+    timerOn = "on";
+    let count = settingsTimerSelect.value;
+    questionsTimer.innerHTML = `00 : ${count}`;
+    picturesTimer.innerHTML = `00 : ${count}`;
+  }
+  if (volumeOn === "off") {
+    audioEffects.volume = 0;
+  } else {
+    audioEffects.volume = localStorage.getItem("volumeValue") || 0.4;
+  }
+  changeLanguage(language);
+  setLocalStorage("lang", language);
+  setLocalStorage("volumeValue", audioEffects.volume);
+  setLocalStorage("volumeStatus", volumeOn);
+  setLocalStorage("timerStatus", timerOn);
+  if (saveTimerNum) setLocalStorage("timerClock", saveTimerNum);
+  mainBlock.classList.remove("hide");
+  settingBlock.classList.add("hide");
+};
+
+buttonSave.addEventListener("click", settingsSave);
+
+// VOLUME SECTION=========================================
+
+// отслеживание значений нстроек
+if (volumeOn === "off") {
+  audioEffects.volume = 0;
+  audioEffects.muted = true;
+  muteBtn.classList.add("unmute");
+  soundIndicator.classList.add("change__indicator");
+  progress.value = 0;
+  tracking(progress);
+} else {
+  audioEffects.volume = localStorage.getItem("volumeValue") || 1;
+  audioEffects.muted = false;
+  muteBtn.classList.remove("unmute");
+  soundIndicator.classList.remove("change__indicator");
+  progress.value = localStorage.getItem("volumeValue") * 100 || 40;
+  tracking(progress);
+}
 
 changeLanguage(language);

@@ -22,7 +22,6 @@ const questionsBlock = document.querySelector(".questions__block");
 const finishResult = document.querySelector(".finish");
 const popupAnswers = document.querySelector(".popup__correct-up");
 const scoreCard = document.querySelectorAll(".down__score");
-const scoreBlock = document.querySelector(".score");
 const categoryBg = document.querySelectorAll(".down__test");
 const finishTitle = document.querySelector(".end__title");
 
@@ -30,10 +29,11 @@ let authorAnswers = new Set();
 let roundCounter = 0;
 let counter;
 let cardNumber;
-let quizByName = [];
+// let quizByName = [];
 let data;
 let buttonsChoose;
 let correctArtistMemory = [];
+let timerCount;
 
 // рандом для вариантов ответа авторов
 const getRandomInt = (num) => {
@@ -45,10 +45,23 @@ const shuffle = (array) => {
   return array.sort(() => Math.random() - 0.5);
 };
 
+// для пометки правильных  и неправильных
+const renderIndicator = () => {
+  const indicatorCircle = document.querySelectorAll(".indicators__circle");
+
+  correctArtistMemory.forEach((item, index) => {
+    if (item === "1") {
+      indicatorCircle[index].classList.add("correct__answer");
+    } else if (item === "0") {
+      indicatorCircle[index].classList.add("uncorrect__answer");
+    }
+  });
+};
+
 // разделение данных на 2 типа квиза
-const cutData = (data) => {
+const cutData = () => {
   quizByAuthor = data.slice(0, data.length / 2);
-  quizByName = data.slice(data.length / 2, data.length - 1);
+  // quizByName = data.slice(data.length / 2, data.length - 1);
 };
 
 //
@@ -72,7 +85,7 @@ const renderPopupAnswer = (answer) => {
 
 // обработчик верного ответа
 const chooseHundler = (e) => {
-  if (e.target.innerHTML == quizByAuthor[counter].author) {
+  if (e.target.innerHTML === quizByAuthor[counter].author) {
     e.target.classList.add("correct__answer");
     correctArtistMemory.push("1");
     renderIndicator(counter);
@@ -87,126 +100,18 @@ const chooseHundler = (e) => {
   }
   playAudio();
   clearInterval(interval);
-  removeEvents();
+  // removeEvents();
 };
 
 // удаление слушателей после нажатия на ответ
-const removeEvents = () => {
-  buttonsChoose.forEach((item) => {
-    item.removeEventListener("click", chooseHundler);
-  });
-};
-
-// получение данных для quiz
-export const renderAnswers = async (index, currentBlock, lang) => {
-  // запоминаем номер карточки
-  if (typeof currentBlock == "number") {
-    cardNumber = currentBlock;
-  }
-  counter = index;
-  let response;
-  if (lang == "en") {
-    response = await fetch(
-      "https://raw.githubusercontent.com/yaarusik/image-data/master/imagesEn.json"
-    );
-  } else {
-    response = await fetch(
-      "https://raw.githubusercontent.com/yaarusik/image-data/master/images.json"
-    );
-  }
-
-  data = await response.json();
-
-  cutData(data);
-
-  renderQuestions(index, data);
-};
-
-// окончание раунда
-const roundEnd = () => {
-  let sumResult = correctArtistMemory.reduce(
-    (item, current) => +item + +current,
-    0
-  );
-
-  popupEnd.classList.add("active");
-  if (language == "ru") {
-    if (sumResult <= 3) {
-      finishTitle.textContent = "Ты можешь лучше :)";
-      gameOver();
-    } else if (sumResult > 3 && sumResult <= 7) {
-      finishTitle.textContent = "У тебя хороший уровень!";
-      gameCenter();
-    } else if (sumResult > 7) {
-      finishTitle.textContent = "Поздравляю! Ты выйграл :)";
-      endGame();
-    }
-  } else {
-    if (sumResult <= 9) {
-      finishTitle.textContent = "You can better :)";
-      gameOver();
-    } else if (sumResult > 3 && sumResult <= 7) {
-      finishTitle.textContent = "You have a good level!";
-      gameCenter();
-    } else if (sumResult > 7) {
-      endGame();
-      finishTitle.textContent = "Congratulations! You won :)";
-    }
-  }
-  finishResult.textContent = `${sumResult}`;
-  // сохраняем результаты
-
-  // ==================================
-  saveResults(sumResult);
-};
-
-const saveResults = (result) => {
-  scoreCard[cardNumber].innerHTML = `
-    ${result} / 10
-  `;
-};
-
-// для пометки правильных  и неправильных
-const renderIndicator = () => {
-  const indicatorCircle = document.querySelectorAll(".indicators__circle");
-
-  correctArtistMemory.forEach((item, index) => {
-    if (item == "1") {
-      indicatorCircle[index].classList.add("correct__answer");
-    } else if (item == "0") {
-      indicatorCircle[index].classList.add("uncorrect__answer");
-    }
-  });
-};
-
-// делегирование
-popupAnswers.addEventListener("click", (e) => {
-  if (e.target.classList.contains("correct__button")) {
-    counter += 1;
-
-    if (roundCounter == 2) {
-      roundEnd();
-      // отрисовываем score
-      renderScoreBlock(cardNumber, correctArtistMemory);
-      // помечаем карточки
-      categoryIndicator();
-      playAudio();
-    } else {
-      questionsTimer.innerHTML = `00 : ${settingsTimerSelect.value.padStart(
-        2,
-        "0"
-      )}`;
-      renderAnswers(counter, undefined, language);
-      timer(timerOn);
-      roundCounter++;
-    }
-    // убираем блок с правильным ответом
-    popupAnswers.innerHTML = "";
-  }
-});
+// const removeEvents = () => {
+//   buttonsChoose.forEach((item) => {
+//     item.removeEventListener("click", chooseHundler);
+//   });
+// };
 
 // cоздаем 4 варианта ответа
-const createAnswers = (index, data) => {
+const createAnswers = (index) => {
   authorAnswers.add(quizByAuthor[index].author);
   while (authorAnswers.size < 4) {
     authorAnswers.add(data[getRandomInt(data.length - 1)].author);
@@ -222,7 +127,7 @@ const createAnswers = (index, data) => {
 };
 
 // создание блока с вариантами ответа и фото
-const renderQuestions = (index, data) => {
+const renderQuestions = (index) => {
   // создание вариантов ответа для quiz авторов
 
   questionsBlock.innerHTML = `
@@ -267,29 +172,6 @@ const renderQuestions = (index, data) => {
   );
 };
 
-// удаляем прогресс
-export const cleanProgress = () => {
-  roundCounter = 0;
-  correctArtistMemory = [];
-};
-
-const categoryIndicator = () => {
-  categoryBg[cardNumber].classList.add("add__bg");
-};
-
-let timerCount;
-export const timer = (timerStatus) => {
-  if (timerStatus == "on") {
-    timerCount = settingsTimerSelect.value.padStart(2, "0");
-    timerSet();
-  } else if (timerStatus == "continue") {
-    console.log(timerCount);
-    timerSet();
-  } else {
-    questionsTimer.innerHTML = "";
-  }
-};
-
 const timerSet = () => {
   interval = setInterval(() => {
     if (+timerCount < 11) {
@@ -297,15 +179,129 @@ const timerSet = () => {
     } else {
       questionsTimer.innerHTML = `00 : ${timerCount - 1}`;
     }
-    timerCount--;
+    timerCount -= 1;
     if (!timerCount) {
       clearInterval(interval);
       correctArtistMemory.push("0");
       renderIndicator(counter);
       renderPopupAnswer("no");
-      removeEvents();
+      // removeEvents();
       wrongAnswer();
       playAudio();
     }
   }, 1000);
+};
+
+export const timer = (timerStatus) => {
+  if (timerStatus === "on") {
+    timerCount = settingsTimerSelect.value.padStart(2, "0");
+    timerSet();
+  } else if (timerStatus === "continue") {
+    timerSet();
+  } else {
+    questionsTimer.innerHTML = "";
+  }
+};
+
+// получение данных для quiz
+export const renderAnswers = async (index, currentBlock, lang) => {
+  // запоминаем номер карточки
+  if (typeof currentBlock === "number") {
+    cardNumber = currentBlock;
+  }
+  counter = index;
+  let response;
+  if (lang === "en") {
+    response = await fetch(
+      "https://raw.githubusercontent.com/yaarusik/image-data/master/imagesEn.json"
+    );
+  } else {
+    response = await fetch(
+      "https://raw.githubusercontent.com/yaarusik/image-data/master/images.json"
+    );
+  }
+
+  data = await response.json();
+
+  cutData(data);
+
+  renderQuestions(index, data);
+};
+
+// окончание раунда
+const roundEnd = () => {
+  let sumResult = correctArtistMemory.reduce(
+    (item, current) => +item + +current,
+    0
+  );
+
+  const saveResults = (result) => {
+    scoreCard[cardNumber].innerHTML = `
+      ${result} / 10
+    `;
+  };
+
+  popupEnd.classList.add("active");
+  if (language === "ru") {
+    if (sumResult <= 3) {
+      finishTitle.textContent = "Ты можешь лучше :)";
+      gameOver();
+    } else if (sumResult > 3 && sumResult <= 7) {
+      finishTitle.textContent = "У тебя хороший уровень!";
+      gameCenter();
+    } else if (sumResult > 7) {
+      finishTitle.textContent = "Поздравляю! Ты выйграл :)";
+      endGame();
+    }
+  } else if (sumResult <= 3) {
+    finishTitle.textContent = "You can better :)";
+    gameOver();
+  } else if (sumResult > 3 && sumResult <= 7) {
+    finishTitle.textContent = "You have a good level!";
+    gameCenter();
+  } else if (sumResult > 7) {
+    endGame();
+    finishTitle.textContent = "Congratulations! You won :)";
+  }
+  finishResult.textContent = `${sumResult}`;
+  // сохраняем результаты
+
+  // ==================================
+  saveResults(sumResult);
+};
+
+const categoryIndicator = () => {
+  categoryBg[cardNumber].classList.add("add__bg");
+};
+
+// делегирование
+popupAnswers.addEventListener("click", (e) => {
+  if (e.target.classList.contains("correct__button")) {
+    counter += 1;
+
+    if (roundCounter === 9) {
+      roundEnd();
+      // отрисовываем score
+      renderScoreBlock(cardNumber, correctArtistMemory);
+      // помечаем карточки
+      categoryIndicator();
+      playAudio();
+    } else {
+      questionsTimer.innerHTML = `00 : ${settingsTimerSelect.value.padStart(
+        2,
+        "0"
+      )}`;
+      renderAnswers(counter, undefined, language);
+      timer(timerOn);
+      roundCounter += 1;
+    }
+    // убираем блок с правильным ответом
+    popupAnswers.innerHTML = "";
+  }
+});
+
+// удаляем прогресс
+export const cleanProgress = () => {
+  roundCounter = 0;
+  correctArtistMemory = [];
 };

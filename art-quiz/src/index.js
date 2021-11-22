@@ -1,7 +1,6 @@
 import "./style.scss";
 import "./js/settings";
 import "./js/blocksHide";
-import "./js/ripple";
 import "./js/quiz";
 import "./js/score";
 import "./js/picturesQuiz";

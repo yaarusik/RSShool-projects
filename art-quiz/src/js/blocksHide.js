@@ -38,7 +38,6 @@ const popupClose = document.querySelector(".popup__cancel");
 export const popupEnd = document.querySelector(".popup__end");
 const popupCancelBtn = document.querySelector(".popup__no");
 const popupCategoryBtn = document.querySelectorAll(".popup__yes");
-const popupNextQuizBtn = document.querySelector(".popup__next");
 
 export let eventMemory = false;
 
@@ -58,11 +57,11 @@ mainSettingBtn.forEach((item) => {
   item.addEventListener("click", addHide);
 });
 
-settingClose.addEventListener("click", (e) => {
-  if (eventMemory == "artist") {
+settingClose.addEventListener("click", () => {
+  if (eventMemory === "artist") {
     categoryBlock.classList.remove("hide");
     settingBlock.classList.add("hide");
-  } else if (eventMemory == "picture") {
+  } else if (eventMemory === "picture") {
     categoryPicturesBlock.classList.remove("hide");
     settingBlock.classList.add("hide");
   } else {
@@ -72,7 +71,7 @@ settingClose.addEventListener("click", (e) => {
 });
 
 artistQuiz.forEach((item) => {
-  item.addEventListener("click", function (e) {
+  item.addEventListener("click", () => {
     eventMemory = "artist";
     mainBlock.classList.add("hide");
     categoryBlock.classList.remove("hide");
@@ -82,7 +81,7 @@ artistQuiz.forEach((item) => {
 });
 
 picturesQuiz.forEach((item) => {
-  item.addEventListener("click", function (e) {
+  item.addEventListener("click", () => {
     eventMemory = "picture";
     mainBlock.classList.add("hide");
     categoryPicturesBlock.classList.remove("hide");
@@ -92,7 +91,7 @@ picturesQuiz.forEach((item) => {
 });
 
 categories.forEach((item, index) => {
-  item.addEventListener("click", function () {
+  item.addEventListener("click", () => {
     categoryBlock.classList.add("hide");
     questionsBlock.classList.remove("hide");
     // в зависимости от категории будет приходить определенный десяток
@@ -103,7 +102,7 @@ categories.forEach((item, index) => {
 });
 
 picturesCategoriesBtn.forEach((item, index) => {
-  item.addEventListener("click", function () {
+  item.addEventListener("click", () => {
     categoryPicturesBlock.classList.add("hide");
     pictureQuestionsBlock.classList.remove("hide");
 
@@ -115,7 +114,7 @@ picturesCategoriesBtn.forEach((item, index) => {
 });
 
 questionsClose.forEach((item) => {
-  item.addEventListener("click", function () {
+  item.addEventListener("click", () => {
     popupClose.classList.add("active");
     clearInterval(interval);
     clearInterval(pictureInterval);
@@ -123,7 +122,7 @@ questionsClose.forEach((item) => {
 });
 
 menuHomeBtn.forEach((item) => {
-  item.addEventListener("click", function () {
+  item.addEventListener("click", () => {
     eventMemory = false;
     categoryBlock.classList.add("hide");
     categoryPicturesBlock.classList.add("hide");
@@ -141,11 +140,11 @@ popupCategoryBtn.forEach((item) => {
       2,
       "0"
     )}`;
-    if (eventMemory == "artist") {
+    if (eventMemory === "artist") {
       questionsBlock.classList.add("hide");
       categoryBlock.classList.remove("hide");
       cleanProgress();
-    } else if (eventMemory == "picture") {
+    } else if (eventMemory === "picture") {
       pictureQuestionsBlock.classList.add("hide");
       categoryPicturesBlock.classList.remove("hide");
       cleanPictureProgress();
@@ -160,7 +159,7 @@ popupCategoryBtn.forEach((item) => {
 // закрываем popup с предупреждением
 popupCancelBtn.addEventListener("click", () => {
   popupClose.classList.remove("active");
-  if (eventMemory == "artist") {
+  if (eventMemory === "artist") {
     timer("continue");
   } else {
     timerPicture("continue");
@@ -168,10 +167,10 @@ popupCancelBtn.addEventListener("click", () => {
 });
 
 backCategoriesBtn.addEventListener("click", () => {
-  if (eventMemory == "artist") {
+  if (eventMemory === "artist") {
     scoreBlock.classList.add("hide");
     categoryBlock.classList.remove("hide");
-  } else if (eventMemory == "picture") {
+  } else if (eventMemory === "picture") {
     scoreBlock.classList.add("hide");
     categoryPicturesBlock.classList.remove("hide");
   }

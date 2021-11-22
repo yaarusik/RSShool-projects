@@ -24,16 +24,18 @@ const scoreCard = document.querySelectorAll(".down__results");
 const categoryBg = document.querySelectorAll(".down__reaction");
 const questionTitle = document.querySelector(".change__title");
 
-let authorAnswers = new Set();
+// let authorAnswers = new Set();
 let pictureAnswers = new Set();
 let roundCounter = 0;
 let counter;
 let cardNumber;
-let quizByAuthor = [];
+// let quizByAuthor = [];
 let data;
 let buttonsChoose;
 let correctPictureMemory = [];
 let type = "picture";
+let timerPictureCount;
+
 // рандом для вариантов ответа авторов
 const getRandomInt = (num) => {
   return Math.floor(Math.random() * num);
@@ -45,8 +47,8 @@ const shuffle = (array) => {
 };
 
 // разделение данных на 2 типа квиза
-const cutData = (data) => {
-  quizByAuthor = data.slice(0, data.length / 2);
+const cutData = () => {
+  // quizByAuthor = data.slice(0, data.length / 2);
   quizByName = data.slice(data.length / 2, data.length - 1);
 };
 
@@ -69,9 +71,22 @@ const renderPopupAnswer = (answer) => {
   `;
 };
 
+// для пометки правильных  и неправильных
+const renderIndicator = () => {
+  const indicatorRound = document.querySelectorAll(".indicators__round");
+
+  correctPictureMemory.forEach((item, index) => {
+    if (item === "1") {
+      indicatorRound[index].classList.add("correct__answer");
+    } else if (item === "0") {
+      indicatorRound[index].classList.add("uncorrect__answer");
+    }
+  });
+};
+
 // обработчик верного ответа
 const chooseHundler = (e) => {
-  if (e.target.alt == quizByName[counter].imageNum) {
+  if (e.target.alt === quizByName[counter].imageNum) {
     e.target.classList.add("correct__answer");
     correctPictureMemory.push("1");
     renderIndicator(counter);
@@ -86,126 +101,18 @@ const chooseHundler = (e) => {
   }
   playAudio();
   clearInterval(pictureInterval);
-  removeEvents();
+  // removeEvents();
 };
 
-// удаление слушателей после нажатия на ответ
-const removeEvents = () => {
-  buttonsChoose.forEach((item) => {
-    item.removeEventListener("click", chooseHundler);
-  });
-};
-
-// получение данных для quiz
-export const renderPictureAnswers = async (index, currentBlock, lang) => {
-  // запоминаем номер карточки
-  if (typeof currentBlock == "number") {
-    cardNumber = currentBlock;
-  }
-  counter = index;
-  let response;
-  if (lang == "en") {
-    response = await fetch(
-      "https://raw.githubusercontent.com/yaarusik/image-data/master/imagesEn.json"
-    );
-  } else {
-    response = await fetch(
-      "https://raw.githubusercontent.com/yaarusik/image-data/master/images.json"
-    );
-  }
-
-  data = await response.json();
-
-  cutData(data);
-
-  renderQuestions(index, data);
-};
-
-// окончание раунда
-const roundEnd = () => {
-  let sumResult = correctPictureMemory.reduce(
-    (item, current) => +item + +current,
-    0
-  );
-
-  popupEnd.classList.add("active");
-
-  if (language == "ru") {
-    if (sumResult <= 3) {
-      finishTitle.textContent = "Ты можешь лучше :)";
-      gameOver();
-    } else if (sumResult > 3 && sumResult <= 7) {
-      finishTitle.textContent = "У тебя хороший уровень!";
-      gameCenter();
-    } else if (sumResult > 7) {
-      finishTitle.textContent = "Поздравляю! Ты выйграл :)";
-      endGame();
-    }
-  } else {
-    if (sumResult <= 3) {
-      finishTitle.textContent = "You can better :)";
-      gameOver();
-    } else if (sumResult > 3 && sumResult <= 7) {
-      finishTitle.textContent = "You have a good level!";
-      gameCenter();
-    } else if (sumResult > 7) {
-      endGame();
-      finishTitle.textContent = "Congratulations! You won :)";
-    }
-  }
-
-  finishResult.textContent = `${sumResult}`;
-  saveResults(sumResult);
-};
-
-const saveResults = (result) => {
-  scoreCard[cardNumber].innerHTML = `
-    ${result} / 10
-  `;
-};
-
-// для пометки правильных  и неправильных
-const renderIndicator = () => {
-  const indicatorRound = document.querySelectorAll(".indicators__round");
-
-  correctPictureMemory.forEach((item, index) => {
-    if (item == "1") {
-      indicatorRound[index].classList.add("correct__answer");
-    } else if (item == "0") {
-      indicatorRound[index].classList.add("uncorrect__answer");
-    }
-  });
-};
-
-// делегирование
-popupAnswers.addEventListener("click", (e) => {
-  if (e.target.classList.contains("correct__btn")) {
-    counter += 1;
-
-    if (roundCounter == 9) {
-      roundEnd();
-      // отрисовываем score
-      renderScoreBlock(cardNumber, correctPictureMemory, type);
-      // помечаем карточки
-      categoryIndicator();
-
-      playAudio();
-    } else {
-      picturesTimer.innerHTML = `00 : ${settingsTimerSelect.value.padStart(
-        2,
-        "0"
-      )}`;
-      renderPictureAnswers(counter, undefined, language);
-      timerPicture(timerOn);
-      roundCounter++;
-    }
-    // убираем блок с правильным ответом
-    popupAnswers.innerHTML = "";
-  }
-});
+// // удаление слушателей после нажатия на ответ
+// const removeEvents = () => {
+//   buttonsChoose.forEach((item) => {
+//     item.removeEventListener("click", chooseHundler);
+//   });
+// };
 
 // cоздаем 4 варианта ответа
-const createAnswers = (index, data) => {
+const createAnswers = (index) => {
   questionTitle.innerHTML = quizByName[index].author;
   pictureAnswers.add(quizByName[index].imageNum);
   while (pictureAnswers.size < 4) {
@@ -225,7 +132,7 @@ const createAnswers = (index, data) => {
 };
 
 // создание блока с вариантами ответа и фото
-const renderQuestions = (index, data) => {
+const renderQuestions = (index) => {
   // создание вариантов ответа для quiz картин
 
   questionsBlock.innerHTML = `
@@ -265,27 +172,74 @@ const renderQuestions = (index, data) => {
   );
 };
 
-// удаляем прогресс
-export const cleanPictureProgress = () => {
-  roundCounter = 0;
-  correctPictureMemory = [];
+// получение данных для quiz
+export const renderPictureAnswers = async (index, currentBlock, lang) => {
+  // запоминаем номер карточки
+  if (typeof currentBlock === "number") {
+    cardNumber = currentBlock;
+  }
+  counter = index;
+  let response;
+  if (lang === "en") {
+    response = await fetch(
+      "https://raw.githubusercontent.com/yaarusik/image-data/master/imagesEn.json"
+    );
+  } else {
+    response = await fetch(
+      "https://raw.githubusercontent.com/yaarusik/image-data/master/images.json"
+    );
+  }
+
+  data = await response.json();
+
+  cutData(data);
+
+  renderQuestions(index, data);
+};
+
+const saveResults = (result) => {
+  scoreCard[cardNumber].innerHTML = `
+    ${result} / 10
+  `;
+};
+
+// окончание раунда
+const roundEnd = () => {
+  let sumResult = correctPictureMemory.reduce(
+    (item, current) => +item + +current,
+    0
+  );
+
+  popupEnd.classList.add("active");
+
+  if (language === "ru") {
+    if (sumResult <= 3) {
+      finishTitle.textContent = "Ты можешь лучше :)";
+      gameOver();
+    } else if (sumResult > 3 && sumResult <= 7) {
+      finishTitle.textContent = "У тебя хороший уровень!";
+      gameCenter();
+    } else if (sumResult > 7) {
+      finishTitle.textContent = "Поздравляю! Ты выйграл :)";
+      endGame();
+    }
+  } else if (sumResult <= 3) {
+      finishTitle.textContent = `You can better :)`;
+      gameOver();
+    } else if (sumResult > 3 && sumResult <= 7) {
+      finishTitle.textContent = "You have a good level!";
+      gameCenter();
+    } else if (sumResult > 7) {
+      endGame();
+      finishTitle.textContent = "Congratulations! You won :)";
+    }
+
+  finishResult.textContent = `${sumResult}`;
+  saveResults(sumResult);
 };
 
 const categoryIndicator = () => {
   categoryBg[cardNumber].classList.add("add__bg");
-};
-
-let timerPictureCount;
-export const timerPicture = (timerStatus) => {
-  if (timerStatus == "on") {
-    timerPictureCount = settingsTimerSelect.value.padStart(2, "0");
-    timerSet();
-  } else if (timerStatus == "continue") {
-    console.log(timerPictureCount);
-    timerSet();
-  } else {
-    picturesTimer.innerHTML = "";
-  }
 };
 
 const timerSet = () => {
@@ -295,15 +249,59 @@ const timerSet = () => {
     } else {
       picturesTimer.innerHTML = `00 : ${timerPictureCount - 1}`;
     }
-    timerPictureCount--;
+    timerPictureCount -= 1;
     if (!timerPictureCount) {
       clearInterval(pictureInterval);
       correctPictureMemory.push("0");
       renderIndicator(counter);
       renderPopupAnswer("no");
-      removeEvents();
+      // removeEvents();
       wrongAnswer();
       playAudio();
     }
   }, 1000);
+};
+
+export const timerPicture = (timerStatus) => {
+  if (timerStatus === "on") {
+    timerPictureCount = settingsTimerSelect.value.padStart(2, "0");
+    timerSet();
+  } else if (timerStatus === "continue") {
+    timerSet();
+  } else {
+    picturesTimer.innerHTML = "";
+  }
+};
+
+// делегирование
+popupAnswers.addEventListener("click", (e) => {
+  if (e.target.classList.contains("correct__btn")) {
+    counter += 1;
+
+    if (roundCounter === 9) {
+      roundEnd();
+      // отрисовываем score
+      renderScoreBlock(cardNumber, correctPictureMemory, type);
+      // помечаем карточки
+      categoryIndicator();
+
+      playAudio();
+    } else {
+      picturesTimer.innerHTML = `00 : ${settingsTimerSelect.value.padStart(
+        2,
+        "0"
+      )}`;
+      renderPictureAnswers(counter, undefined, language);
+      timerPicture(timerOn);
+      roundCounter += 1;
+    }
+    // убираем блок с правильным ответом
+    popupAnswers.innerHTML = "";
+  }
+});
+
+// удаляем прогресс
+export const cleanPictureProgress = () => {
+  roundCounter = 0;
+  correctPictureMemory = [];
 };

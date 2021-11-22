@@ -1,16 +1,24 @@
 import { popupEnd } from "./blocksHide";
 import { renderScoreBlock } from "./score";
-import { wrongAnswer } from "./settings";
-import { rigthAnswer } from "./settings";
-import { endGame } from "./settings";
-import { playAudio } from "./settings";
-import { language } from "./settings";
-import { timer } from "./quiz";
-import { timerOn } from "./settings";
+import {
+  wrongAnswer,
+  rigthAnswer,
+  endGame,
+  playAudio,
+  gameOver,
+  gameCenter,
+  language,
+  settingsTimerSelect,
+  timerOn,
+} from "./settings";
+
+export let pictureInterval;
+export const picturesTimer = document.querySelector(".pictures__timer");
+export let quizByName = [];
 
 const questionsBlock = document.querySelector(".question__pictures");
 const finishResult = document.querySelector(".finish");
-// const nextQuestionBtn = document.querySelector(".correct__button");
+const finishTitle = document.querySelector(".end__title");
 const popupAnswers = document.querySelector(".popup__correct-up");
 const scoreCard = document.querySelectorAll(".down__results");
 const categoryBg = document.querySelectorAll(".down__reaction");
@@ -18,12 +26,10 @@ const questionTitle = document.querySelector(".change__title");
 
 let authorAnswers = new Set();
 let pictureAnswers = new Set();
-
 let roundCounter = 0;
 let counter;
 let cardNumber;
 let quizByAuthor = [];
-export let quizByName = [];
 let data;
 let buttonsChoose;
 let correctPictureMemory = [];
@@ -79,6 +85,7 @@ const chooseHundler = (e) => {
     wrongAnswer();
   }
   playAudio();
+  clearInterval(pictureInterval);
   removeEvents();
 };
 
@@ -122,6 +129,31 @@ const roundEnd = () => {
   );
 
   popupEnd.classList.add("active");
+
+  if (language == "ru") {
+    if (sumResult <= 3) {
+      finishTitle.textContent = "Ты можешь лучше :)";
+      gameOver();
+    } else if (sumResult > 3 && sumResult <= 7) {
+      finishTitle.textContent = "У тебя хороший уровень!";
+      gameCenter();
+    } else if (sumResult > 7) {
+      finishTitle.textContent = "Поздравляю! Ты выйграл :)";
+      endGame();
+    }
+  } else {
+    if (sumResult <= 3) {
+      finishTitle.textContent = "You can better :)";
+      gameOver();
+    } else if (sumResult > 3 && sumResult <= 7) {
+      finishTitle.textContent = "You have a good level!";
+      gameCenter();
+    } else if (sumResult > 7) {
+      endGame();
+      finishTitle.textContent = "Congratulations! You won :)";
+    }
+  }
+
   finishResult.textContent = `${sumResult}`;
   saveResults(sumResult);
 };
@@ -150,18 +182,21 @@ popupAnswers.addEventListener("click", (e) => {
   if (e.target.classList.contains("correct__btn")) {
     counter += 1;
 
-    // console.log(roundCounter);
     if (roundCounter == 3) {
       roundEnd();
       // отрисовываем score
       renderScoreBlock(cardNumber, correctPictureMemory, type);
       // помечаем карточки
       categoryIndicator();
-      endGame();
+
       playAudio();
     } else {
+      picturesTimer.innerHTML = `00 : ${settingsTimerSelect.value.padStart(
+        2,
+        "0"
+      )}`;
       renderPictureAnswers(counter, undefined, language);
-      timer(timerOn);
+      timerPicture(timerOn);
       roundCounter++;
     }
     // убираем блок с правильным ответом
@@ -238,4 +273,37 @@ export const cleanPictureProgress = () => {
 
 const categoryIndicator = () => {
   categoryBg[cardNumber].classList.add("add__bg");
+};
+
+let timerPictureCount;
+export const timerPicture = (timerStatus) => {
+  if (timerStatus == "on") {
+    timerPictureCount = settingsTimerSelect.value.padStart(2, "0");
+    timerSet();
+  } else if (timerStatus == "continue") {
+    console.log(timerPictureCount);
+    timerSet();
+  } else {
+    picturesTimer.innerHTML = "";
+  }
+};
+
+const timerSet = () => {
+  pictureInterval = setInterval(() => {
+    if (+timerPictureCount < 11) {
+      picturesTimer.innerHTML = `00 : 0${timerPictureCount - 1}`;
+    } else {
+      picturesTimer.innerHTML = `00 : ${timerPictureCount - 1}`;
+    }
+    timerPictureCount--;
+    if (!timerPictureCount) {
+      clearInterval(pictureInterval);
+      correctPictureMemory.push("0");
+      renderIndicator(counter);
+      renderPopupAnswer("no");
+      removeEvents();
+      wrongAnswer();
+      playAudio();
+    }
+  }, 1000);
 };

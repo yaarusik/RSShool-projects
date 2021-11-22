@@ -37,10 +37,13 @@ body {
 }
 
 //ОСНОВНАЯ СЕТКА========================
-.container {
-   max-width: 360px;
-   margin: 0 auto;
-   width: calc(100% - 20px);
+
+@media (max-width: 768px) {
+   .container {
+      max-width: calc(360px + (768 - 360) * ((100vw - 360px) / (768 - 360)));
+      margin: 0 auto;
+      width: calc(100% - 20px);
+   }
 }
 //ОСНОВНАЯ СЕТКА========================
 

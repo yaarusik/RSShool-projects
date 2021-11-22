@@ -2,36 +2,38 @@
 
 import { popupEnd } from "./blocksHide";
 import { renderScoreBlock } from "./score";
-import { settingsTimerSelect } from "./settings";
-import { timerOn } from "./settings";
-import { questionsTimer } from "./settings";
-import { rigthAnswer } from "./settings";
-import { wrongAnswer } from "./settings";
-import { endGame } from "./settings";
-import { playAudio } from "./settings";
-import { setLocalStorage } from "./settings";
-import { language } from "./settings";
+import {
+  settingsTimerSelect,
+  timerOn,
+  questionsTimer,
+  rigthAnswer,
+  wrongAnswer,
+  endGame,
+  playAudio,
+  gameCenter,
+  gameOver,
+  language,
+} from "./settings";
+
+export let quizByAuthor = [];
+export let interval;
 
 const questionsBlock = document.querySelector(".questions__block");
 const finishResult = document.querySelector(".finish");
-// const nextQuestionBtn = document.querySelector(".correct__button");
 const popupAnswers = document.querySelector(".popup__correct-up");
 const scoreCard = document.querySelectorAll(".down__score");
 const scoreBlock = document.querySelector(".score");
 const categoryBg = document.querySelectorAll(".down__test");
+const finishTitle = document.querySelector(".end__title");
 
 let authorAnswers = new Set();
-// let uniqAuthors = new Set();
 let roundCounter = 0;
 let counter;
 let cardNumber;
-export let quizByAuthor = [];
 let quizByName = [];
 let data;
 let buttonsChoose;
 let correctArtistMemory = [];
-
-export let interval;
 
 // рандом для вариантов ответа авторов
 const getRandomInt = (num) => {
@@ -128,6 +130,29 @@ const roundEnd = () => {
   );
 
   popupEnd.classList.add("active");
+  if (language == "ru") {
+    if (sumResult <= 3) {
+      finishTitle.textContent = "Ты можешь лучше :)";
+      gameOver();
+    } else if (sumResult > 3 && sumResult <= 7) {
+      finishTitle.textContent = "У тебя хороший уровень!";
+      gameCenter();
+    } else if (sumResult > 7) {
+      finishTitle.textContent = "Поздравляю! Ты выйграл :)";
+      endGame();
+    }
+  } else {
+    if (sumResult <= 3) {
+      finishTitle.textContent = "You can better :)";
+      gameOver();
+    } else if (sumResult > 3 && sumResult <= 7) {
+      finishTitle.textContent = "You have a good level!";
+      gameCenter();
+    } else if (sumResult > 7) {
+      endGame();
+      finishTitle.textContent = "Congratulations! You won :)";
+    }
+  }
   finishResult.textContent = `${sumResult}`;
   // сохраняем результаты
 
@@ -159,14 +184,12 @@ popupAnswers.addEventListener("click", (e) => {
   if (e.target.classList.contains("correct__button")) {
     counter += 1;
 
-    // console.log(roundCounter);
-    if (roundCounter == 3) {
+    if (roundCounter == 2) {
       roundEnd();
       // отрисовываем score
       renderScoreBlock(cardNumber, correctArtistMemory);
       // помечаем карточки
       categoryIndicator();
-      endGame();
       playAudio();
     } else {
       questionsTimer.innerHTML = `00 : ${settingsTimerSelect.value.padStart(

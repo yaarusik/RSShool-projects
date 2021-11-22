@@ -5,24 +5,31 @@
 
    .score {
       &__back {
+         width: 100%;
          padding: 10px 0;
       }
 
       &__row {
+         width: 200px;
+         cursor: pointer;
          display: flex;
          align-items: center;
          justify-content: left;
          column-gap: 10px;
+         transition: 0.2s;
+      }
+      &__row:hover {
+         transform: scale(0.9);
       }
 
       &__categories {
-         width: 17px;
-         height: 17px;
+         width: calc(17px + (20 - 17) * ((100vw - 360px) / (1920 - 360)));
+         height: calc(17px + (20 - 17) * ((100vw - 360px) / (1920 - 360)));
          background-image: url("./images/assets/svg/left__arrow.svg");
       }
 
       &__artists {
-         font-size: 14px;
+         font-size: calc(14px + (20 - 14) * ((100vw - 360px) / (1920 - 360)));
          color: var(--col-grey);
       }
    }
@@ -34,9 +41,14 @@
    }
 
    &__logo {
+      transition: 0.2s;
+      cursor: pointer;
       width: 110px;
       height: 132px;
       background-image: url("./images/assets/logo/art-quiz.webp");
+   }
+   &__logo:hover {
+      transform: scale(1.1);
    }
 
    &__header {
@@ -48,7 +60,7 @@
 
    &__title {
       padding-top: 10px;
-      font-size: 28px;
+      font-size: calc(28px + (35 - 28) * ((100vw - 360px) / (1920 - 360)));
       line-height: 30px;
       font-weight: 700;
       color: var(--col-grey);

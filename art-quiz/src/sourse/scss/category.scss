@@ -4,13 +4,11 @@
    min-height: 100vh;
 
    &__setting {
-      position: absolute;
-      top: 28px;
-      right: 16px;
-      width: 35px;
-      height: 35px;
+      width: calc(35px + (60 - 35) * ((100vw - 360px) / (1920 - 360)));
+      height: calc(35px + (60 - 35) * ((100vw - 360px) / (1920 - 360)));
       background-image: url("./images/assets/svg/settingLogo.svg");
-      background-size: cover;
+      background-size: calc(35px + (60 - 35) * ((100vw - 360px) / (1920 - 360)))
+         calc(35px + (60 - 35) * ((100vw - 360px) / (1920 - 360)));
       background-repeat: no-repeat;
       transform: rotate(0deg);
       transition: 0.2s;
@@ -29,8 +27,8 @@
       position: relative;
       font-weight: 500;
       text-transform: uppercase;
-      font-size: 20px;
-      line-height: 28px;
+      font-size: calc(20px + (60 - 20) * ((100vw - 360px) / (1920 - 360)));
+      line-height: calc(28px + (64 - 28) * ((100vw - 360px) / (1920 - 360)));
 
       color: var(--col-grey);
       padding-bottom: 26px;
@@ -38,7 +36,7 @@
 
    &__down {
       padding-bottom: 31px;
-      max-height: 435px;
+      max-height: calc(435px + (800 - 435) * ((100vw - 360px) / (1920 - 360)));
       overflow: auto;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
@@ -47,15 +45,6 @@
    &__down::-webkit-scrollbar {
       width: 0;
    }
-
-   &__menu {
-      margin: 0 auto;
-      border-radius: 20px 20px 0px 0px;
-      border: 1px solid var(--col-grey);
-      max-width: 100px;
-      height: 65px;
-      filter: drop-shadow(0px -10px 50px rgba(0, 0, 0, 0.8));
-   }
 }
 
 .down {
@@ -63,9 +52,9 @@
       color: var(--col-grey);
       display: flex;
       justify-content: center;
-      column-gap: 10px;
+      column-gap: calc(10px + (30 - 10) * ((100vw - 360px) / (1920 - 360)));
       flex-wrap: wrap;
-      row-gap: 13px;
+      row-gap: calc(13px + (33 - 13) * ((100vw - 360px) / (1920 - 360)));
    }
 
    &__row,
@@ -116,8 +105,8 @@
    &__test,
    &__reaction {
       position: relative;
-      width: 155px;
-      height: 164px;
+      width: calc(155px + (230 - 155) * ((100vw - 360px) / (1920 - 360)));
+      height: calc(164px + (250 - 164) * ((100vw - 360px) / (1920 - 360)));
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -134,9 +123,9 @@
    font-weight: 400;
    bottom: 0;
    left: 0;
-   background-color: red;
+   background-color: rgba(218, 38, 38, 0.7);
    width: 100%;
-   height: 35px;
+   height: calc(35px + (50 - 35) * ((100vw - 360px) / (1920 - 360)));
 }
 
 .category__one .down__row:first-child .down__test {
@@ -221,9 +210,9 @@
 
 .logo__title {
    // color: var(--col-grey);
-   padding-left: 4px;
+   padding-left: calc(4px + (55 - 4) * ((100vw - 360px) / (1920 - 360)));
    color: transparent;
-   font-size: 30px;
+   font-size: calc(30px + (70 - 30) * ((100vw - 360px) / (1920 - 360)));
    // text-transform: uppercase;
    font-weight: 700;
    background-size: cover;
@@ -248,12 +237,15 @@
 
 .menu {
    &__row {
-      padding: 10px 45px 10px;
+      padding: calc(10px + (18 - 10) * ((100vw - 360px) / (1920 - 360))) 45px 10px;
       display: flex;
       justify-content: center;
+      align-items: center;
    }
 
    &__flex {
+      right: 0;
+      top: 0;
       cursor: pointer;
       display: flex;
       flex-direction: column;
@@ -264,23 +256,29 @@
 
    &__flex:hover {
       -webkit-transition: linear 0.2s;
-      transition: linear 0.2s;
-      -webkit-filter: invert(54%) sepia(32%) saturate(347%) hue-rotate(356deg) brightness(93%) contrast(92%);
-      filter: invert(54%) sepia(32%) saturate(347%) hue-rotate(356deg) brightness(93%) contrast(92%);
-      -webkit-transform: scale(0.95);
-      transform: scale(0.95);
+      transform: scale(0.9);
    }
 
    &__home-logo {
-      width: 21px;
-      height: 23px;
+      width: calc(30px + (60 - 30) * ((100vw - 360px) / (1920 - 360)));
+      height: calc(32px + (62 - 32) * ((100vw - 360px) / (1920 - 360)));
       background-image: url("./images/assets/svg/home.svg");
+      background-size: 94%;
    }
 
    &__text {
-      font-size: 12px;
+      font-size: calc(12px + (20 - 12) * ((100vw - 360px) / (1920 - 360)));
       line-height: 14px;
       font-weight: 500;
       color: var(--col-grey);
    }
+}
+
+.buttons__position {
+   position: absolute;
+   top: 10px;
+   right: 3%;
+   display: flex;
+   align-items: center;
+   column-gap: calc(10px + (25 - 10) * ((100vw - 360px) / (1920 - 360)));
 }

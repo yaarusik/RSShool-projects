@@ -1,21 +1,26 @@
-import { scoreBlock } from "./blocksHide";
-import { categoryBlock } from "./blocksHide";
-import { categoryPicturesBlock } from "./blocksHide";
+import {
+  scoreBlock,
+  mainBlock,
+  categoryBlock,
+  categoryPicturesBlock,
+  eventMemory,
+} from "./blocksHide";
+
 import { quizByAuthor } from "./quiz";
 import { quizByName } from "./picturesQuiz";
-import { eventMemory } from "./blocksHide";
 import { setLocalStorage } from "./settings";
 
+export const scoreBtn = document.querySelectorAll(".button__score");
 const scoreBody = document.querySelector(".score__body");
-const scoreBtn = document.querySelectorAll(".button__score");
 const resultsNumber = document.querySelectorAll(".down__common");
 const localIndicator = document.querySelectorAll(".local__indicator");
+
 let amountBtnQuiz = scoreBtn.length / 2;
-// console.log(amountBtnQuiz);
 let scoreArtistsPages = JSON.parse(localStorage.getItem("artistScore")) || [];
 let scorePicturesPages = JSON.parse(localStorage.getItem("pictureScore")) || [];
 let scoreButtonIndex = JSON.parse(localStorage.getItem("scoreIndex")) || [];
 let quizType;
+
 export const renderScoreBlock = (index, answers, type) => {
   quizType = type;
   console.log("index " + index);
@@ -151,6 +156,13 @@ const renderScorePage = (index, type) => {
       item.children[1].classList.toggle("description__title-visible");
     });
   });
+  const scoreLogoBtn = document.querySelectorAll(".score__logo");
+  scoreLogoBtn.forEach((item) => {
+    item.addEventListener("click", () => {
+      scoreBlock.classList.add("hide");
+      mainBlock.classList.remove("hide");
+    });
+  });
 };
 
 window.onload = () => {
@@ -165,6 +177,13 @@ window.onload = () => {
         );
         resultsNumber[i].innerHTML = `${sumResult} / 10`;
       }
+    });
+  });
+  const scoreLogoBtn = document.querySelectorAll(".score__logo");
+  scoreLogoBtn.forEach((item) => {
+    item.addEventListener("click", () => {
+      scoreBlock.classList.add("hide");
+      mainBlock.classList.remove("hide");
     });
   });
 };

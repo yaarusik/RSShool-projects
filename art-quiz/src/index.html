@@ -20,24 +20,77 @@
               <div class="main__body">
                 <div class="main__row">
                   <div class="main__author main__block">ARTISTS QUIZ</div>
+
                   <div class="main__picture main__block">PICTURES QUIZ</div>
                   <div class="main__settings main__block">SETTINGS</div>
-                  <div class="main__image background__size"></div>
+                  <div class="main__cube">
+                    <div class="cube">
+                      <div class="side front background__size"></div>
+                      <div class="side back background__size"></div>
+                      <div class="side right background__size"></div>
+                      <div class="side left background__size"></div>
+                      <div class="side top background__size"></div>
+                      <div class="side bottom background__size"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </main>
+            <main class="cards">
+              <div class="container">
+                <div class="cards__body">
+                  <div class="cards__row">
+                    <div class="main__author card card__one">
+                      <div class="card__flip">
+                        <div class="card__author author__one"></div>
+                        <div class="card__back">
+                          <span class="card__description"
+                            >Тип игры <br />угадать картину по имени её
+                            автора</span
+                          >
+                        </div>
+                      </div>
+                      <div class="card__text card__artist">
+                        ARTIST <span>QUIZ</span>
+                      </div>
+                    </div>
+                    <div class="main__picture card card__two">
+                      <div class="card__flip">
+                        <div class="card__author author__two"></div>
+                        <div class="card__back">
+                          <span class="card__description"
+                            >Тип игры <br />Угадать художника по картине</span
+                          >
+                        </div>
+                      </div>
+                      <div class="card__text card__picture">
+                        PICTURES <span>QUIZ</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </main>
+            <div class="main__settings settings__block">
+              <button class="settings__logo"></button>
+              <div class="settings__text">SETTINGS</div>
+            </div>
             <footer class="footer">
               <div class="footer__row">
-                <div class="footer__logo background__size"></div>
-                <div class="footer__author">Developer: Ruslan Vildanov</div>
-                <div class="footer__year">2021</div>
+                <a href="https://rs.school/js/" target="_blank">
+                  <div class="footer__logo background__size"></div>
+                </a>
+                <a href="https://github.com/yaarusik" target="_blank">
+                  <div class="footer__author">Developer: Ruslan Vildanov</div>
+                </a>
+                <div class="footer__year">© 2021</div>
               </div>
             </footer>
           </div>
         </div>
         <div class="setting hide">
-          <div class="settings__close background__size"></div>
           <div class="settings__body">
+            <div class="settings__close background__size"></div>
             <div class="header">
               <div class="header__logo background__size"></div>
             </div>
@@ -113,23 +166,31 @@
                       </div>
                     </div>
                   </div>
-                  <div class="footer">
-                    <div class="footer__row">
-                      <div class="footer__logo background__size"></div>
-                      <div class="footer__author">
-                        Developer: Ruslan Vildanov
-                      </div>
-                      <div class="footer__year">2021</div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </main>
+            <footer class="footer footer__bottom">
+              <div class="footer__row">
+                <a href="https://rs.school/js/" target="_blank">
+                  <div class="footer__logo background__size"></div>
+                </a>
+                <a href="https://github.com/yaarusik" target="_blank">
+                  <div class="footer__author">Developer: Ruslan Vildanov</div>
+                </a>
+                <div class="footer__year">© 2021</div>
+              </div>
+            </footer>
           </div>
         </div>
         <div class="category category__one hide">
           <div class="container">
-            <div class="category__setting"></div>
+            <div class="buttons__position">
+              <div class="menu__home menu__flex">
+                <div class="menu__home-logo background__size"></div>
+              </div>
+              <div class="category__setting"></div>
+            </div>
+
             <div class="category__body">
               <div class="category__row">
                 <div class="category__up">
@@ -146,7 +207,9 @@
                         <div class="down__score down__common"></div>
                       </div>
                       <div class="down__test local__indicator"></div>
-                      <button class="button__score">SCORE</button>
+                      <div class="score__container">
+                        <button class="button__score">SCORE</button>
+                      </div>
                     </div>
                     <div class="down__row">
                       <div class="down__category">
@@ -237,14 +300,6 @@
                       <button class="button__score">SCORE</button>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div class="category__menu">
-              <div class="menu__row">
-                <div class="menu__home menu__flex">
-                  <div class="menu__home-logo background__size"></div>
-                  <div class="menu__text">Home</div>
                 </div>
               </div>
             </div>
@@ -252,7 +307,12 @@
         </div>
         <div class="category category__two hide">
           <div class="container">
-            <div class="category__setting"></div>
+            <div class="buttons__position">
+              <div class="menu__home menu__flex">
+                <div class="menu__home-logo background__size"></div>
+              </div>
+              <div class="category__setting"></div>
+            </div>
             <div class="category__body">
               <div class="category__row">
                 <div class="category__up">
@@ -363,18 +423,10 @@
                 </div>
               </div>
             </div>
-            <div class="category__menu">
-              <div class="menu__row">
-                <div class="menu__home menu__flex">
-                  <div class="menu__home-logo background__size"></div>
-                  <div class="menu__text">Home</div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
         <div class="questions hide">
-          <div class="container">
+          <div class="question__container">
             <div class="questions__header">
               <div class="questions__close background__size"></div>
               <div class="questions__progress">
@@ -382,64 +434,48 @@
               </div>
               <div class="questions__timer">0:20</div>
             </div>
-            <div class="questions__title">
+            <div class="questions__title title__author">
               Who is the author of this picture?
             </div>
             <div class="questions__block"></div>
-            <div class="footer">
+            <footer class="footer">
               <div class="footer__row">
-                <div class="footer__logo background__size"></div>
-                <div class="footer__author">Developer: Ruslan Vildanov</div>
-                <div class="footer__year">2021</div>
+                <a href="https://rs.school/js/" target="_blank">
+                  <div class="footer__logo background__size"></div>
+                </a>
+                <a href="https://github.com/yaarusik" target="_blank">
+                  <div class="footer__author">Developer: Ruslan Vildanov</div>
+                </a>
+                <div class="footer__year">© 2021</div>
               </div>
-            </div>
+            </footer>
           </div>
         </div>
         <div class="questions picture__questions hide">
-          <div class="container">
+          <div class="question__container">
             <div class="questions__header">
               <div class="questions__close background__size"></div>
               <div class="questions__progress">
                 <div class="progress__bar"></div>
               </div>
-              <div class="questions__timer">0:20</div>
+              <div class="questions__timer pictures__timer">0:20</div>
             </div>
-            <div class="questions__title">
+            <div class="questions__title title__picture">
               Какую из этих картин написал
               <span class="change__title">Леонардо Да Винчи</span>?
             </div>
-            <div class="questions__block question__pictures">
-              <!-- <div class="block__indicators">
-                <span></span><span></span><span></span><span></span><span></span
-                ><span></span><span></span><span></span><span></span
-                ><span></span>
-              </div>
-              <div class="block__variants">
-                <div class="variants__body">
-                  <div class="variants__row pictures__row">
-                    <div class="pictures__answer">
-                      <img src="./images/assets/img/107.jpg" alt="" />
-                    </div>
-                    <div class="pictures__answer">
-                      <img src="./images/assets/img/107.jpg" alt="" />
-                    </div>
-                    <div class="pictures__answer">
-                      <img src="./images/assets/img/107.jpg" alt="" />
-                    </div>
-                    <div class="pictures__answer">
-                      <img src="./images/assets/img/107.jpg" alt="" />
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-            </div>
-            <div class="footer">
+            <div class="questions__block question__pictures"></div>
+            <footer class="footer">
               <div class="footer__row">
-                <div class="footer__logo background__size"></div>
-                <div class="footer__author">Developer: Ruslan Vildanov</div>
-                <div class="footer__year">2021</div>
+                <a href="https://rs.school/js/" target="_blank">
+                  <div class="footer__logo background__size"></div>
+                </a>
+                <a href="https://github.com/yaarusik" target="_blank">
+                  <div class="footer__author">Developer: Ruslan Vildanov</div>
+                </a>
+                <div class="footer__year">© 2021</div>
               </div>
-            </div>
+            </footer>
           </div>
         </div>
         <div class="answer">
@@ -471,18 +507,20 @@
                 <span class="finish">8</span> / <span>10</span>
               </div>
               <div class="popup__buttons">
-                <button class="popup__yes popup__home">Categories</button>
+                <button class="popup__yes popup__home button__categories">
+                  Categories
+                </button>
               </div>
             </div>
           </div>
         </div>
         <div class="popup__correct-up"></div>
         <div class="score score__block hide">
-          <div class="container">
+          <div class="question__container">
             <div class="score__back">
               <div class="score__row">
                 <div class="score__categories background__size"></div>
-                <div class="score__artists">Artists categories</div>
+                <div class="score__artists">Back to categories</div>
               </div>
             </div>
             <div class="score__body"></div>
@@ -490,204 +528,5 @@
         </div>
       </div>
     </div>
-    <!-- <div class="main__wrapper">
-      <div class="header">
-        <div class="container">
-          <div class="header__logo">
-            <div class="main__logo">
-              <svg
-                width="220"
-                height="140"
-                viewBox="0 0 220 140"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-              >
-                <rect width="220" height="140" fill="url(#pattern0)" />
-                <defs>
-                  <pattern
-                    id="pattern0"
-                    patternContentUnits="objectBoundingBox"
-                    width="1"
-                    height="1"
-                  >
-                    <use
-                      xlink:href="#image0_4:15"
-                      transform="scale(0.00454545 0.00714286)"
-                    />
-                  </pattern>
-                  <image
-                    id="image0_4:15"
-                    width="220"
-                    height="140"
-                    xlink:href="data:image/png;base64,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"
-                  />
-                </defs>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-      <main class="cards">
-        <div class="container">
-          <div class="cards__body">
-            <div class="cards__row">
-              <div class="card card__one">
-                <div class="card__flip">
-                  <div class="card__author author__one"></div>
-                  <div class="card__back">
-                    <span
-                      >Тип игры <br />угадать картину по имени её автора</span
-                    >
-                  </div>
-                </div>
-                <div class="card__text">ARTIST <span>QUIZ</span></div>
-              </div>
-              <div class="card card__two">
-                <div class="card__flip">
-                  <div class="card__author author__two"></div>
-                  <div class="card__back">
-                    <span>Тип игры <br />Угадать художника по картине</span>
-                  </div>
-                </div>
-                <div class="card__text">PICTURES <span>QUIZ</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-      <footer class="footer">
-        <div class="container">
-          <div class="footer__settings">
-            <div class="settings__block">
-              <button class="settings__logo"></button>
-              <div class="settings__text">SETTINGS</div>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-    <div class="settings__wrapper hide">
-      <div class="settings__close text__size">X</div>
-      <div class="header">
-        <div class="container">
-          <div class="header__logo settings__header">
-            <div class="settings__logotip background__size">
-              <svg
-                class="svg"
-                width="220"
-                height="140"
-                viewBox="0 0 220 140"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-              >
-                <rect width="220" height="140" fill="url(#pattern0)" />
-                <defs>
-                  <pattern
-                    id="pattern0"
-                    patternContentUnits="objectBoundingBox"
-                    width="1"
-                    height="1"
-                  >
-                    <use
-                      xlink:href="#image0_4:15"
-                      transform="scale(0.00454545 0.00714286)"
-                    />
-                  </pattern>
-                  <image
-                    id="image0_4:15"
-                    width="220"
-                    height="140"
-                    xlink:href="data:image/png;base64,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"
-                  />
-                </defs>
-              </svg>
-            </div>
-            <div class="settings__title settings__description">SETTINGS</div>
-          </div>
-        </div>
-      </div>
-      <main class="cards">
-        <div class="container">
-          <div class="cards__body">
-            <div class="cards__row">
-              <div class="card">
-                <div class="card__settings card__body">
-                  <div class="settings__sound">
-                    <svg
-                      width="100"
-                      height="82"
-                      viewBox="0 0 100 82"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M15.3846 23.7389H0V58.039H15.3846L44.4725 79.6447C44.4725 79.6447 49.7688 84.1004 49.7688 79.4766C49.7688 74.8528 49.7688 5.83219 49.7688 1.62874C49.7688 -1.98622 45.061 1.54467 45.061 1.54467L15.3846 23.7389Z"
-                        fill="#660033"
-                      />
-                      <path
-                        d="M65.3942 21.9039C64.1728 20.6908 62.1372 20.6908 60.9158 21.9039C59.6944 23.1171 59.6944 25.139 60.9158 26.3521C64.987 30.3959 67.0226 35.6529 67.0226 40.9772C67.0226 46.3016 64.987 51.5585 60.9158 55.6023C59.6944 56.8155 59.6944 58.8374 60.9158 60.0505C61.5265 60.6571 62.3407 60.9941 63.155 60.9941C63.9692 60.9941 64.7835 60.7245 65.3942 60.0505C70.6868 54.7936 73.3331 47.8517 73.3331 40.9772C73.3331 34.0354 70.6868 27.1609 65.3942 21.9039Z"
-                        fill="#660033"
-                      />
-                      <path
-                        d="M75.1459 11.9057C73.9808 10.6902 72.0391 10.6902 70.874 11.9057C69.709 13.1213 69.709 15.1471 70.874 16.3627C77.4113 23.1832 80.6475 32.0295 80.6475 40.9434C80.6475 49.8573 77.4113 58.7712 70.874 65.5917C69.709 66.8073 69.709 68.8331 70.874 70.0487C71.4566 70.6564 72.2333 70.9941 73.01 70.9941C73.7867 70.9941 74.5634 70.6564 75.1459 70.0487C82.8481 62.0126 86.6669 51.4105 86.6669 40.9434C86.6669 30.4088 82.8481 19.9417 75.1459 11.9057Z"
-                        fill="#660033"
-                      />
-                      <path
-                        d="M82.4546 1.90199C81.1441 0.691401 78.96 0.691401 77.6496 1.90199C76.3391 3.11259 76.3391 5.13024 77.6496 6.34083C87.9876 15.8911 93.1566 28.4005 93.1566 40.91C93.1566 53.4867 87.9876 65.9961 77.6496 75.6136C76.3391 76.8242 76.3391 78.8419 77.6496 80.0525C78.3048 80.6578 79.1785 80.994 80.0521 80.994C80.9257 80.994 81.7994 80.725 82.4546 80.0525C94.103 69.2244 100 55.1008 100 40.91C100 26.7864 94.103 12.6628 82.4546 1.90199Z"
-                        fill="#660033"
-                      />
-                    </svg>
-                  </div>
-                  <div class="settings__progress">
-                    <div class="settings__mute">
-                      <div class="mute background__size"></div>
-                    </div>
-                    <input
-                      type="range"
-                      value="40"
-                      min="0"
-                      max="100"
-                      step="1"
-                      class="volume__progress"
-                    />
-                  </div>
-                  <div class="settings__description">volume</div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card__timer card__body">
-                  <div class="timer__icon background__size"></div>
-                  <div class="timer__check">
-                    <div class="timer__turn background__size"></div>
-                    <div class="timer__check-description text__size">
-                      <span>ON</span> / <span>OFF</span>
-                    </div>
-                  </div>
-                  <div class="timer__text settings__description">
-                    Timer game
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-      <div class="buttons">
-        <div class="container">
-          <div class="buttons__body">
-            <div class="buttons__row">
-              <div class="buttons__save buttons__block">
-                <div class="buttons__text text__size">SAVE</div>
-              </div>
-              <div class="buttons__default buttons__block">
-                <div class="buttons__text text__size">DEFAULTS</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
   </body>
 </html>

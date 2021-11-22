@@ -1,24 +1,30 @@
-import { renderAnswers } from "./quiz";
-import { cleanProgress } from "./quiz";
-import { renderPictureAnswers } from "./picturesQuiz";
-import { cleanPictureProgress } from "./picturesQuiz";
-import { timer } from "./quiz";
-import { interval } from "./quiz";
-import { timerOn } from "./settings";
-import { language } from "./settings";
-import { questionsTimer } from "./settings";
-import { settingsTimerSelect } from "./settings";
+import { renderAnswers, cleanProgress, timer, interval } from "./quiz";
+
+import {
+  pictureInterval,
+  renderPictureAnswers,
+  cleanPictureProgress,
+  timerPicture,
+  picturesTimer,
+} from "./picturesQuiz";
+
+import {
+  timerOn,
+  language,
+  questionsTimer,
+  settingsTimerSelect,
+} from "./settings";
 
 export const mainBlock = document.querySelector(".start");
 export const settingBlock = document.querySelector(".setting");
 const settingClose = document.querySelector(".settings__close");
-export const mainSettingBtn = document.querySelector(".main__settings");
+export const mainSettingBtn = document.querySelectorAll(".main__settings");
 const categorySetting = document.querySelectorAll(".category__setting");
 export const categoryBlock = document.querySelector(".category__one");
 export const categoryPicturesBlock = document.querySelector(".category__two");
-export const picturesQuiz = document.querySelector(".main__picture");
+export const picturesQuiz = document.querySelectorAll(".main__picture");
 const questionsBlock = document.querySelector(".questions");
-export const artistQuiz = document.querySelector(".main__author");
+export const artistQuiz = document.querySelectorAll(".main__author");
 const categories = document.querySelectorAll(".down__row");
 const questionsClose = document.querySelectorAll(".questions__close");
 const menuHomeBtn = document.querySelectorAll(".menu__home");
@@ -41,8 +47,14 @@ const addHide = () => {
   settingBlock.classList.remove("hide");
 };
 
-mainSettingBtn.addEventListener("click", addHide);
 categorySetting.forEach((item) => {
+  item.addEventListener("click", () => {
+    categoryPicturesBlock.classList.add("hide");
+    categoryBlock.classList.add("hide");
+    settingBlock.classList.remove("hide");
+  });
+});
+mainSettingBtn.forEach((item) => {
   item.addEventListener("click", addHide);
 });
 
@@ -59,16 +71,24 @@ settingClose.addEventListener("click", (e) => {
   }
 });
 
-artistQuiz.addEventListener("click", function (e) {
-  eventMemory = "artist";
-  mainBlock.classList.add("hide");
-  categoryBlock.classList.remove("hide");
+artistQuiz.forEach((item) => {
+  item.addEventListener("click", function (e) {
+    eventMemory = "artist";
+    mainBlock.classList.add("hide");
+    categoryBlock.classList.remove("hide");
+    clearInterval(interval);
+    clearInterval(pictureInterval);
+  });
 });
 
-picturesQuiz.addEventListener("click", function (e) {
-  eventMemory = "picture";
-  mainBlock.classList.add("hide");
-  categoryPicturesBlock.classList.remove("hide");
+picturesQuiz.forEach((item) => {
+  item.addEventListener("click", function (e) {
+    eventMemory = "picture";
+    mainBlock.classList.add("hide");
+    categoryPicturesBlock.classList.remove("hide");
+    clearInterval(interval);
+    clearInterval(pictureInterval);
+  });
 });
 
 categories.forEach((item, index) => {
@@ -90,7 +110,7 @@ picturesCategoriesBtn.forEach((item, index) => {
     // в зависимости от категории будет приходить определенный десяток
 
     renderPictureAnswers(index * 10, index, language);
-    timer(timerOn);
+    timerPicture(timerOn);
   });
 });
 
@@ -98,6 +118,7 @@ questionsClose.forEach((item) => {
   item.addEventListener("click", function () {
     popupClose.classList.add("active");
     clearInterval(interval);
+    clearInterval(pictureInterval);
   });
 });
 
@@ -116,6 +137,10 @@ popupCategoryBtn.forEach((item) => {
       2,
       "0"
     )}`;
+    picturesTimer.innerHTML = `00 : ${settingsTimerSelect.value.padStart(
+      2,
+      "0"
+    )}`;
     if (eventMemory == "artist") {
       questionsBlock.classList.add("hide");
       categoryBlock.classList.remove("hide");
@@ -126,6 +151,7 @@ popupCategoryBtn.forEach((item) => {
       cleanPictureProgress();
     }
     clearInterval(interval);
+    clearInterval(pictureInterval);
     popupClose.classList.remove("active");
     popupEnd.classList.remove("active");
   });
@@ -134,7 +160,11 @@ popupCategoryBtn.forEach((item) => {
 // закрываем popup с предупреждением
 popupCancelBtn.addEventListener("click", () => {
   popupClose.classList.remove("active");
-  timer("continue");
+  if (eventMemory == "artist") {
+    timer("continue");
+  } else {
+    timerPicture("continue");
+  }
 });
 
 backCategoriesBtn.addEventListener("click", () => {

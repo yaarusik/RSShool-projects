@@ -58,7 +58,7 @@ const renderPopupAnswer = (answer) => {
               <div class="correct__body">
                 <div class="correct__img">
                   <div class="correct__logo ${answer} background__size"></div>
-                  <img src="./images/assets/img/${quizByName[counter].imageNum}.jpg" alt="img" />
+                  <img class="opacity__img" onload="this.style.opacity='1'" src="./images/assets/img/${quizByName[counter].imageNum}.jpg" alt="img" />
                 </div>
                 <div class="correct__name">${quizByName[counter].name}</div>
                 <div class="correct__author"> ${quizByName[counter].author}, ${quizByName[counter].year}</div>
@@ -182,7 +182,7 @@ popupAnswers.addEventListener("click", (e) => {
   if (e.target.classList.contains("correct__btn")) {
     counter += 1;
 
-    if (roundCounter == 3) {
+    if (roundCounter == 9) {
       roundEnd();
       // отрисовываем score
       renderScoreBlock(cardNumber, correctPictureMemory, type);
@@ -218,7 +218,7 @@ const createAnswers = (index, data) => {
   return pictureArray
     .map((item) => {
       return `<div class="pictures__answer">
-                  <img src="./images/assets/img/${item}.jpg" alt="${item}" />
+                  <img class="img__opacity" onload="this.style.opacity='1'" src="./images/assets/img/${item}.jpg" alt="${item}" />
                </div>`;
     })
     .join("");
@@ -241,7 +241,7 @@ const renderQuestions = (index, data) => {
   <span class="indicators__round"></span>
   <span class="indicators__round"></span>
 </div>
-<div class="block__variants">
+<div class="block__variants opacity__img" onload="this.style.opacity='1'>
   <div class="variants__body">
     <div class="variants__row pictures__row">
       ${createAnswers(index, data)} 

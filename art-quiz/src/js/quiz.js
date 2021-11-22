@@ -54,12 +54,12 @@ const cutData = (data) => {
 //
 const renderPopupAnswer = (answer) => {
   popupAnswers.innerHTML = `
-  <div class="popup__correct">
+  <div class="popup__correct opacity__img" onload="this.style.opacity='1'"">
             <div class="container">
               <div class="correct__body">
                 <div class="correct__img">
                   <div class="correct__logo ${answer} background__size"></div>
-                  <img src="./images/assets/img/${counter}.jpg" alt="img" />
+                  <img class="opacity__img" onload="this.style.opacity='1'" src="./images/assets/img/${counter}.jpg" alt="img" />
                 </div>
                 <div class="correct__name">${quizByAuthor[counter].name}</div>
                 <div class="correct__author"> ${quizByAuthor[counter].author}, ${quizByAuthor[counter].year}</div>
@@ -142,7 +142,7 @@ const roundEnd = () => {
       endGame();
     }
   } else {
-    if (sumResult <= 3) {
+    if (sumResult <= 9) {
       finishTitle.textContent = "You can better :)";
       gameOver();
     } else if (sumResult > 3 && sumResult <= 7) {
@@ -226,9 +226,9 @@ const renderQuestions = (index, data) => {
   // создание вариантов ответа для quiz авторов
 
   questionsBlock.innerHTML = `
-  <div class="questions__block">
+  <div class="questions__block opacity__img" onload="this.style.opacity='1'">
   <div class="block__picture">
-    <img src="https://raw.githubusercontent.com/yaarusik/image-data/master/img/${index}.jpg" alt="" />
+    <img class="opacity__img" onload="this.style.opacity='1'" src="https://raw.githubusercontent.com/yaarusik/image-data/master/img/${index}.jpg" alt="" />
   </div>
   <div class="block__indicators">
     <span class="indicators__circle"></span>

@@ -157,19 +157,32 @@ const changeLanguage = (lang) => {
     timerTitle.textContent = englishParams[5];
     timeTitle.textContent = englishParams[6];
     saveTitle.textContent = englishParams[8];
-    footerDeveloper.forEach((item) => (item.textContent = englishParams[9]));
-    categoryTitle.forEach((item) => (item.textContent = englishParams[10]));
-    categoriesSubtitle.forEach(
-      (item, index) => (item.textContent = englishParams[11] + ` ${index + 1}`)
-    );
-    menuTitle.forEach((item) => (item.textContent = englishParams[12]));
+    footerDeveloper.forEach((item) => {
+      let that = item;
+      that.textContent = englishParams[9];
+    });
+    categoryTitle.forEach((item) => {
+      let that = item;
+      that.textContent = englishParams[10];
+    });
+    categoriesSubtitle.forEach((item, index) => {
+      let that = item;
+      that.textContent = englishParams[11] + ` ${index + 1}`;
+    });
+    menuTitle.forEach((item) => {
+      let that = item;
+      that.textContent = englishParams[12];
+    });
     questionTitleAuthor[0].textContent = englishParams[13];
     questionTitlePicture[0].textContent = englishParams[14];
     popupTitle.textContent = englishParams[15];
     popupHome.textContent = englishParams[16];
     popupClose.textContent = englishParams[17];
     buttonCategories.textContent = englishParams[10];
-    scoreBtn.forEach((item) => (item.textContent = englishParams[18]));
+    scoreBtn.forEach((item) => {
+      let that = item;
+      that.textContent = englishParams[18];
+    });
     scoreTitle.textContent = englishParams[19];
     cardAuthor[0].textContent = "ARTIST ";
     cardAuthor[1].textContent = "QUIZ";
@@ -188,19 +201,32 @@ const changeLanguage = (lang) => {
     timerTitle.textContent = russianParams[5];
     timeTitle.textContent = russianParams[6];
     saveTitle.textContent = russianParams[8];
-    footerDeveloper.forEach((item) => (item.textContent = russianParams[9]));
-    categoryTitle.forEach((item) => (item.textContent = russianParams[10]));
-    categoriesSubtitle.forEach(
-      (item, index) => (item.textContent = russianParams[11] + ` ${index + 1}`)
-    );
-    menuTitle.forEach((item) => (item.textContent = russianParams[12]));
+    footerDeveloper.forEach((item) => {
+      let that = item;
+      that.textContent = russianParams[9];
+    });
+    categoryTitle.forEach((item) => {
+      let that = item;
+      that.textContent = russianParams[10];
+    });
+    categoriesSubtitle.forEach((item, index) => {
+      let that = item;
+      that.textContent = russianParams[11] + ` ${index + 1}`;
+    });
+    menuTitle.forEach((item) => {
+      let that = item;
+      that.textContent = russianParams[12];
+    });
     questionTitleAuthor[0].textContent = russianParams[13];
     questionTitlePicture[0].textContent = russianParams[14];
     popupTitle.textContent = russianParams[15];
     popupHome.textContent = russianParams[16];
     popupClose.textContent = russianParams[17];
     buttonCategories.textContent = russianParams[10];
-    scoreBtn.forEach((item) => (item.textContent = russianParams[18]));
+    scoreBtn.forEach((item) => {
+      let that = item;
+      that.textContent = russianParams[18];
+    });
     scoreTitle.textContent = russianParams[19];
     cardAuthor[0].textContent = "Квиз по ";
     cardAuthor[1].textContent = "художникам";
@@ -213,8 +239,9 @@ const changeLanguage = (lang) => {
 };
 
 function tracking(obj) {
+  let that = obj;
   // console.log(obj.value);
-  obj.style.background = `linear-gradient(to right, #00cece 0%, #00cece ${obj.value}%, #e5e5e5 ${obj.value}%, #e5e5e5 100%)`;
+  that.style.background = `linear-gradient(to right, #00cece 0%, #00cece ${that.value}%, #e5e5e5 ${that.value}%, #e5e5e5 100%)`;
 }
 
 // запоминает значение громкости

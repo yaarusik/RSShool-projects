@@ -17,29 +17,28 @@ import {
 
 export const mainBlock = document.querySelector(".start");
 export const settingBlock = document.querySelector(".setting");
-const settingClose = document.querySelector(".settings__close");
+export const popupEnd = document.querySelector(".popup__end");
+export let eventMemory = false;
+export const scoreBlock = document.querySelector(".score");
 export const mainSettingBtn = document.querySelectorAll(".main__settings");
-const categorySetting = document.querySelectorAll(".category__setting");
 export const categoryBlock = document.querySelector(".category__one");
 export const categoryPicturesBlock = document.querySelector(".category__two");
 export const picturesQuiz = document.querySelectorAll(".main__picture");
-const questionsBlock = document.querySelector(".questions");
 export const artistQuiz = document.querySelectorAll(".main__author");
 const categories = document.querySelectorAll(".down__row");
 const questionsClose = document.querySelectorAll(".questions__close");
 const menuHomeBtn = document.querySelectorAll(".menu__home");
-
-export const scoreBlock = document.querySelector(".score");
+const settingClose = document.querySelector(".settings__close");
 const backCategoriesBtn = document.querySelector(".score__row");
 const picturesCategoriesBtn = document.querySelectorAll(".down__pictures");
 const pictureQuestionsBlock = document.querySelector(".picture__questions");
+const categorySetting = document.querySelectorAll(".category__setting");
+const questionsBlock = document.querySelector(".questions");
 
 const popupClose = document.querySelector(".popup__cancel");
-export const popupEnd = document.querySelector(".popup__end");
 const popupCancelBtn = document.querySelector(".popup__no");
 const popupCategoryBtn = document.querySelectorAll(".popup__yes");
-
-export let eventMemory = false;
+export let questionsCount = 10;
 
 const addHide = () => {
   mainBlock.classList.add("hide");
@@ -96,7 +95,7 @@ categories.forEach((item, index) => {
     questionsBlock.classList.remove("hide");
     // в зависимости от категории будет приходить определенный десяток
 
-    renderAnswers(index * 10, index, language);
+    renderAnswers(index * questionsCount, index, language);
     timer(timerOn);
   });
 });
@@ -108,7 +107,7 @@ picturesCategoriesBtn.forEach((item, index) => {
 
     // в зависимости от категории будет приходить определенный десяток
 
-    renderPictureAnswers(index * 10, index, language);
+    renderPictureAnswers(index * questionsCount, index, language);
     timerPicture(timerOn);
   });
 });

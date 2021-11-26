@@ -4,6 +4,7 @@ import {
   categoryBlock,
   categoryPicturesBlock,
   eventMemory,
+  questionsCount,
 } from "./blocksHide";
 
 import { quizByAuthor } from "./quiz";
@@ -19,7 +20,6 @@ let amountBtnQuiz = scoreBtn.length / 2;
 let scoreArtistsPages = JSON.parse(localStorage.getItem("artistScore")) || [];
 let scorePicturesPages = JSON.parse(localStorage.getItem("pictureScore")) || [];
 let scoreButtonIndex = JSON.parse(localStorage.getItem("scoreIndex")) || [];
-// let quizType;
 
 // показывает скор у сыгранной категории
 const scoreBtnShow = (index, answers) => {
@@ -30,10 +30,11 @@ const scoreBtnShow = (index, answers) => {
 
 // генерация картинок
 const renderPictureBlock = (currentImg, answers, type) => {
+  let current = currentImg;
   let htmlString = "";
   let classString;
   let count = 0;
-  while (count < 10) {
+  while (count < questionsCount) {
     if (answers[count] === "1") {
       classString = `class ="add__bg"`;
     } else {
@@ -42,38 +43,38 @@ const renderPictureBlock = (currentImg, answers, type) => {
     if (type === "picture") {
       htmlString += `
                   <div class="picture__one">
-                  <img ${classString} src="./images/assets/img/${quizByName[currentImg].imageNum}.jpg" alt="img" />
+                  <img ${classString} src="./images/assets/img/${quizByName[current].imageNum}.jpg" alt="img" />
                 <div class="img__row">
                 <div class="img__title">
-                ${quizByName[currentImg].author}
+                ${quizByName[current].author}
                 </div>
                 <div class="img__subtitle">
-                ${quizByName[currentImg].name}
+                ${quizByName[current].name}
                 </div>
                 <div class="img__year">
-                ${quizByName[currentImg].year}
+                ${quizByName[current].year}
                 </div>
                 </div>
                         </div>`;
     } else {
       htmlString += `
                   <div class="picture__one">
-                  <img ${classString} src="./images/assets/img/${quizByAuthor[currentImg].imageNum}.jpg" alt="img" />
+                  <img ${classString} src="./images/assets/img/${quizByAuthor[current].imageNum}.jpg" alt="img" />
                   <div class="img__row">
                   <div class="img__title">
-                  ${quizByAuthor[currentImg].author}
+                  ${quizByAuthor[current].author}
                   </div>
                   <div class="img__subtitle">
-                  ${quizByAuthor[currentImg].name}
+                  ${quizByAuthor[current].name}
                   </div>
                   <div class="img__year">
-                  ${quizByAuthor[currentImg].year}
+                  ${quizByAuthor[current].year}
                   </div>
                   </div>
                   </div>`;
     }
 
-    currentImg += 1;
+    current += 1;
     count += 1;
   }
 
@@ -90,7 +91,7 @@ export const renderScoreBlock = (index, answers, type) => {
        <div class="score__title">Score</div>
      </div>
      <div class="score__picture">
-         ${renderPictureBlock(index * 10, answers, type)}
+         ${renderPictureBlock(index * questionsCount, answers, type)}
      </div>
    </div>
 `;
@@ -173,7 +174,7 @@ window.onload = () => {
           (res, current) => +res + +current,
           0
         );
-        resultsNumber[i].innerHTML = `${sumResult} / 10`;
+        resultsNumber[i].innerHTML = `${sumResult} / ${questionsCount}`;
       }
     });
   });

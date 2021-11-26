@@ -1,4 +1,4 @@
-import { popupEnd } from "./blocksHide";
+import { popupEnd, questionsCount } from "./blocksHide";
 import { renderScoreBlock } from "./score";
 import {
   wrongAnswer,
@@ -24,12 +24,10 @@ const scoreCard = document.querySelectorAll(".down__results");
 const categoryBg = document.querySelectorAll(".down__reaction");
 const questionTitle = document.querySelector(".change__title");
 
-// let authorAnswers = new Set();
 let pictureAnswers = new Set();
 let roundCounter = 0;
 let counter;
 let cardNumber;
-// let quizByAuthor = [];
 let data;
 let buttonsChoose;
 let correctPictureMemory = [];
@@ -37,18 +35,17 @@ let type = "picture";
 let timerPictureCount;
 
 // рандом для вариантов ответа авторов
-const getRandomInt = (num) => {
+export const getRandomInt = (num) => {
   return Math.floor(Math.random() * num);
 };
 
 // рандом для массива ответов
-const shuffle = (array) => {
+export const shuffle = (array) => {
   return array.sort(() => Math.random() - 0.5);
 };
 
 // разделение данных на 2 типа квиза
 const cutData = () => {
-  // quizByAuthor = data.slice(0, data.length / 2);
   quizByName = data.slice(data.length / 2, data.length - 1);
 };
 
@@ -199,7 +196,7 @@ export const renderPictureAnswers = async (index, currentBlock, lang) => {
 
 const saveResults = (result) => {
   scoreCard[cardNumber].innerHTML = `
-    ${result} / 10
+    ${result} / ${questionsCount}
   `;
 };
 
@@ -224,15 +221,15 @@ const roundEnd = () => {
       endGame();
     }
   } else if (sumResult <= 3) {
-      finishTitle.textContent = `You can better :)`;
-      gameOver();
-    } else if (sumResult > 3 && sumResult <= 7) {
-      finishTitle.textContent = "You have a good level!";
-      gameCenter();
-    } else if (sumResult > 7) {
-      endGame();
-      finishTitle.textContent = "Congratulations! You won :)";
-    }
+    finishTitle.textContent = `You can better :)`;
+    gameOver();
+  } else if (sumResult > 3 && sumResult <= 7) {
+    finishTitle.textContent = "You have a good level!";
+    gameCenter();
+  } else if (sumResult > 7) {
+    endGame();
+    finishTitle.textContent = "Congratulations! You won :)";
+  }
 
   finishResult.textContent = `${sumResult}`;
   saveResults(sumResult);

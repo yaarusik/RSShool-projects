@@ -1,6 +1,6 @@
 // import images from "./../images/images";
 
-import { popupEnd } from "./blocksHide";
+import { popupEnd, questionsCount } from "./blocksHide";
 import { renderScoreBlock } from "./score";
 import {
   settingsTimerSelect,
@@ -14,7 +14,7 @@ import {
   gameOver,
   language,
 } from "./settings";
-
+import { shuffle, getRandomInt } from "./picturesQuiz";
 export let quizByAuthor = [];
 export let interval;
 
@@ -29,21 +29,20 @@ let authorAnswers = new Set();
 let roundCounter = 0;
 let counter;
 let cardNumber;
-// let quizByName = [];
 let data;
 let buttonsChoose;
 let correctArtistMemory = [];
 let timerCount;
 
 // рандом для вариантов ответа авторов
-const getRandomInt = (num) => {
-  return Math.floor(Math.random() * num);
-};
+// const getRandomInt = (num) => {
+//   return Math.floor(Math.random() * num);
+// };
 
 // рандом для массива ответов
-const shuffle = (array) => {
-  return array.sort(() => Math.random() - 0.5);
-};
+// const shuffle = (array) => {
+//   return array.sort(() => Math.random() - 0.5);
+// };
 
 // для пометки правильных  и неправильных
 const renderIndicator = () => {
@@ -61,7 +60,6 @@ const renderIndicator = () => {
 // разделение данных на 2 типа квиза
 const cutData = () => {
   quizByAuthor = data.slice(0, data.length / 2);
-  // quizByName = data.slice(data.length / 2, data.length - 1);
 };
 
 //
@@ -237,7 +235,7 @@ const roundEnd = () => {
 
   const saveResults = (result) => {
     scoreCard[cardNumber].innerHTML = `
-      ${result} / 10
+      ${result} / ${questionsCount}
     `;
   };
 

@@ -104,6 +104,7 @@
 
    &__test,
    &__reaction {
+      transition: all 1s ease-in-out;
       position: relative;
       width: calc(155px + (230 - 155) * ((100vw - 360px) / (1920 - 360)));
       height: calc(164px + (250 - 164) * ((100vw - 360px) / (1920 - 360)));
@@ -127,6 +128,8 @@
    width: 100%;
    height: calc(35px + (50 - 35) * ((100vw - 360px) / (1920 - 360)));
 }
+
+
 
 .category__one .down__row:first-child .down__test {
    background-image: url("./images/assets/img/0.jpg");

@@ -1,22 +1,24 @@
 import AppLoader from './appLoader';
+import { IDate } from './../app/app';
+import { ISources } from '../view/appView';
+
+export type CallbackNews = (data: IDate) => void;
+export type CallbackSources = (data: ISources) => void;
 
 class AppController extends AppLoader {
-    getSources(callback) {
-        super.getResp(
-            {
-                endpoint: 'sources',
-            },
-            callback
-        );
+    getSources(callback: CallbackSources): void {
+        super.getResp({ endpoint: 'sources' }, callback);
     }
 
-    getNews(e, callback) {
-        let target = e.target;
-        const newsContainer = e.currentTarget;
+    getNews(e: Event, callback: CallbackNews): void {
+        // т.к. событие не всегда наследуется от HTML елемента(например может быть XMLYttpRequest)
+        let target: Element = e.target as Element;
+        const newsContainer: Element = e.currentTarget as Element;
 
         while (target !== newsContainer) {
             if (target.classList.contains('source__item')) {
-                const sourceId = target.getAttribute('data-source-id');
+                const sourceId: string | null = target.getAttribute('data-source-id') || ''; //добавил пустую строку
+
                 if (newsContainer.getAttribute('data-source') !== sourceId) {
                     newsContainer.setAttribute('data-source', sourceId);
                     super.getResp(
@@ -31,7 +33,7 @@ class AppController extends AppLoader {
                 }
                 return;
             }
-            target = target.parentNode;
+            target = target.parentNode as Element;
         }
     }
 }

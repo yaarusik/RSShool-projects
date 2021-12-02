@@ -1,20 +1,21 @@
 import './sources.css';
+import { DataArticles, ISourcesArray } from './../appView';
 
 class Sources {
-    draw(data) {
+    draw(data: ISourcesArray[]): void {
         const fragment = document.createDocumentFragment();
-        const sourceItemTemp = document.querySelector('#sourceItemTemp');
+        const sourceItemTemp: HTMLTemplateElement = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
 
-        data.forEach((item) => {
-            const sourceClone = sourceItemTemp.content.cloneNode(true);
+        data.forEach((item: ISourcesArray) => {
+            const sourceClone: HTMLTemplateElement = sourceItemTemp.content.cloneNode(true) as HTMLTemplateElement;
 
-            sourceClone.querySelector('.source__item-name').textContent = item.name;
-            sourceClone.querySelector('.source__item').setAttribute('data-source-id', item.id);
+            (sourceClone.querySelector('.source__item-name') as HTMLElement).textContent = item.name;
+            (sourceClone.querySelector('.source__item') as HTMLElement).setAttribute('data-source-id', item.id);
 
             fragment.append(sourceClone);
         });
 
-        document.querySelector('.sources').append(fragment);
+        document.querySelector('.sources')?.append(fragment);
     }
 }
 

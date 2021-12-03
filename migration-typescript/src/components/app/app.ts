@@ -3,7 +3,7 @@ import { AppView } from '../view/appView';
 import { DataArticles } from './../view/appView';
 import { ISources } from '../view/appView';
 
-export type Callback = () => void;
+// export type Callback = () => void;
 
 export interface IDate {
     status: string;

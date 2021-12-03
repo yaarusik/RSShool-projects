@@ -1,27 +1,23 @@
-// type EndPoint = {
-import Sources from './../view/sources/sources';
-import { IDate } from './../app/app';
-
 type GetRespType = {
     endpoint: string;
-    options?: {
-        [key: string]: string | null;
-    };
+    options?: Record<string, unknown>;
 };
+
+export type Callback<T> = (data: T) => void;
 
 class Loader {
     constructor(private baseLink: string, private options: object) {
-        this.baseLink = baseLink;
-        this.options = options;
+        // this.baseLink = baseLink;
+        // this.options = options;
     }
 
-    public getResp(
+    public getResp<T>(
         { endpoint, options = {} }: GetRespType,
-        callback: (data: any) => void = () => {
+        callback: Callback<T> = () => {
             console.error('No callback for GET response');
         }
     ): void {
-        this.load('GET', endpoint, callback, options);
+        this.load<T>('GET', endpoint, callback, options);
     }
 
     private errorHandler(res: Response): Response {
@@ -45,11 +41,11 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    private load(method: string, endpoint: string, callback: (data: IDate) => void, options = {}) {
+    private load<T>(method: string, endpoint: string, callback: Callback<T>, options = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
-            .then((res: Response) => res.json())
-            .then((data) => callback(data))
+            .then((res: Response) => res.json() as Promise<T>)
+            .then((data: T) => callback(data))
             .catch((err: Error) => console.error(err));
     }
 }

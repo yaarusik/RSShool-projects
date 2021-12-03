@@ -1,16 +1,16 @@
 import AppLoader from './appLoader';
 import { IDate } from './../app/app';
 import { ISources } from '../view/appView';
-
-export type CallbackNews = (data: IDate) => void;
-export type CallbackSources = (data: ISources) => void;
+import { Callback } from './loader';
+// export type CallbackNews = (data: IDate) => void;
+// export type CallbackSources = (data: ISources) => void;
 
 class AppController extends AppLoader {
-    getSources(callback: CallbackSources): void {
-        super.getResp({ endpoint: 'sources' }, callback);
+    getSources(callback: Callback<ISources>): void {
+        super.getResp<ISources>({ endpoint: 'sources' }, callback);
     }
 
-    getNews(e: Event, callback: CallbackNews): void {
+    getNews(e: Event, callback: Callback<IDate>): void {
         // т.к. событие не всегда наследуется от HTML елемента(например может быть XMLYttpRequest)
         let target: Element = e.target as Element;
         const newsContainer: Element = e.currentTarget as Element;
@@ -21,7 +21,7 @@ class AppController extends AppLoader {
 
                 if (newsContainer.getAttribute('data-source') !== sourceId) {
                     newsContainer.setAttribute('data-source', sourceId);
-                    super.getResp(
+                    super.getResp<IDate>(
                         {
                             endpoint: 'everything',
                             options: {

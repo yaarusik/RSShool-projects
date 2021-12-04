@@ -1,5 +1,5 @@
 import './sources.css';
-import { DataArticles, ISourcesArray } from './../appView';
+import { ISourcesArray } from './../appView';
 
 class Sources {
     draw(data: ISourcesArray[]): void {

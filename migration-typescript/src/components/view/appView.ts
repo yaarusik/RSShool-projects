@@ -1,6 +1,5 @@
 import News from './news/news';
 import Sources from './sources/sources';
-import { IDate } from './../app/app';
 
 export type DataArticles = {
     source: { id: string | null; name: string };
@@ -18,6 +17,12 @@ export interface ISources {
     sources: ISourcesArray[];
 }
 
+export interface IDate {
+    status: string;
+    totalResults: number;
+    articles: DataArticles[];
+}
+
 export interface ISourcesArray {
     id: string;
     name: string;
@@ -29,19 +34,19 @@ export interface ISourcesArray {
 }
 
 export class AppView {
-    private news: News;
-    private sources: Sources;
+    readonly news: News;
+    readonly sources: Sources;
     constructor() {
         this.news = new News();
         this.sources = new Sources();
     }
 
-    drawNews(data: IDate): void {
+    public drawNews(data: IDate): void {
         const values: DataArticles[] = data?.articles ? data?.articles : [];
         this.news.draw(values);
     }
 
-    drawSources(data: ISources): void {
+    public drawSources(data: ISources): void {
         const values: ISourcesArray[] = data?.sources ? data?.sources : [];
         this.sources.draw(values);
     }

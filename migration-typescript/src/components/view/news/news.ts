@@ -3,7 +3,7 @@ import './news.css';
 import { DataArticles } from './../appView';
 
 class News {
-    draw(data: DataArticles[]): void {
+    public draw(data: DataArticles[]): void {
         const news: DataArticles[] =
             data.length >= 10 ? data.filter((_item: DataArticles, idx: number): boolean => idx < 10) : data;
 
@@ -11,7 +11,7 @@ class News {
         const newsItemTemp: HTMLTemplateElement = <HTMLTemplateElement>document.querySelector('#newsItemTemp');
 
         if (newsItemTemp) {
-            news.forEach((item: DataArticles, idx: number) => {
+            news.forEach((item: DataArticles, idx: number): void => {
                 const newsClone: HTMLTemplateElement = <HTMLTemplateElement>newsItemTemp.content.cloneNode(true);
 
                 if (idx % 2) newsClone.querySelector('.news__item')?.classList.add('alt');

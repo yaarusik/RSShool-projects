@@ -1,23 +1,30 @@
-type GetRespType = {
+type GetRespT = {
     endpoint: string;
     options?: Record<string, unknown>;
 };
 
+type OptionsLoad = {
+    sources: string;
+    apiKey: string;
+};
+
+enum Method {
+    GET = 'GET',
+    POST = 'POST',
+}
+
 export type Callback<T> = (data: T) => void;
 
 class Loader {
-    constructor(private baseLink: string, private options: object) {
-        // this.baseLink = baseLink;
-        // this.options = options;
-    }
+    constructor(private baseLink: string, private options: Partial<OptionsLoad>) {}
 
     public getResp<T>(
-        { endpoint, options = {} }: GetRespType,
+        { endpoint, options = {} }: GetRespT,
         callback: Callback<T> = () => {
             console.error('No callback for GET response');
         }
     ): void {
-        this.load<T>('GET', endpoint, callback, options);
+        this.load<T>(Method.GET, endpoint, callback, options);
     }
 
     private errorHandler(res: Response): Response {
@@ -30,9 +37,9 @@ class Loader {
         return res;
     }
 
-    private makeUrl(options: object, endpoint: string): string {
+    private makeUrl(options: Partial<OptionsLoad>, endpoint: string): string {
         const urlOptions: { [key: string]: string } = { ...this.options, ...options };
-        let url = `${this.baseLink}${endpoint}?`;
+        let url: string = `${this.baseLink}${endpoint}?`;
 
         Object.keys(urlOptions).forEach((key: string): void => {
             url += `${key}=${urlOptions[key]}&`;
@@ -41,13 +48,20 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    private load<T>(method: string, endpoint: string, callback: Callback<T>, options = {}) {
+    private load<T>(method: string, endpoint: string, callback: Callback<T>, options: Partial<OptionsLoad>): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
-            .then((res: Response) => res.json() as Promise<T>)
-            .then((data: T) => callback(data))
-            .catch((err: Error) => console.error(err));
+            .then((res: Response) => <Promise<T>>res.json())
+            .then((data: T): void => callback(data))
+            .catch((err: Error): void => console.error(err));
     }
 }
+
+// type LoadParams = {
+//     method: string;
+//     endpoint: string;
+//     callback: Callback<T>;
+//     options: {};
+// }
 
 export default Loader;

@@ -1,9 +1,9 @@
-import "./style.scss";
-import "./js/settings";
-import "./js/blocksHide";
-import "./js/quiz";
-import "./js/score";
-import "./js/picturesQuiz";
+import './style.scss';
+import './js/settings';
+import './js/blocksHide';
+import './js/quiz';
+import './js/score';
+import './js/picturesQuiz';
 // const createImage = (src) =>
 //   new Promise((res, rej) => {
 //     const img = new Image();

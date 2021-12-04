@@ -3,19 +3,20 @@ import { ISourcesArray } from './../appView';
 
 class Sources {
     draw(data: ISourcesArray[]): void {
-        const fragment = document.createDocumentFragment();
-        const sourceItemTemp: HTMLTemplateElement = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
+        const fragment: DocumentFragment = document.createDocumentFragment();
+        const sourceItemTemp: HTMLTemplateElement = <HTMLTemplateElement>document.querySelector('#sourceItemTemp');
 
-        data.forEach((item: ISourcesArray) => {
-            const sourceClone: HTMLTemplateElement = sourceItemTemp.content.cloneNode(true) as HTMLTemplateElement;
+        data.forEach((item: Pick<ISourcesArray, 'id' | 'name'>): void => {
+            const sourceClone: HTMLTemplateElement = <HTMLTemplateElement>sourceItemTemp.content.cloneNode(true);
 
-            (sourceClone.querySelector('.source__item-name') as HTMLElement).textContent = item.name;
-            (sourceClone.querySelector('.source__item') as HTMLElement).setAttribute('data-source-id', item.id);
+            (<HTMLTemplateElement>sourceClone.querySelector('.source__item-name')).textContent = item.name;
+            (<HTMLTemplateElement>sourceClone.querySelector('.source__item')).setAttribute('data-source-id', item.id);
 
             fragment.append(sourceClone);
         });
-
-        document.querySelector('.sources')?.append(fragment);
+        if (document.querySelector('.sources')?.textContent === '') {
+            document.querySelector('.sources')?.append(fragment);
+        }
     }
 }
 

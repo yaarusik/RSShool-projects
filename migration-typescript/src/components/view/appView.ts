@@ -47,7 +47,9 @@ export class AppView {
     }
 
     public drawSources(data: ISources): void {
-        const values: ISourcesArray[] = data?.sources ? data?.sources : [];
+        type NewType = ISourcesArray[];
+
+        const values: NewType = data?.sources ? data?.sources : [];
         this.sources.draw(values);
     }
 }

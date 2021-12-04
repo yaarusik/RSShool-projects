@@ -14,7 +14,7 @@ class AppController extends AppLoader {
 
         while (target !== newsContainer) {
             if (target.classList.contains('source__item')) {
-                const sourceId: string = <string>target.getAttribute('data-source-id'); //добавил пустую строку
+                const sourceId: string = <string>target.getAttribute('data-source-id');
 
                 if (newsContainer.getAttribute('data-source') !== sourceId) {
                     newsContainer.setAttribute('data-source', sourceId);

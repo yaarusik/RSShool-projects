@@ -27,7 +27,7 @@ class News {
                     .split('-')
                     .reverse()
                     .join('-');
-
+                
                 (<HTMLElement>newsClone.querySelector('.news__description-title')).textContent = item.title;
                 (<HTMLElement>newsClone.querySelector('.news__description-source')).textContent = item.source.name;
                 (<HTMLElement>newsClone.querySelector('.news__description-content')).textContent = item.description;

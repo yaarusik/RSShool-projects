@@ -1,13 +1,11 @@
-import "./style.scss";
+import './style.scss';
 // import image from './images/lazy.png';
-
 // const createImage = (src: string) => new Promise<HTMLImageElement>((res, rej) => {
 //   const img = new Image();
 //   img.onload = () => res(img);
 //   img.onerror = rej;
 //   img.src = src;
 // });
-
 // async function render() {
 //   const subHeader = document.createElement('h2');
 //   subHeader.innerHTML = 'This elements was created by js';
@@ -15,11 +13,4 @@ import "./style.scss";
 //   document.body.appendChild(subHeader);
 //   document.body.appendChild(myImage);
 // }
-var foo = 1;
-console.log(foo);
-var bar;
-bar = 1;
-function test() {
-  console.log(baz);
-}
-var baz = 123;
+// render();

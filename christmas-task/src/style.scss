@@ -2,7 +2,9 @@
 //МИКСИНЫ================================
 @import "./scss/mixin.scss";
 //МИКСИНЫ================================
-
+//noUiSlider================================
+@import "nouislider/dist/nouislider.css";
+// =========================================
 //подключение шрифтов====================
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Forum&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
@@ -21,7 +23,7 @@ $fontfamily: "Roboto", sans-serif;
 
 //переменные============================
 $minwidth: 320px;
-$maxwidth: 500px;
+$maxwidth: 1920px;
 $mw: 1100px;
 $md1: $mw + 12;
 $md2: 992.98;
@@ -30,11 +32,18 @@ $md4: 479.98;
 :root {
    --bg-red: #de2f32;
    --col-blue: #a0d5d3;
+   --col-white: #ffffff;
+   --col-milk: #fff4ea;
+   --col-green: #a8ead5;
 }
 //переменные============================
 
 body {
-   background-color: var(--col-blue);
+   background-color: rgba(#a0d5d3, 0.2);
+   background-blend-mode: multiply;
+   background-repeat: no-repeat;
+
+   transition: background-image 1s ease-in-out;
 }
 // Файл обнуляющих стилей===============
 @import "./scss/nullstyle.scss";
@@ -45,17 +54,38 @@ body {
    @include flexbox();
    flex-direction: column;
    width: 100%;
-   margin: 0 auto;
    max-width: $maxwidth;
-   background: var(--bg-red);
+   // background: var(--bg-red);
 }
 //ОБОЛОЧКА==============================
 
 //ОСНОВНАЯ СЕТКА========================
-// .container {
-// }
+.container {
+   width: 100%;
+   max-width: 1440px;
+   width: calc(100% - 40px);
+   margin: 0 auto;
+   // overflow: hidden;
+}
 //ОСНОВНАЯ СЕТКА========================
 
 // MAIN SECTION=================================
 @import "./scss/main.scss";
 // =============================================
+
+// MAIN SECTION=================================
+@import "./scss/toys.scss";
+// =============================================
+
+.bcg__size {
+   background-size: 100%;
+   background-repeat: no-repeat;
+   background-position: center;
+}
+
+.card__active {
+   background: rgb(228, 167, 54);
+}
+.card__active.ribbon::after {
+   border-left: 15px solid rgb(228, 167, 54);
+}

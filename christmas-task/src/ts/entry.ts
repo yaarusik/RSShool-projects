@@ -10,6 +10,7 @@ import View from './view';
     // const toysView: View = new View();
     const balls: IData[] = await Model.getData(
       'https://raw.githubusercontent.com/yaarusik/stage1-tasks/christmas-task/christmas.json'
+      // '../assets/christmas.json'
     );
 
     Controller.getDataFromEntry(balls);

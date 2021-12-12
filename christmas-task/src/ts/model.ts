@@ -48,18 +48,8 @@ class Model {
   }
 
   static getTypeOfSortByValue(type: SortProperty, data: IData[]) {
-    if (type.type === 'form') {
-      console.log(type);
-      return Utils.sortByForm(type, data);
-    }
-    console.log(type.type);
-    if (type.type === 'color') {
-      return Utils.sortByForm(type, data);
-    }
-    if (type.type === 'size') {
-      return Utils.sortByForm(type, data);
-    }
-    return data;
+      return Utils.sort(type, data);
+    
   }
 
   static getRangeValues(values: string[], data: IData[], type: string): IData[] {

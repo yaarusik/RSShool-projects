@@ -1,6 +1,7 @@
 /* eslint-disable import/no-cycle */
 // eslint-disable-next-line import/no-named-as-default
 import Model from './model';
+
 import View from './view';
 
 export type SortProperty = {
@@ -13,7 +14,7 @@ const sortSelect: HTMLSelectElement = document.querySelector('.name__select') as
 const mainFormBlock: HTMLElement = document.querySelector('.form__sort .value__form-icons') as HTMLElement;
 const mainColorBlock: HTMLElement = document.querySelector('.value__color .value__form-icons') as HTMLElement;
 const mainSizeBlock: HTMLElement = document.querySelector('.value__size .value__size-icons') as HTMLElement;
-const mainFavoriteBlock: HTMLElement = document.querySelector('.value__favorite .value__ok') as HTMLElement;
+// const mainFavoriteBlock: HTMLElement = document.querySelector('.value__favorite .value__ok') as HTMLElement;
 
 sortSelect.addEventListener('change', () => {
   const sortData: IData[] = Model.getTypeOfSort(sortSelect.value, data);
@@ -21,47 +22,56 @@ sortSelect.addEventListener('change', () => {
 });
 
 mainFormBlock.addEventListener('click', (e: Event): void => {
-  if ((e.target as HTMLElement).classList.contains('value__form-img')) {
+  const button: HTMLElement = e.target as HTMLElement;
+  if (button.classList.contains('value__form-img')) {
+    button.classList.toggle('form__active');
+
     const target: SortProperty = {};
-    target.name = (e.target as HTMLElement).getAttribute('data-filter');
-    target.type = (e.target as HTMLElement).getAttribute('data-type');
+    target.name = button.getAttribute('data-filter');
+    target.type = button.getAttribute('data-type');
+
     const sortData: IData[] = Model.getTypeOfSortByValue(target, data);
     View.renderBalls(sortData);
   }
 });
 
 mainColorBlock.addEventListener('click', (e: Event): void => {
-  if ((e.target as HTMLElement).classList.contains('value__form-cube')) {
+  const button: HTMLElement = e.target as HTMLElement;
+  if (button.classList.contains('value__form-cube')) {
+    button.classList.toggle('color__active');
     const target: SortProperty = {};
-    target.name = (e.target as HTMLElement).getAttribute('data-filter');
-    target.type = (e.target as HTMLElement).getAttribute('data-type');
-    console.log(target.type);
+    target.name = button.getAttribute('data-filter');
+    target.type = button.getAttribute('data-type');
+
     const sortData: IData[] = Model.getTypeOfSortByValue(target, data);
     View.renderBalls(sortData);
   }
 });
 
 mainSizeBlock.addEventListener('click', (e: Event): void => {
-  if ((e.target as HTMLElement).classList.contains('size__option')) {
+  const button: HTMLElement = e.target as HTMLElement;
+  if (button.classList.contains('size__option')) {
+    button.classList.toggle('form__active');
     const target: SortProperty = {};
-    target.name = (e.target as HTMLElement).getAttribute('data-filter');
-    target.type = (e.target as HTMLElement).getAttribute('data-type');
+    target.name = button.getAttribute('data-filter');
+    target.type = button.getAttribute('data-type');
+  
     console.log(target.type);
     const sortData: IData[] = Model.getTypeOfSortByValue(target, data);
     View.renderBalls(sortData);
   }
 });
 
-mainFavoriteBlock.addEventListener('click', (e: Event): void => {
-  if ((e.target as HTMLElement).classList.contains('value__checkbox')) {
-    const target: SortProperty = {};
-    target.name = (e.target as HTMLElement).getAttribute('data-filter');
-    target.type = (e.target as HTMLElement).getAttribute('data-type');
-    console.log(target.type);
-    const sortData: IData[] = Model.getTypeOfSortByValue(target, data);
-    View.renderBalls(sortData);
-  }
-});
+// mainFavoriteBlock.addEventListener('click', (e: Event): void => {
+//   if ((e.target as HTMLElement).classList.contains('value__checkbox')) {
+//     const target: SortProperty = {};
+//     target.name = (e.target as HTMLElement).getAttribute('data-filter');
+//     target.type = (e.target as HTMLElement).getAttribute('data-type');
+//     console.log(target.type);
+//     const sortData: IData[] = Model.getTypeOfSortByValue(target, data);
+//     View.renderBalls(sortData);
+//   }
+// });
 
 export interface IData {
   num: string;
@@ -75,11 +85,14 @@ export interface IData {
 }
 
 class Controller {
-  static getDataFromEntry(dataBalls: IData[]) {
+  static getDataFromEntry(dataBalls: IData[]): void {
     data = dataBalls;
   }
 
-  static getTypeOfSort() {}
+  static getSliderValues(values: string[], type: string) {
+    const sortData: IData[] = Model.getRangeValues(values, data, type);
+    View.renderBalls(sortData);
+  }
 }
 
 export default Controller;

@@ -49,16 +49,27 @@ class Model {
 
   static getTypeOfSortByValue(type: SortProperty, data: IData[]) {
     if (type.type === 'form') {
-      return Utils.sortByForm(type.name, data);
+      console.log(type);
+      return Utils.sortByForm(type, data);
     }
     console.log(type.type);
     if (type.type === 'color') {
-      return Utils.sortByColor(type.name, data);
+      return Utils.sortByForm(type, data);
     }
     if (type.type === 'size') {
-      return Utils.sortBySize(type.name, data);
+      return Utils.sortByForm(type, data);
     }
-    return [];
+    return data;
+  }
+
+  static getRangeValues(values: string[], data: IData[], type: string): IData[] {
+    if (type === 'year') {
+      return Utils.sortByRangeYear(values, data);
+    }
+    if (type === 'count') {
+      return Utils.sortByRangeCount(values, data);
+    }
+    return data;
   }
 }
 

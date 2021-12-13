@@ -55,7 +55,7 @@ mainSizeBlock.addEventListener('click', (e: Event): void => {
     const target: SortProperty = {};
     target.name = button.getAttribute('data-filter');
     target.type = button.getAttribute('data-type');
-  
+
     console.log(target.type);
     const sortData: IData[] = Model.getTypeOfSortByValue(target, data);
     View.renderBalls(sortData);
@@ -93,6 +93,12 @@ class Controller {
   static getSliderValues(values: string[], type: string) {
     const sortData: IData[] = Model.getRangeValues(values, data, type);
     View.renderBalls(sortData);
+  }
+
+  static searchFilter() {
+    const search: HTMLInputElement = document.querySelector('.search__scope') as HTMLInputElement;
+    search.focus();
+    Model.searchChanges(search);
   }
 }
 

@@ -43,6 +43,8 @@
 }
 .navigation {
    &__btn {
+      // -webkit-text-stroke-width: 1px;
+      // -webkit-text-stroke-color: #2f7d64;
       cursor: pointer;
    }
    &__btn:first-child {
@@ -54,43 +56,47 @@
 .right {
    &__body {
       display: flex;
-      column-gap: 20px;
+      align-items: center;
+      column-gap: 40px;
    }
 
-   &__search input {
+   &__search .search__scope {
       background: var(--col-milk);
       border-radius: 20px;
-      height: 20px;
-      width: 200px;
-      padding: 10px;
+      height: 38px;
+      width: 270px;
+      font-size: 16px;
+      line-height: 18px;
+      padding: 10px 15px;
    }
 
    &__search {
       position: relative;
+      padding-top: 2px;
    }
 
    &__search::before {
       content: " ";
       position: absolute;
       z-index: 10;
-      top: 12px;
-      right: 10px;
-      width: 15px;
-      height: 15px;
+      top: 11px;
+      right: 13px;
+      width: 18px;
+      height: 18px;
       background-image: url("./assets/images/svg/search.svg");
       background-size: 100%;
    }
 
    &__toys-count {
       position: relative;
-      width: 38px;
-      height: 37px;
+      width: 42px;
+      height: 42px;
       background-image: url("./assets/images/svg/ball.svg");
    }
    &__count {
       padding-top: 8px;
       display: block;
-      color: var(--col-green);
+      color: #2f7d64;
       font-size: 20px;
       line-height: 20px;
       position: absolute;
@@ -341,6 +347,13 @@
    justify-content: space-between;
    flex-wrap: wrap;
    row-gap: 15px;
+
+   &__message {
+      font: size 20px;
+      display: inline-block;
+      color: var(--col-white);
+   }
+
    &__body {
       position: relative;
       flex: 0 0 19%;

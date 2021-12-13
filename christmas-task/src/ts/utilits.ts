@@ -40,10 +40,9 @@ const filtersCheck: IFiltersType = {
 
 type CommonSort = {
   [key: string]: string[];
-}
+};
 
-
-let typeArr: CommonSort = {
+const typeArr: CommonSort = {
   form: [],
   color: [],
   size: [],
@@ -88,23 +87,23 @@ class Utils {
     const property: string = sortProperty.name as string;
     const type: string = sortProperty.type as string;
 
-// создаем карточку
+    // создаем карточку
     const cardsResult: IData[] = [];
     console.log(typeArr[type], type);
     // проверяем какие уже нажаты
-    if(type){
+    if (type) {
       if (!typeArr[type]?.includes(property)) {
         typeArr[type]?.push(property);
       } else {
-        typeArr[type] = typeArr[type]?.filter(item => item !== property) as string[]; 
+        typeArr[type] = typeArr[type]?.filter((item) => item !== property) as string[];
       }
     }
     console.log(typeArr);
     // формируем карточки
     // должны проходить не только по одному массиву, а сразу несколько
     // запустили 1 массив передали data получили 1 порцию карточек
-    // запустили 2 массив передали 1порцию карточек получили 
-   
+    // запустили 2 массив передали 1порцию карточек получили
+
     // let newTypeArr: string[][] = Object.values(typeArr);
     // const saveArr = []
     // console.log(newTypeArr);
@@ -117,31 +116,30 @@ class Utils {
     //   filterData =  data.filter(card => {
     //           if(card.shape === params || card.color === params || card.size === params || String(card.favorite) === params) {
     //             return card;
-    //           } 
+    //           }
     //           return false;
     //         })
-            
+
     //   })
     //   saveArr.push(filterData);
     // })
     // console.log(saveArr);
-    typeArr[type]?.forEach(type => {
-    
+    typeArr[type]?.forEach((type) => {
       console.log(type);
-      const filterData: IData[] =  data.filter(card => {
-        if(card.shape === type || card.color === type || card.size === type || String(card.favorite) === type) {
+      const filterData: IData[] = data.filter((card) => {
+        if (card.shape === type || card.color === type || card.size === type || String(card.favorite) === type) {
           return card;
-        } 
+        }
         return false;
-      })
+      });
       cardsResult.push(...filterData);
     });
     console.log(cardsResult);
     // сортируем по порядку
-    cardsResult.sort((a,b): number=> +a.num - +b.num);
+    cardsResult.sort((a, b): number => +a.num - +b.num);
     console.log(cardsResult);
-    
-    return typeArr[type]?.length === 0 ? data: cardsResult;
+
+    return typeArr[type]?.length === 0 ? data : cardsResult;
   }
 
   // static sortByColor(type: string | null | undefined, data: IData[]): IData[] {

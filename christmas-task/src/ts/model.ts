@@ -6,6 +6,9 @@ import Utils from './utilits';
 let ballsArray: number[] = [];
 
 export const countBall: Element = document.querySelector('.right__count') as Element;
+const searchMessage: HTMLElement = document.querySelector('.balls__message') as HTMLElement;
+const search: HTMLInputElement = document.querySelector('.search__scope') as HTMLInputElement;
+
 countBall.innerHTML = '0';
 class Model {
   // readonly utils: Utils;
@@ -48,8 +51,7 @@ class Model {
   }
 
   static getTypeOfSortByValue(type: SortProperty, data: IData[]) {
-      return Utils.sort(type, data);
-    
+    return Utils.sort(type, data);
   }
 
   static getRangeValues(values: string[], data: IData[], type: string): IData[] {
@@ -60,6 +62,33 @@ class Model {
       return Utils.sortByRangeCount(values, data);
     }
     return data;
+  }
+
+  static search() {}
+
+  static searchChanges(input: HTMLInputElement) {
+    input.addEventListener('keyup', Model.filterCards);
+  }
+
+  static filterCards(): void {
+    const cards: NodeListOf<HTMLElement> = document.querySelectorAll('.balls__body');
+    const value: string = search.value.toLowerCase();
+
+    cards.forEach((item) => {
+      const cardTitle: HTMLElement = item.children[0] as HTMLElement;
+      console.log(cardTitle);
+      const card: HTMLElement = item;
+      if (cardTitle.innerHTML.toLowerCase().indexOf(value) > -1) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // подумать по поводу сообщения
+    // if (!document.querySelectorAll('.balls__body').length) {
+    //   searchMessage.innerHTML = 'нет';
+    // }
   }
 }
 

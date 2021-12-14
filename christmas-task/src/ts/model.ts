@@ -76,7 +76,6 @@ class Model {
 
     cards.forEach((item) => {
       const cardTitle: HTMLElement = item.children[0] as HTMLElement;
-      console.log(cardTitle);
       const card: HTMLElement = item;
       if (cardTitle.innerHTML.toLowerCase().indexOf(value) > -1) {
         card.style.display = '';

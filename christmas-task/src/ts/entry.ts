@@ -1,7 +1,7 @@
 import Model from './model';
-import Controller, { IData } from './controller';
+import Controller from './controller';
+import { IData } from './interfases';
 // eslint-disable-next-line import/no-named-as-default
-import View from './view';
 
 const search: HTMLInputElement = document.querySelector('.search__scope') as HTMLInputElement;
 
@@ -17,7 +17,7 @@ search.focus();
       '../assets/christmas.json'
     );
     Controller.getDataFromEntry(balls);
-    View.renderBalls(balls);
+    Controller.renderBalls(balls);
     Controller.searchFilter();
   } catch (e) {
     console.log(e.message);

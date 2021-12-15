@@ -1,42 +1,5 @@
 // eslint-disable-next-line import/no-cycle
-import { IData, SortProperty } from './controller';
-
-// type Name = Pick<IData, 'name'>;
-
-// interface IFiltersType {
-//   shape: Shape;
-//   color: Color;
-//   size: Size;
-//   favorite: boolean;
-// }
-
-// type Shape = {
-//   sphere: boolean;
-//   bell: boolean;
-//   cone: boolean;
-//   figure: boolean;
-//   snowflake: boolean;
-// };
-// type Color = {
-//   yellow: boolean;
-//   red: boolean;
-//   blue: boolean;
-//   green: boolean;
-//   white: boolean;
-// };
-
-// type Size = {
-//   big: boolean;
-//   medium: boolean;
-//   small: boolean;
-// };
-
-// const filtersCheck: IFiltersType = {
-//   shape: { sphere: false, bell: false, cone: false, figure: false, snowflake: false },
-//   color: { yellow: false, red: false, blue: false, green: false, white: false },
-//   size: { big: false, medium: false, small: false },
-//   favorite: false,
-// };
+import { IData, SortProperty } from './interfases';
 
 type CommonSort = {
   [key: string]: string[];
@@ -51,43 +14,43 @@ const typeArr: CommonSort = {
 
 class Utils {
   static sortNameMax(data: IData[]) {
-    const sourse: IData[] = data;
-    sourse.sort((a, b): number => {
+    const source: IData[] = data;
+    source.sort((a, b): number => {
       return a.name > b.name ? 1 : -1;
     });
-    return sourse;
+    return source;
   }
 
   static sortNameMin(data: IData[]): IData[] {
-    const sourse: IData[] = data;
-    sourse.sort((a, b): number => {
+    const source: IData[] = data;
+    source.sort((a, b): number => {
       return a.name < b.name ? 1 : -1;
     });
-    return sourse;
+    return source;
   }
 
   static sortCountMax(data: IData[]): IData[] {
-    const sourse: IData[] = data;
-    sourse.sort((a, b): number => {
+    const source: IData[] = data;
+    source.sort((a, b): number => {
       return +a.count - +b.count;
     });
-    return sourse;
+    return source;
   }
 
   static sortCountMin(data: IData[]): IData[] {
-    const sourse: IData[] = data;
-    sourse.sort((a, b): number => {
+    const source: IData[] = data;
+    source.sort((a, b): number => {
       return +b.count - +a.count;
     });
-    return sourse;
+    return source;
   }
 
   // разбить функцию одна задача одна функция
   static sort(sortProperty: SortProperty, data: IData[]): IData[] {
-    let sourse: IData[] = data;
+    let source: IData[] = data;
     const property: string = sortProperty.name as string;
     const type: string = sortProperty.type as string;
-
+    // запоминаем нажатые фильтры
     if (type) {
       if (!typeArr[type]?.includes(property)) {
         typeArr[type]?.push(property);
@@ -96,19 +59,14 @@ class Utils {
       }
     }
 
-    type ReturnFunction = {
-      (): false | IData;
-    };
-
     const newTypeArr: string[][] = Object.values(typeArr);
-    console.log(`new ${newTypeArr}`);
 
     newTypeArr.forEach((tips): void => {
       const cardsResult: IData[] = [];
       if (tips.length) {
         let cardsCollection: IData[] = [];
         tips.forEach((item): void => {
-          cardsCollection = sourse.filter((card) => {
+          cardsCollection = source.filter((card) => {
             if (card.shape === item || card.color === item || card.size === item || String(card.favorite) === item) {
               return card;
             }
@@ -116,11 +74,17 @@ class Utils {
           });
           cardsResult.push(...cardsCollection);
         });
-        sourse = cardsResult;
+        source = cardsResult;
       }
     });
 
-    return sourse.length === 0 ? data : sourse;
+    source.sort((a, b) => +a.num - +b.num);
+
+    if (source.length === 0) {
+      // сообщение
+    }
+    // тут не должны быть нажаты кнопки
+    return source.length === 0 ? data : source;
   }
 
   static sortByRangeCount(values: string[], data: IData[]): IData[] {
@@ -128,14 +92,14 @@ class Utils {
       return [];
     }
     const [leftOuput, rightOuput] = values;
-    const sourse: IData[] = data.filter((item) => {
+    const source: IData[] = data.filter((item) => {
       if (+item.count >= +leftOuput! && +item.count <= +rightOuput!) {
         return item;
       }
       return false;
     });
-    console.log(sourse);
-    return sourse;
+    console.log(source);
+    return source;
   }
 
   static sortByRangeYear(values: string[], data: IData[]): IData[] {
@@ -143,14 +107,14 @@ class Utils {
       return [];
     }
     const [leftOuput, rightOuput] = values;
-    const sourse: IData[] = data.filter((item) => {
+    const source: IData[] = data.filter((item) => {
       if (+item.year >= +leftOuput! && +item.year <= +rightOuput!) {
         return item;
       }
       return false;
     });
-    console.log(sourse);
-    return sourse;
+    console.log(source);
+    return source;
   }
 }
 

@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
+import { IData, SortProperty } from './interfases';
 
-import { IData, SortProperty } from './controller';
 import Utils from './utilits';
 
 let ballsArray: number[] = [];
@@ -31,10 +31,11 @@ class Model {
     } else {
       console.log('у вас много шаров');
     }
-    return ballsArray.length;
+    console.log(ballsArray);
+    return { length: ballsArray.length, active: ballsArray };
   };
 
-  static getTypeOfSort(type: string | null, data: IData[]) {
+  static getTypeOfSort(type: string | null, data: IData[]): IData[] {
     if (type === 'sort-name-max') {
       return Utils.sortNameMax(data);
     }
@@ -50,7 +51,7 @@ class Model {
     return [];
   }
 
-  static getTypeOfSortByValue(type: SortProperty, data: IData[]) {
+  static getTypeOfSortByValue(type: SortProperty, data: IData[]): IData[] {
     return Utils.sort(type, data);
   }
 
@@ -64,7 +65,7 @@ class Model {
     return data;
   }
 
-  static search() {}
+  // static search() {}
 
   static searchChanges(input: HTMLInputElement) {
     input.addEventListener('keyup', Model.filterCards);
@@ -83,11 +84,6 @@ class Model {
         card.style.display = 'none';
       }
     });
-
-    // подумать по поводу сообщения
-    // if (!document.querySelectorAll('.balls__body').length) {
-    //   searchMessage.innerHTML = 'нет';
-    // }
   }
 }
 

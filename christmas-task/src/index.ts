@@ -5,6 +5,8 @@ import './ts/entry';
 import './ts/model';
 import './ts/view';
 import './ts/utilits';
+import './ts/filterBlocks';
+import './ts/interfases';
 // import image from './images/lazy.png';
 // const createImage = (src: string) => new Promise<HTMLImageElement>((res, rej) => {
 //   const img = new Image();

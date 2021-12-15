@@ -1,10 +1,6 @@
 import noUiSlider, { target } from 'nouislider';
 import Controller from './controller';
 
-// interface Instance extends HTMLElement {
-//   noUiSlider: noUiSlider;
-// }
-
 const outputs: NodeListOf<HTMLElement> = document.querySelectorAll('.slider-output') as NodeListOf<HTMLElement>;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -33,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (yearSlider !== null) {
     noUiSlider.create(yearSlider, {
       start: [1940, 2021],
-      connect: true, // нужно ли красить полоску
+      connect: true,
       behaviour: 'tap-drag',
       step: 10,
       range: {

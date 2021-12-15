@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-cycle
-import { IData } from './controller';
+import { IData } from './interfases';
 // eslint-disable-next-line import/no-cycle
 import Model, { countBall } from './model';
 
@@ -23,13 +23,13 @@ class View {
           <div class="balls__favorite balls__text">Любимая: ${item.favorite}</div>
         </div>
       </div>
-      <div class="ribbon"></div>
+      <div class="ribbon "></div>
     </div>`;
       ballsTemplate.push(template);
     });
     const ballsElement: HTMLDivElement = document.querySelector('.balls') as HTMLDivElement;
     ballsElement.innerHTML = ballsTemplate.join('');
-    this.renderCardsIndicator();
+    // this.renderCardsIndicator();
   }
 
   static changeRibbonColor(element: Element): void {
@@ -40,17 +40,29 @@ class View {
     countBall.innerHTML = `${index}`;
   }
 
-  // Исправить не должно быть обращения к Model
-  static renderCardsIndicator(): void {
-    const ballsBody: NodeListOf<Element> = document.querySelectorAll('.balls__body');
-    ballsBody.forEach((item: Element, index: number): void => {
-      item.addEventListener('click', (): void => {
-        this.changeRibbonColor(item);
-        const count: number = Model.getPressCard(index);
-        this.renderCardCount(count);
-      });
-    });
-  }
+  // static renderRibbon(card: IData, activeArr: number[] | undefined): string {
+  //   if (activeArr?.includes(+card.num)) {
+  //     return `<div class="ribbon card__active"></div>`;
+  //   }
+  //   return `<div class="ribbon "></div>`;
+  // }
+
+  // // Исправить не должно быть обращения к Model
+  // static renderCardsIndicator(): void {
+  //   const ballsBody: NodeListOf<Element> = document.querySelectorAll('.balls__body');
+  //   ballsBody.forEach((item: Element, index: number): void => {
+  //     item.addEventListener('click', (): void => {
+  //       this.changeRibbonColor(item);
+  //       const { length, active }: IActive = Model.getPressCard(index);
+  //       this.renderCardCount(length);
+  //     });
+  //   });
+  // }
 }
 // добавлять активный класс избранным карточкам
 export default View;
+
+interface IActive {
+  length: number;
+  active: number[];
+}

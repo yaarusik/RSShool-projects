@@ -344,9 +344,10 @@
 }
 .balls {
    display: flex;
-   justify-content: space-between;
+   justify-content: flex-start;
+   width: 100%;
    flex-wrap: wrap;
-   row-gap: 15px;
+   gap: 20px;
 
    &__message {
       font: size 20px;
@@ -356,7 +357,7 @@
 
    &__body {
       position: relative;
-      flex: 0 0 19%;
+      flex: 0 0 18.88%;
       padding: 15px 0 10px 10px;
       height: 280px;
       backdrop-filter: blur(2px);

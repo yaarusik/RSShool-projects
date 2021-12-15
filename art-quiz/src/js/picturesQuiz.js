@@ -1,6 +1,7 @@
 import { popupEnd, questionsCount } from './blocksHide';
 import { renderScoreBlock } from './score';
 import { language, settingsTimerSelect, timerOn, soundEffects } from './settings';
+import { shuffle, getRandomInt, showResultsMessage } from './commonFunctions';
 
 export let pictureInterval;
 export const picturesTimer = document.querySelector('.pictures__timer');
@@ -8,7 +9,7 @@ export let quizByName = [];
 
 const questionsBlock = document.querySelector('.question__pictures');
 const finishResult = document.querySelector('.finish');
-const finishTitle = document.querySelector('.end__title');
+const type = 'picture';
 const popupAnswers = document.querySelector('.popup__correct-up');
 const scoreCard = document.querySelectorAll('.down__results');
 const categoryBg = document.querySelectorAll('.down__reaction');
@@ -18,24 +19,13 @@ let pictureAnswers = new Set();
 let roundCounter = 0;
 let counter;
 let cardNumber;
-let data;
+let answersData;
 let buttonsChoose;
 let correctPictureMemory = [];
-let type = 'picture';
 let timerPictureCount;
 
-// рандом для вариантов ответа авторов
-export const getRandomInt = (num) => {
-    return Math.floor(Math.random() * num);
-};
-
-// рандом для массива ответов
-export const shuffle = (array) => {
-    return array.sort(() => Math.random() - 0.5);
-};
-
 const cutData = () => {
-    quizByName = data.slice(data.length / 2, data.length - 1);
+    quizByName = answersData.slice(answersData.length / 2, answersData.length - 1);
 };
 
 const renderPopupAnswer = (answer) => {
@@ -58,17 +48,18 @@ const renderPopupAnswer = (answer) => {
 
 const renderIndicator = () => {
     const indicatorRound = document.querySelectorAll('.indicators__round');
-
     correctPictureMemory.forEach((item, index) => {
-        if (item === '1') {
-            indicatorRound[index].classList.add('correct__answer');
-        } else if (item === '0') {
-            indicatorRound[index].classList.add('uncorrect__answer');
+        switch (item) {
+            case '1':
+                indicatorRound[index].classList.add('correct__answer');
+                break;
+            default:
+                indicatorRound[index].classList.add('uncorrect__answer');
         }
     });
 };
 
-const chooseHundler = (e) => {
+const hundler = (e) => {
     if (e.target.alt === quizByName[counter].imageNum) {
         e.target.classList.add('correct__answer');
         correctPictureMemory.push('1');
@@ -91,9 +82,8 @@ const createAnswers = (index) => {
     questionTitle.innerHTML = quizByName[index].author;
     pictureAnswers.add(quizByName[index].imageNum);
     while (pictureAnswers.size < 4) {
-        pictureAnswers.add(data[getRandomInt(data.length - 1)].imageNum);
+        pictureAnswers.add(answersData[getRandomInt(answersData.length - 1)].imageNum);
     }
-
     let pictureArray = [...pictureAnswers];
     pictureArray = shuffle(pictureArray);
 
@@ -123,22 +113,18 @@ const renderQuestions = (index) => {
 <div class="block__variants opacity__img" onload="this.style.opacity='1'>
   <div class="variants__body">
     <div class="variants__row pictures__row">
-      ${createAnswers(index, data)} 
+      ${createAnswers(index)} 
     </div>
   </div>
 </div>
   `;
-
     // окрашивание предыдущих ответов
     if (index) {
         renderIndicator();
     }
-
     pictureAnswers = new Set();
-
     buttonsChoose = document.querySelectorAll('.pictures__answer');
-
-    buttonsChoose.forEach((item) => item.addEventListener('click', chooseHundler));
+    buttonsChoose.forEach((item) => item.addEventListener('click', hundler));
 };
 
 export const renderPictureAnswers = async (index, currentBlock, lang) => {
@@ -147,17 +133,17 @@ export const renderPictureAnswers = async (index, currentBlock, lang) => {
     }
     counter = index;
     let response;
-    if (lang === 'en') {
-        response = await fetch('https://raw.githubusercontent.com/yaarusik/image-data/master/imagesEn.json');
-    } else {
-        response = await fetch('https://raw.githubusercontent.com/yaarusik/image-data/master/images.json');
+    switch (lang) {
+        case 'en':
+            response = await fetch('https://raw.githubusercontent.com/yaarusik/image-data/master/imagesEn.json');
+            break;
+        default:
+            response = await fetch('https://raw.githubusercontent.com/yaarusik/image-data/master/images.json');
     }
 
-    data = await response.json();
-
-    cutData(data);
-
-    renderQuestions(index, data);
+    answersData = await response.json();
+    cutData(answersData);
+    renderQuestions(index, answersData);
 };
 
 const saveResults = (result) => {
@@ -168,31 +154,10 @@ const saveResults = (result) => {
 
 const roundEnd = () => {
     let sumResult = correctPictureMemory.reduce((item, current) => +item + +current, 0);
-
     popupEnd.classList.add('active');
 
-    if (language === 'ru') {
-        if (sumResult <= 3) {
-            finishTitle.textContent = 'Ты можешь лучше :)';
-            soundEffects.gameOver();
-        } else if (sumResult > 3 && sumResult <= 7) {
-            finishTitle.textContent = 'У тебя хороший уровень!';
-            soundEffects.gameCenter();
-        } else if (sumResult > 7) {
-            finishTitle.textContent = 'Поздравляю! Ты выйграл :)';
-            soundEffects.endGame();
-        }
-    } else if (sumResult <= 3) {
-        finishTitle.textContent = `You can better :)`;
-        soundEffects.gameOver();
-    } else if (sumResult > 3 && sumResult <= 7) {
-        finishTitle.textContent = 'You have a good level!';
-        soundEffects.gameCenter();
-    } else if (sumResult > 7) {
-        soundEffects.endGame();
-        finishTitle.textContent = 'Congratulations! You won :)';
-    }
-
+    showResultsMessage(language, sumResult);
+    soundEffects.endGame();
     finishResult.textContent = `${sumResult}`;
     saveResults(sumResult);
 };
@@ -222,28 +187,26 @@ const timerSet = () => {
 };
 
 export const timerPicture = (timerStatus) => {
-    if (timerStatus === 'on') {
-        timerPictureCount = settingsTimerSelect.value.padStart(2, '0');
-        timerSet();
-    } else if (timerStatus === 'continue') {
-        timerSet();
-    } else {
-        picturesTimer.innerHTML = '';
+    switch (timerStatus) {
+        case 'on':
+            timerPictureCount = settingsTimerSelect.value.padStart(2, '0');
+            timerSet();
+            break;
+        case 'continue':
+            timerSet();
+            break;
+        default:
+            picturesTimer.innerHTML = '';
     }
 };
-
 // делегирование
 popupAnswers.addEventListener('click', (e) => {
     if (e.target.classList.contains('correct__btn')) {
         counter += 1;
-
         if (roundCounter === 9) {
             roundEnd();
-
             renderScoreBlock(cardNumber, correctPictureMemory, type);
-
             categoryIndicator();
-
             soundEffects.playAudio();
         } else {
             picturesTimer.innerHTML = `00 : ${settingsTimerSelect.value.padStart(2, '0')}`;
@@ -251,7 +214,6 @@ popupAnswers.addEventListener('click', (e) => {
             timerPicture(timerOn);
             roundCounter += 1;
         }
-
         popupAnswers.innerHTML = '';
     }
 });

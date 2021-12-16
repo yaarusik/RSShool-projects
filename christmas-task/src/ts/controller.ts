@@ -17,7 +17,11 @@ class Controller {
   }
 
   static getSliderValues(values: string[], type: string) {
-    const sortData: IData[] = Model.getRangeValues(values, data, type);
+    const filter: SortProperty = {};
+    filter.type = type; // year | count
+    filter.name = values; // ['1960','2000']
+
+    const sortData: IData[] = Model.getTypeOfSortByValue(filter, data);
     View.renderBalls(sortData);
   }
 

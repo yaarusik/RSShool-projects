@@ -10,6 +10,8 @@ const typeArr: CommonSort = {
   color: [],
   size: [],
   favorite: [],
+  year: [],
+  count: [],
 };
 
 class Utils {
@@ -45,39 +47,69 @@ class Utils {
     return source;
   }
 
+  static checkFilters(type: string, property: string) {
+    if (!typeArr[type]?.includes(property)) {
+      typeArr[type]?.push(property);
+    } else {
+      typeArr[type] = typeArr[type]?.filter((item): boolean => item !== property) as string[];
+    }
+  }
+
   // разбить функцию одна задача одна функция
   static sort(sortProperty: SortProperty, data: IData[]): IData[] {
     let source: IData[] = data;
-    const property: string = sortProperty.name as string;
     const type: string = sortProperty.type as string;
-    // запоминаем нажатые фильтры
-    if (type) {
-      if (!typeArr[type]?.includes(property)) {
-        typeArr[type]?.push(property);
-      } else {
-        typeArr[type] = typeArr[type]?.filter((item): boolean => item !== property) as string[];
+
+    switch (type) {
+      case 'year':
+      case 'count': {
+        // обнуляем массив
+        typeArr[type] = [type];
+        const sliderValues: string[] = sortProperty.name as string[];
+        sliderValues.forEach((item) => typeArr[type]?.push(item));
+        break;
+      }
+      default: {
+        const property: string = sortProperty.name as string;
+        this.checkFilters(type, property);
       }
     }
 
-    const newTypeArr: string[][] = Object.values(typeArr);
+    console.log(typeArr);
 
+    const newTypeArr: string[][] = Object.values(typeArr);
     newTypeArr.forEach((tips): void => {
       const cardsResult: IData[] = [];
       if (tips.length) {
+        // сохраняем промежуточное значение
         let cardsCollection: IData[] = [];
-        tips.forEach((item): void => {
-          cardsCollection = source.filter((card) => {
-            if (card.shape === item || card.color === item || card.size === item || String(card.favorite) === item) {
-              return card;
-            }
-            return false;
-          });
-          cardsResult.push(...cardsCollection);
-        });
+
+        switch (tips[0]) {
+          case 'year': {
+            cardsCollection = this.sortByRangeYear(tips, source);
+            cardsResult.push(...cardsCollection);
+            break;
+          }
+          case 'count': {
+            cardsCollection = this.sortByRangeCount(tips, source);
+            cardsResult.push(...cardsCollection);
+            break;
+          }
+          default: {
+            tips.forEach((item): void => {
+              cardsCollection = source.filter(
+                (card) =>
+                  card.shape === item || card.color === item || card.size === item || String(card.favorite) === item
+              );
+              cardsResult.push(...cardsCollection);
+            });
+          }
+        }
+
         source = cardsResult;
       }
     });
-
+    // сортируем в исходном порядке
     source.sort((a, b) => +a.num - +b.num);
 
     if (source.length === 0) {
@@ -91,14 +123,13 @@ class Utils {
     if (!data) {
       return [];
     }
-    const [leftOuput, rightOuput] = values;
+    const [type, leftOuput, rightOuput] = values;
     const source: IData[] = data.filter((item) => {
       if (+item.count >= +leftOuput! && +item.count <= +rightOuput!) {
         return item;
       }
       return false;
     });
-    console.log(source);
     return source;
   }
 
@@ -106,14 +137,13 @@ class Utils {
     if (!data) {
       return [];
     }
-    const [leftOuput, rightOuput] = values;
+    const [type, leftOuput, rightOuput] = values;
     const source: IData[] = data.filter((item) => {
       if (+item.year >= +leftOuput! && +item.year <= +rightOuput!) {
         return item;
       }
       return false;
     });
-    console.log(source);
     return source;
   }
 }

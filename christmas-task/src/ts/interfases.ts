@@ -10,6 +10,6 @@ export interface IData {
 }
 
 export type SortProperty = {
-  name?: string | null;
+  name?: string | null | string[];
   type?: string | null;
 };

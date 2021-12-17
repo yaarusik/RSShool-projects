@@ -54,7 +54,9 @@
                 <div class="menu__right">
                   <div class="right__body">
                     <div class="right__search">
+                      <div class="right__loup search__before"></div>
                       <input class="search__scope" placeholder="Поиск игрушки" type="text" maxlength="21" />
+                      <div class="search__after"></div>
                     </div>
                     <div class="right__toys-count bcg__size">
                       <span class="right__count">9</span>
@@ -85,7 +87,7 @@
                     <div class="value__color value__form">
                       <div class="value__text">Цвет:</div>
                       <div class="value__form-icons value-cubes">
-                        <button class="value__form-cube" data-type="color" data-filter="желтый"></button>
+                        <button class="value__form-cube type__form" data-type="color" data-filter="желтый"></button>
                         <button class="value__form-cube" data-type="color" data-filter="красный"></button>
                         <button class="value__form-cube" data-type="color" data-filter="синий"></button>
                         <button class="value__form-cube" data-type="color" data-filter="зелёный"></button>
@@ -103,12 +105,7 @@
                     <div class="value__favorite value__form">
                       <div class="value__text">Только любимые:</div>
                       <div class="value__ok">
-                        <button
-                          class="value__form-cube value__checkbox"
-                          data-type="favorite"
-                          data-filter="true"
-                          id="ok"
-                        ></button>
+                        <button class="value__checkbox" data-type="favorite" data-filter="true" id="ok"></button>
                       </div>
                     </div>
                   </div>
@@ -145,13 +142,17 @@
                         <option value="sort-count-min">По количеству по убыванию</option>
                       </select>
                     </div>
-                    <button class="name__clear">Сброс фильтров</button>
+                    <div class="name__setting">
+                      <button class="name__clear">Сброс фильтров</button>
+                      <button class="name__clear name__none">Сброс настроек</button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="cards__balls">
-              <div class="balls">К сожалению, совпадений не обнаружено;</div>
+              <div class="cards__message"></div>
+              <div class="balls"></div>
             </div>
           </div>
         </main>

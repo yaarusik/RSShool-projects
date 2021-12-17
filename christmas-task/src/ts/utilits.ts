@@ -1,4 +1,5 @@
 // eslint-disable-next-line import/no-cycle
+import Controller from './controller';
 import { IData, SortProperty } from './interfases';
 
 type CommonSort = {
@@ -7,7 +8,7 @@ type CommonSort = {
 
 let countFilters = 0;
 
-export const typeArr: CommonSort = {
+let typeArr: CommonSort = {
   form: [],
   color: [],
   size: [],
@@ -15,6 +16,16 @@ export const typeArr: CommonSort = {
   year: [],
   count: [],
 };
+
+const getLocaleStorage = localStorage.getItem('filters');
+if (getLocaleStorage) {
+  typeArr = JSON.parse(getLocaleStorage);
+  Object.values(typeArr).forEach((filter) => {
+    const allFilterBtn: NodeListOf<HTMLElement> = document.querySelectorAll('[data-filter]');
+  });
+}
+
+// export const typeArr: CommonSort = (JSON.parse(localStorage.getItem('filters') as string) as CommonSort) || filtersObj;
 
 class Utils {
   static sortNameMax(data: IData[]) {
@@ -31,6 +42,10 @@ class Utils {
       return a.name < b.name ? 1 : -1;
     });
     return source;
+  }
+
+  static getTypeFilters() {
+    return typeArr;
   }
 
   static sortCountMax(data: IData[]): IData[] {
@@ -80,6 +95,9 @@ class Utils {
         this.checkFilters(type, property);
       }
     }
+
+    Controller.setLocaleStorage('filters', JSON.stringify(typeArr));
+
     // если ни один фильтр не нажат
     if (!countFilters) {
       return data;

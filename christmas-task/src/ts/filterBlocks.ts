@@ -37,6 +37,7 @@ mainSizeBlock.addEventListener('click', (e: Event): void => {
 mainFavoriteBlock.addEventListener('click', (e: Event): void => {
   const button: HTMLElement = e.target as HTMLElement;
   if (button.classList.contains('value__checkbox')) {
+    button.classList.toggle('color__active');
     const target: SortProperty = {};
     Controller.filterCards(target, button);
   }

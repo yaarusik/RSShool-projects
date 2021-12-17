@@ -39,10 +39,13 @@ $md4: 479.98;
 //переменные============================
 
 body {
+   background-image: url("./assets/images/bg/bg__main.jpg");
+   background-size: cover;
+   background-attachment: fixed;
+   min-height: 100%;
    background-color: rgba(#a0d5d3, 0.2);
    background-blend-mode: multiply;
    background-repeat: no-repeat;
-
    transition: background-image 1s ease-in-out;
 }
 // Файл обнуляющих стилей===============

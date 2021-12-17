@@ -8,11 +8,8 @@
       padding: 10px 0 10px 10px;
    }
    &__page {
-      background-image: url("./assets/images/bg/bg__main.jpg");
       min-width: 100%;
       min-height: calc(100vh - 140px);
-      background-size: cover;
-      background-attachment: fixed;
    }
 }
 
@@ -73,17 +70,32 @@
    &__search {
       position: relative;
       padding-top: 2px;
+      transition: 0.2s;
    }
 
-   &__search::before {
-      content: " ";
+   &__loup {
+      transition: 0.2s;
+      position: absolute;
+      z-index: 1;
+      top: 11px;
+      right: 13px;
+      width: 18px;
+      height: 18px;
+      background-image: url("./assets/images/svg/search.svg");
+      background-size: 100%;
+      cursor: pointer;
+   }
+
+   &__close {
+      transition: 0.2s;
+
       position: absolute;
       z-index: 10;
       top: 11px;
       right: 13px;
       width: 18px;
       height: 18px;
-      background-image: url("./assets/images/svg/search.svg");
+      background-image: url("./assets/images/svg/close2.svg");
       background-size: 100%;
    }
 
@@ -109,6 +121,14 @@
    &__sort {
       padding-top: 30px;
       padding-bottom: 30px;
+   }
+
+   &__message {
+      font-size: 26px;
+      font-weight: 300;
+      // text-align: center;
+      line-height: 28px;
+      color: var(--col-white);
    }
 
    // &__balls {
@@ -195,11 +215,15 @@
       width: 24px;
       height: 24px;
       border-radius: 5px;
-      background-color: red;
       transition: 0.2s;
       background-position: center;
       background-repeat: no-repeat;
       background-size: 0%;
+   }
+
+   &__form-cube:hover {
+      transform: scale(1.05);
+      border: 1px solid #666;
    }
 
    &__form-cube:first-child {
@@ -242,6 +266,14 @@
    }
 
    &__checkbox {
+      background-color: #fff;
+      width: 24px;
+      height: 24px;
+      border-radius: 5px;
+      transition: 0.2s;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 0%;
    }
 
    // &__favorite {
@@ -288,16 +320,20 @@
       pointer-events: none;
    }
 
+   &__setting {
+      display: flex;
+      column-gap: 10px;
+   }
+
    &__clear {
       margin-top: 137px;
       display: block;
-      width: 250px;
+      width: 200px;
       height: 38px;
       border-radius: 10px;
       border: 2px solid #7ba9df;
       background-color: rgba(#0096d1, 0.3);
       backdrop-filter: blur(6px);
-      cursor: pointer;
       color: #fff;
       font-size: 20px;
       font-weight: 400;
@@ -545,4 +581,10 @@
 .year-slider__container .noUi-horizontal .noUi-handle {
    right: -15px;
    top: -8px;
+}
+
+@media (max-width: 1468px) {
+   .sort__row {
+      flex-wrap: wrap;
+   }
 }

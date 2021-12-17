@@ -1,12 +1,13 @@
-import { typeArr } from './utilits';
 import Controller, { pressFilter } from './controller';
 import Model from './model';
 import View from './view';
 import sliderReset from './uislider';
+import Utils from './utilits';
 
 const resetBtn: HTMLButtonElement = document.querySelector('.name__clear') as HTMLButtonElement;
 
 const resetFilters = () => {
+  const typeArr = Utils.getTypeFilters();
   if (typeArr !== undefined) {
     Object.values(typeArr).forEach((item) => item.splice(0, item.length));
   }

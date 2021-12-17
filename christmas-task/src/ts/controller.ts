@@ -6,12 +6,13 @@ import { SortProperty, IData } from './interfases';
 import View from './view';
 
 let data: IData[] = [];
+
 let currentData: IData[] | string = [];
 const sortSelect: HTMLSelectElement = document.querySelector('.name__select') as HTMLSelectElement;
 export const pressFilter = new Set();
 
 // используем сортированные данные
-let selectValueMemory = 'sort-name-max';
+let selectValueMemory = localStorage.getItem('selectSort') || 'sort-name-max';
 
 class Controller {
   // получаем данные в переменную
@@ -68,11 +69,16 @@ class Controller {
   static renderBalls(sortCards: IData[] | string): void {
     View.renderBalls(sortCards);
   }
+
+  static setLocaleStorage(variable: string, variableValue: string): void {
+    localStorage.setItem(`${variable}`, variableValue);
+  }
 }
 
 sortSelect.addEventListener('change', () => {
   console.log(currentData.length);
   selectValueMemory = sortSelect.value;
+  Controller.setLocaleStorage('selectSort', selectValueMemory);
   const sortData: IData[] | string = Model.getTypeOfSort(sortSelect.value, currentData);
 
   Controller.renderBalls(sortData);

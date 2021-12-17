@@ -6,6 +6,7 @@ import Model, { countBall } from './model';
 let lengthFavorite = 0;
 class View {
   static renderBalls(data: IData[] | string): void {
+    localStorage.setItem('currentData', JSON.stringify(data));
     const ballsElement: HTMLDivElement = document.querySelector('.balls') as HTMLDivElement;
 
     const ballsTemplate: string[] = [];
@@ -13,6 +14,12 @@ class View {
       ballsElement.innerHTML = `${data}`;
     } else {
       data.forEach((item): void => {
+        let favorite: string;
+        if (item.favorite === false) {
+          favorite = 'Нет';
+        } else {
+          favorite = 'Да';
+        }
         const template = `
       <div class="balls__body" data-num="${item.num}">
       <h2 class="balls__title">${item.name}</h2>
@@ -26,7 +33,7 @@ class View {
           <div class="balls__form balls__text">Форма: ${item.shape}</div>
           <div class="balls__color balls__text">Цвет: ${item.color}</div>
           <div class="balls__size balls__text">Размер: ${item.size}</div>
-          <div class="balls__favorite balls__text">Любимая: ${item.favorite}</div>
+          <div class="balls__favorite balls__text">Любимая: ${favorite}</div>
         </div>
       </div>
       ${this.renderRibbon(+item.num)}

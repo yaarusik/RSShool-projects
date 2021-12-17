@@ -15,6 +15,12 @@ search.focus();
       // 'https://raw.githubusercontent.com/yaarusik/stage1-tasks/christmas-task/christmas.json'
       '../assets/christmas.json'
     );
+
+    // const getLocaleStorage = localStorage.getItem('currentData');
+    // if (getLocaleStorage) {
+    //   balls = JSON.parse(getLocaleStorage);
+    // }
+
     Controller.getDataFromEntry(balls);
     const selectValue = Controller.getSelectValue();
     const sortData = Model.getTypeOfSort(selectValue, balls);

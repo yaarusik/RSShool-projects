@@ -242,30 +242,6 @@
    }
 
    &__checkbox {
-      display: none;
-   }
-
-   &__checkbox + &__label {
-      display: block;
-      width: 25px;
-      height: 25px;
-      border-radius: 5px;
-      border: 2px solid var(--col-white);
-      background-color: #0096d1;
-      text-align: center;
-   }
-   &__checkbox + &__label::before {
-      content: "\2713";
-      display: inline-block;
-      color: var(--col-white);
-      font-size: 21px;
-      line-height: 25px;
-      transform: scale(0);
-      transition: 0.3s;
-   }
-
-   &__checkbox:checked + &__label::before {
-      transform: scale(1);
    }
 
    // &__favorite {
@@ -347,6 +323,11 @@
    justify-content: flex-start;
    width: 100%;
    flex-wrap: wrap;
+   font-size: 26px;
+   font-weight: 300;
+   // text-align: center;
+   line-height: 28px;
+   color: var(--col-white);
    gap: 20px;
 
    &__message {
@@ -365,6 +346,10 @@
       cursor: pointer;
       border: 2px solid rgb(141, 187, 240);
       background-color: rgba(57, 138, 230, 0.8);
+      transition: 0.2s;
+   }
+   &__body:hover {
+      transform: scale(0.95);
    }
 
    &__title {

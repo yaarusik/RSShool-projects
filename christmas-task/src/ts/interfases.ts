@@ -13,3 +13,8 @@ export type SortProperty = {
   name?: string | null | string[];
   type?: string | null;
 };
+
+export type SliderValues = {
+  year: number[];
+  count: number[];
+};

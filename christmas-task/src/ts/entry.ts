@@ -1,7 +1,6 @@
 import Model from './model';
 import Controller from './controller';
 import { IData } from './interfases';
-// eslint-disable-next-line import/no-named-as-default
 
 const search: HTMLInputElement = document.querySelector('.search__scope') as HTMLInputElement;
 
@@ -17,7 +16,9 @@ search.focus();
       '../assets/christmas.json'
     );
     Controller.getDataFromEntry(balls);
-    Controller.renderBalls(balls);
+    const selectValue = Controller.getSelectValue();
+    const sortData = Model.getTypeOfSort(selectValue, balls);
+    Controller.renderBalls(sortData);
     Controller.searchFilter();
   } catch (e) {
     console.log(e.message);

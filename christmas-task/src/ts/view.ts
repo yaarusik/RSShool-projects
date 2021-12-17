@@ -3,12 +3,18 @@ import { IData } from './interfases';
 // eslint-disable-next-line import/no-cycle
 import Model, { countBall } from './model';
 
+let lengthFavorite = 0;
 class View {
-  static renderBalls(data: IData[]): void {
+  static renderBalls(data: IData[] | string): void {
+    const ballsElement: HTMLDivElement = document.querySelector('.balls') as HTMLDivElement;
+
     const ballsTemplate: string[] = [];
-    data.forEach((item): void => {
-      const template = `
-      <div class="balls__body">
+    if (typeof data === 'string') {
+      ballsElement.innerHTML = `${data}`;
+    } else {
+      data.forEach((item): void => {
+        const template = `
+      <div class="balls__body" data-num="${item.num}">
       <h2 class="balls__title">${item.name}</h2>
       <div class="balls__column">
         <div class="balls__toy">
@@ -23,13 +29,13 @@ class View {
           <div class="balls__favorite balls__text">Любимая: ${item.favorite}</div>
         </div>
       </div>
-      <div class="ribbon "></div>
+      ${this.renderRibbon(+item.num)}
     </div>`;
-      ballsTemplate.push(template);
-    });
-    const ballsElement: HTMLDivElement = document.querySelector('.balls') as HTMLDivElement;
-    ballsElement.innerHTML = ballsTemplate.join('');
-    // this.renderCardsIndicator();
+        ballsTemplate.push(template);
+      });
+      ballsElement.innerHTML = ballsTemplate.join('');
+      this.renderCardsIndicator();
+    }
   }
 
   static changeRibbonColor(element: Element): void {
@@ -40,29 +46,35 @@ class View {
     countBall.innerHTML = `${index}`;
   }
 
-  // static renderRibbon(card: IData, activeArr: number[] | undefined): string {
-  //   if (activeArr?.includes(+card.num)) {
-  //     return `<div class="ribbon card__active"></div>`;
-  //   }
-  //   return `<div class="ribbon "></div>`;
-  // }
+  // отрисовываем цвет нажатым карточкам
+  static renderRibbon(active: number): string {
+    const activeCards: number[] = Model.getActiveCards();
+    if (activeCards?.includes(active)) {
+      return `<div class="ribbon card__active"></div>`;
+    }
+    return `<div class="ribbon "></div>`;
+  }
 
   // // Исправить не должно быть обращения к Model
-  // static renderCardsIndicator(): void {
-  //   const ballsBody: NodeListOf<Element> = document.querySelectorAll('.balls__body');
-  //   ballsBody.forEach((item: Element, index: number): void => {
-  //     item.addEventListener('click', (): void => {
-  //       this.changeRibbonColor(item);
-  //       const { length, active }: IActive = Model.getPressCard(index);
-  //       this.renderCardCount(length);
-  //     });
-  //   });
-  // }
+  static renderCardsIndicator(): void {
+    const ballsBody: NodeListOf<HTMLDivElement> = document.querySelectorAll('.balls__body');
+    ballsBody.forEach((item: HTMLDivElement): void => {
+      item.addEventListener('click', (): void => {
+        const cardNum = item.dataset.num;
+        if (typeof cardNum === 'string') {
+          lengthFavorite = Model.getPressCard(+cardNum);
+          if (lengthFavorite < 3) {
+            //  по клику добавляю класс с цветом если их не больше 20
+            this.changeRibbonColor(item);
+            // запоминаю нажатые карточки
+
+            // отображаю количество зажатых
+            this.renderCardCount(lengthFavorite);
+          }
+        }
+      });
+    });
+  }
 }
 // добавлять активный класс избранным карточкам
 export default View;
-
-interface IActive {
-  length: number;
-  active: number[];
-}

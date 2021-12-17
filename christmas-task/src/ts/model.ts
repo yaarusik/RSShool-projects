@@ -3,18 +3,14 @@ import { IData, SortProperty } from './interfases';
 
 import Utils from './utilits';
 
-let ballsArray: number[] = [];
+let activeCards: number[] = [];
 
 export const countBall: Element = document.querySelector('.right__count') as Element;
-const searchMessage: HTMLElement = document.querySelector('.balls__message') as HTMLElement;
+// const searchMessage: HTMLElement = document.querySelector('.balls__message') as HTMLElement;
 const search: HTMLInputElement = document.querySelector('.search__scope') as HTMLInputElement;
 
 countBall.innerHTML = '0';
 class Model {
-  // readonly utils: Utils;
-  // constructor() {
-  //   // this.utils = new Utils();
-  // }
   static async callData(url: string): Promise<IData[]> {
     return fetch(url).then((data): Promise<IData[]> => data.json());
   }
@@ -24,18 +20,27 @@ class Model {
   }
 
   static getPressCard = (index: number) => {
-    if (ballsArray.includes(index)) {
-      ballsArray = ballsArray.filter((ball) => ball !== index);
-    } else if (ballsArray.length < 20) {
-      ballsArray.push(index);
+    // index нажатая карточка
+    if (activeCards.includes(index)) {
+      activeCards = activeCards.filter((ball) => ball !== index);
+    } else if (activeCards.length < 3) {
+      activeCards.push(index);
     } else {
+      // сделать poup с сообщением
       console.log('у вас много шаров');
     }
-    console.log(ballsArray);
-    return { length: ballsArray.length, active: ballsArray };
+    // console.log(activeCards);
+    return activeCards.length;
   };
 
-  static getTypeOfSort(type: string | null, data: IData[]): IData[] {
+  static getActiveCards(): number[] {
+    return activeCards;
+  }
+
+  static getTypeOfSort(type: string | null, data: IData[] | string): IData[] | string {
+    if (typeof data === 'string') {
+      return 'Извините, совпадений не обнаружено';
+    }
     if (type === 'sort-name-max') {
       return Utils.sortNameMax(data);
     }
@@ -51,26 +56,26 @@ class Model {
     return [];
   }
 
-  static getTypeOfSortByValue(type: SortProperty, data: IData[]): IData[] {
-    return Utils.sort(type, data);
+  static getTypeOfFilterByValue(type: SortProperty, data: IData[]): IData[] | string {
+    return Utils.filter(type, data);
   }
 
   static getRangeValues(values: string[], data: IData[], type: string): IData[] {
     if (type === 'year') {
-      return Utils.sortByRangeYear(values, data);
+      return Utils.filterByRangeYear(values, data);
     }
     if (type === 'count') {
-      return Utils.sortByRangeCount(values, data);
+      return Utils.filterByRangeCount(values, data);
     }
     return data;
   }
 
-  // static search() {}
-
   static searchChanges(input: HTMLInputElement) {
+    // тут наверное oninput
     input.addEventListener('keyup', Model.filterCards);
   }
 
+  // поиск карточек через input
   static filterCards(): void {
     const cards: NodeListOf<HTMLElement> = document.querySelectorAll('.balls__body');
     const value: string = search.value.toLowerCase();

@@ -6,14 +6,27 @@ import { SortProperty, IData } from './interfases';
 import View from './view';
 
 let data: IData[] = [];
-let currentData: IData[] = data;
+let currentData: IData[] | string = [];
+const sortSelect: HTMLSelectElement = document.querySelector('.name__select') as HTMLSelectElement;
+export const pressFilter = new Set();
+
 // используем сортированные данные
-// const selectValue = 'sort-name-max';
+let selectValueMemory = 'sort-name-max';
 
 class Controller {
   // получаем данные в переменную
   static getDataFromEntry(dataBalls: IData[]): void {
     data = dataBalls;
+    currentData = dataBalls;
+  }
+
+  static defaultCardsData() {
+    currentData = data;
+    return data;
+  }
+
+  static getSelectValue() {
+    return selectValueMemory;
   }
 
   static getSliderValues(values: string[], type: string) {
@@ -21,7 +34,11 @@ class Controller {
     filter.type = type; // year | count
     filter.name = values; // ['1960','2000']
 
-    const sortData: IData[] = Model.getTypeOfSortByValue(filter, data);
+    let sortData: IData[] | string = Model.getTypeOfFilterByValue(filter, data);
+    currentData = sortData;
+    console.log(currentData.length);
+    // сортируем по выбранной сортировке
+    sortData = Model.getTypeOfSort(selectValueMemory, currentData);
     View.renderBalls(sortData);
   }
 
@@ -32,20 +49,33 @@ class Controller {
   }
 
   // сортируем карточки по нажатию
-  static sortCards(element: SortProperty, button: HTMLElement) {
+  static filterCards(element: SortProperty, button: HTMLElement) {
     const filter = element;
     filter.name = button.getAttribute('data-filter');
     filter.type = button.getAttribute('data-type');
+    pressFilter.add(button);
+    console.log(pressFilter);
 
-    const sortData: IData[] = Model.getTypeOfSortByValue(filter, data);
+    let sortData: IData[] | string = Model.getTypeOfFilterByValue(filter, data);
     // сохраняем сортированные данные
     currentData = sortData;
+    console.log(currentData.length);
+    // сортируем по выбранной сортировке
+    sortData = Model.getTypeOfSort(selectValueMemory, currentData);
     this.renderBalls(sortData);
   }
 
-  static renderBalls(sortCards: IData[]): void {
+  static renderBalls(sortCards: IData[] | string): void {
     View.renderBalls(sortCards);
   }
 }
+
+sortSelect.addEventListener('change', () => {
+  console.log(currentData.length);
+  selectValueMemory = sortSelect.value;
+  const sortData: IData[] | string = Model.getTypeOfSort(sortSelect.value, currentData);
+
+  Controller.renderBalls(sortData);
+});
 
 export default Controller;

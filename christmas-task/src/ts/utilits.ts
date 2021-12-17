@@ -5,7 +5,9 @@ type CommonSort = {
   [key: string]: string[];
 };
 
-const typeArr: CommonSort = {
+let countFilters = 0;
+
+export const typeArr: CommonSort = {
   form: [],
   color: [],
   size: [],
@@ -50,13 +52,16 @@ class Utils {
   static checkFilters(type: string, property: string) {
     if (!typeArr[type]?.includes(property)) {
       typeArr[type]?.push(property);
+      countFilters += 1;
     } else {
       typeArr[type] = typeArr[type]?.filter((item): boolean => item !== property) as string[];
+      countFilters -= 1;
     }
+    console.log(countFilters);
   }
 
   // разбить функцию одна задача одна функция
-  static sort(sortProperty: SortProperty, data: IData[]): IData[] {
+  static filter(sortProperty: SortProperty, data: IData[]): IData[] | string {
     let source: IData[] = data;
     const type: string = sortProperty.type as string;
 
@@ -67,6 +72,7 @@ class Utils {
         typeArr[type] = [type];
         const sliderValues: string[] = sortProperty.name as string[];
         sliderValues.forEach((item) => typeArr[type]?.push(item));
+        countFilters += 1;
         break;
       }
       default: {
@@ -74,8 +80,10 @@ class Utils {
         this.checkFilters(type, property);
       }
     }
-
-    console.log(typeArr);
+    // если ни один фильтр не нажат
+    if (!countFilters) {
+      return data;
+    }
 
     const newTypeArr: string[][] = Object.values(typeArr);
     newTypeArr.forEach((tips): void => {
@@ -86,12 +94,12 @@ class Utils {
 
         switch (tips[0]) {
           case 'year': {
-            cardsCollection = this.sortByRangeYear(tips, source);
+            cardsCollection = this.filterByRangeYear(tips, source);
             cardsResult.push(...cardsCollection);
             break;
           }
           case 'count': {
-            cardsCollection = this.sortByRangeCount(tips, source);
+            cardsCollection = this.filterByRangeCount(tips, source);
             cardsResult.push(...cardsCollection);
             break;
           }
@@ -105,7 +113,6 @@ class Utils {
             });
           }
         }
-
         source = cardsResult;
       }
     });
@@ -113,37 +120,40 @@ class Utils {
     source.sort((a, b) => +a.num - +b.num);
 
     if (source.length === 0) {
-      // сообщение
+      return 'Извините, совпадений не обнаружено';
+      // ретурн сообщение что игрушек нет
     }
     // тут не должны быть нажаты кнопки
-    return source.length === 0 ? data : source;
-  }
-
-  static sortByRangeCount(values: string[], data: IData[]): IData[] {
-    if (!data) {
-      return [];
-    }
-    const [type, leftOuput, rightOuput] = values;
-    const source: IData[] = data.filter((item) => {
-      if (+item.count >= +leftOuput! && +item.count <= +rightOuput!) {
-        return item;
-      }
-      return false;
-    });
     return source;
   }
 
-  static sortByRangeYear(values: string[], data: IData[]): IData[] {
-    if (!data) {
-      return [];
+  static filterByRangeCount(values: string[], data: IData[]): IData[] {
+    const [type, min, max] = values;
+    let source: IData[] = [];
+    if (min !== undefined && max !== undefined) {
+      source = data.filter((item) => {
+        if (+item.count >= +min && +item.count <= +max) {
+          return item;
+        }
+        return false;
+      });
     }
-    const [type, leftOuput, rightOuput] = values;
-    const source: IData[] = data.filter((item) => {
-      if (+item.year >= +leftOuput! && +item.year <= +rightOuput!) {
-        return item;
-      }
-      return false;
-    });
+
+    return source;
+  }
+
+  static filterByRangeYear(values: string[], data: IData[]): IData[] {
+    const [type, min, max] = values;
+    let source: IData[] = [];
+    if (min !== undefined && max !== undefined) {
+      source = data.filter((item) => {
+        if (+item.year >= +min && +item.year <= +max) {
+          return item;
+        }
+        return false;
+      });
+    }
+
     return source;
   }
 }

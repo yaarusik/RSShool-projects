@@ -16,11 +16,6 @@ search.focus();
       '../assets/christmas.json'
     );
 
-    // const getLocaleStorage = localStorage.getItem('currentData');
-    // if (getLocaleStorage) {
-    //   balls = JSON.parse(getLocaleStorage);
-    // }
-
     Controller.getDataFromEntry(balls);
     const selectValue = Controller.getSelectValue();
     const sortData = Model.getTypeOfSort(selectValue, balls);

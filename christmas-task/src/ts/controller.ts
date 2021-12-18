@@ -9,10 +9,10 @@ let data: IData[] = [];
 
 let currentData: IData[] | string = [];
 const sortSelect: HTMLSelectElement = document.querySelector('.name__select') as HTMLSelectElement;
-export const pressFilter = new Set();
 
 // используем сортированные данные
 let selectValueMemory = localStorage.getItem('selectSort') || 'sort-name-max';
+sortSelect.value = localStorage.getItem('selectSort') || 'sort-name-max';
 
 class Controller {
   // получаем данные в переменную
@@ -54,8 +54,6 @@ class Controller {
     const filter = element;
     filter.name = button.getAttribute('data-filter');
     filter.type = button.getAttribute('data-type');
-    pressFilter.add(button);
-    console.log(pressFilter);
 
     let sortData: IData[] | string = Model.getTypeOfFilterByValue(filter, data);
     // сохраняем сортированные данные

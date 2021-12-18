@@ -1,4 +1,5 @@
 import noUiSlider, { target } from 'nouislider';
+// eslint-disable-next-line import/no-cycle
 import Controller from './controller';
 import { SliderValues } from './interfases';
 
@@ -8,8 +9,8 @@ const countSlider: target = <target>document.querySelector('.count-slider');
 const yearSlider: target = <target>document.querySelector('.year-slider');
 
 const uisliderReset = (values: SliderValues) => {
-  yearSlider.noUiSlider?.set(values.year);
-  countSlider.noUiSlider?.set(values.count);
+  yearSlider.noUiSlider?.set(values.year as number[]);
+  countSlider.noUiSlider?.set(values.count as number[]);
 };
 
 const sliderReset = (values: SliderValues) => {

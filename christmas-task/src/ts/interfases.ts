@@ -15,6 +15,5 @@ export type SortProperty = {
 };
 
 export type SliderValues = {
-  year: number[];
-  count: number[];
+  [key: string]: number[];
 };

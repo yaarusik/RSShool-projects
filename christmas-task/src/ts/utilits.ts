@@ -1,6 +1,8 @@
 // eslint-disable-next-line import/no-cycle
+import sliderReset from './uislider';
+// eslint-disable-next-line import/no-cycle
 import Controller from './controller';
-import { IData, SortProperty } from './interfases';
+import { IData, SliderValues, SortProperty } from './interfases';
 
 type CommonSort = {
   [key: string]: string[];
@@ -20,9 +22,39 @@ let typeArr: CommonSort = {
 const getLocaleStorage = localStorage.getItem('filters');
 if (getLocaleStorage) {
   typeArr = JSON.parse(getLocaleStorage);
-  Object.values(typeArr).forEach((filter) => {
-    const allFilterBtn: NodeListOf<HTMLElement> = document.querySelectorAll('[data-filter]');
+  // добавление классов нажатым кнопкам
+  const allFilterBtn: NodeListOf<HTMLElement> = document.querySelectorAll('[data-filter]');
+  const sliderValues: SliderValues = {};
+  Object.entries(typeArr).forEach((item) => {
+    if (item[0] === 'form' || item[0] === 'size') {
+      item[1].forEach((property) => {
+        allFilterBtn.forEach((btn) => {
+          if (btn.dataset.filter === property) {
+            btn.classList.add('form__active');
+          }
+        });
+      });
+    } else if (item[0] === 'color' || item[0] === 'favorite') {
+      item[1].forEach((property) => {
+        allFilterBtn.forEach((btn) => {
+          if (btn.dataset.filter === property) {
+            btn.classList.add('color__active');
+          }
+        });
+      });
+    } else {
+      const type = item[0];
+      const params = item[1].slice(1).map(parseFloat);
+      sliderValues[type] = params;
+    }
+
+    console.log(item);
   });
+  // слайдер не успевает подгрузиться
+  const initValue = () => {
+    sliderReset(sliderValues);
+  };
+  setTimeout(initValue, 200);
 }
 
 // export const typeArr: CommonSort = (JSON.parse(localStorage.getItem('filters') as string) as CommonSort) || filtersObj;

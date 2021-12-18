@@ -1,18 +1,21 @@
-import Controller, { pressFilter } from './controller';
+import Controller from './controller';
 import Model from './model';
 import View from './view';
 import sliderReset from './uislider';
 import Utils from './utilits';
+import { IData } from './interfases';
 
 const resetBtn: HTMLButtonElement = document.querySelector('.name__clear') as HTMLButtonElement;
+const resetLocaleStorage: HTMLButtonElement = document.querySelector('.name__none') as HTMLButtonElement;
 
-const resetFilters = () => {
+const resetFilters = (select?: string) => {
   const typeArr = Utils.getTypeFilters();
   if (typeArr !== undefined) {
     Object.values(typeArr).forEach((item) => item.splice(0, item.length));
   }
+  const allFilterBtn: NodeListOf<HTMLElement> = document.querySelectorAll('[data-filter]');
   // очищаем классы активных фильтров
-  [...pressFilter].forEach((button) => {
+  allFilterBtn.forEach((button) => {
     const btn: HTMLButtonElement = button as HTMLButtonElement;
     if (btn.classList.contains('form__active')) {
       btn.classList.remove('form__active');
@@ -27,9 +30,25 @@ const resetFilters = () => {
   sliderReset(values);
   const defaultData = Controller.defaultCardsData();
   const selectValue = Controller.getSelectValue();
-  const sortData = Model.getTypeOfSort(selectValue, defaultData);
+  let sortData: IData[] | string;
+  if (select) {
+    sortData = Model.getTypeOfSort(select, defaultData);
+  } else {
+    sortData = Model.getTypeOfSort(selectValue, defaultData);
+  }
   View.renderBalls(sortData);
   console.log(typeArr);
 };
 
-resetBtn.addEventListener('click', resetFilters);
+const resetFull = () => {
+  const sortSelect: HTMLSelectElement = document.querySelector('.name__select') as HTMLSelectElement;
+
+  sortSelect.value = 'sort-name-max';
+  localStorage.clear();
+  resetFilters('sort-name-max');
+};
+
+resetBtn.addEventListener('click', () => {
+  resetFilters();
+});
+resetLocaleStorage.addEventListener('click', resetFull);

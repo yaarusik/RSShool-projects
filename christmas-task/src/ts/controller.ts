@@ -37,7 +37,7 @@ class Controller {
 
     let sortData: IData[] | string = Model.getTypeOfFilterByValue(filter, data);
     currentData = sortData;
-    console.log(currentData.length);
+    // console.log(currentData.length);
     // сортируем по выбранной сортировке
     sortData = Model.getTypeOfSort(selectValueMemory, currentData);
     View.renderBalls(sortData);

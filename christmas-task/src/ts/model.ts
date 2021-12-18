@@ -2,8 +2,16 @@
 import { IData, SortProperty } from './interfases';
 
 import Utils from './utilits';
+import View from './view';
 
-let activeCards: number[] = [];
+let activeCards: number[];
+const activeFromStorage = localStorage.getItem('favoriteCards');
+
+if (activeFromStorage) {
+  activeCards = JSON.parse(activeFromStorage);
+} else {
+  activeCards = [];
+}
 
 export const countBall: Element = document.querySelector('.right__count') as Element;
 // const searchMessage: HTMLElement = document.querySelector('.balls__message') as HTMLElement;
@@ -17,7 +25,7 @@ const deleteValue = () => {
 };
 searchAfter.addEventListener('click', deleteValue);
 
-countBall.innerHTML = '0';
+countBall.innerHTML = localStorage.getItem('favoritesCount') || '0';
 class Model {
   static async callData(url: string): Promise<IData[]> {
     return fetch(url).then((data): Promise<IData[]> => data.json());
@@ -27,17 +35,26 @@ class Model {
     return this.callData(url);
   }
 
-  static getPressCard = (index: number) => {
+  static getPressCard = (index: number, card: HTMLDivElement, currentCard: number) => {
     // index нажатая карточка
     if (activeCards.includes(index)) {
       activeCards = activeCards.filter((ball) => ball !== index);
+      View.changeRibbonColor(card, 'remove');
     } else if (activeCards.length < 3) {
       activeCards.push(index);
+      View.changeRibbonColor(card, 'add');
     } else {
-      // сделать poup с сообщением
-      console.log('у вас много шаров');
+      const msg: NodeListOf<HTMLElement> = document.querySelectorAll('.msg') as NodeListOf<HTMLElement>;
+      if (msg[currentCard]) {
+        msg[currentCard]?.classList.add('message');
+        msg[currentCard]!.textContent = 'Извините, все слоты заполнены';
+        setTimeout(() => {
+          msg[currentCard]?.classList.remove('message');
+          msg[currentCard]!.textContent = 'Извините, все слоты заполнены';
+        }, 900);
+      }
     }
-    // console.log(activeCards);
+    localStorage.setItem('favoriteCards', JSON.stringify(activeCards));
     return activeCards.length;
   };
 

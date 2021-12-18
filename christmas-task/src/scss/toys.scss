@@ -588,3 +588,41 @@
       flex-wrap: wrap;
    }
 }
+
+.msg {
+   position: absolute;
+   border-radius: 8px;
+   font-size: 15px;
+   line-height: 25px;
+   right: 0;
+   width: 67%;
+   font-weight: 400;
+   color: #000;
+   text-align: center;
+   background: rgba(40, 160, 255, 1);
+   z-index: 20;
+   height: 50px;
+   bottom: 0px;
+   opacity: 0;
+   transform: translateY(100%);
+   perspective: 1000px;
+   transition: 0.2s ease;
+}
+
+.message {
+   position: absolute;
+   border-radius: 8px;
+   font-size: 15px;
+   line-height: 25px;
+   right: 0;
+   width: 67%;
+   font-weight: 400;
+   color: #000;
+   text-align: center;
+   background: rgba(40, 160, 255, 1);
+   z-index: 20;
+   height: 50px;
+   bottom: 0px;
+   opacity: 1;
+   transform: translateY(0%);
+}

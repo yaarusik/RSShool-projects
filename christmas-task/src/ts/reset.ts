@@ -1,5 +1,5 @@
 import Controller from './controller';
-import Model from './model';
+import Model, { countBall } from './model';
 import View from './view';
 import sliderReset from './uislider';
 import Utils from './utilits';
@@ -33,6 +33,7 @@ const resetFilters = (select?: string) => {
   let sortData: IData[] | string;
   if (select) {
     sortData = Model.getTypeOfSort(select, defaultData);
+    countBall.innerHTML = '0';
   } else {
     sortData = Model.getTypeOfSort(selectValue, defaultData);
   }

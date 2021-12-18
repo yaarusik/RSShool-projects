@@ -22,6 +22,7 @@ class View {
         }
         const template = `
       <div class="balls__body" data-num="${item.num}">
+      <div class="msg"></div>
       <h2 class="balls__title">${item.name}</h2>
       <div class="balls__column">
         <div class="balls__toy">
@@ -45,12 +46,21 @@ class View {
     }
   }
 
-  static changeRibbonColor(element: Element): void {
-    element.children[2]?.classList.toggle('card__active');
+  static changeRibbonColor(element: Element, change: string): void {
+    switch (change) {
+      case 'add': {
+        element.children[3]?.classList.add('card__active');
+        break;
+      }
+      default: {
+        element.children[3]?.classList.remove('card__active');
+      }
+    }
   }
 
   static renderCardCount(index: number): void {
     countBall.innerHTML = `${index}`;
+    localStorage.setItem('favoritesCount', JSON.stringify(index));
   }
 
   // отрисовываем цвет нажатым карточкам
@@ -59,26 +69,24 @@ class View {
     if (activeCards?.includes(active)) {
       return `<div class="ribbon card__active"></div>`;
     }
-    return `<div class="ribbon "></div>`;
+    return `<div class="ribbon"></div>`;
   }
 
   // // Исправить не должно быть обращения к Model
   static renderCardsIndicator(): void {
     const ballsBody: NodeListOf<HTMLDivElement> = document.querySelectorAll('.balls__body');
-    ballsBody.forEach((item: HTMLDivElement): void => {
+    ballsBody.forEach((item: HTMLDivElement, index: number): void => {
       item.addEventListener('click', (): void => {
         const cardNum = item.dataset.num;
         if (typeof cardNum === 'string') {
-          lengthFavorite = Model.getPressCard(+cardNum);
-          if (lengthFavorite < 3) {
-            //  по клику добавляю класс с цветом если их не больше 20
-            this.changeRibbonColor(item);
-            // запоминаю нажатые карточки
-
-            // отображаю количество зажатых
-            this.renderCardCount(lengthFavorite);
-          }
+          //  по клику добавляю класс с цветом если их не больше 20
+          // запоминаю нажатые карточки
+          lengthFavorite = Model.getPressCard(+cardNum, item, index);
+          // отображаю количество зажатых
+          this.renderCardCount(lengthFavorite);
         }
+
+        console.log(`${lengthFavorite} favorites`);
       });
     });
   }

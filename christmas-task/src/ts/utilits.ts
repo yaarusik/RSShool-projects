@@ -56,9 +56,6 @@ if (getLocaleStorage) {
   };
   setTimeout(initValue, 200);
 }
-
-// export const typeArr: CommonSort = (JSON.parse(localStorage.getItem('filters') as string) as CommonSort) || filtersObj;
-
 class Utils {
   static sortNameMax(data: IData[]) {
     const source: IData[] = data;

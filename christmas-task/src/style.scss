@@ -24,11 +24,7 @@ $fontfamily: "Roboto", sans-serif;
 //переменные============================
 $minwidth: 320px;
 $maxwidth: 1920px;
-$mw: 1100px;
-$md1: $mw + 12;
-$md2: 992.98;
-$md3: 767.98;
-$md4: 479.98;
+
 :root {
    --bg-red: #de2f32;
    --col-blue: #a0d5d3;
@@ -42,7 +38,7 @@ body {
    background-image: url("./assets/images/bg/bg__main.jpg");
    background-size: cover;
    background-attachment: fixed;
-   min-height: 100%;
+   height: 100%;
    background-color: rgba(#a0d5d3, 0.2);
    background-blend-mode: multiply;
    background-repeat: no-repeat;
@@ -94,9 +90,42 @@ body {
 }
 
 .form__active {
-   filter: invert(9%) sepia(63%) saturate(461%) hue-rotate(322deg) brightness(83%) contrast(88%);
+   // filter: invert(9%) sepia(63%) saturate(461%) hue-rotate(322deg) brightness(83%) contrast(88%);
+   filter: invert(23%) sepia(66%) saturate(3362%) hue-rotate(343deg) brightness(92%) contrast(90%); // stroke: #de2f32;
 }
 .color__active {
    background-image: url("./assets/images/svg/choose.svg");
    background-size: 100%;
+}
+
+.balls__visible {
+   margin-top: 0;
+   opacity: 1;
+}
+
+.hide {
+   animation-name: hide;
+   animation-duration: 0.3s;
+   animation-fill-mode: forwards;
+}
+
+.anime {
+   transform: scale(0);
+   opacity: 0;
+}
+
+@keyframes hide {
+   0% {
+      visibility: hidden;
+      height: 280px;
+   }
+   100% {
+      visibility: visible;
+      width: 0;
+      height: 0;
+      font-size: 0;
+      margin: 0;
+      border: 0;
+      padding: 0;
+   }
 }

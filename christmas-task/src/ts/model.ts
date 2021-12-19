@@ -40,7 +40,7 @@ class Model {
     if (activeCards.includes(index)) {
       activeCards = activeCards.filter((ball) => ball !== index);
       View.changeRibbonColor(card, 'remove');
-    } else if (activeCards.length < 3) {
+    } else if (activeCards.length < 20) {
       activeCards.push(index);
       View.changeRibbonColor(card, 'add');
     } else {
@@ -60,6 +60,10 @@ class Model {
 
   static getActiveCards(): number[] {
     return activeCards;
+  }
+
+  static clearActiveCards() {
+    activeCards = [];
   }
 
   static getTypeOfSort(type: string | null, data: IData[] | string): IData[] | string {
@@ -117,15 +121,24 @@ class Model {
     }
 
     cards.forEach((item) => {
-      const cardTitle: HTMLElement = item.children[0] as HTMLElement;
+      const cardTitle: HTMLElement = item.children[1] as HTMLElement;
       const card: HTMLElement = item;
       if (cardTitle.innerHTML.toLowerCase().indexOf(value) > -1) {
-        card.style.display = '';
+        card.classList.remove('anime');
+        card.classList.remove('hide');
         countHide -= 1;
       } else {
-        card.style.display = 'none';
+        card.classList.add('anime');
         countHide += 1;
       }
+    });
+
+    cards.forEach((card) => {
+      card.addEventListener('transitionend', () => {
+        if (card.classList.contains('anime')) {
+          card.classList.add('hide');
+        }
+      });
     });
 
     if (countHide > cards.length - 1) {

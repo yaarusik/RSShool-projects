@@ -88,6 +88,9 @@ class View {
 
         console.log(`${lengthFavorite} favorites`);
       });
+      setTimeout(() => {
+        item.classList.add('balls__visible');
+      }, 80 * index);
     });
   }
 }

@@ -46,6 +46,7 @@ const resetFull = () => {
 
   sortSelect.value = 'sort-name-max';
   localStorage.clear();
+  Model.clearActiveCards();
   resetFilters('sort-name-max');
 };
 

@@ -22,11 +22,11 @@ if (getLocaleStorage) {
   const allFilterBtn: NodeListOf<HTMLElement> = document.querySelectorAll('[data-filter]');
   const sliderValues: SliderValues = {};
   Object.entries(typeArr).forEach((item) => {
-    const typeFilter = item[0];
+    const [typeFilter, filterValues] = item;
     switch (typeFilter) {
       case 'form':
       case 'size': {
-        item[1].forEach((property) => {
+        filterValues.forEach((property) => {
           allFilterBtn.forEach((btn) => {
             if (btn.dataset.filter === property) {
               btn.classList.add('form__active');
@@ -37,7 +37,7 @@ if (getLocaleStorage) {
       }
       case 'color':
       case 'favorite': {
-        item[1].forEach((property) => {
+        filterValues.forEach((property) => {
           allFilterBtn.forEach((btn) => {
             if (btn.dataset.filter === property) {
               btn.classList.add('color__active');
@@ -47,7 +47,7 @@ if (getLocaleStorage) {
         break;
       }
       default: {
-        const params = item[1].slice(1).map(parseFloat);
+        const params = filterValues.slice(1).map(parseFloat);
         sliderValues[typeFilter] = params;
       }
     }

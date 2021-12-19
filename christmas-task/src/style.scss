@@ -54,6 +54,7 @@ body {
    flex-direction: column;
    width: 100%;
    max-width: $maxwidth;
+   height: 100%;
    // background: var(--bg-red);
 }
 //ОБОЛОЧКА==============================
@@ -91,7 +92,7 @@ body {
 
 .form__active {
    // filter: invert(9%) sepia(63%) saturate(461%) hue-rotate(322deg) brightness(83%) contrast(88%);
-   filter: invert(23%) sepia(66%) saturate(3362%) hue-rotate(343deg) brightness(92%) contrast(90%); // stroke: #de2f32;
+   filter: invert(10%) sepia(66%) saturate(3362%) hue-rotate(343deg) brightness(92%) contrast(90%); // stroke: #de2f32;
 }
 .color__active {
    background-image: url("./assets/images/svg/choose.svg");

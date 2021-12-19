@@ -48,7 +48,7 @@ class Search {
 
   static deleteValue = () => {
     search.value = '';
-    const event = new Event('keyup');
+    const event = new Event('input');
     search.dispatchEvent(event);
   };
 }

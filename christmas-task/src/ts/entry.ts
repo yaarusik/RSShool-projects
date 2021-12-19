@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-named-as-default
 import Model from './model';
 import Controller from './controller';
 import { IData } from './interfases';

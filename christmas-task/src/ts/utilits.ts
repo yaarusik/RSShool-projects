@@ -2,11 +2,7 @@
 import sliderReset from './uislider';
 // eslint-disable-next-line import/no-cycle
 import Controller from './controller';
-import { IData, SliderValues, SortProperty } from './interfases';
-
-type CommonSort = {
-  [key: string]: string[];
-};
+import { IData, SliderValues, SortProperty, CommonSort } from './interfases';
 
 let countFilters = 0;
 
@@ -26,50 +22,52 @@ if (getLocaleStorage) {
   const allFilterBtn: NodeListOf<HTMLElement> = document.querySelectorAll('[data-filter]');
   const sliderValues: SliderValues = {};
   Object.entries(typeArr).forEach((item) => {
-    if (item[0] === 'form' || item[0] === 'size') {
-      item[1].forEach((property) => {
-        allFilterBtn.forEach((btn) => {
-          if (btn.dataset.filter === property) {
-            btn.classList.add('form__active');
-          }
+    const typeFilter = item[0];
+    switch (typeFilter) {
+      case 'form':
+      case 'size': {
+        item[1].forEach((property) => {
+          allFilterBtn.forEach((btn) => {
+            if (btn.dataset.filter === property) {
+              btn.classList.add('form__active');
+            }
+          });
         });
-      });
-    } else if (item[0] === 'color' || item[0] === 'favorite') {
-      item[1].forEach((property) => {
-        allFilterBtn.forEach((btn) => {
-          if (btn.dataset.filter === property) {
-            btn.classList.add('color__active');
-          }
+        break;
+      }
+      case 'color':
+      case 'favorite': {
+        item[1].forEach((property) => {
+          allFilterBtn.forEach((btn) => {
+            if (btn.dataset.filter === property) {
+              btn.classList.add('color__active');
+            }
+          });
         });
-      });
-    } else {
-      const type = item[0];
-      const params = item[1].slice(1).map(parseFloat);
-      sliderValues[type] = params;
+        break;
+      }
+      default: {
+        const params = item[1].slice(1).map(parseFloat);
+        sliderValues[typeFilter] = params;
+      }
     }
-
-    console.log(item);
   });
   // слайдер не успевает подгрузиться
   const initValue = () => {
     sliderReset(sliderValues);
   };
-  setTimeout(initValue, 200);
+  setTimeout(initValue, 100);
 }
 class Utils {
   static sortNameMax(data: IData[]) {
     const source: IData[] = data;
-    source.sort((a, b): number => {
-      return a.name > b.name ? 1 : -1;
-    });
+    source.sort((a, b): number => (a.name > b.name ? 1 : -1));
     return source;
   }
 
   static sortNameMin(data: IData[]): IData[] {
     const source: IData[] = data;
-    source.sort((a, b): number => {
-      return a.name < b.name ? 1 : -1;
-    });
+    source.sort((a, b): number => (a.name < b.name ? 1 : -1));
     return source;
   }
 
@@ -79,59 +77,29 @@ class Utils {
 
   static sortCountMax(data: IData[]): IData[] {
     const source: IData[] = data;
-    source.sort((a, b): number => {
-      return +a.count - +b.count;
-    });
+    source.sort((a, b): number => +a.count - +b.count);
     return source;
   }
 
   static sortCountMin(data: IData[]): IData[] {
     const source: IData[] = data;
-    source.sort((a, b): number => {
-      return +b.count - +a.count;
-    });
+    source.sort((a, b): number => +b.count - +a.count);
     return source;
   }
 
   static checkFilters(type: string, property: string) {
-    if (!typeArr[type]?.includes(property)) {
-      typeArr[type]?.push(property);
+    const types = typeArr[type];
+    if (!types?.includes(property)) {
+      types?.push(property);
       countFilters += 1;
     } else {
-      typeArr[type] = typeArr[type]?.filter((item): boolean => item !== property) as string[];
+      typeArr[type] = types?.filter((item): boolean => item !== property) as string[];
       countFilters -= 1;
     }
-    console.log(countFilters);
   }
 
-  // разбить функцию одна задача одна функция
-  static filter(sortProperty: SortProperty, data: IData[]): IData[] | string {
-    let source: IData[] = data;
-    const type: string = sortProperty.type as string;
-
-    switch (type) {
-      case 'year':
-      case 'count': {
-        // обнуляем массив
-        typeArr[type] = [type];
-        const sliderValues: string[] = sortProperty.name as string[];
-        sliderValues.forEach((item) => typeArr[type]?.push(item));
-        countFilters += 1;
-        break;
-      }
-      default: {
-        const property: string = sortProperty.name as string;
-        this.checkFilters(type, property);
-      }
-    }
-
-    Controller.setLocaleStorage('filters', JSON.stringify(typeArr));
-
-    // если ни один фильтр не нажат
-    if (!countFilters) {
-      return data;
-    }
-
+  static unionFilter(currentData: IData[]): IData[] {
+    let source: IData[] = currentData;
     const newTypeArr: string[][] = Object.values(typeArr);
     newTypeArr.forEach((tips): void => {
       const cardsResult: IData[] = [];
@@ -163,44 +131,58 @@ class Utils {
         source = cardsResult;
       }
     });
-    // сортируем в исходном порядке
-    source.sort((a, b) => +a.num - +b.num);
-
-    if (source.length === 0) {
-      return 'Извините, совпадений не обнаружено';
-      // ретурн сообщение что игрушек нет
-    }
-    // тут не должны быть нажаты кнопки
     return source;
+  }
+
+  static filter(sortProperty: SortProperty, data: IData[]): IData[] | string {
+    const source: IData[] = data;
+    const type: string = sortProperty.type as string;
+
+    switch (type) {
+      case 'year':
+      case 'count': {
+        // обнуляем массив
+        typeArr[type] = [type];
+        const sliderValues: string[] = sortProperty.name as string[];
+        sliderValues.forEach((item) => typeArr[type]?.push(item));
+        countFilters += 1;
+        break;
+      }
+      default: {
+        const property: string = sortProperty.name as string;
+        this.checkFilters(type, property);
+      }
+    }
+    Controller.setLocaleStorage('filters', JSON.stringify(typeArr));
+    // если ни один фильтр не нажат
+    if (!countFilters) {
+      return data;
+    }
+    const dataAfterFilters = this.unionFilter(source);
+    // сортируем в исходном порядке
+    dataAfterFilters.sort((a, b) => +a.num - +b.num);
+
+    if (dataAfterFilters.length === 0) {
+      return 'Извините, совпадений не обнаружено';
+    }
+    return dataAfterFilters;
   }
 
   static filterByRangeCount(values: string[], data: IData[]): IData[] {
     const [type, min, max] = values;
     let source: IData[] = [];
-    if (min !== undefined && max !== undefined) {
-      source = data.filter((item) => {
-        if (+item.count >= +min && +item.count <= +max) {
-          return item;
-        }
-        return false;
-      });
+    if (min && max) {
+      source = data.filter((item) => +item.count >= +min && +item.count <= +max);
     }
-
     return source;
   }
 
   static filterByRangeYear(values: string[], data: IData[]): IData[] {
     const [type, min, max] = values;
     let source: IData[] = [];
-    if (min !== undefined && max !== undefined) {
-      source = data.filter((item) => {
-        if (+item.year >= +min && +item.year <= +max) {
-          return item;
-        }
-        return false;
-      });
+    if (min && max) {
+      source = data.filter((item) => +item.year >= +min && +item.year <= +max);
     }
-
     return source;
   }
 }

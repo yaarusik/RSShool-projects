@@ -11,9 +11,13 @@ export interface IData {
 
 export type SortProperty = {
   name?: string | null | string[];
-  type?: string | null;
+  type?: string;
 };
 
 export type SliderValues = {
   [key: string]: number[];
+};
+
+export type CommonSort = {
+  [key: string]: string[];
 };

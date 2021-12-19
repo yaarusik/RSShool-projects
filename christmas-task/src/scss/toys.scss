@@ -293,9 +293,6 @@
       font-size: 18px;
       line-height: 20px;
    }
-
-   &__row {
-   }
 }
 .name {
    &__sort {
@@ -465,9 +462,6 @@
       line-height: 22px;
    }
 
-   &__end {
-   }
-
    &__rsschool .logo {
       width: 130px;
       height: 40px;
@@ -475,9 +469,6 @@
 
    &__username .footer__link {
       color: var(--col-white);
-   }
-
-   &__year {
    }
 }
 

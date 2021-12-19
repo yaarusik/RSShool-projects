@@ -9,8 +9,8 @@ const countSlider: target = <target>document.querySelector('.count-slider');
 const yearSlider: target = <target>document.querySelector('.year-slider');
 
 const uisliderReset = (values: SliderValues) => {
-  yearSlider.noUiSlider?.set(values.year as number[]);
-  countSlider.noUiSlider?.set(values.count as number[]);
+  yearSlider.noUiSlider?.set(Number(values.year));
+  countSlider.noUiSlider?.set(Number(values.count));
 };
 
 const sliderReset = (values: SliderValues) => {
@@ -30,14 +30,13 @@ function sliderInit() {
         max: 12,
       },
     });
-    countSlider.noUiSlider?.on('update', (values: any) => {
-      const [leftOutput, rightOutput] = values;
-      if (leftOutput !== undefined && rightOutput !== undefined) {
-        (outputs[0] as HTMLElement).innerHTML = `${parseInt(leftOutput, 10)}`;
-        (outputs[1] as HTMLElement).innerHTML = `${parseInt(rightOutput, 10)}`;
+    countSlider.noUiSlider?.on('update', (values: (string | number)[]) => {
+      const [min, max] = values as string[];
+      if (min && max) {
+        (outputs[0] as HTMLElement).innerHTML = `${parseInt(min, 10)}`;
+        (outputs[1] as HTMLElement).innerHTML = `${parseInt(max, 10)}`;
+        Controller.getSliderValues([min, max], 'count');
       }
-
-      Controller.getSliderValues(values, 'count');
     });
   }
   if (yearSlider !== null) {
@@ -51,15 +50,15 @@ function sliderInit() {
         max: 2021,
       },
     });
-    yearSlider.noUiSlider?.on('update', (values: any) => {
-      const [leftYear, rightYear] = values;
-      if (leftYear !== undefined && rightYear !== undefined) {
-        (outputs[2] as HTMLElement).innerHTML = `${parseInt(leftYear, 10)}`;
-        (outputs[3] as HTMLElement).innerHTML = `${parseInt(rightYear, 10)}`;
+    yearSlider.noUiSlider?.on('update', (values: (string | number)[]) => {
+      const [min, max] = values as string[];
+      if (min && max) {
+        (outputs[2] as HTMLElement).innerHTML = `${parseInt(min, 10)}`;
+        (outputs[3] as HTMLElement).innerHTML = `${parseInt(max, 10)}`;
+        Controller.getSliderValues([min, max], 'year');
       }
-      Controller.getSliderValues(values, 'year');
     });
   }
 }
 
-setTimeout(sliderInit, 100);
+setTimeout(sliderInit, 50);

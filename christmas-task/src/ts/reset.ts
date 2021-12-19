@@ -1,6 +1,6 @@
 import Controller from './controller';
-import Model, { countBall } from './model';
-import View from './view';
+import Model from './model';
+import View, { countBall } from './view';
 import sliderReset from './uislider';
 import Utils from './utilits';
 import { IData } from './interfases';
@@ -8,11 +8,7 @@ import { IData } from './interfases';
 const resetBtn: HTMLButtonElement = document.querySelector('.name__clear') as HTMLButtonElement;
 const resetLocaleStorage: HTMLButtonElement = document.querySelector('.name__none') as HTMLButtonElement;
 
-const resetFilters = (select?: string) => {
-  const typeArr = Utils.getTypeFilters();
-  if (typeArr !== undefined) {
-    Object.values(typeArr).forEach((item) => item.splice(0, item.length));
-  }
+const cleanClasses = () => {
   const allFilterBtn: NodeListOf<HTMLElement> = document.querySelectorAll('[data-filter]');
   // очищаем классы активных фильтров
   allFilterBtn.forEach((button) => {
@@ -23,13 +19,24 @@ const resetFilters = (select?: string) => {
       btn.classList.remove('color__active');
     }
   });
+};
+
+const resetFilters = (select?: string) => {
+  const defaultData = Controller.defaultCardsData();
+  const selectValue = Controller.getSelectValue();
   const values = {
     year: [0, 2021],
     count: [0, 12],
   };
+
+  const typeArr = Utils.getTypeFilters();
+  if (typeArr) {
+    Object.values(typeArr).forEach((item) => item.splice(0, item.length));
+  }
+
+  cleanClasses();
   sliderReset(values);
-  const defaultData = Controller.defaultCardsData();
-  const selectValue = Controller.getSelectValue();
+
   let sortData: IData[] | string;
   if (select) {
     sortData = Model.getTypeOfSort(select, defaultData);
@@ -37,13 +44,12 @@ const resetFilters = (select?: string) => {
   } else {
     sortData = Model.getTypeOfSort(selectValue, defaultData);
   }
+
   View.renderBalls(sortData);
-  console.log(typeArr);
 };
 
 const resetFull = () => {
   const sortSelect: HTMLSelectElement = document.querySelector('.name__select') as HTMLSelectElement;
-
   sortSelect.value = 'sort-name-max';
   localStorage.clear();
   Model.clearActiveCards();

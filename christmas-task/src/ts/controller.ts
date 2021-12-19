@@ -1,5 +1,5 @@
 /* eslint-disable import/no-cycle */
-// eslint-disable-next-line import/no-named-as-default
+
 import Model from './model';
 import { SortProperty, IData } from './interfases';
 
@@ -15,6 +15,12 @@ let selectValueMemory = localStorage.getItem('selectSort') || 'sort-name-max';
 sortSelect.value = localStorage.getItem('selectSort') || 'sort-name-max';
 
 class Controller {
+  readonly model: Model;
+
+  constructor() {
+    this.model = new Model();
+  }
+
   // получаем данные в переменную
   static getDataFromEntry(dataBalls: IData[]): void {
     data = dataBalls;
@@ -37,7 +43,6 @@ class Controller {
 
     let sortData: IData[] | string = Model.getTypeOfFilterByValue(filter, data);
     currentData = sortData;
-    // console.log(currentData.length);
     // сортируем по выбранной сортировке
     sortData = Model.getTypeOfSort(selectValueMemory, currentData);
     View.renderBalls(sortData);
@@ -53,12 +58,11 @@ class Controller {
   static filterCards(element: SortProperty, button: HTMLElement) {
     const filter = element;
     filter.name = button.getAttribute('data-filter');
-    filter.type = button.getAttribute('data-type');
+    filter.type = button.getAttribute('data-type') as string;
 
     let sortData: IData[] | string = Model.getTypeOfFilterByValue(filter, data);
     // сохраняем сортированные данные
     currentData = sortData;
-    console.log(currentData.length);
     // сортируем по выбранной сортировке
     sortData = Model.getTypeOfSort(selectValueMemory, currentData);
     this.renderBalls(sortData);
@@ -74,7 +78,6 @@ class Controller {
 }
 
 sortSelect.addEventListener('change', () => {
-  console.log(currentData.length);
   selectValueMemory = sortSelect.value;
   Controller.setLocaleStorage('selectSort', selectValueMemory);
   const sortData: IData[] | string = Model.getTypeOfSort(sortSelect.value, currentData);

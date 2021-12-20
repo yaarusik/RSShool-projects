@@ -4,6 +4,7 @@ import View, { countBall } from './view';
 import sliderReset from './uislider';
 import Utils from './utilits';
 import { IData } from './interfases';
+import { search } from './search';
 
 const resetBtn: HTMLButtonElement = document.querySelector('.name__clear') as HTMLButtonElement;
 const resetLocaleStorage: HTMLButtonElement = document.querySelector('.name__none') as HTMLButtonElement;
@@ -51,6 +52,7 @@ const resetFilters = (select?: string) => {
 const resetFull = () => {
   const sortSelect: HTMLSelectElement = document.querySelector('.name__select') as HTMLSelectElement;
   sortSelect.value = 'sort-name-max';
+  search.value = '';
   localStorage.clear();
   Model.clearActiveCards();
   resetFilters('sort-name-max');

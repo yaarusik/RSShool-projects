@@ -53,6 +53,7 @@ if (getLocaleStorage) {
     }
   });
   // слайдер не успевает подгрузиться
+
   const initValue = () => {
     sliderReset(sliderValues);
   };

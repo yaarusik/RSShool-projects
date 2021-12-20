@@ -8,6 +8,8 @@ import './ts/utilits';
 import './ts/filterBlocks';
 import './ts/interfases';
 import './ts/reset';
+import './ts/application';
+import './ts/router';
 
 // import image from './images/lazy.png';
 // const createImage = (src: string) => new Promise<HTMLImageElement>((res, rej) => {

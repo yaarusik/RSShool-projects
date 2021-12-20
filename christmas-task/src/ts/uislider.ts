@@ -9,8 +9,8 @@ const countSlider: target = <target>document.querySelector('.count-slider');
 const yearSlider: target = <target>document.querySelector('.year-slider');
 
 const uisliderReset = (values: SliderValues) => {
-  yearSlider.noUiSlider?.set(Number(values.year));
-  countSlider.noUiSlider?.set(Number(values.count));
+  yearSlider.noUiSlider?.set(values.year as number[]);
+  countSlider.noUiSlider?.set(values.count as number[]);
 };
 
 const sliderReset = (values: SliderValues) => {
@@ -20,7 +20,7 @@ const sliderReset = (values: SliderValues) => {
 export default sliderReset;
 
 function sliderInit() {
-  if (countSlider !== null) {
+  if (countSlider) {
     noUiSlider.create(countSlider, {
       start: [1, 12],
       connect: true, // нужно ли красить полоску
@@ -39,7 +39,7 @@ function sliderInit() {
       }
     });
   }
-  if (yearSlider !== null) {
+  if (yearSlider) {
     noUiSlider.create(yearSlider, {
       start: [1940, 2021],
       connect: true,
@@ -61,4 +61,4 @@ function sliderInit() {
   }
 }
 
-setTimeout(sliderInit, 50);
+sliderInit();

@@ -5,6 +5,7 @@ import { IData } from './interfases';
 import Model from './model';
 
 export const countBall: Element = document.querySelector('.right__count') as Element;
+
 countBall.innerHTML = localStorage.getItem('favoritesCount') || '0';
 let lengthFavorite = 0;
 class View {

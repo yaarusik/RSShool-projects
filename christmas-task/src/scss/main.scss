@@ -4,18 +4,20 @@
 
 .main {
    &__page {
-      min-height: 100vh;
+      min-height: 100%;
       display: flex;
       flex-direction: column;
       text-transform: uppercase;
    }
    &__body {
-      padding-top: 50px;
+      padding-top: 25px;
       position: relative;
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      flex: 1 0 auto;
       align-items: center;
-      row-gap: 20px;
+      row-gap: 40px;
    }
 }
 
@@ -24,21 +26,64 @@
       position: relative;
       width: 340px;
       height: 340px;
-      background: #a0d5d3;
+      background: rgba(#0096d1, 0.7);
+
+      backdrop-filter: blur(8px);
       border-radius: 50%;
-      border: 10px solid #f8e7dc;
+      border: 10px solid var(--col-white);
       overflow: hidden;
       animation: rock;
       animation-iteration-count: infinite;
       animation-duration: 1s;
    }
-   // &__santa {
-   // }
+
    &__message {
-      color: #f8e7dc;
+      display: flex;
+      flex-direction: column;
+      row-gap: 40px;
+      align-items: center;
+      color: var(--col-white);
       font-family: "Mountains of Christmas";
       font-size: 50px;
       white-space: nowrap;
+   }
+   &__link-toys {
+      width: 200px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--col-white);
+      border-radius: 10px;
+      font-size: 26px;
+      transition: ease-in-out 0.3s;
+      border: 3px solid rgba(#ffffff, 1);
+      position: relative;
+      z-index: 1;
+   }
+   &__link-toys:hover {
+      color: rgba(blue, 0.8);
+      cursor: pointer;
+   }
+   &__link-toys:before {
+      transition: 0.5s all ease-in-out;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      right: 50%;
+      bottom: 0;
+      opacity: 0;
+      content: "";
+      border-radius: 6px;
+      backdrop-filter: blur(8px);
+      background-color: rgba(#0096d1, 0.3);
+   }
+   &__link-toys:hover:before {
+      transition: 0.5s all ease-in-out;
+      left: 0;
+      right: 0;
+      opacity: 1;
+      z-index: -1;
    }
 }
 

@@ -1,4 +1,4 @@
-const search: HTMLInputElement = document.querySelector('.search__scope') as HTMLInputElement;
+export const search: HTMLInputElement = document.querySelector('.search__scope') as HTMLInputElement;
 const searchAfter: HTMLElement = document.querySelector('.search__after') as HTMLElement;
 
 class Search {
@@ -9,7 +9,7 @@ class Search {
     const before = document.querySelector('.search__before');
     const after = document.querySelector('.search__after');
     let countHide = 0;
-    const value: string = search.value.toLowerCase();
+    const value: string = search.value.trim().toLowerCase();
     if (!value.length) {
       after?.classList.remove('right__close');
       before?.classList.add('right__loup');

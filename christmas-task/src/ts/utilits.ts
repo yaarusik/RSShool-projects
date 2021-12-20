@@ -77,13 +77,13 @@ class Utils {
 
   static sortCountMax(data: IData[]): IData[] {
     const source: IData[] = data;
-    source.sort((a, b): number => +a.count - +b.count);
+    source.sort((a, b): number => +a.year - +b.year);
     return source;
   }
 
   static sortCountMin(data: IData[]): IData[] {
     const source: IData[] = data;
-    source.sort((a, b): number => +b.count - +a.count);
+    source.sort((a, b): number => +b.year - +a.year);
     return source;
   }
 

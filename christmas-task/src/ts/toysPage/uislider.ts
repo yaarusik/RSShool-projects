@@ -1,7 +1,7 @@
 import noUiSlider, { target } from 'nouislider';
 // eslint-disable-next-line import/no-cycle
 import Controller from './controller';
-import { SliderValues } from './interfases';
+import { SliderValues } from '../interfases';
 
 const outputs: NodeListOf<HTMLElement> = document.querySelectorAll('.slider-output') as NodeListOf<HTMLElement>;
 

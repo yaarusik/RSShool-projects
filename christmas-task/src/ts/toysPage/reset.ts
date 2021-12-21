@@ -3,7 +3,7 @@ import Model from './model';
 import View, { countBall } from './view';
 import sliderReset from './uislider';
 import Utils from './utilits';
-import { IData } from './interfases';
+import { IData } from '../interfases';
 import { search } from './search';
 
 const resetBtn: HTMLButtonElement = document.querySelector('.name__clear') as HTMLButtonElement;

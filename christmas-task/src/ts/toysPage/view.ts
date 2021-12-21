@@ -1,5 +1,5 @@
 /* eslint-disable import/no-named-as-default */
-import { IData } from './interfases';
+import { IData } from '../interfases';
 
 // eslint-disable-next-line import/no-cycle
 import Model from './model';

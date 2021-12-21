@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 
 import Model from './model';
-import { SortProperty, IData } from './interfases';
+import { SortProperty, IData } from '../interfases';
 
 import View from './view';
 

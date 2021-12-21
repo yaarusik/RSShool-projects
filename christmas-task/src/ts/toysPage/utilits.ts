@@ -2,7 +2,7 @@
 import sliderReset from './uislider';
 // eslint-disable-next-line import/no-cycle
 import Controller from './controller';
-import { IData, SliderValues, SortProperty, CommonSort } from './interfases';
+import { IData, SliderValues, SortProperty, CommonSort } from '../interfases';
 
 let countFilters = 0;
 

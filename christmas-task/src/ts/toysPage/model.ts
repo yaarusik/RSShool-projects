@@ -1,5 +1,5 @@
 /* eslint-disable import/no-cycle */
-import { IData, SortProperty } from './interfases';
+import { IData, SortProperty } from '../interfases';
 import Search from './search';
 import Utils from './utilits';
 import View from './view';

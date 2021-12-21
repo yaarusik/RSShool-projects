@@ -1,5 +1,5 @@
 import Controller from './controller';
-import { SortProperty } from './interfases';
+import { SortProperty } from '../interfases';
 
 const mainFormBlock: HTMLElement = document.querySelector('.form__sort .value__form-icons') as HTMLElement;
 const mainColorBlock: HTMLElement = document.querySelector('.value__color .value__form-icons') as HTMLElement;

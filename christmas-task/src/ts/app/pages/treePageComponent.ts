@@ -1,12 +1,12 @@
-import { BuilderComponent } from '../../builder/component';
+import { BuilderComponent, ComponentConfig } from '../../builder/component';
 
 class TreePageComponent extends BuilderComponent {
-  constructor(config) {
+  constructor(config: ComponentConfig) {
     super(config);
   }
 }
 
-export const treePageComponent = new TreePageComponent({
+const treePageComponent = new TreePageComponent({
   selector: 'main__page',
   template: `
   <main class="tree__favorite">
@@ -163,4 +163,7 @@ export const treePageComponent = new TreePageComponent({
   </footer>
 
   `,
+  events: { 'click .tree__container': 'changeBcg' },
 });
+
+export default treePageComponent;

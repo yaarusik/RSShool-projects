@@ -3,7 +3,7 @@ import Model from './model';
 import Controller from './controller';
 import { IData } from '../interfases';
 
-(async () => {
+export default async function ToysEntry() {
   try {
     const balls: IData[] = await Model.getData(
       'https://raw.githubusercontent.com/yaarusik/stage1-tasks/christmas-task/christmas.json'
@@ -18,7 +18,7 @@ import { IData } from '../interfases';
   } catch (e) {
     console.log(e.message);
   }
-})();
+}
 
 console.log(`Score: 212 / 200
 

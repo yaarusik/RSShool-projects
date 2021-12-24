@@ -1,12 +1,12 @@
-import { BuilderComponent, Config } from '../../builder/component';
+import { BuilderComponent, ComponentConfig } from '../../builder/component';
 
 class AppHeader extends BuilderComponent {
-  constructor(config: Config) {
+  constructor(config: ComponentConfig) {
     super(config);
   }
 }
 
-export const appHeader = new AppHeader({
+const appHeader = new AppHeader({
   selector: `header`,
   template: `
       <div class="container">
@@ -24,3 +24,5 @@ export const appHeader = new AppHeader({
       </div>
    `,
 });
+
+export default appHeader;

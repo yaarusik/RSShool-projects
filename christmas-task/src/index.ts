@@ -11,14 +11,14 @@ import './style.scss';
 // import './ts/application';
 // import './ts/router';
 
-import { BuilderModule } from './ts/builder/module';
+import BuilderModule from './ts/builder/module';
 import { BuilderComponent } from './ts/builder/component';
 import bootstrap from './ts/builder/bootstrap';
 import appModule from './ts/app/appModule';
-import preload from './ts/builder/tools/preload';
+import helper from './ts/builder/tools/helper';
 
-export { BuilderModule, BuilderComponent, bootstrap, preload };
+export { BuilderModule, BuilderComponent, bootstrap, helper };
 
-preload.delay(1000).then(() => {
+helper.delay(1000).then(() => {
   bootstrap(appModule);
 });

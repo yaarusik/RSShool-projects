@@ -1,12 +1,12 @@
-import { BuilderComponent } from '../../builder/component';
+import { BuilderComponent, ComponentConfig } from '../../builder/component';
 
 class HomePageComponent extends BuilderComponent {
-  constructor(config) {
+  constructor(config: ComponentConfig) {
     super(config);
   }
 }
 
-export const homePageComponent = new HomePageComponent({
+const homePageComponent = new HomePageComponent({
   selector: 'main__page',
   template: `
   <div class="main__body">
@@ -102,4 +102,7 @@ export const homePageComponent = new HomePageComponent({
   </footer>
 
   `,
+  events: {},
 });
+
+export default homePageComponent;

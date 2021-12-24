@@ -1,12 +1,25 @@
-import { BuilderComponent } from '../../builder/component';
+import { BuilderComponent, ComponentConfig } from '../../builder/component';
+
+// import ToysEntry from '../../toysPage/entry';
 
 class ToysPageComponent extends BuilderComponent {
-  constructor(config) {
+  constructor(config: ComponentConfig) {
     super(config);
   }
+
+  toysEvents() {
+    return {
+      'click .tree': 'changeBcg',
+    };
+  }
+
+  changeBcg(target) {}
+  // startPageEvents() {
+  //   ToysEntry();
+  // }
 }
 
-export const toysPageComponent = new ToysPageComponent({
+const toysPageComponent = new ToysPageComponent({
   selector: 'toys__page',
   template: `
   <main class="toys__cards">
@@ -162,4 +175,7 @@ export const toysPageComponent = new ToysPageComponent({
 
   
   `,
+  events: {},
 });
+
+export default toysPageComponent;

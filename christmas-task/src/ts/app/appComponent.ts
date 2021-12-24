@@ -1,8 +1,7 @@
-import { BuilderComponent } from '../..';
-import { Config } from '../builder/component';
+import { ComponentConfig, BuilderComponent } from '../builder/component';
 
 class AppComponent extends BuilderComponent {
-  constructor(config: Config) {
+  constructor(config: ComponentConfig) {
     super(config);
   }
 }

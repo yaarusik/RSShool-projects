@@ -1,6 +1,7 @@
 export const search: HTMLInputElement = document.querySelector('.search__scope') as HTMLInputElement;
 const searchAfter: HTMLElement = document.querySelector('.search__after') as HTMLElement;
 
+// нужно вызывать методы прослушки элементов и всё
 class Search {
   // поиск карточек через input
   static filterCards(): void {

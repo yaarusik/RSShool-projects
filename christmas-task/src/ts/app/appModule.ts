@@ -1,10 +1,10 @@
-import { BuilderModule } from '../..';
+import BuilderModule, { IBuilderConfig } from '../builder/module';
 import appComponent from './appComponent';
-import { appRoutes } from './appRouts';
-import { appHeader } from './common/appHeader';
+import appRoutes from './appRouts';
+import appHeader from './common/appHeader';
 
 class AppModule extends BuilderModule {
-  constructor(config) {
+  constructor(config: IBuilderConfig) {
     super(config);
   }
 }

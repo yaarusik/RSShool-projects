@@ -43,6 +43,7 @@ body {
    background-blend-mode: multiply;
    background-repeat: no-repeat;
    transition: background-image 1s ease-in-out;
+   overflow: hidden;
 }
 // Файл обнуляющих стилей===============
 @import "./scss/nullstyle.scss";
@@ -79,6 +80,10 @@ body {
 
 // TREE SECTION=================================
 @import "./scss/tree.scss";
+// =============================================
+
+// SNOW=========================================
+@import "./scss/snow.scss";
 // =============================================
 
 .bcg__size {
@@ -133,4 +138,8 @@ body {
       border: 0;
       padding: 0;
    }
+}
+
+.page__hide {
+   display: none;
 }

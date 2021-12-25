@@ -4,11 +4,10 @@ import View, { countBall } from './view';
 import sliderReset from './uislider';
 import Utils from './utilits';
 import { IData } from '../interfases';
-// import { search } from './search';
+import { search } from './search';
 
 const resetBtn: HTMLButtonElement = document.querySelector('.name__clear') as HTMLButtonElement;
 const resetLocaleStorage: HTMLButtonElement = document.querySelector('.name__none') as HTMLButtonElement;
-const search: HTMLInputElement = document.querySelector('.search__scope') as HTMLInputElement;
 
 const cleanClasses = () => {
   const allFilterBtn: NodeListOf<HTMLElement> = document.querySelectorAll('[data-filter]');

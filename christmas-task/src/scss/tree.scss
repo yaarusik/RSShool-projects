@@ -111,6 +111,7 @@
       background-repeat: no-repeat;
       background-position: center;
       border-radius: 10px;
+      transition: 0.2s;
    }
    &__tree:nth-child(1) {
       background-image: url("./assets/images/bg/1.jpg");
@@ -175,6 +176,11 @@
    height: 40px;
    background-image: url("./assets/images/svg/mute.svg");
    cursor: pointer;
+   transition: 0.2s;
+}
+
+.sound__btn-on {
+   background-image: url("./assets/images/svg/audio.svg");
 }
 .snow__btn {
    cursor: pointer;

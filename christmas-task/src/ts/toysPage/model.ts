@@ -3,12 +3,14 @@ import { IData, SortProperty } from '../interfases';
 import Search from './search';
 import Utils from './utilits';
 import View from './view';
+import { getFavoriteCards } from '../treePage/favoriteToys';
 
 let activeCards: number[];
 const activeFromStorage = localStorage.getItem('favoriteCards');
 
 if (activeFromStorage) {
   activeCards = JSON.parse(activeFromStorage);
+  getFavoriteCards(activeCards);
 } else {
   activeCards = [];
 }

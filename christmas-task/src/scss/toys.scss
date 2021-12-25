@@ -44,7 +44,7 @@
 }
 .navigation {
    &__btn .navigation__link {
-      color: var(--col-white);
+      color: inherit;
    }
    &__btn .navigation__home {
       display: block;
@@ -52,6 +52,9 @@
       width: 40px;
       height: 50px;
       background-image: url("./assets/images/svg/tree.svg");
+   }
+   &__btn {
+      color: var(--col-white);
    }
 }
 .right {

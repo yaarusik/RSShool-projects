@@ -43,7 +43,7 @@ body {
    background-blend-mode: multiply;
    background-repeat: no-repeat;
    transition: background-image 1s ease-in-out;
-   overflow: hidden;
+   overflow-x: hidden;
 }
 // Файл обнуляющих стилей===============
 @import "./scss/nullstyle.scss";
@@ -142,4 +142,8 @@ body {
 
 .page__hide {
    display: none;
+}
+
+.btn__show {
+   color: rgb(228, 167, 54);
 }

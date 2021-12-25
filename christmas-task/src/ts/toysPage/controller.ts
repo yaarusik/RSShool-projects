@@ -15,12 +15,6 @@ let selectValueMemory = localStorage.getItem('selectSort') || 'sort-name-max';
 sortSelect.value = localStorage.getItem('selectSort') || 'sort-name-max';
 
 class Controller {
-  readonly model: Model;
-
-  constructor() {
-    this.model = new Model();
-  }
-
   // получаем данные в переменную
   static getDataFromEntry(dataBalls: IData[]): void {
     data = dataBalls;
@@ -29,6 +23,10 @@ class Controller {
 
   static defaultCardsData() {
     currentData = data;
+    return data;
+  }
+
+  static getCurrentData() {
     return data;
   }
 

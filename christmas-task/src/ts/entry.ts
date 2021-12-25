@@ -2,6 +2,7 @@
 import Model from './toysPage/model';
 import Controller from './toysPage/controller';
 import { IData } from './interfases';
+import { getDataFromEntry } from './treePage/favoriteToys';
 
 (async () => {
   try {
@@ -11,6 +12,7 @@ import { IData } from './interfases';
     );
 
     Controller.getDataFromEntry(balls);
+    getDataFromEntry(balls);
     const selectValue = Controller.getSelectValue();
     const sortData = Model.getTypeOfSort(selectValue, balls);
     Controller.renderBalls(sortData);

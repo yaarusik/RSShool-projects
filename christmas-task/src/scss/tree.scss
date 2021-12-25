@@ -57,6 +57,33 @@
       background-position: center;
    }
 }
+
+.favorite__count {
+   z-index: 10;
+   align-self: flex-end;
+   width: 22px;
+   height: 22px;
+   line-height: 22px;
+   text-align: center;
+   padding: 0;
+   margin: 0;
+   margin: 0 0 2px 48px;
+   border-radius: 10px;
+   background-color: rgba(#a8ead5, 0.5);
+   font-size: 14px;
+   font-weight: 900;
+}
+
+.favorite__img {
+   display: block;
+   position: absolute;
+   width: auto;
+   height: 55px;
+   width: 55px;
+   object-fit: contain;
+   cursor: move;
+}
+
 .toys {
    &__container {
       display: flex;
@@ -145,6 +172,12 @@
    }
 }
 
+.main__tree {
+   display: block;
+   width: 420px;
+   height: 90%;
+}
+
 .favorite {
    &__menu {
       max-width: 400px;
@@ -153,7 +186,7 @@
    &__tree {
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-end;
       background-image: url("./assets/images/bg/8.jpg");
       background-size: cover;
       // background-position: center;

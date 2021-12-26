@@ -4,7 +4,7 @@ import Controller from '../toysPage/controller';
 // let isEnable = false;
 
 const pages = {
-  home: {
+  '': {
     page: <HTMLElement>document.querySelector('.main__page'),
     btn: document.querySelectorAll('.navigation__icon'),
   },

@@ -7,7 +7,9 @@ import { IData } from '../interfases';
 import { search } from './search';
 
 const resetBtn: HTMLButtonElement = document.querySelector('.name__clear') as HTMLButtonElement;
-const resetLocaleStorage: HTMLButtonElement = document.querySelector('.name__none') as HTMLButtonElement;
+const resetLocaleStorage: NodeListOf<HTMLButtonElement> = <NodeListOf<HTMLButtonElement>>(
+  document.querySelectorAll('.name__none')
+);
 
 const cleanClasses = () => {
   const allFilterBtn: NodeListOf<HTMLElement> = document.querySelectorAll('[data-filter]');
@@ -61,4 +63,6 @@ const resetFull = () => {
 resetBtn.addEventListener('click', () => {
   resetFilters();
 });
-resetLocaleStorage.addEventListener('click', resetFull);
+resetLocaleStorage.forEach((btn) => {
+  btn.addEventListener('click', resetFull);
+});

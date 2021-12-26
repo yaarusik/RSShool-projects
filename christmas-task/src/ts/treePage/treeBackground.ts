@@ -1,5 +1,6 @@
 const bcgBtns: NodeListOf<HTMLElement> = document.querySelectorAll('.bcg__tree');
 const treeBg: HTMLElement = <HTMLElement>document.querySelector('.favorite__tree');
+const bcg = localStorage.getItem('treeBg') || `url(./assets/images/bg/1.jpg)`;
 
 const backgrounds = [
   './assets/images/bg/1.jpg',
@@ -14,17 +15,23 @@ const backgrounds = [
   './assets/images/bg/10.jpg',
 ];
 
-const hundleBcg = (e: Event) => {
-  const { target } = e;
-  if (target) {
-    const bgNum = Number((<HTMLButtonElement>target).dataset.bg);
-    console.log(bgNum);
-    treeBg.style.backgroundImage = `url(${backgrounds[bgNum - 1]})`;
+const hundleBcg = (e?: Event) => {
+  if (!e) {
+    treeBg.style.backgroundImage = `${bcg}`;
+  } else {
+    const { target } = e;
+    if (target) {
+      const bgNum = Number((<HTMLButtonElement>target).dataset.bg);
+      treeBg.style.backgroundImage = `url(${backgrounds[bgNum - 1]})`;
+      localStorage.setItem('treeBg', treeBg.style.backgroundImage);
+    }
   }
 };
 
 bcgBtns.forEach((btn) => {
   btn.addEventListener('click', hundleBcg);
 });
+
+hundleBcg();
 
 // type HTMLElementEvent<T extends HTMLElement> = Event & { target: T };

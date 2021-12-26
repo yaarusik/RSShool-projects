@@ -1,5 +1,5 @@
 import { IData } from '../interfases';
-import { toyMove } from './dragAndDrop';
+import addImgEvents from './dragAndDrop';
 
 let toysData: IData[] = [];
 let favoriteCards: number[] = [];
@@ -17,7 +17,7 @@ const createCardsImg = (counter: number, card: IData, index: number) => {
     img.className = 'favorite__img';
     img.draggable = true;
     img.id = `${index}-${i}`;
-    img.addEventListener('mousedown', toyMove);
+    addImgEvents(img);
     allIndeticalImg.push(img);
   }
   return allIndeticalImg;

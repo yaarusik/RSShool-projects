@@ -1,5 +1,7 @@
 const snowBtn: HTMLElement = <HTMLElement>document.querySelector('.snow__btn');
 
+let on = localStorage.getItem('snow') || 'off';
+
 const createSnowflake = () => {
   const snowflake = document.createElement('div');
   snowflake.classList.add('snowflake');
@@ -21,12 +23,17 @@ const hundler = () => {
 
   if (!snowflake) {
     deleteSnow = setInterval(createSnowflake, 100);
+    on = 'on';
+    localStorage.setItem('snow', on);
   } else {
     clearInterval(deleteSnow);
     document.querySelectorAll('.snowflake').forEach((item) => {
       item.remove();
     });
+    on = 'off';
+    localStorage.setItem('snow', on);
   }
 };
+if (on === 'on') hundler();
 
 snowBtn.addEventListener('click', hundler);

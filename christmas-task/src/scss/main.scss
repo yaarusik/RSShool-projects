@@ -20,7 +20,10 @@
       row-gap: 40px;
    }
 }
-
+.message__title {
+   text-align: center;
+   font-family: "Neucha";
+}
 .christmas {
    &__window {
       position: relative;

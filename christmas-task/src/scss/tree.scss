@@ -9,6 +9,8 @@
    background-position: center;
    &__page {
       min-height: 100%;
+      overflow: hidden;
+      max-height: 100%;
       min-width: calc(100vh - 40px);
       display: flex;
       flex-direction: column;
@@ -85,10 +87,14 @@
 }
 
 .toys {
+   &__title {
+      text-align: center;
+   }
    &__container {
       display: flex;
       flex-wrap: wrap;
       gap: 5px;
+      justify-content: center;
       padding-bottom: 10px;
    }
 
@@ -121,6 +127,7 @@
    }
 
    &__festoon {
+      padding-top: 15px;
    }
 }
 
@@ -198,7 +205,7 @@
    }
 
    &__interactive {
-      padding-left: 25px;
+      // padding-left: 25px;
       width: 400px;
    }
 }
@@ -227,20 +234,71 @@
    }
 
    &__btns {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 250px;
+      padding: 10px;
    }
 
    &__switch {
    }
 }
+
+.btn__color {
+   width: 24px;
+   height: 24px;
+   border-radius: 50%;
+}
+
+.multicolor {
+   &__btn {
+      background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8);
+      box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #441313 0 -1px 9px, #ccc 0 2px 12px;
+   }
+}
+.red {
+   &__btn {
+      background-color: #f00;
+      box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgb(255 0 0 / 50%) 0 2px 12px;
+   }
+}
+.blue {
+   &__btn {
+      background-color: #24e0ff;
+      box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #006 0 -1px 9px, #3f8cff 0 2px 14px;
+   }
+}
+.yellow {
+   &__btn {
+      background-color: #ff0;
+      box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #ff0 0 2px 12px;
+   }
+}
+.green {
+   &__btn {
+      background-color: #abff00;
+      box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89ff00 0 2px 12px;
+   }
+}
+
 .interactive {
    &__toys {
       padding: 15px 0 0 10px;
       display: flex;
       flex-direction: column;
+
       row-gap: 10px;
    }
 
-   &__decorate {
+   &__clear {
+      display: flex;
+      justify-content: flex-end;
+   }
+
+   &__clean {
+      margin-top: 20px;
+      margin-bottom: 0;
    }
 }
 .decorate {
@@ -268,4 +326,63 @@
 }
 .tree:nth-child(6) {
    background-image: url("./assets/images/tree/6.png");
+}
+
+.interactive {
+   &__timer {
+      margin-top: 80px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      width: 322spx;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.5);
+      color: #fff;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+   }
+}
+.timer {
+   &__title {
+      padding-bottom: 10px;
+      text-align: center;
+      font-size: 25px;
+   }
+
+   &__content {
+      display: flex;
+      justify-content: center;
+
+      column-gap: 10px;
+   }
+
+   &__count-item {
+      text-align: center;
+      font-size: 20px;
+      line-height: 22px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 5px;
+   }
+
+   &__days {
+   }
+
+   &__count__value {
+      min-width: 45.75px;
+   }
+
+   &__sepatetor {
+      font-size: 20px;
+   }
+
+   &__hours {
+   }
+
+   &__minutes {
+   }
+
+   &__seconds {
+   }
 }

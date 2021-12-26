@@ -11,6 +11,7 @@ console.log(renderRandom());
 const createTree = (e?: Event) => {
   const img = new Image();
   img.className = 'main__tree';
+  img.useMap = `#image-map`;
   if (e) {
     const treeNum = Number((<HTMLButtonElement>e.target).dataset.tree);
     img.src = `./assets/images/tree/${treeNum}.png`;

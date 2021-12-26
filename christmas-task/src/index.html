@@ -18,7 +18,7 @@
                 <div class="menu__left">
                   <ul class="left__buttons">
                     <li class="navigation__btn navigation__icon">
-                      <a href="#home" class="navigation__home bcg__size"></a>
+                      <a href="" class="navigation__home bcg__size"></a>
                     </li>
                     <li class="navigation__btn navigation__toys">
                       <a href="#toys" class="navigation__link">Игрушки</a>
@@ -54,7 +54,10 @@
             </div>
           </div>
           <div class="christmas__message">
-            <h1>Merry Christmas!</h1>
+            <h2 class="message__title">
+              Помогите дедушке <br />
+              нарядить елочку
+            </h2>
             <div class="christmas__start">
               <a href="#toys" class="christmas__link-toys navigation__icon">Играть</a>
             </div>
@@ -130,7 +133,7 @@
                 <div class="menu__left">
                   <ul class="left__buttons">
                     <li class="navigation__btn navigation__icon">
-                      <a href="#home" class="navigation__home bcg__size"></a>
+                      <a href="" class="navigation__home bcg__size"></a>
                     </li>
                     <li class="navigation__btn navigation__toys">
                       <a href="#toys" class="navigation__link">Игрушки</a>
@@ -313,7 +316,7 @@
                 <div class="menu__left">
                   <ul class="left__buttons">
                     <li class="navigation__btn navigation__icon">
-                      <a href="#home" class="navigation__home bcg__size"></a>
+                      <a href="" class="navigation__home bcg__size"></a>
                     </li>
                     <li class="navigation__btn navigation__toys">
                       <a href="#toys" class="navigation__link">Игрушки</a>
@@ -364,20 +367,28 @@
                     <h2 class="tree__title">Гирлянда</h2>
                     <div class="festoon__container">
                       <div class="festoon__btns">
-                        <div class="btn__color"></div>
-                        <div class="btn__color"></div>
-                        <div class="btn__color"></div>
-                        <div class="btn__color"></div>
-                        <div class="btn__color"></div>
+                        <button class="btn__color multicolor__btn" data-color="multicolor"></button>
+                        <button class="btn__color red__btn" data-color="red"></button>
+                        <button class="btn__color blue__btn" data-color="blue"></button>
+                        <button class="btn__color yellow__btn" data-color="yellow"></button>
+                        <button class="btn__color green__btn" data-color="green"></button>
                       </div>
                       <div class="festoon__switch"></div>
                     </div>
                   </div>
                 </div>
-                <div class="favorite__tree"></div>
+                <div class="favorite__tree">
+                  <map class="favorite__map" name="image-map">
+                    <area
+                      class="favorite__area"
+                      coords="252,5,182,144,137,240,98,330,81,372,90,412,62,454,33,503,13,590,65,654,132,666,106,689,135,698,136,704,198,679,262,686,388,699,413,659,433,670,474,647,486,576,478,528,447,447,403,349,383,281,360,224"
+                      shape="poly"
+                    />
+                  </map>
+                </div>
                 <div class="favorite__interactive">
                   <div class="interactive__toys">
-                    <div class="tree__title">Игрушки</div>
+                    <div class="tree__title toys__title">Игрушки</div>
                     <div class="toys__container">
                       <div class="toys__ticket" data-num="1"></div>
                       <div class="toys__ticket" data-num="2"></div>
@@ -401,15 +412,32 @@
                       <div class="toys__ticket" data-num="20"></div>
                     </div>
                   </div>
-                  <div class="interactive__decorate">
-                    <h2 class="tree__title">Вы нарядили</h2>
-                    <div class="decorate__container">
-                      <div class="tree__decorate"></div>
-                      <div class="tree__decorate"></div>
-                      <div class="tree__decorate"></div>
-                      <div class="tree__decorate"></div>
-                      <div class="tree__decorate"></div>
+                  <div class="interactive__timer">
+                    <h2 class="timer__title">До нового года осталось</h2>
+                    <div class="timer__content">
+                      <div class="timer__count-item timer__days">
+                        <div class="timer__count__value">00</div>
+                        <div class="timer__count__text">дней</div>
+                      </div>
+                      <div class="timer__sepatetor">:</div>
+                      <div class="timer__count-item timer__hours">
+                        <div class="timer__count__value">00</div>
+                        <div class="timer__count__text">часов</div>
+                      </div>
+                      <div class="timer__sepatetor">:</div>
+                      <div class="timer__count-item timer__minutes">
+                        <div class="timer__count__value">00</div>
+                        <div class="timer__count__text">минут</div>
+                      </div>
+                      <div class="timer__sepatetor">:</div>
+                      <div class="timer__count-item timer__seconds">
+                        <div class="timer__count__value">00</div>
+                        <div class="timer__count__text">секунд</div>
+                      </div>
                     </div>
+                  </div>
+                  <div class="interactive__clear">
+                    <button class="name__clear name__none interactive__clean">Сброс настроек</button>
                   </div>
                 </div>
               </div>

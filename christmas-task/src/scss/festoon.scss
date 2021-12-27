@@ -1,0 +1,113 @@
+.circle-container {
+   // @include on-circle($item-coun: 16, $circle-size: 120px, $item-size: 10px);
+   position: absolute;
+   width: 200px;
+   height: 200px;
+   border-radius: 50%;
+   padding: 0;
+   list-style: none;
+   margin: 20px auto 0;
+
+   .uniq__circle {
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -6px;
+      max-width: 100%;
+      border-radius: 50%;
+      transition: 0.15s;
+      animation: lights 0.1s linear infinite;
+      animation-fill-mode: both;
+   }
+}
+
+.festoon__wrapper {
+   display: flex;
+
+   justify-content: center;
+   flex-direction: column;
+   position: absolute;
+   top: 0px;
+   left: 49.2%;
+   transform: translateX(-50%) rotate(75deg);
+   pointer-events: none;
+}
+
+.festoon__container {
+   display: flex;
+   column-gap: 30px;
+   align-items: center;
+}
+
+.festoon__switch {
+   font-size: 17px;
+   color: var(--col-white);
+   display: flex;
+   column-gap: 5px;
+   align-items: center;
+}
+
+.festoon__checkbox {
+   cursor: pointer;
+   position: relative;
+   width: 50px;
+   height: 24px;
+   appearance: none;
+   outline: none;
+   background-color: var(--col-milk);
+   border-radius: 20px;
+   transition: all 0.5s;
+   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.festoon__checkbox:checked {
+   background-color: #fff;
+}
+.festoon__checkbox:before {
+   content: "";
+   position: absolute;
+   width: 24px;
+   height: 24px;
+   border-radius: 20px;
+   top: 0;
+   left: 0;
+   background-color: lightcoral;
+   transform: scale(1.1);
+   transition: 0.5s;
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.festoon__checkbox:checked::before {
+   left: 25px;
+}
+
+.festoon__red {
+   background-color: #f12;
+}
+.festoon__blue {
+   background-color: #24e0ff;
+}
+.festoon__yellow {
+   background-color: yellow;
+}
+.festoon__green {
+   background-color: #0f0;
+}
+
+@keyframes lights {
+   0% {
+      opacity: 0.7;
+      filter: grayscale(0%);
+   }
+   50% {
+      opacity: 1;
+      filter: grayscale(70%);
+   }
+   70% {
+      opacity: 0.5;
+      filter: grayscale(40%);
+   }
+   100% {
+      filter: grayscale(80%);
+      opacity: 1;
+   }
+}

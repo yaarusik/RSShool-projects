@@ -95,11 +95,14 @@
    width: 20px;
    height: 20px;
    background-image: url("./assets/images/svg/snowflake.svg");
+   border-radius: 50%;
+   background-position: center center;
    background-size: 100%;
+   pointer-events: none;
    z-index: 10;
    color: #ffffff;
    position: absolute;
-   top: -20px;
+   top: -62px;
    animation: fall linear forwards;
 }
 

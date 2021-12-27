@@ -59,6 +59,8 @@ body {
    width: 100%;
    max-width: $maxwidth;
    height: 100%;
+   overflow: auto;
+
    // background: var(--bg-red);
 }
 //ОБОЛОЧКА==============================
@@ -69,7 +71,6 @@ body {
    max-width: 1440px;
    width: calc(100% - 40px);
    margin: 0 auto;
-   // overflow: hidden;
 }
 //ОСНОВНАЯ СЕТКА========================
 
@@ -87,6 +88,10 @@ body {
 
 // SNOW=========================================
 @import "./scss/snow.scss";
+// =============================================
+
+// FESTOON=========================================
+@import "./scss/festoon.scss";
 // =============================================
 
 .bcg__size {

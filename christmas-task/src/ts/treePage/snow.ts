@@ -1,4 +1,5 @@
 const snowBtn: HTMLElement = <HTMLElement>document.querySelector('.snow__btn');
+const treePage = document.querySelector('.tree__page');
 
 let on = localStorage.getItem('snow') || 'off';
 
@@ -7,14 +8,14 @@ const createSnowflake = () => {
   snowflake.classList.add('snowflake');
   snowflake.style.left = `${Math.random() * window.innerWidth - 50}px`;
   snowflake.style.animationDuration = `${Math.random() * 3 + 3}s`;
-  snowflake.style.opacity = `${Math.random()}`;
+  snowflake.style.opacity = `${(Math.random() + 1) * 0.5}`;
   snowflake.style.fontSize = `${Math.random() * 10 + 10}px`;
 
   document.body.prepend(snowflake);
 
   setTimeout(() => {
     snowflake.remove();
-  }, 3500);
+  }, 5000);
 };
 let deleteSnow: NodeJS.Timeout;
 

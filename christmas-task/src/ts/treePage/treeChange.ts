@@ -6,7 +6,6 @@ const renderRandom = () => {
 };
 
 const imgUrl = localStorage.getItem('tree') || `./assets/images/tree/${renderRandom()}.png`;
-console.log(renderRandom());
 
 const createTree = (e?: Event) => {
   const img = new Image();

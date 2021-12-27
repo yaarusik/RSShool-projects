@@ -1,3 +1,7 @@
+.tree:hover {
+   transform: scale(0.95);
+}
+
 .tree {
    width: 115px;
    height: 115px;
@@ -7,9 +11,10 @@
    backdrop-filter: blur(3px);
    background-color: rgba(#aff4ea, 0.5);
    background-position: center;
+   transition: 0.2s;
    &__page {
       min-height: 100%;
-      overflow: hidden;
+      overflow: auto;
       max-height: 100%;
       min-width: calc(100vh - 40px);
       display: flex;
@@ -19,7 +24,7 @@
    &__blur {
       background: rgba(22, 41, 251, 0.1);
       backdrop-filter: blur(3px);
-      height: 100%;
+      height: 106%;
       width: 100%;
    }
 
@@ -29,6 +34,7 @@
 
    &__body {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
    }
 
@@ -130,9 +136,6 @@
       flex-direction: column;
    }
 
-   &__bcg {
-   }
-
    &__festoon {
       padding-top: 15px;
    }
@@ -153,6 +156,11 @@
       background-position: center;
       border-radius: 10px;
       transition: 0.2s;
+   }
+   &__tree:hover {
+      transform: scale(0.9);
+      border-radius: 20px;
+      border: 1px solid #fff;
    }
    &__tree:nth-child(1) {
       background-image: url("./assets/images/bg/1.jpg");
@@ -198,7 +206,6 @@
    }
 
    &__tree {
-      // position: relative;
       display: flex;
       justify-content: center;
       align-items: flex-end;
@@ -210,6 +217,8 @@
       width: 611px;
       margin-bottom: -40px;
       overflow: hidden;
+      background-position: center center;
+      transition: background-image 0.5s ease-in-out;
    }
 
    &__interactive {
@@ -217,7 +226,8 @@
       width: 400px;
    }
 }
-.btn__color {
+.btn__color:hover {
+   transform: scale(1.1);
 }
 .sound__btn {
    width: 40px;
@@ -262,31 +272,31 @@
 .multicolor {
    &__btn {
       background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8);
-      box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #441313 0 -1px 9px, #ccc 0 2px 12px;
+      // box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #441313 0 -1px 9px, #ccc 0 2px 12px;
    }
 }
 .red {
    &__btn {
       background-color: #f00;
-      box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgb(255 0 0 / 50%) 0 2px 12px;
+      // box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgb(255 0 0 / 50%) 0 2px 12px;
    }
 }
 .blue {
    &__btn {
       background-color: #24e0ff;
-      box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #006 0 -1px 9px, #3f8cff 0 2px 14px;
+      // box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #006 0 -1px 9px, #3f8cff 0 2px 14px;
    }
 }
 .yellow {
    &__btn {
       background-color: #ff0;
-      box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #ff0 0 2px 12px;
+      // box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #ff0 0 2px 12px;
    }
 }
 .green {
    &__btn {
       background-color: #abff00;
-      box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89ff00 0 2px 12px;
+      // box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89ff00 0 2px 12px;
    }
 }
 
@@ -392,5 +402,33 @@
    }
 
    &__seconds {
+   }
+}
+
+@media (max-width: 1451px) {
+   .tree__body {
+      justify-content: center;
+      column-gap: 15px;
+      row-gap: 15px;
+   }
+
+   .favorite__menu {
+      order: 3;
+   }
+   .favorite__tree {
+      order: 2;
+   }
+   .festoon__wrapper {
+      left: 68.2% !important;
+   }
+}
+
+@media (max-width: 1066px) {
+   .festoon__wrapper {
+      top: 650px !important;
+      left: 48.2% !important;
+   }
+   .tree__body {
+      row-gap: 25px;
    }
 }

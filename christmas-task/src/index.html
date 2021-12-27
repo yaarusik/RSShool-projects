@@ -367,17 +367,20 @@
                     <h2 class="tree__title">Гирлянда</h2>
                     <div class="festoon__container">
                       <div class="festoon__btns">
-                        <button class="btn__color multicolor__btn" data-color="multicolor"></button>
-                        <button class="btn__color red__btn" data-color="red"></button>
-                        <button class="btn__color blue__btn" data-color="blue"></button>
-                        <button class="btn__color yellow__btn" data-color="yellow"></button>
-                        <button class="btn__color green__btn" data-color="green"></button>
+                        <button class="btn__color multicolor__btn" id="multicolor"></button>
+                        <button class="btn__color red__btn" id="red"></button>
+                        <button class="btn__color blue__btn" id="blue"></button>
+                        <button class="btn__color yellow__btn" id="yellow"></button>
+                        <button class="btn__color green__btn" id="green"></button>
                       </div>
-                      <div class="festoon__switch"></div>
+                      <div class="festoon__switch">Выкл<input class="festoon__checkbox" type="checkbox" />Вкл</div>
                     </div>
                   </div>
                 </div>
                 <div class="favorite__tree">
+                  <div class="festoon__wrapper">
+                    <ul class="circle-container"></ul>
+                  </div>
                   <map class="favorite__map" name="image-map">
                     <area class="favorite__area" shape="poly" />
                   </map>

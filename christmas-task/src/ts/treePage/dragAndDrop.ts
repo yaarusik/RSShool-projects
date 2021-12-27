@@ -35,7 +35,6 @@ const addImgEvents = (image: HTMLImageElement) => {
 
 export const saveParents = (parent: HTMLElement) => {
   parentsArr.push(parent);
-  console.log(parentsArr);
 };
 
 const zoneOver = (e: MouseEvent) => {

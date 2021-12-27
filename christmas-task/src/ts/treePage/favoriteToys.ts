@@ -51,7 +51,6 @@ export const appendToysCards = (favorite: number[], toys: IData[]) => {
   let cards;
   if (favorite.length === 0) {
     cards = toys.slice(0, 20);
-    console.log(`${cards.length}length`);
   } else {
     cards = filterToysData(favorite, toys);
   }

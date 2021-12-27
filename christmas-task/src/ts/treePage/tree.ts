@@ -7,3 +7,4 @@ import './favoriteToys';
 import './dragAndDrop';
 import './timer';
 import './mapCreate';
+import './festoon';

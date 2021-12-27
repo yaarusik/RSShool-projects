@@ -1,9 +1,9 @@
 import { IData } from '../interfases';
-import addImgEvents from './dragAndDrop';
+import addImgEvents, { saveParents } from './dragAndDrop';
 
 let toysData: IData[] = [];
 let favoriteCards: number[] = [];
-const favoriteCardsContainer = document.querySelectorAll('.toys__ticket');
+const favoriteCardsContainer: NodeListOf<HTMLElement> = document.querySelectorAll('.toys__ticket');
 
 const filterToysData = (favorite: number[], toys: IData[]) => {
   return toys.filter((card) => favorite.includes(+card.num));
@@ -43,6 +43,7 @@ const createToysCards = (cards: IData[]) => {
     allElements.forEach((item) => {
       container.append(item);
     });
+    saveParents(container);
   });
 };
 

@@ -6,3 +6,4 @@ import './navigation';
 import './favoriteToys';
 import './dragAndDrop';
 import './timer';
+import './mapCreate';

@@ -61,7 +61,6 @@
 }
 
 .favorite__count {
-   z-index: 10;
    align-self: flex-end;
    width: 22px;
    height: 22px;
@@ -79,11 +78,17 @@
 .favorite__img {
    display: block;
    position: absolute;
-   width: auto;
    height: 55px;
    width: 55px;
    object-fit: contain;
    cursor: move;
+   transition: all 0.2s;
+}
+.favorite__img:hover {
+   transform: scale(0.95);
+}
+.toys__ticket:hover {
+   border: 1px solid #fff;
 }
 
 .toys {
@@ -99,6 +104,7 @@
    }
 
    &__ticket {
+      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -107,6 +113,7 @@
       min-height: 74px;
       border-radius: 10px;
       background-color: rgba(255, 255, 255, 0.5);
+      transition: all 0.2s;
    }
 }
 
@@ -182,7 +189,7 @@
 .main__tree {
    display: block;
    width: 420px;
-   height: 90%;
+   height: 85%;
 }
 
 .favorite {
@@ -191,6 +198,7 @@
    }
 
    &__tree {
+      // position: relative;
       display: flex;
       justify-content: center;
       align-items: flex-end;

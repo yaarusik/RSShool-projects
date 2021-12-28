@@ -5,6 +5,10 @@ import sliderReset from './uislider';
 import Utils from './utilits';
 import { IData } from '../interfases';
 import { search } from './search';
+import hundleBcg from '../treePage/treeBackground';
+import { cleanTree } from '../treePage/treeChange';
+import hundler from '../treePage/snow';
+import { audioPlay, getSound } from '../treePage/christmasSound';
 
 const resetBtn: HTMLButtonElement = document.querySelector('.name__clear') as HTMLButtonElement;
 const resetLocaleStorage: NodeListOf<HTMLButtonElement> = <NodeListOf<HTMLButtonElement>>(
@@ -51,6 +55,13 @@ const resetFilters = (select?: string) => {
   View.renderBalls(sortData);
 };
 
+const resetTreeStorage = () => {
+  hundleBcg();
+  cleanTree();
+  hundler('off');
+  audioPlay('off');
+};
+
 const resetFull = () => {
   const sortSelect: HTMLSelectElement = document.querySelector('.name__select') as HTMLSelectElement;
   sortSelect.value = 'sort-name-max';
@@ -58,6 +69,7 @@ const resetFull = () => {
   localStorage.clear();
   Model.clearActiveCards();
   resetFilters('sort-name-max');
+  resetTreeStorage();
 };
 
 resetBtn.addEventListener('click', () => {

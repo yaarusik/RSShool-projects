@@ -22,11 +22,15 @@ class Sound {
   }
 }
 
+export const getSound = () => {
+  return sound;
+};
+
 const christmasSong = new Sound();
 const soundBtn = document.querySelector('.sound__btn');
 
-const audioPlay = () => {
-  if (soundBtn?.classList.contains('sound__btn-on')) {
+export const audioPlay = (song?: string) => {
+  if (soundBtn?.classList.contains('sound__btn-on') || song) {
     soundBtn?.classList.remove('sound__btn-on');
     christmasSong.stopAudio();
     sound = 'off';
@@ -41,7 +45,16 @@ const audioPlay = () => {
 };
 
 if (sound === 'on') {
-  document.body.addEventListener('click', audioPlay, { once: true });
+  document.body.addEventListener(
+    'click',
+    () => {
+      audioPlay();
+    },
+    { once: true }
+  );
 }
 
-if (soundBtn) soundBtn.addEventListener('click', audioPlay);
+if (soundBtn)
+  soundBtn.addEventListener('click', () => {
+    audioPlay();
+  });

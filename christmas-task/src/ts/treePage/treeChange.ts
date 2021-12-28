@@ -5,9 +5,8 @@ const renderRandom = () => {
   return Math.floor(Math.random() * treeBtns.length + 1);
 };
 
-const imgUrl = localStorage.getItem('tree') || `./assets/images/tree/${renderRandom()}.png`;
-
 const createTree = (e?: Event) => {
+  const imgUrl = localStorage.getItem('tree') || `./assets/images/tree/6.png`;
   const img = new Image();
   img.className = 'main__tree';
   img.useMap = `#image-map`;
@@ -22,7 +21,7 @@ const createTree = (e?: Event) => {
   treeContainer.appendChild(img);
 };
 
-const cleanTree = (e: Event) => {
+export const cleanTree = (e?: Event) => {
   (<HTMLElement>document.querySelector('.main__tree')).remove();
   createTree(e);
 };
@@ -30,3 +29,5 @@ const cleanTree = (e: Event) => {
 treeBtns.forEach((btn) => btn.addEventListener('click', cleanTree));
 
 createTree();
+
+export default createTree;

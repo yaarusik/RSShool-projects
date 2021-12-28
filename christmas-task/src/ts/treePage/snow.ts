@@ -19,22 +19,25 @@ const createSnowflake = () => {
 };
 let deleteSnow: NodeJS.Timeout;
 
-const hundler = () => {
+const hundler = (switchCondition?: string) => {
   const snowflake: HTMLElement = <HTMLElement>document.querySelector('.snowflake');
-
-  if (!snowflake) {
-    deleteSnow = setInterval(createSnowflake, 100);
-    on = 'on';
-    localStorage.setItem('snow', on);
-  } else {
+  if (switchCondition || snowflake) {
     clearInterval(deleteSnow);
     document.querySelectorAll('.snowflake').forEach((item) => {
       item.remove();
     });
     on = 'off';
     localStorage.setItem('snow', on);
+  } else {
+    deleteSnow = setInterval(createSnowflake, 100);
+    on = 'on';
+    localStorage.setItem('snow', on);
   }
 };
 if (on === 'on') hundler();
 
-snowBtn.addEventListener('click', hundler);
+snowBtn.addEventListener('click', () => {
+  hundler();
+});
+
+export default hundler;

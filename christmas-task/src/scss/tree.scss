@@ -384,7 +384,8 @@
       row-gap: 5px;
    }
 
-   &__days {
+   &__count__text {
+      min-width: 64px;
    }
 
    &__count__value {
@@ -393,15 +394,6 @@
 
    &__sepatetor {
       font-size: 20px;
-   }
-
-   &__hours {
-   }
-
-   &__minutes {
-   }
-
-   &__seconds {
    }
 }
 

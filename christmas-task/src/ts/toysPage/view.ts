@@ -74,6 +74,7 @@ class View {
   // отрисовываем цвет нажатым карточкам
   static renderRibbon(active: number): string {
     const activeCards: number[] = Model.getActiveCards();
+
     if (activeCards?.includes(active)) {
       return `<div class="ribbon card__active"></div>`;
     }

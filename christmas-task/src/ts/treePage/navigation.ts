@@ -1,7 +1,7 @@
 import { appendToysCards } from './favoriteToys';
 import Controller from '../toysPage/controller';
 
-// let isEnable = false;
+let isEnable = false;
 
 const pages = {
   '': {
@@ -22,18 +22,19 @@ const getRouteInfo = () => {
   return window.location.hash ? window.location.hash.slice(1) : '';
 };
 
-// const updateFavoriteCards = () => {
-//   const activeFromStorage = localStorage.getItem('favoriteCards');
-//   let activeCards;
-//   if (activeFromStorage) {
-//     activeCards = JSON.parse(activeFromStorage);
-//   } else {
-//     activeCards = [];
-//   }
-//   const currentData = Controller.getCurrentData();
+const updateFavoriteCards = () => {
+  const activeFromStorage = localStorage.getItem('favoriteCards');
+  let activeCards;
+  if (activeFromStorage) {
+    activeCards = JSON.parse(activeFromStorage);
+    // localStorage.setItem('favoriteCards', JSON.parse(activeCards));
+  } else {
+    activeCards = [];
+  }
+  const currentData = Controller.getCurrentData();
 
-//   appendToysCards(activeCards, currentData);
-// };
+  appendToysCards(activeCards, currentData);
+};
 
 const hundleHash = () => {
   const currentPage = getRouteInfo();
@@ -51,8 +52,8 @@ const hundleHash = () => {
       });
     }
   });
-  // if (isEnable) updateFavoriteCards();
-  // isEnable = true;
+  if (isEnable) updateFavoriteCards();
+  isEnable = true;
 };
 
 const init = () => {

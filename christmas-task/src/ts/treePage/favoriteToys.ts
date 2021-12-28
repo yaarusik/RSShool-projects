@@ -58,7 +58,6 @@ export const appendToysCards = (favorite: number[], toys: IData[]) => {
   } else {
     cards = filterToysData(favorite, toys);
   }
-
   createToysCards(cards);
 };
 

@@ -27,7 +27,6 @@ const updateFavoriteCards = () => {
   let activeCards;
   if (activeFromStorage) {
     activeCards = JSON.parse(activeFromStorage);
-    // localStorage.setItem('favoriteCards', JSON.parse(activeCards));
   } else {
     activeCards = [];
   }

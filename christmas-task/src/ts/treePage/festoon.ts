@@ -4,14 +4,21 @@ const lightsCircleClasses: string[] = ['festoon__blue', 'festoon__green', 'festo
 const festoonSwitch: HTMLInputElement = <HTMLInputElement>document.querySelector('.festoon__checkbox');
 // сколько реально отрисовывается
 let needLI = 3;
-
 const ulCount = 9;
+// количество шаров допустимых на окружности
 let circleCount = 25;
-
+// ширина маленьких шаров
 const circleSize = 12;
 let bigCircleSize = 200;
-
 const liArr: HTMLElement[] = [];
+
+const addListyle = (item: HTMLElement, rotate: number) => {
+  const li = item;
+  li.style.transform = `rotate(${rotate}deg) translate(${bigCircleSize / 2}px) rotate(${-rotate}deg)`;
+  li.style.width = `${circleSize}px`;
+  li.style.height = `${circleSize}px`;
+  li.style.animationDuration = `${Math.random()}s`;
+};
 
 const createLi = (ul: HTMLElement, style: string) => {
   const angle = 360 / circleCount;
@@ -26,10 +33,7 @@ const createLi = (ul: HTMLElement, style: string) => {
       li.className = `uniq__circle ${style}`;
     }
 
-    li.style.transform = `rotate(${rotate}deg) translate(${bigCircleSize / 2}px) rotate(${-rotate}deg)`;
-    li.style.width = `${circleSize}px`;
-    li.style.height = `${circleSize}px`;
-    li.style.animationDuration = `${Math.random()}s`;
+    addListyle(li, rotate);
     rotate += angle;
     liArr.push(li);
   }

@@ -1,13 +1,12 @@
-let img: HTMLImageElement;
 const dropZone: HTMLElement = <HTMLElement>document.querySelector('.favorite__map');
 const containerTree: HTMLElement = <HTMLElement>document.querySelector('.favorite__area');
-let isDrop = false;
 const parentsArr: HTMLElement[] = [];
+let isDrop = false;
+let img: HTMLImageElement;
 
 const imgDragStart = (e: DragEvent) => {
   isDrop = false;
   img = <HTMLImageElement>e.target;
-
   e.dataTransfer?.setData('id', img.id);
 };
 
@@ -43,7 +42,6 @@ const zoneOver = (e: MouseEvent) => {
 
 const zoneDrop = (e: DragEvent) => {
   isDrop = true;
-
   const itemId = e.dataTransfer?.getData('id');
   const zone: HTMLImageElement = <HTMLImageElement>e.target;
 
@@ -51,7 +49,6 @@ const zoneDrop = (e: DragEvent) => {
     img.style.top = `${e.pageY - img.offsetHeight * 1.5}px`;
     img.style.left = `${e.pageX - img.offsetWidth / 2}px`;
   }
-
   zone.append(document.getElementById(`${itemId}`) as HTMLImageElement);
 };
 

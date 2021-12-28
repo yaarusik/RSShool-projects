@@ -1,9 +1,6 @@
 const treeBtns: NodeListOf<HTMLElement> = <NodeListOf<HTMLElement>>document.querySelectorAll('.tree');
 
 const treeContainer: HTMLElement = <HTMLElement>document.querySelector('.favorite__tree');
-const renderRandom = () => {
-  return Math.floor(Math.random() * treeBtns.length + 1);
-};
 
 const createTree = (e?: Event) => {
   const imgUrl = localStorage.getItem('tree') || `./assets/images/tree/6.png`;

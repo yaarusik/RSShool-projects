@@ -1,12 +1,12 @@
 import './sources.css';
-import { ISourcesArray } from './../appView';
+import { IOrigin } from './../appView';
 
 class Sources {
-    draw(data: ISourcesArray[]): void {
+    draw(data: IOrigin[]): void {
         const fragment: DocumentFragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLTemplateElement = <HTMLTemplateElement>document.querySelector('#sourceItemTemp');
 
-        data.forEach((item: Pick<ISourcesArray, 'id' | 'name'>): void => {
+        data.forEach((item: IOrigin): void => {
             const sourceClone: HTMLTemplateElement = <HTMLTemplateElement>sourceItemTemp.content.cloneNode(true);
 
             (<HTMLTemplateElement>sourceClone.querySelector('.source__item-name')).textContent = item.name;

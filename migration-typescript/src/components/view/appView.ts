@@ -14,7 +14,7 @@ export type DataArticles = {
 
 export interface ISources {
     status: string;
-    sources: ISourcesArray[];
+    sources: IOrigin[];
 }
 
 export interface IDate {
@@ -23,7 +23,7 @@ export interface IDate {
     articles: DataArticles[];
 }
 
-export interface ISourcesArray {
+export interface IOrigin {
     id: string;
     name: string;
     description: string;
@@ -47,9 +47,7 @@ export class AppView {
     }
 
     public drawSources(data: ISources): void {
-        type NewType = ISourcesArray[];
-
-        const values: NewType = data?.sources ? data?.sources : [];
+        const values:  IOrigin[] = data?.sources ? data?.sources : [];
         this.sources.draw(values);
     }
 }

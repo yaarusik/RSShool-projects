@@ -23,19 +23,19 @@ export const shuffle = (array) => {
 };
 
 export const showResultsMessage = (lang, sumResult) => {
-    if (lang === 'ru') {
-        if (sumResult <= 3) {
-            finishTitle.textContent = dictionary[lang].bad;
-        } else if (sumResult > 3 && sumResult <= 7) {
-            finishTitle.textContent = dictionary[lang].notbad;
-        } else if (sumResult > 7) {
-            finishTitle.textContent = dictionary[lang].good;
+    if (lang) {
+        switch (true) {
+            case sumResult <= 3: {
+                finishTitle.textContent = dictionary[lang].bad;
+                break;
+            }
+            case sumResult > 3 && sumResult <= 7: {
+                finishTitle.textContent = dictionary[lang].notbad;
+                break;
+            }
+            default: {
+                finishTitle.textContent = dictionary[lang].good;
+            }
         }
-    } else if (sumResult <= 3) {
-        finishTitle.textContent = dictionary[lang].bad;
-    } else if (sumResult > 3 && sumResult <= 7) {
-        finishTitle.textContent = dictionary[lang].notbad;
-    } else if (sumResult > 7) {
-        finishTitle.textContent = dictionary[lang].good;
     }
 };

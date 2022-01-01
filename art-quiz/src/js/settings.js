@@ -56,50 +56,50 @@ progress.addEventListener('input', () => {
 });
 
 const changeLanguage = (lang) => {
-    artistQuiz.textContent = langParams[lang][0];
-    picturesQuiz.textContent = langParams[lang][1];
-    mainSettingBtn.textContent = langParams[lang][2];
+    artistQuiz.textContent = langParams[lang].artistQuiz;
+    picturesQuiz.textContent = langParams[lang].picturesQuiz;
+    mainSettingBtn.textContent = langParams[lang].settings;
 
-    settingsTitle.textContent = langParams[lang][2];
-    languageTitle.textContent = langParams[lang][3];
-    soundTitle.textContent = langParams[lang][4];
-    timerTitle.textContent = langParams[lang][5];
-    timeTitle.textContent = langParams[lang][6];
-    saveTitle.textContent = langParams[lang][8];
+    settingsTitle.textContent = langParams[lang].settings;
+    languageTitle.textContent = langParams[lang].shangeLang;
+    soundTitle.textContent = langParams[lang].sound;
+    timerTitle.textContent = langParams[lang].gameTime;
+    timeTitle.textContent = langParams[lang].timeForQuestion;
+    saveTitle.textContent = langParams[lang].save;
     footerDeveloper.forEach((item) => {
         let that = item;
-        that.textContent = langParams[lang][9];
+        that.textContent = langParams[lang].developer;
     });
     categoryTitle.forEach((item) => {
         let that = item;
-        that.textContent = langParams[lang][10];
+        that.textContent = langParams[lang].categories;
     });
     categoriesSubtitle.forEach((item, index) => {
         let that = item;
-        that.textContent = langParams[lang][11] + ` ${index + 1}`;
+        that.textContent = langParams[lang].round + ` ${index + 1}`;
     });
     menuTitle.forEach((item) => {
         let that = item;
-        that.textContent = langParams[lang][12];
+        that.textContent = langParams[lang].home;
     });
-    questionTitleAuthor[0].textContent = langParams[lang][13];
-    questionTitlePicture[0].textContent = langParams[lang][14];
-    popupTitle.textContent = langParams[lang][15];
-    popupHome.textContent = langParams[lang][16];
-    popupClose.textContent = langParams[lang][17];
-    buttonCategories.textContent = langParams[lang][10];
+    questionTitleAuthor[0].textContent = langParams[lang].whoAuthor;
+    questionTitlePicture[0].textContent = langParams[lang].whichPicture;
+    popupTitle.textContent = langParams[lang].questionCancelGame;
+    popupHome.textContent = langParams[lang].agree;
+    popupClose.textContent = langParams[lang].cancel;
+    buttonCategories.textContent = langParams[lang].categories;
     scoreBtn.forEach((item) => {
         let that = item;
-        that.textContent = langParams[lang][18];
+        that.textContent = langParams[lang].results;
     });
-    scoreTitle.textContent = langParams[lang][19];
-    cardAuthor[0].textContent = 'ARTIST ';
-    cardAuthor[1].textContent = 'QUIZ';
-    cardPicture[0].textContent = 'PICTURES ';
-    cardPicture[1].textContent = 'QUIZ';
-    cardDescription[0].textContent = langParams[lang][20];
-    cardDescription[1].textContent = langParams[lang][21];
-    settingText.textContent = langParams[lang][2];
+    scoreTitle.textContent = langParams[lang].backToCategories;
+    cardAuthor[0].textContent = langParams[lang].artist;
+    cardAuthor[1].textContent = langParams[lang].quiz;
+    cardPicture[0].textContent = langParams[lang].pictures;
+    cardPicture[1].textContent = langParams[lang].quiz;
+    cardDescription[0].textContent = langParams[lang].quizType;
+    cardDescription[1].textContent = langParams[lang].pictureType;
+    settingText.textContent = langParams[lang].settings;
 };
 
 function tracking(obj) {

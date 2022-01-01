@@ -151,14 +151,13 @@ scoreBtn.forEach((item, index) => {
 
 window.onload = () => {
     scoreBtn.forEach((btn, i) => {
-        scoreButtonIndex.forEach((item) => {
-            if (item.index === i) {
-                btn.classList.add('show');
-                localIndicator[i].classList.add('add__bg');
-                let sumResult = item.results.reduce((res, current) => +res + +current, 0);
-                resultsNumber[i].innerHTML = `${sumResult} / ${questionsCount}`;
-            }
-        });
+        let saveBtn = scoreButtonIndex.find((score) => score.index === i);
+        if (saveBtn) {
+            let sumResult = saveBtn.results.reduce((res, current) => +res + +current, 0);
+            btn.classList.add('show');
+            localIndicator[i].classList.add('add__bg');
+            resultsNumber[i].innerHTML = `${sumResult} / ${questionsCount}`;
+        }
     });
     const scoreLogoBtn = document.querySelectorAll('.score__logo');
     scoreLogoBtn.forEach((item) => {

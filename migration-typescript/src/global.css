@@ -1,0 +1,105 @@
+body {
+    color: #fff;
+    /* background: #17181c; */
+    font-family: sans-serif;
+}
+
+::-webkit-scrollbar {
+    border-radius: 3px;
+    width: 8px; /* ширина scrollbar */
+}
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.6); /* цвет дорожки */
+}
+::-webkit-scrollbar-thumb {
+    background-color: #000; /* цвет плашки */
+    /* border: 1px solid grey; padding вокруг плашки */
+}
+
+header {
+    padding: 10px 30px;
+}
+
+header h1 {
+    font-size: 40px;
+    font-weight: 800;
+}
+
+footer {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+footer .copyright {
+    font-size: 14px;
+    color: #888;
+    text-align: center;
+}
+footer .copyright a {
+    color: #999;
+}
+footer .copyright a:hover {
+    color: #999;
+}
+footer .copyright:before {
+    content: "©";
+}
+
+@media (max-width: 631px) {
+    header h1 {
+        text-align: center;
+    }
+}
+
+body {
+    animation: scroll 120s linear infinite;
+    background: url("https://images.unsplash.com/photo-1465146633011-14f8e0781093?ixlib=rb-1.2.1.footerixid=eyJhcHBfaWQiOjEyMDd9.footerauto=format.footerfit=crop.footerw=3450.footerq=80"),
+        #111111;
+
+    height: 100vh;
+
+    perspective: 1000px;
+    perspective-origin: 50% 50%;
+}
+
+@keyframes scroll {
+    100% {
+        background-position: 0px -3000px;
+    }
+}
+
+@media (prefers-reduced-motion) {
+    body {
+        animation: scroll 200s linear infinite;
+    }
+}
+
+.footer {
+}
+
+.footer__down {
+}
+
+.footer__row {
+    color: #999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    column-gap: 20px;
+}
+
+.footer__end {
+}
+
+.footer__year {
+}
+
+.footer__rsschool {
+}
+
+.footer__username a {
+    color: #999;
+    text-decoration: none;
+}

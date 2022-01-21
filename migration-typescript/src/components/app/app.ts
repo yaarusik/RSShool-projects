@@ -1,13 +1,13 @@
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
-import { ISources, IDate } from '../view/appView';
+import { ISources, IData } from '../view/appView';
 
 // export type Callback = () => void;
 
 class App {
     readonly controller: AppController;
     readonly view: AppView;
-    constructor() {
+    constructor () {
         this.controller = new AppController();
         this.view = new AppView();
     }
@@ -16,7 +16,7 @@ class App {
         document
             .querySelector('.sources')
             ?.addEventListener('click', (e: Event): void =>
-                this.controller.getNews(e, (data: IDate): void => this.view.drawNews(data))
+                this.controller.getNews(e, (data: IData): void => this.view.drawNews(data))
             );
         this.controller.getSources((data: ISources): void => this.view.drawSources(data));
     }

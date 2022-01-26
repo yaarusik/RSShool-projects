@@ -104,50 +104,6 @@
           <img width="800" src="./assets/adaptive.gif">
         </section>
       </section>
-      <section class="slide__seven">
-        <section>
-          <h3>How to work with images in canvas</h3>
-        </section>
-        <section>
-          <h3>Create JavaScript object Image</h3>
-          <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
-            let img= new Image(); 
-            img.src = 'image.png'; 
-            </code></pre>
-        </section>
-        <section>
-          <div>Draw an image on the canvas using the drawImage function</div>
-          <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
-            drawImage(image, x, y, width, height) 
-            //image - image object. 
-            // x and y are the coordinates of the top left corner 
-            //of the image,
-            //width и height - size of image,     
-            </code></pre>
-        </section>
-        <section>
-          <div>Use a construct for loading an
-            image asynchronously</div>
-          <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
-            let img= new Image(); 
-            img.onload = () => {   }  
-            img.src = 'myImage.png';  
-            </code></pre>
-          <div>
-          </div>
-        </section>
-        <section>
-          <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
-            canvas.width = 1600; canvas.style.width = "100%";
-            canvas.height = 1200; canvas.style.maxWidth = "1600px";
-            const image = new Image(); 
-            image.onload = () => {
-            context.drawImage(image, 0, 0, canvas.width, canvas.height);}
-            image.src = "./assets/gameMap.jpg"; 
-            </code></pre>
-          <img src="./assets/bcg.gif" alt="">
-        </section>
-      </section>
       <section class="slide__eight">
         <section>
           <div>Drawing a fragment of an image</div>

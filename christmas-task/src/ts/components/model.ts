@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
-import { IData, SortProperty } from './interfases';
-import Search from './search';
-import Utils from './utilits';
+import { ChristmasToy, SortProperty } from '../interfases';
+import Search from '../interactiveElements/search';
+import Utils from '../utils/utilits';
 import View from './view';
 
 let activeCards: number[];
@@ -14,11 +14,11 @@ if (activeFromStorage) {
 }
 
 class Model {
-  static async callData(url: string): Promise<IData[]> {
-    return fetch(url).then((data): Promise<IData[]> => data.json());
+  static async callData(url: string): Promise<ChristmasToy[]> {
+    return fetch(url).then((data): Promise<ChristmasToy[]> => data.json());
   }
 
-  static getData(url: string): Promise<IData[]> {
+  static getData(url: string): Promise<ChristmasToy[]> {
     return this.callData(url);
   }
 
@@ -59,7 +59,7 @@ class Model {
     activeCards = [];
   }
 
-  static getTypeOfSort(type: string | null, data: IData[] | string): IData[] | string {
+  static getTypeOfSort(type: string | null, data: ChristmasToy[] | string): ChristmasToy[] | string {
     if (typeof data === 'string') {
       return 'Извините, совпадений не обнаружено';
     }
@@ -83,11 +83,11 @@ class Model {
     }
   }
 
-  static getTypeOfFilterByValue(type: SortProperty, data: IData[]): IData[] | string {
+  static getTypeOfFilterByValue(type: SortProperty, data: ChristmasToy[]): ChristmasToy[] | string {
     return Utils.filter(type, data);
   }
 
-  public static getRangeValues(values: string[], data: IData[], type: string): IData[] {
+  public static getRangeValues(values: string[], data: ChristmasToy[], type: string): ChristmasToy[] {
     switch (type) {
       case 'year': {
         return Utils.filterByRangeYear(values, data);

@@ -1,9 +1,9 @@
-import Controller from './controller';
-import Model from './model';
-import View, { countBall } from './view';
-import sliderReset from './uislider';
-import Utils from './utilits';
-import { IData } from './interfases';
+import Controller from '../components/controller';
+import Model from '../components/model';
+import View, { countBall } from '../components/view';
+import sliderReset from '../slider/uislider';
+import Utils from '../utils/utilits';
+import { ChristmasToy } from '../interfases';
 import { search } from './search';
 
 const resetBtn: HTMLButtonElement = document.querySelector('.name__clear') as HTMLButtonElement;
@@ -38,7 +38,7 @@ const resetFilters = (select?: string) => {
   cleanClasses();
   sliderReset(values);
 
-  let sortData: IData[] | string;
+  let sortData: ChristmasToy[] | string;
   if (select) {
     sortData = Model.getTypeOfSort(select, defaultData);
     countBall.innerHTML = '0';

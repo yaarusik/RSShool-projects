@@ -1,28 +1,10 @@
 import './style.scss';
-import './ts/uislider';
-import './ts/controller';
+import './ts/slider/uislider';
+import './ts/components/controller';
 import './ts/entry';
-import './ts/model';
-import './ts/view';
-import './ts/utilits';
-import './ts/filterBlocks';
+import './ts/components/model';
+import './ts/components/view';
+import './ts/utils/utilits';
+import './ts/interactiveElements/filterBlocks';
 import './ts/interfases';
-import './ts/reset';
-import './ts/application';
-import './ts/router';
-
-// import image from './images/lazy.png';
-// const createImage = (src: string) => new Promise<HTMLImageElement>((res, rej) => {
-//   const img = new Image();
-//   img.onload = () => res(img);
-//   img.onerror = rej;
-//   img.src = src;
-// });
-// async function render() {
-//   const subHeader = document.createElement('h2');
-//   subHeader.innerHTML = 'This elements was created by js';
-//   const myImage = await createImage(image);
-//   document.body.appendChild(subHeader);
-//   document.body.appendChild(myImage);
-// }
-// render();
+import './ts/interactiveElements/reset';

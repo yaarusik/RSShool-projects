@@ -1,9 +1,22 @@
 import noUiSlider, { target } from 'nouislider';
-// eslint-disable-next-line import/no-cycle
-import Controller from './controller';
-import { SliderValues } from './interfases';
+import { SliderValues } from '../interfases';
+import Controller from '../components/controller';
 
 const outputs: NodeListOf<HTMLElement> = document.querySelectorAll('.slider-output') as NodeListOf<HTMLElement>;
+
+const COUNT_SLIDER = {
+  minValue: 1,
+  maxValue: 12,
+  step: 1,
+  behaviour: 'tap-drag',
+};
+
+const YEAR_SLIDER = {
+  minValue: 1940,
+  maxValue: 2021,
+  step: 10,
+  behaviour: 'tap-drag',
+};
 
 const countSlider: target = <target>document.querySelector('.count-slider');
 const yearSlider: target = <target>document.querySelector('.year-slider');
@@ -22,12 +35,13 @@ export default sliderReset;
 function sliderInit() {
   if (countSlider) {
     noUiSlider.create(countSlider, {
-      start: [1, 12],
+      start: [COUNT_SLIDER.minValue, COUNT_SLIDER.maxValue],
       connect: true, // нужно ли красить полоску
-      step: 1,
+      behaviour: COUNT_SLIDER.behaviour,
+      step: COUNT_SLIDER.step,
       range: {
-        min: 1,
-        max: 12,
+        min: COUNT_SLIDER.minValue,
+        max: COUNT_SLIDER.maxValue,
       },
     });
     countSlider.noUiSlider?.on('update', (values: (string | number)[]) => {
@@ -41,13 +55,13 @@ function sliderInit() {
   }
   if (yearSlider) {
     noUiSlider.create(yearSlider, {
-      start: [1940, 2021],
+      start: [YEAR_SLIDER.minValue, YEAR_SLIDER.maxValue],
       connect: true,
-      behaviour: 'tap-drag',
-      step: 10,
+      behaviour: YEAR_SLIDER.behaviour,
+      step: YEAR_SLIDER.step,
       range: {
-        min: 1940,
-        max: 2021,
+        min: YEAR_SLIDER.minValue,
+        max: YEAR_SLIDER.maxValue,
       },
     });
     yearSlider.noUiSlider?.on('update', (values: (string | number)[]) => {

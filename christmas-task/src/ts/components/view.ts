@@ -1,5 +1,5 @@
 /* eslint-disable import/no-named-as-default */
-import { IData } from './interfases';
+import { ChristmasToy } from '../interfases';
 
 // eslint-disable-next-line import/no-cycle
 import Model from './model';
@@ -9,7 +9,7 @@ export const countBall: Element = document.querySelector('.right__count') as Ele
 countBall.innerHTML = localStorage.getItem('favoritesCount') || '0';
 let lengthFavorite = 0;
 class View {
-  static renderBalls(data: IData[] | string): void {
+  static renderBalls(data: ChristmasToy[] | string): void {
     localStorage.setItem('currentData', JSON.stringify(data));
     const ballsElement: HTMLDivElement = document.querySelector('.balls') as HTMLDivElement;
     const ballsTemplate: string[] = [];

@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-named-as-default
 import Model from './components/model';
 import Controller from './components/controller';
 import { ChristmasToy } from './interfases';

@@ -1,10 +1,5 @@
 import './style.scss';
 import './ts/slider/uislider';
-import './ts/components/controller';
 import './ts/entry';
-import './ts/components/model';
-import './ts/components/view';
-import './ts/utils/utilits';
 import './ts/interactiveElements/filterBlocks';
-import './ts/interfases';
 import './ts/interactiveElements/reset';

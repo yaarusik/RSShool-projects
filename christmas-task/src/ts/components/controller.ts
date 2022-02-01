@@ -1,8 +1,5 @@
-/* eslint-disable import/no-cycle */
-
 import Model from './model';
 import { SortProperty, ChristmasToy } from '../interfases';
-
 import View from './view';
 
 let data: ChristmasToy[] = [];
@@ -13,8 +10,7 @@ const sortSelect: HTMLSelectElement = document.querySelector('.name__select') as
 // используем сортированные данные
 let selectValueMemory = localStorage.getItem('selectSort') || 'sort-name-max';
 sortSelect.value = localStorage.getItem('selectSort') || 'sort-name-max';
-
-class Controller {
+export default class Controller {
   // получаем данные в переменную
   static getDataFromEntry(dataBalls: ChristmasToy[]): void {
     data = dataBalls;
@@ -78,5 +74,3 @@ sortSelect.addEventListener('change', () => {
 
   Controller.renderBalls(sortData);
 });
-
-export default Controller;

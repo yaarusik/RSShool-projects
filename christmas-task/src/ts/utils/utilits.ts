@@ -1,6 +1,4 @@
-// eslint-disable-next-line import/no-cycle
 import sliderReset from '../slider/uislider';
-// eslint-disable-next-line import/no-cycle
 import Controller from '../components/controller';
 import { ChristmasToy, SliderValues, SortProperty, CommonSort } from '../interfases';
 
@@ -52,7 +50,6 @@ if (getLocaleStorage) {
       }
     }
   });
-  // слайдер не успевает подгрузиться
 
   const initValue = () => {
     sliderReset(sliderValues);

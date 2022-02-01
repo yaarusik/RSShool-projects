@@ -22,9 +22,7 @@
     "node": true
   },
   "rules": {
-    // "no-debugger": "off",
-    "no-console": "off"
-    // "class-methods-use-this": "off",
-    // "@typescript-eslint/no-explicit-any": "error"
+    "no-console": "off",
+    "import/no-cycle": "off"
   }
 }

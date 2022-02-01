@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import { ChristmasToy, SortProperty } from '../interfases';
 import Search from '../interactiveElements/search';
 import Utils from '../utils/utilits';
@@ -35,7 +34,7 @@ class Model {
     }
   }
 
-  static getPressCard = (index: number, card: HTMLDivElement, currentCard: number) => {
+  static getPressCard(index: number, card: HTMLDivElement, currentCard: number): number {
     // index нажатая карточка
     // currentCard номер отображения на странице
     if (activeCards.includes(index)) {
@@ -49,7 +48,7 @@ class Model {
     }
     localStorage.setItem('favoriteCards', JSON.stringify(activeCards));
     return activeCards.length;
-  };
+  }
 
   static getActiveCards(): number[] {
     return activeCards;

@@ -1,14 +1,14 @@
-import Controller from './controller';
-import Model from './model';
-import View, { countBall } from './view';
-import sliderReset from './uislider';
-import Utils from './utilits';
-import { IData } from '../interfases';
+import Controller from '../components/controller';
+import Model from '../components/model';
+import View, { countBall } from '../components/view';
+import sliderReset from '../slider/uislider';
+import Utils from '../utils/utilits';
+import { ChristmasToy } from '../../interfases';
 import { search } from './search';
-import hundleBcg from '../treePage/treeBackground';
-import { cleanTree } from '../treePage/treeChange';
-import hundler from '../treePage/snow';
-import { audioPlay, getSound } from '../treePage/christmasSound';
+import hundleBcg from '../../treePage/pageElements/treeBackground';
+import { cleanTree } from '../../treePage/interactiveElements/treeChange';
+import hundler from '../../treePage/treeElements/snow';
+import { audioPlay, getSound } from '../../treePage/pageElements/christmasSound';
 
 const resetBtn: HTMLButtonElement = document.querySelector('.name__clear') as HTMLButtonElement;
 const resetLocaleStorage: NodeListOf<HTMLButtonElement> = <NodeListOf<HTMLButtonElement>>(
@@ -44,7 +44,7 @@ const resetFilters = (select?: string) => {
   cleanClasses();
   sliderReset(values);
 
-  let sortData: IData[] | string;
+  let sortData: ChristmasToy[] | string;
   if (select) {
     sortData = Model.getTypeOfSort(select, defaultData);
     countBall.innerHTML = '0';

@@ -1,4 +1,4 @@
-export interface IData {
+export interface ChristmasToy {
   num: string;
   name: string;
   count: string;

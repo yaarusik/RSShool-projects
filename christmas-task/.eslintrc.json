@@ -22,10 +22,8 @@
     "node": true
   },
   "rules": {
-    // "no-debugger": "off",
     "no-console": "off",
-    "no-useless-constructor": "off"
-    // "class-methods-use-this": "off",
-    // "@typescript-eslint/no-explicit-any": "error"
+    "no-useless-constructor": "off",
+    "import/no-cycle": "off"
   }
 }

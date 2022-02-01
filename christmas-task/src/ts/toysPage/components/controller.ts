@@ -1,13 +1,11 @@
-/* eslint-disable import/no-cycle */
-
 import Model from './model';
-import { SortProperty, IData } from '../interfases';
+import { SortProperty, ChristmasToy } from '../../interfases';
 
 import View from './view';
 
-let data: IData[] = [];
+let data: ChristmasToy[] = [];
 
-let currentData: IData[] | string = [];
+let currentData: ChristmasToy[] | string = [];
 const sortSelect: HTMLSelectElement = document.querySelector('.name__select') as HTMLSelectElement;
 
 // используем сортированные данные
@@ -16,7 +14,7 @@ sortSelect.value = localStorage.getItem('selectSort') || 'sort-name-max';
 
 class Controller {
   // получаем данные в переменную
-  static getDataFromEntry(dataBalls: IData[]): void {
+  static getDataFromEntry(dataBalls: ChristmasToy[]): void {
     data = dataBalls;
     currentData = dataBalls;
   }
@@ -39,7 +37,7 @@ class Controller {
     filter.type = type; // year | count
     filter.name = values; // ['1960','2000']
 
-    let sortData: IData[] | string = Model.getTypeOfFilterByValue(filter, data);
+    let sortData: ChristmasToy[] | string = Model.getTypeOfFilterByValue(filter, data);
     currentData = sortData;
     // сортируем по выбранной сортировке
     sortData = Model.getTypeOfSort(selectValueMemory, currentData);
@@ -58,7 +56,7 @@ class Controller {
     filter.name = button.getAttribute('data-filter');
     filter.type = button.getAttribute('data-type') as string;
 
-    let sortData: IData[] | string = Model.getTypeOfFilterByValue(filter, data);
+    let sortData: ChristmasToy[] | string = Model.getTypeOfFilterByValue(filter, data);
     // сохраняем сортированные данные
     currentData = sortData;
     // сортируем по выбранной сортировке
@@ -66,7 +64,7 @@ class Controller {
     this.renderBalls(sortData);
   }
 
-  static renderBalls(sortCards: IData[] | string): void {
+  static renderBalls(sortCards: ChristmasToy[] | string): void {
     View.renderBalls(sortCards);
   }
 
@@ -78,7 +76,7 @@ class Controller {
 sortSelect.addEventListener('change', () => {
   selectValueMemory = sortSelect.value;
   Controller.setLocaleStorage('selectSort', selectValueMemory);
-  const sortData: IData[] | string = Model.getTypeOfSort(sortSelect.value, currentData);
+  const sortData: ChristmasToy[] | string = Model.getTypeOfSort(sortSelect.value, currentData);
 
   Controller.renderBalls(sortData);
 });

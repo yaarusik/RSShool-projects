@@ -1,12 +1,11 @@
-// eslint-disable-next-line import/no-named-as-default
-import Model from './toysPage/model';
-import Controller from './toysPage/controller';
-import { IData } from './interfases';
-import { getDataFromEntry } from './treePage/favoriteToys';
+import Model from './toysPage/components/model';
+import Controller from './toysPage/components/controller';
+import { ChristmasToy } from './interfases';
+import { getDataFromEntry } from './treePage/treeElements/favoriteToys';
 
 (async () => {
   try {
-    const balls: IData[] = await Model.getData(
+    const balls: ChristmasToy[] = await Model.getData(
       'https://raw.githubusercontent.com/yaarusik/stage1-tasks/christmas-task/christmas.json'
       // '../assets/christmas.json'
     );

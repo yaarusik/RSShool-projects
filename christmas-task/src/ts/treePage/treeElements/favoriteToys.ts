@@ -1,15 +1,15 @@
-import { IData } from '../interfases';
-import addImgEvents, { saveParents } from './dragAndDrop';
+import { ChristmasToy } from '../../interfases';
+import addImgEvents, { saveParents } from '../interactiveElements/dragAndDrop';
 
-let toysData: IData[] = [];
+let toysData: ChristmasToy[] = [];
 let favoriteCards: number[] = [];
 const favoriteCardsContainer: NodeListOf<HTMLElement> = document.querySelectorAll('.toys__ticket');
 
-const filterToysData = (favorite: number[], toys: IData[]) => {
+const filterToysData = (favorite: number[], toys: ChristmasToy[]) => {
   return toys.filter((card) => favorite.includes(+card.num));
 };
 
-const createCardsImg = (counter: number, card: IData, index: number) => {
+const createCardsImg = (counter: number, card: ChristmasToy, index: number) => {
   const allIndeticalImg: HTMLElement[] = [];
   for (let i = 0; i < counter; i += 1) {
     const img = new Image();
@@ -23,19 +23,19 @@ const createCardsImg = (counter: number, card: IData, index: number) => {
   return allIndeticalImg;
 };
 
-const createCardCount = (card: IData) => {
+const createCardCount = (card: ChristmasToy) => {
   const cardCount = document.createElement('div');
   cardCount.className = 'favorite__count';
   if (card) cardCount.textContent = `${card.count}`;
   return cardCount;
 };
 
-const createToysCards = (cards: IData[]) => {
+const createToysCards = (cards: ChristmasToy[]) => {
   favoriteCardsContainer.forEach((container, index) => {
     const cardsParent = container;
     cardsParent.innerHTML = ``;
 
-    const card: IData = <IData>cards[index];
+    const card: ChristmasToy = <ChristmasToy>cards[index];
     if (card) {
       const cardCount = createCardCount(card);
 
@@ -51,7 +51,7 @@ const createToysCards = (cards: IData[]) => {
   });
 };
 
-export const appendToysCards = (favorite: number[], toys: IData[]) => {
+export const appendToysCards = (favorite: number[], toys: ChristmasToy[]) => {
   let cards;
   if (favorite.length === 0) {
     cards = toys.slice(0, 20);
@@ -61,7 +61,7 @@ export const appendToysCards = (favorite: number[], toys: IData[]) => {
   createToysCards(cards);
 };
 
-export const getDataFromEntry = (dataBalls: IData[]): void => {
+export const getDataFromEntry = (dataBalls: ChristmasToy[]): void => {
   toysData = dataBalls;
   appendToysCards(favoriteCards, toysData);
 };

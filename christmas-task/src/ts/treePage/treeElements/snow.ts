@@ -1,5 +1,4 @@
 const snowBtn: HTMLElement = <HTMLElement>document.querySelector('.snow__btn');
-const treePage = document.querySelector('.tree__page');
 
 let on = localStorage.getItem('snow') || 'off';
 

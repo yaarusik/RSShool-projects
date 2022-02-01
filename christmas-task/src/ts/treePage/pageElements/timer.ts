@@ -5,7 +5,7 @@ function declOfNum(number: number, titles: string[]) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const newYear = new Date('Jan 1 2022 00:00:00');
+  const newYear = new Date('Jan 1 2023 00:00:00');
 
   const daysValue = document.querySelector('.timer__days .timer__count__value');
   const hoursValue = document.querySelector('.timer__hours .timer__count__value');

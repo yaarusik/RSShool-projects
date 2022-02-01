@@ -1,8 +1,6 @@
-// eslint-disable-next-line import/no-cycle
-import sliderReset from './uislider';
-// eslint-disable-next-line import/no-cycle
-import Controller from './controller';
-import { IData, SliderValues, SortProperty, CommonSort } from '../interfases';
+import sliderReset from '../slider/uislider';
+import Controller from '../components/controller';
+import { ChristmasToy, SliderValues, SortProperty, CommonSort } from '../../interfases';
 
 let countFilters = 0;
 
@@ -60,14 +58,14 @@ if (getLocaleStorage) {
   setTimeout(initValue, 100);
 }
 class Utils {
-  static sortNameMax(data: IData[]) {
-    const source: IData[] = data;
+  static sortNameMax(data: ChristmasToy[]) {
+    const source: ChristmasToy[] = data;
     source.sort((a, b): number => (a.name > b.name ? 1 : -1));
     return source;
   }
 
-  static sortNameMin(data: IData[]): IData[] {
-    const source: IData[] = data;
+  static sortNameMin(data: ChristmasToy[]): ChristmasToy[] {
+    const source: ChristmasToy[] = data;
     source.sort((a, b): number => (a.name < b.name ? 1 : -1));
     return source;
   }
@@ -76,14 +74,14 @@ class Utils {
     return typeArr;
   }
 
-  static sortCountMax(data: IData[]): IData[] {
-    const source: IData[] = data;
+  static sortCountMax(data: ChristmasToy[]): ChristmasToy[] {
+    const source: ChristmasToy[] = data;
     source.sort((a, b): number => +a.year - +b.year);
     return source;
   }
 
-  static sortCountMin(data: IData[]): IData[] {
-    const source: IData[] = data;
+  static sortCountMin(data: ChristmasToy[]): ChristmasToy[] {
+    const source: ChristmasToy[] = data;
     source.sort((a, b): number => +b.year - +a.year);
     return source;
   }
@@ -99,14 +97,14 @@ class Utils {
     }
   }
 
-  static unionFilter(currentData: IData[]): IData[] {
-    let source: IData[] = currentData;
+  static unionFilter(currentData: ChristmasToy[]): ChristmasToy[] {
+    let source: ChristmasToy[] = currentData;
     const newTypeArr: string[][] = Object.values(typeArr);
     newTypeArr.forEach((tips): void => {
-      const cardsResult: IData[] = [];
+      const cardsResult: ChristmasToy[] = [];
       if (tips.length) {
         // сохраняем промежуточное значение
-        let cardsCollection: IData[] = [];
+        let cardsCollection: ChristmasToy[] = [];
 
         switch (tips[0]) {
           case 'year': {
@@ -135,8 +133,8 @@ class Utils {
     return source;
   }
 
-  static filter(sortProperty: SortProperty, data: IData[]): IData[] | string {
-    const source: IData[] = data;
+  static filter(sortProperty: SortProperty, data: ChristmasToy[]): ChristmasToy[] | string {
+    const source: ChristmasToy[] = data;
     const type: string = sortProperty.type as string;
 
     switch (type) {
@@ -169,18 +167,18 @@ class Utils {
     return dataAfterFilters;
   }
 
-  static filterByRangeCount(values: string[], data: IData[]): IData[] {
+  static filterByRangeCount(values: string[], data: ChristmasToy[]): ChristmasToy[] {
     const [type, min, max] = values;
-    let source: IData[] = [];
+    let source: ChristmasToy[] = [];
     if (min && max) {
       source = data.filter((item) => +item.count >= +min && +item.count <= +max);
     }
     return source;
   }
 
-  static filterByRangeYear(values: string[], data: IData[]): IData[] {
+  static filterByRangeYear(values: string[], data: ChristmasToy[]): ChristmasToy[] {
     const [type, min, max] = values;
-    let source: IData[] = [];
+    let source: ChristmasToy[] = [];
     if (min && max) {
       source = data.filter((item) => +item.year >= +min && +item.year <= +max);
     }

@@ -1,5 +1,5 @@
-import { appendToysCards } from './favoriteToys';
-import Controller from '../toysPage/controller';
+import { appendToysCards } from '../treeElements/favoriteToys';
+import Controller from '../../toysPage/components/controller';
 
 let isEnable = false;
 

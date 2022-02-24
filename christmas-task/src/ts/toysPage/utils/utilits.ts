@@ -1,6 +1,6 @@
 import sliderReset from '../slider/uislider';
 import Controller from '../components/controller';
-import { ChristmasToy, SliderValues, SortProperty, CommonSort } from '../../interfases';
+import { ChristmasToy, SliderValues, SortProperty, CommonSort, FiltersParam, IKeyString } from '../../interfases';
 
 let countFilters = 0;
 
@@ -13,44 +13,25 @@ let typeArr: CommonSort = {
   count: [],
 };
 
+const activeClass: IKeyString = {
+  form: 'form__active',
+  color: 'color__active',
+  size: 'form__active',
+  favorite: 'color__active',
+};
+
 const getLocaleStorage = localStorage.getItem('filters');
 if (getLocaleStorage) {
   typeArr = JSON.parse(getLocaleStorage);
-  // добавление классов нажатым кнопкам
+
   const allFilterBtn: NodeListOf<HTMLElement> = document.querySelectorAll('[data-filter]');
-  const sliderValues: SliderValues = {};
-  Object.entries(typeArr).forEach((item) => {
-    const [typeFilter, filterValues] = item;
-    switch (typeFilter) {
-      case 'form':
-      case 'size': {
-        filterValues.forEach((property) => {
-          allFilterBtn.forEach((btn) => {
-            if (btn.dataset.filter === property) {
-              btn.classList.add('form__active');
-            }
-          });
-        });
-        break;
-      }
-      case 'color':
-      case 'favorite': {
-        filterValues.forEach((property) => {
-          allFilterBtn.forEach((btn) => {
-            if (btn.dataset.filter === property) {
-              btn.classList.add('color__active');
-            }
-          });
-        });
-        break;
-      }
-      default: {
-        const params = filterValues.slice(1).map(parseFloat);
-        sliderValues[typeFilter] = params;
-      }
+  allFilterBtn.forEach((btn) => {
+    const [type, filter] = [btn.dataset.type, btn.dataset.filter];
+    if (type && filter && typeArr[type]?.includes(filter)) {
+      btn.classList.add(`${activeClass[type]}`);
     }
   });
-  // слайдер не успевает подгрузиться
+  const sliderValues: SliderValues = {};
 
   const initValue = () => {
     sliderReset(sliderValues);

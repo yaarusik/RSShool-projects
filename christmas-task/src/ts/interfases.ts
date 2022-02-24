@@ -21,3 +21,9 @@ export type SliderValues = {
 export type CommonSort = {
   [key: string]: string[];
 };
+
+export type IKeyString = {
+  [key: string]: string;
+};
+
+export type FiltersParam = [string, string[]];

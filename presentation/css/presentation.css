@@ -1,0 +1,20 @@
+.slide__one img {
+  width: 300px;
+  border-radius: 10px;
+}
+
+.slide__two h2 {
+  font-size: 40px;
+}
+
+.slide__two-plan {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 30px;
+}
+
+.slide__twelve {
+  font-size: 30px;
+}
